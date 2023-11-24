@@ -20,7 +20,6 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
     "indent": ["error", 2],
     "semi": ["error", "always"],
     "quotes": ["error", "single"],
@@ -30,6 +29,7 @@
     "no-console": "warn",
     "eqeqeq": "error",
     "no-eval": "error",
-    "space-infix-ops": "error"
+    "space-infix-ops": "error",
+    "react/react-in-jsx-scope":"off"
   }
 }
