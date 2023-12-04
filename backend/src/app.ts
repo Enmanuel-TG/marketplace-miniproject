@@ -5,11 +5,12 @@ const app = express();
 const port = 3000;
 
 app.use(cors());
+app.use(express.json())
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('¡Hola, mundo!');
+  res.send('¡Hi, word!');
 });
 
 app.listen(port, () => {
-  console.log(`La aplicación está escuchando en http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
