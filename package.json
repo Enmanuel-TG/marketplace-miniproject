@@ -1,0 +1,24 @@
+{
+  "name": "colmadon-miniproject",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "docker:dowm": "docker-compose dowm",
+    "docker": "docker-compose up",
+    "install:backend": "cd backend &7 npm i",
+    "install:frontend": "cd frontend && npm i",
+    "install": "npm run install:frontend && npm run install:backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adonyssantos/colmadon-miniproject.git"
+  },
+  "author": "Enmanuel-TG",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adonyssantos/colmadon-miniproject/issues"
+  },
+  "homepage": "https://github.com/adonyssantos/colmadon-miniproject#readme"
+}
