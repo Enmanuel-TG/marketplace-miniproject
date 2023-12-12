@@ -21,6 +21,8 @@
   },
   "scripts": {
   "check": "npm run lint && npm run format",
+  "lint": "eslint . --fix",
+  "format": "prettier --write .",
   "dev": "ts-node src/app.ts",
   "docker:dowm": "docker-compose dowm",
   "docker": "docker-compose up"
