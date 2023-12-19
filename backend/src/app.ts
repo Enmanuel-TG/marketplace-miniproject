@@ -1,16 +1,13 @@
-import express, { Request, Response } from 'express';
+import express,{ Request, Response } from 'express';
 import cors from 'cors';
 
-const app = express();
-const port = 3000;
-
+const app: express.Application = express();
+app.use(express.json());
 app.use(cors());
-app.use(express.json())
-
-app.get('/', (req: Request, res: Response) => {
-  res.send('¡Hi, word!');
+app.get('/', (_req: Request, res: Response) => {
+  res.send('¡Hola, mundo!');
 });
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+const PORT: number = 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
