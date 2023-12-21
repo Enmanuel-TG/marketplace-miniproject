@@ -24,6 +24,6 @@
     "format": "prettier --write .",
     "dev": "ts-node src/app.ts",
     "docker:dowm": "docker-compose dowm",
-    "docker": "docker-compose up"
+    "docker": "sudo docker compose up -d"
   }
 }
