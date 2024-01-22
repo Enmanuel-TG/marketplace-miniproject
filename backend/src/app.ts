@@ -1,6 +1,8 @@
 import express,{ Request, Response } from 'express';
 import UserController  from "./router/auth.router";
 import cors from 'cors';
+import 'dotenv/config'
+import { PORT } from "./utilities/consts.utility";
 
 const app: express.Application = express();
 app.use(express.json());
@@ -10,7 +12,6 @@ app.get('/', (_req: Request, res: Response) => {
 });
 app.use("/api",  UserController)
 
-const PORT: number = 3000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
