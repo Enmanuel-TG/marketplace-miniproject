@@ -1,10 +1,10 @@
 // routes/index.ts
 import { Router } from 'express';
 import UserController from '../controllers/user.ts';
-import validerUser from '../middlewares/validerUser.ts';
+import userValidator from '../middlewares/validerUser.ts';
 
 const router = Router();
 
-router.post('/register', validerUser, UserController.registerUser);
+router.post('/register', userValidator, UserController.registerUser);
 
 export default router;

@@ -7,8 +7,8 @@ const UserController = {
       await register(req, res);
     } catch (error) {
       res.status(500).json({
-        message: 'Error en el registro del usuario',
-        error: error || 'Error desconocido',
+        message: 'error to register user',
+        error: error || 'know ',
       });
     }
   },
