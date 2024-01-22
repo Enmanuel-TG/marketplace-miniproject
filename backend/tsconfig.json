@@ -4,6 +4,8 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
     "strict": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
