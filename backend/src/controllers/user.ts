@@ -8,7 +8,7 @@ const UserController = {
     } catch (error) {
       res.status(500).json({
         message: 'error to register user',
-        error: error || 'know ',
+        error: error || 'unknown error',
       });
     }
   },
