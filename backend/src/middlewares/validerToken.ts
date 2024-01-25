@@ -1,6 +1,6 @@
 // import { Request, Response, NextFunction } from 'express';
 // import jwt from 'jsonwebtoken';
-// import { TOKEN_SECRET } from '../config';
+// import { TOKEN_SECRET } from '';
 
 // export const authRequired = (req: Request, res: Response, next: NextFunction) => {
 //     const { token } = req.cookies;

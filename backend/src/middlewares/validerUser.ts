@@ -1,12 +1,14 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../utilities/prisma.utility';
 import { Response, Request, NextFunction } from 'express';
-const prisma = new PrismaClient();
+import calculateAge from '../utilities/calculate-age.utility';
+import { LEGAL_AGE } from '../utilities/consts.utility';
 
 const userValidator = async (req: Request, res: Response, next: NextFunction) => {
-  const { email, age } = req.body;
-  const parsedAge = parseInt(age);
+  const { email, birthday } = req.body;
   const errors = [];
+
   try {
+    const age = calculateAge(birthday);
     const userFound = await prisma.user.findFirst({
       where: {
         email,
@@ -15,10 +17,10 @@ const userValidator = async (req: Request, res: Response, next: NextFunction) =>
     if (userFound) {
       errors.push({
         type: 'email',
-        message: 'email is already in use',
+        message: 'Email is already in use',
       });
     }
-    if (parsedAge < 18) {
+    if (age < LEGAL_AGE) {
       errors.push({
         type: 'age',
         message: 'You need to be of legal age',

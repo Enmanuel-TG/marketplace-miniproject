@@ -1,11 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../utilities/prisma.utility';
 import { Response, Request } from 'express';
 import { createAccessToken } from '../libs/jwt.ts';
 
-const prisma = new PrismaClient();
-
 export const register = async (req: Request, res: Response) => {
-  const { name, email, password, age, phoneNumber, photo } = req.body;
+  const { name, email, password, birthday, phoneNumber, photo } = req.body;
 
   try {
     const user = await prisma.user.create({
@@ -13,7 +11,7 @@ export const register = async (req: Request, res: Response) => {
         name,
         email,
         password,
-        age,
+        birthday,
         phoneNumber,
         photo,
       },
@@ -22,10 +20,14 @@ export const register = async (req: Request, res: Response) => {
     const token = await createAccessToken({ id: user.id });
     res.cookie('token', token);
     res.json({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      password: user.password,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        birthday: user.birthday,
+        phoneNumber: user.phoneNumber,
+        photo: user.photo,
+      },
     });
     return res.status(200).json({
       message: 'register successfully',
