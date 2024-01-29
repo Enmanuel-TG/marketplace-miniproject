@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { TOKEN_SECRET, TOKEN_EXPIRES } from '../utilities/consts.utility';
+import { TOKEN_SECRET, TOKEN_EXPIRES } from './consts.utility';
 
 export function createAccessToken(payload: any): Promise<string> {
   return new Promise((resolve, reject) => {

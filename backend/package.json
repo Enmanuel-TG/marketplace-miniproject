@@ -32,7 +32,7 @@
     "format": "prettier --write ./src/**/*.ts",
     "start": "ts-node src/app.ts",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
-    "docker:dowm": "docker-compose dowm",
+    "docker:down": "docker-compose down",
     "docker": "docker compose up -d"
   }
 }

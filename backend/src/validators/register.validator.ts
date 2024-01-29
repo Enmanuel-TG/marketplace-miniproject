@@ -3,7 +3,7 @@ import { Response, Request, NextFunction } from 'express';
 import calculateAge from '../utilities/calculate-age.utility';
 import { LEGAL_AGE } from '../utilities/consts.utility';
 
-const userValidator = async (req: Request, res: Response, next: NextFunction) => {
+const registerValidator = async (req: Request, res: Response, next: NextFunction) => {
   const { email, birthday } = req.body;
   const errors = [];
 
@@ -38,4 +38,4 @@ const userValidator = async (req: Request, res: Response, next: NextFunction) =>
   }
 };
 
-export default userValidator;
+export default registerValidator;

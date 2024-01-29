@@ -1,6 +1,6 @@
 import { prisma } from '../utilities/prisma.utility';
 import { Response, Request } from 'express';
-import { createAccessToken } from '../libs/jwt.ts';
+import { createAccessToken } from '../utilities/jwt.utility.ts';
 
 export const register = async (req: Request, res: Response) => {
   const { name, email, password, birthday, phoneNumber, photo } = req.body;
