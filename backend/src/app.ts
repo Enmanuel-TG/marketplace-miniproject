@@ -11,7 +11,6 @@ app.get('/', (_req: Request, res: Response) => {
   res.send('Hi, wold!');
 });
 app.use('/api', UserController);
-
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`server is running in port ${PORT}`);

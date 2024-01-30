@@ -1,23 +1,23 @@
-import { prisma } from '../utilities/prisma.utility';
 import { Request, Response } from 'express';
-
-import bcrypt from 'bcryptjs';
+import { createAccessToken } from '../utilities/jwt.utility.ts';
 
 export const login = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
-  try {
-    const userFound = await prisma.user.findUnique({ where: { email } });
-    if (!userFound) {
-      return res.status(404).json(['User Not Found']);
-    }
-    const isMatch = await bcrypt.compare(password, password.userFound);
-    if (!isMatch) {
-      return res.status(404).json(['incorrect password']);
-    }
-  } catch (error) {
-    return res.status(400).json(error);
-  }
-  return;
+  const user = req.body;
+  const token = await createAccessToken({ id: user.id });
+  res.cookie('token', token);
+  res.json({
+    user: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      birthday: user.birthday,
+      phoneNumber: user.phoneNumber,
+      photo: user.photo,
+    },
+  });
+  return res.status(200).json({
+    message: 'login successfully',
+  });
 };
 
 export default login;
