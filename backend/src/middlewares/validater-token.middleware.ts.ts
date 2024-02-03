@@ -16,5 +16,4 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
     return res.status(401).json({ message: 'Invalid token' });
   }
 };
-
 export default validateToken;

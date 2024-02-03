@@ -1,16 +1,18 @@
 import { prisma } from '../utilities/prisma.utility';
 import { Response, Request } from 'express';
 import { createAccessToken } from '../utilities/jwt.utility.ts';
+import bcrypt from 'bcryptjs';
 
 export const register = async (req: Request, res: Response) => {
   const { name, email, password, birthday, phoneNumber, photo } = req.body;
 
+  const passwordhash = await bcrypt.hash(password, 10);
   try {
     const user = await prisma.user.create({
       data: {
         name,
         email,
-        password,
+        password: passwordhash,
         birthday,
         phoneNumber,
         photo,

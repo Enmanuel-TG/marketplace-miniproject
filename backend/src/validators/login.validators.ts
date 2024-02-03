@@ -7,8 +7,7 @@ const loginValidator = async (req: Request, res: Response, next: NextFunction) =
     const { email, password } = req.body;
     const userFound = await prisma.user.findUnique({
       where: {
-        email: email,
-        password: password,
+        email,
       },
     });
     if (!userFound) {
