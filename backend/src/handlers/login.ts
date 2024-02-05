@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createAccessToken } from '../utilities/jwt.utility.ts';
+import { createAccessToken } from '../utils/jwt.utility.ts';
 
 export const login = async (req: Request, res: Response) => {
   const user = req.body;

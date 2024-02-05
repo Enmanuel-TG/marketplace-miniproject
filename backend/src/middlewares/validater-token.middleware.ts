@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { TOKEN_SECRET } from '../utilities/consts.utility';
+import { TOKEN_SECRET } from '../utils/consts.utility';
 
 const validateToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.header('Authorization');

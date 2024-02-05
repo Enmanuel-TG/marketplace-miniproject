@@ -1,7 +1,7 @@
-import { prisma } from '../utilities/prisma.utility';
+import { prisma } from '../utils/prisma.utility';
 import { Response, Request, NextFunction } from 'express';
-import calculateAge from '../utilities/calculate-age.utility';
-import { LEGAL_AGE } from '../utilities/consts.utility';
+import calculateAge from '../utils/calculate-age.utility';
+import { LEGAL_AGE } from '../utils/consts.utility';
 
 const registerValidator = async (req: Request, res: Response, next: NextFunction) => {
   const { email, birthday } = req.body;

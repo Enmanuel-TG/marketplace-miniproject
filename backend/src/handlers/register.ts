@@ -1,6 +1,6 @@
-import { prisma } from '../utilities/prisma.utility';
+import { prisma } from '../utils/prisma.utility.ts';
 import { Response, Request } from 'express';
-import { createAccessToken } from '../utilities/jwt.utility.ts';
+import { createAccessToken } from '../utils/jwt.utility.ts';
 import bcrypt from 'bcryptjs';
 
 export const register = async (req: Request, res: Response) => {

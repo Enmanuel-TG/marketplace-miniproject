@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import UserController from './router/auth.router';
 import cors from 'cors';
 import 'dotenv/config.js';
-import { PORT } from './utilities/consts.utility';
+import { PORT } from './utils/consts.utility';
 
 const app: express.Application = express();
 app.use(express.json());
