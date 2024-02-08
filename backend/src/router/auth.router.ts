@@ -9,4 +9,5 @@ const router = Router();
 router.post('/register', registerValidator, UserController.registerUser);
 router.post('/login', loginValidator, UserController.loginUser);
 router.post('/logout', UserController.logoutUser);
+router.get('/whoIam', UserController.whoIamUser);
 export default router;
