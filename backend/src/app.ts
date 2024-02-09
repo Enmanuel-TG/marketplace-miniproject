@@ -7,12 +7,9 @@ import { PORT } from './utils/consts.utility';
 const app: express.Application = express();
 app.use(express.json());
 app.use(cors());
-app.use((_req, res, next) => {
-  res.setHeader('Set-Cookie', 'HttpOnly; Secure');
-  next();
-});
+
 app.get('/', (_req: Request, res: Response) => {
-  res.send('Hi, wold!');
+  res.send('Hi, world!');
 });
 app.use('/api', UserController);
 app.listen(PORT, () => {
