@@ -21,14 +21,14 @@ const loginValidator = async (req: Request, res: Response, next: NextFunction) =
       if (!userFound.password) {
         errors.push({
           code: 400,
-          massage: 'Password not set for the user',
+          massage: 'Incorrect Data',
         });
       } else {
         const isMatch = await bcrypt.compare(password, userFound.password);
         if (!isMatch) {
           errors.push({
             code: 400,
-            massage: 'Incorrect password',
+            massage: 'Incorrect Data',
           });
         }
       }

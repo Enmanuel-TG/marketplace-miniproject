@@ -44,12 +44,15 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
   const userFound = await prisma.user.findUnique({
     where: {
       email,
     },
   });
+  if (!userFound) {
+    return res.status(400).json(['User not found']);
+  }
   const token = await createAccessToken({ id: userFound.id });
   return res
     .cookie(NAME_TOKEN, token, { httpOnly: true })
