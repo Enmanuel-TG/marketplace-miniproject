@@ -17,22 +17,16 @@ const loginValidator = async (req: Request, res: Response, next: NextFunction) =
         code: 400,
         massage: 'User Not Found',
       });
-    } else {
-      if (!userFound.password) {
-        errors.push({
-          code: 400,
-          massage: 'Incorrect Data',
-        });
-      } else {
-        const isMatch = await bcrypt.compare(password, userFound.password);
-        if (!isMatch) {
-          errors.push({
-            code: 400,
-            massage: 'Incorrect Data',
-          });
-        }
-      }
+      return;
     }
+    const isMatch = await bcrypt.compare(password, userFound.password);
+    if (!isMatch) {
+      errors.push({
+        code: 400,
+        massage: 'Incorrect Data',
+      });
+    }
+
     if (errors.length > 0) {
       return res.status(400).json({ errors });
     }

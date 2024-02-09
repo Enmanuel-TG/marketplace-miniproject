@@ -81,11 +81,11 @@ export const logout = (_req: Request, res: Response) => {
   }
 };
 
-export const whoIam = async (req: Request, res: Response) => {
-  const { email } = req.body;
+export const whoiam = async (req: Request, res: Response) => {
+  const id = (req as any).userId; //TODO: fix this
   const userFound = await prisma.user.findUnique({
     where: {
-      email,
+      id,
     },
   });
   if (!userFound) {

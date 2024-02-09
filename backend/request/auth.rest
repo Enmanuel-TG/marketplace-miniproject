@@ -1,0 +1,27 @@
+### Register
+POST http://localhost:3000/api/register
+Content-Type: application/json
+
+{
+  "name":"Enmanuel",
+  "email":"etg1517@gmail.com",
+  "password":"1517",
+  "birthday":"2000-01-25T12:34:56Z",
+  "phoneNumber":"8295168214"
+}
+
+###Login
+
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "email":"enma@gmail.com",
+  "password":"1517"
+}
+
+###WhoIam
+POST http://localhost:3000/api/whoiam
+
+###Logout
+POST http://localhost:3000/api/logout
