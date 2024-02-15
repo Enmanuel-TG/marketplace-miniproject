@@ -2,13 +2,16 @@ import { Response, Request } from 'express';
 import { createAccessToken } from '../utils/jwt.utility.ts';
 import { prisma } from '../utils/prisma.utility.ts';
 import { NAME_TOKEN } from '../utils/consts.utility.ts';
+import uploadImage from '../libs/cloudinary.ts';
 import bcrypt from 'bcryptjs';
+import { IMG_DEFAULT } from '../utils/consts.utility.ts';
 
 export const register = async (req: Request, res: Response) => {
   const { name, email, password, birthday, phoneNumber, photo } = req.body;
-
   const passwordhash = await bcrypt.hash(password, 10);
+
   try {
+    const photoUrl = photo ? await uploadImage(photo) : IMG_DEFAULT;
     const user = await prisma.user.create({
       data: {
         name,
@@ -16,7 +19,7 @@ export const register = async (req: Request, res: Response) => {
         password: passwordhash,
         birthday,
         phoneNumber,
-        photo,
+        photo: photoUrl,
       },
     });
 
