@@ -6,12 +6,12 @@ cloudinary.config({
   api_key: KEY,
   api_secret: SECRET,
 });
-
 const uploadImage = async (filePath: any) => {
   try {
     const result = await cloudinary.uploader.upload(filePath, { folder: 'ftProfile' });
     return result.secure_url;
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log('Error to upload Cloudinary:', error);
     throw error;
   }
