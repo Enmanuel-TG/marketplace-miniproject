@@ -8,7 +8,7 @@ const uploadImg = (req: Request, res: Response) => {
   const file = req.files.photo as UploadedFile;
   const path = `${__dirname}/${file.name}`;
   file.mv(path, (err) => {
-    if (err) return res.status(500).send('');
+    if (err) return res.status(500).send(err);
 
     return res.send('File uploaded!');
   });

@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import UserController from './router/auth.router';
+import uploadController from './router/upload.router';
 import cors from 'cors';
 import 'dotenv/config.js';
 import { PORT } from './utils/consts.utility';
@@ -16,6 +17,7 @@ app.get('/', (_req: Request, res: Response) => {
   res.send('Hi, world!');
 });
 app.use('/api', UserController);
+app.use('/api', uploadController);
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`server is running in port ${PORT}`);

@@ -2,7 +2,7 @@ import { Response, Request } from 'express';
 import { createAccessToken } from '../utils/jwt.utility.ts';
 import { prisma } from '../utils/prisma.utility.ts';
 import { NAME_TOKEN } from '../utils/consts.utility.ts';
-import uploadImage from '../libs/cloudinary.ts';
+import uploadImage from '../utils/cloudinary.ts';
 import bcrypt from 'bcryptjs';
 import { IMG_DEFAULT } from '../utils/consts.utility.ts';
 
