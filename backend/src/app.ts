@@ -11,7 +11,12 @@ const app: express.Application = express();
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-app.use(fileUpload());
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: './photos',
+  }),
+);
 
 app.get('/', (_req: Request, res: Response) => {
   res.send('Hi, world!');

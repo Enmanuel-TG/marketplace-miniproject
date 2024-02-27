@@ -14,4 +14,4 @@ export const SECRET = process.env.API_SECRET;
 export const LEGAL_AGE = 18;
 export const NAME_TOKEN = 'token';
 export const IMG_DEFAULT =
-  'https://res.cloudinary.com/dvqevobqi/image/upload/v1707945492/ftProfiler/ImgDefault_dh81gs.jpg';
+  'https://res.cloudinary.com/dvqevobqi/image/upload/v1708961063/Default/30349e17-b84b-4ae7-ae0e-db4802a3dcfd.png';
