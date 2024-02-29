@@ -10,7 +10,8 @@ const getImg = async (req: Request, res: Response) => {
     if (req.files.photo) {
       const file = req.files.photo as UploadedFile;
       const tempFilePath = file.tempFilePath;
-      await uploadImage(tempFilePath);
+      const result = await uploadImage(tempFilePath);
+      return result;
     }
     return res.status(200).json('Complete');
   } catch (error) {
