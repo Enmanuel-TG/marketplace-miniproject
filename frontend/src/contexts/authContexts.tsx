@@ -1,37 +1,39 @@
-import { createContext, useContext, ReactNode } from 'react';
+import React, { createContext, useContext } from 'react';
+import { AuthProviderProps, User } from '../utility/interfaces';
 import { registerRequest } from '../api/auth';
 
-interface User {
-  name: string;
-  email: string;
-  password: string;
-  birthday: string;
-  phoneNumber: string;
-}
-interface AuthProviderProps {
-  children: ReactNode;
+interface useContextType {
+  theme: string;
+  user: User;
+  setUser: React.Dispatch<React.SetStateAction<User>>;
+  setTheme: React.Dispatch<React.SetStateAction<string>>;
+  signUp: ( user: User) => void;
 }
 
-export const AuthContext = createContext({});
+const AuthContext = createContext<useContextType | null>(null);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error('useTheme  in ThemeProvider');
   }
   return context;
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [theme, setTheme] = React.useState('light');
+  const [user, setUser] = React.useState<User>({
+    name: '',
+    email: '',
+    password: '',
+    birthday: '',
+    phoneNumber: '',
+  });
+
   const signUp = async (user: User) => {
-    try {
-      if (user) {
-        const result = await registerRequest(user);
-        console.log(result);
-      }
-    } catch (error) {
-      throw new Error('error');
-    }
+    await registerRequest(user);
+    console.log(user);
   };
-  return <AuthContext.Provider value={{ signUp }}>{children}</AuthContext.Provider>;
+
+  return <AuthContext.Provider value={{ theme, setTheme, user, setUser, signUp }}>{children}</AuthContext.Provider>;
 };

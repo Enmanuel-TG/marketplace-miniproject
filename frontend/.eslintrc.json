@@ -15,7 +15,6 @@
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "comma-dangle": ["error", "always-multiline"],
-    "no-unused-vars": "error",
     "arrow-spacing": ["error", { "before": true, "after": true }],
     "no-console": "warn",
     "eqeqeq": "error",
