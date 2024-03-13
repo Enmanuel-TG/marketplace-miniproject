@@ -6,12 +6,23 @@
   "extends": [
     "eslint:recommended",
     "plugin:node/recommended",
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
+  "parser": "@typescript-eslint/parser",
+
+  "plugins": [
+  "@typescript-eslint",
+  "prettier"],
+
   "parserOptions": {
-    "ecmaVersion": 12
+    "ecmaVersion": 12,
+    "sourceType": "module"
   },
   "rules": {
+    "no-var": 0,
     "prettier/prettier": "error",
     "indent": ["error", 2],
     "semi": ["error", "always"],
@@ -30,10 +41,18 @@
     "node/no-unsupported-features/es-syntax": ["error", { "ignores": ["modules"] }],
     "node/no-extraneous-import": "error",
     "node/no-extraneous-require": "error",
-    "node/no-missing-import": "error",
     "node/no-missing-require": "error",
     "node/no-unpublished-import": "error",
     "node/no-unpublished-require": "error",
-    "node/no-unsafe-optional-chaining": "error"
-  }
+    "@typescript-eslint/no-explicit-any": ["off"],
+    "node/no-missing-import": [
+      "error",
+      {
+        "allowModules": [],
+        "resolvePaths": ["/path/to/a/modules/directory"],
+        "tryExtensions": [".js", ".ts", ".json", ".node"]
+      }
+    ]
+  },
+    "root": true
 }

@@ -1,0 +1,25 @@
+### Register
+POST http://localhost:3001/api/auth/register
+Content-Type: application/json
+
+{
+  "name":"Enmanuel",
+  "email":"enmanueltg1@gmail.com",
+  "password":"123456",
+  "birthday":"2000-01-25T12:34:56Z",
+  "phoneNumber":"8295168214"
+}
+
+###Login
+
+POST http://localhost:3001/api/auth/login
+Content-Type: application/json
+
+{
+  "email":"enmanuel@gmail.com",
+  "password":"123456"
+}
+
+###Logout
+POST http://localhost:3001/api/auth/logout
+
