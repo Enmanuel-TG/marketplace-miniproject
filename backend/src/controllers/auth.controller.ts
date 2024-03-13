@@ -4,6 +4,7 @@ import { prisma } from '../utilities/prisma.utility.ts';
 import { NAME_TOKEN } from '../utilities/consts.utility.ts';
 import { IMG_DEFAULT } from '../utilities/consts.utility.ts';
 import bcrypt from 'bcryptjs';
+import { ExtendedRequest } from '../types.d';
 
 export const register = async (req: Request, res: Response) => {
   const { name, email, password, birthday, phoneNumber } = req.body;
@@ -82,7 +83,12 @@ export const logout = (_req: Request, res: Response) => {
 };
 
 export const whoiam = async (req: Request, res: Response) => {
-  const id = (req as any).userId; //TODO: fix this
+  const id = (req as unknown as ExtendedRequest).userId;
+  if (!id) {
+    return res.status(404).json({
+      message: 'User not found',
+    });
+  }
   const userFound = await prisma.user.findUnique({
     where: {
       id,
