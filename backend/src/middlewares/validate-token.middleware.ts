@@ -10,7 +10,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
     return res.status(401).json({ message: 'Token not provided' });
   }
   try {
-    const decoded = jwt.verify(token, TOKEN_SECRET) as unknown as { id: string };
+    const decoded = jwt.verify(token, TOKEN_SECRET) as unknown as { id: string; iat: number; exp: number };
     (req as unknown as ExtendedRequest).userId = Number(decoded.id);
     return next();
   } catch (error) {
