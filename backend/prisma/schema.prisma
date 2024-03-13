@@ -14,7 +14,7 @@ model User {
   password    String
   birthday    DateTime
   phoneNumber String
-  photo       String?
+  photo       String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
