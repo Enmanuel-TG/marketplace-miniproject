@@ -4,10 +4,16 @@
     "@types/cookie-parser": "^1.4.6",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/express-fileupload": "^1.4.4",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.10.4",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "nodemon": "^3.0.3",
     "prettier": "^3.1.0",
     "prisma": "^5.6.0",
     "ts-node": "^10.9.2",
@@ -15,15 +21,22 @@
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.0.1",
+    "cookie-parser": "1.4.6",
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "dotenv": "^16.3.2",
+    "express": "4.18.2",
+    "express-fileupload": "^1.4.3",
+    "jsonwebtoken": "^9.0.2"
   },
   "scripts": {
-    "check": "npm run lint && npm run format",
-    "lint": "eslint . --fix",
-    "format": "prettier --write .",
-    "dev": "ts-node src/app.ts",
-    "docker:dowm": "docker-compose dowm",
+    "check": "npm run format && npm run lint",
+    "lint": "eslint ./src/**/*.ts --fix",
+    "format": "prettier --write ./src/**/*.ts",
+    "start": "ts-node src/app.ts",
+    "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/app.ts",
+    "docker:down": "docker-compose down",
     "docker": "docker compose up -d"
   }
 }
