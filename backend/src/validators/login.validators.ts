@@ -1,5 +1,5 @@
 import { Response, Request, NextFunction } from 'express';
-import { prisma } from '../utils/prisma.utility';
+import { prisma } from '../utilities/prisma.utility';
 import bcrypt from 'bcryptjs';
 
 const loginValidator = async (req: Request, res: Response, next: NextFunction) => {

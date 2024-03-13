@@ -3,7 +3,7 @@ import UserController from './router/auth.router';
 import uploadImg from './router/uploadImg.router';
 import cors from 'cors';
 import 'dotenv/config.js';
-import { PORT } from './utils/consts.utility';
+import { PORT } from './utilities/consts.utility';
 import cookieParser from 'cookie-parser';
 import fileUpload from 'express-fileupload';
 

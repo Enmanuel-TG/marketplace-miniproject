@@ -1,8 +1,8 @@
 import { Response, Request } from 'express';
-import { createAccessToken } from '../utils/jwt.utility.ts';
-import { prisma } from '../utils/prisma.utility.ts';
-import { NAME_TOKEN } from '../utils/consts.utility.ts';
-import { IMG_DEFAULT } from '../utils/consts.utility.ts';
+import { createAccessToken } from '../utilities/jwt.utility.ts';
+import { prisma } from '../utilities/prisma.utility.ts';
+import { NAME_TOKEN } from '../utilities/consts.utility.ts';
+import { IMG_DEFAULT } from '../utilities/consts.utility.ts';
 import bcrypt from 'bcryptjs';
 
 export const register = async (req: Request, res: Response) => {
