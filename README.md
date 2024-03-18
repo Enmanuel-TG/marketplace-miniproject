@@ -1,53 +1,53 @@
 ## Workflow
 
-El desarrollo de este proyecto esta basado en dos de las estrategias de trabajo colaborativo más modernas y optimas las cuales son **GitHub FLow** y **Ship/Show/Ask**.
+The development of this project is based on two of the most modern and optimal collaborative work strategies, which are **GitHub Flow** and **Ship/Show/Ask**.
 
-Al combinar GitHub Flow con Ship/Show/Ask, el equipo tendrá un enfoque iterativo y colaborativo para el desarrollo de software (en este caso es un equipo de dos personas, el estudiante y el coach, pero esto puede escalar al tamaño del equipo).
+By combining GitHub Flow with Ship/Show/Ask, the team will have an iterative and collaborative approach to software development (in this case, it's a team of two people, the student and the coach, but this can scale to the team size).
 
 ### GitHub Flow
 
-GitHub Flow es un modelo de trabajo colaborativo centrado en branches (para los features o bugs) y Pull Requests para la integración continua y despliegues frecuentes de código en producción.
+GitHub Flow is a collaborative work model focused on branches (for features or bugs) and Pull Requests for continuous integration and frequent code deployments to production.
 
 ### Ship/Show/Ask
 
-Ship/Show/Ask es una estrategia de desarrollo que permite elegir entre enviar cambios directamente `main`, solicitar feedback o pausar para revisión antes de fusionarlos. Favorece la colaboración y la calidad del código, pero a la vez se debe tener confianza en todo el equipo.
+Ship/Show/Ask is a development strategy that allows choosing between directly shipping changes to `main`, requesting feedback, or pausing for review before merging. It fosters collaboration and code quality, but at the same time, the team must have confidence in each other.
 
-1. **Ship (Enviar):** Permite la implementación directa de cambios en la rama `main` sin esperar aprobación o revisión adicional, es adecuado para cambios simples o bien establecidos.
-2. **Show (Mostrar):** Facilita la presentación de cambios a través de Pull Requests para obtener comentarios y revisiones, con la opción de mezclarlo sin esperar aprobación, favoreciendo la colaboración y la mejora continua.
-3. **Ask (Preguntar):** Invita a pausar antes de mezclar cambios para solicitar opiniones o ayuda, útil cuando se necesita validación o se enfrentan desafíos desconocidos en el desarrollo.
+1. **Ship:** Allows the direct implementation of changes to the `main` branch without waiting for additional approval or review, suitable for simple or well-established changes.
+2. **Show:** Facilitates presenting changes through Pull Requests to gather feedback and reviews, with the option to merge without waiting for approval, promoting collaboration and continuous improvement.
+3. **Ask:** Encourages pausing before merging changes to ask for opinions or help, useful when validation is needed or facing unknown challenges in development.
 
-#### ¿Cómo determinar si es Ship, Show o Ask?
+#### How to determine if it's Ship, Show, or Ask?
 
-La decisión es del desarrollador (en este caso, el estudiante), quien debe decidir conscientemente y analíticamente qué opción es mejor para el proyecto. No todo debería ser **Ask** para no sobrecargar al resto de desarrolladores (en este caso el coach), pero tampoco todo debería ser **Show** o **Ship**, ya que algunos cambios necesitan más atención.
+The decision lies with the developer (in this case, the student), who must consciously and analytically decide which option is best for the project. Not everything should be **Ask** to avoid overloading other developers (in this case, the coach), but neither should everything be **Show** or **Ship**, as some changes require more attention.
 
-**Más información sobre estas estrategias en los siguientes enlaces:**
+**More information about these strategies in the following links:**
 
-- [La mejor estrategia de Git para trabajar con ramas y en equipo](https://www.youtube.com/watch?v=3FssKkNqUHE)
-- [Estrategia de Git: Ship / Show / Ask](https://midu.dev/ship-show-ask-estrategia-git/)
+- [The best Git strategy for working with branches and as a team](https://www.youtube.com/watch?v=3FssKkNqUHE)
+- [Git Strategy: Ship/Show/Ask](https://midu.dev/ship-show-ask-estrategia-git/)
 - [Ship/Show/Ask is a branching strategy that helps teams wait less and ship more, without losing out on feedback](https://martinfowler.com/articles/ship-show-ask.html)
 - [GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow)
 
 ### Kanban Board
 
-- **To-do:** es un _issue_ que esta listo para comenzar a trabajarlo.
-- **In Progress:** se debe mover el _issue_ a esta columna cuando el desarrollador inicia a trabajar en él. Es importante que el desarrollador solo tenga un ticket a la vez en esta columna y, en caso de algún impedimento, comunicarlo al PM (o en este caso, al coach).
-- **Client UAT (en este caso Feature Review):** normalmente se le envía un demo al cliente o stakeholders para su revisión y aprobación. En este caso sera una reunión donde el estudiante le mostrara al coach el trabajo realizado.
-- **Done:** para _issues_ que ya se encuentren desplegados a producción y, por lo tanto, mezclados en la rama **main**; esta columna finaliza el workflow.
+- **To-do:** This is an _issue_ ready to start working on.
+- **In Progress:** Move the _issue_ to this column when the developer starts working on it. It's important for the developer to have only one ticket at a time in this column, and in case of any impediment, communicate it to the PM (or in this case, the coach).
+- **Client UAT (in this case Feature Review):** Normally, a demo is sent to the client or stakeholders for review and approval. In this case, it will be a meeting where the student will show the work done to the coach.
+- **Done:** For _issues_ that are already deployed to production and, therefore, merged into the **main** branch; this column concludes the workflow.
 
-Es importante ir moviendo los _issues_ a su columna correspondiente en cada momento para que el resto del equipo sepa en qué te encuentras trabajando.
+It's important to move the _issues_ to their corresponding column at each moment so that the rest of the team knows what you are working on.
 
-⚠️ En nuestro caso, al ser un proyecto con fines educativos, no utilizamos las columnas de Backlog, Code Review, QA, Client UAT y Deploy pero agregaremos una columna adicional llamada **Feature Review** antes de Done.
+⚠️ In our case, being a project for educational purposes, we do not use the Backlog, Code Review, QA, Client UAT, and Deploy columns, but we will add an additional column called **Feature Review** before Done.
 
-### ¿Que es un Feature Review?
+### What is a Feature Review?
 
-Es una reunión entre el estudiante y el coach donde el estudiante le muestra al coach el feature completamente funcionando, tanto en el backend como en el frontend. Si el coach considera que no cumple con los [requerimientos](https://docs.google.com/document/d/1j4d7e5m_gIX5GceB0nG6Txrun9319MtpWm5nzpZSCNo/edit#heading=h.o38wiplmnjzl) definidos desde un inicio, el coach puede dar feedback para que que haga cambios necesarios.
+It is a meeting between the student and the coach where the student demonstrates the feature fully functional, both in the backend and frontend. If the coach considers that it does not meet the [requirements](https://docs.google.com/document/d/1j4d7e5m_gIX5GceB0nG6Txrun9319MtpWm5nzpZSCNo/edit#heading=h.o38wiplmnjzl) defined from the beginning, the coach can provide feedback for necessary changes.
 
-### Pasos para llevar un feature del requerimiento a producción
+### Steps to take a feature from requirement to production
 
-1. Crear un _issue_ en este caso en GitHub Project, con los requerimientos del feature tanto en backend como en frontend.
-2. Elegir que tipo sera (ship, show o ask).
-   1. En caso de **Ship** trabajar dicho _issue_ en `main`.
-   2. En caso de **Show** crear una rama a partir de `main` y mezclarlo cuando este listo.
-   3. En caso de **Ask** crear una rama a partir de `main`, asignarle y notificarle el PR al desarrollador que estará revisando dicho _issue_, cuando se apruebe mezclar con `main`.
+1. Create an _issue_ in this case in GitHub Project, with the requirements of the feature both in the backend and frontend.
+2. Choose what type it will be (ship, show, or ask).
+   1. In case of **Ship** work on that _issue_ in `main`.
+   2. In case of **Show** create a branch from `main` and merge it when ready.
+   3. In case of **Ask** create a branch from `main`, assign and notify the PR to the developer who will be reviewing that _issue_, when approved merge with `main`.
 
-**Nota:** En todo momento se debe utilizar [Conventional Commits](https://www.conventionalcommits.org/es/v1.0.0/) + _issue ID_. **Ejemplo:** `docs: clean readme (#3)`.
+**Note:** Conventional Commits should be used at all times with _issue ID_. **Example:** `docs: clean readme (#3)`.
