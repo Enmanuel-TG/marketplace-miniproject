@@ -21,7 +21,7 @@ const RegisterPages = () => {
         <input type="password" {...register('password', { required: true })} placeholder="Password" />
       </div>
       <div>
-        <input type="date" {...register('birthday', { required: true })} placeholder="birthday" />
+        <input type="text" {...register('birthday', { required: true })} placeholder="birthday" />
       </div>
       <div>
         <input type="tel" {...register('phoneNumber', { required: true })} placeholder="Number Phone" />
