@@ -6,7 +6,6 @@ import { LEGAL_AGE } from '../utilities/consts.utility';
 const registerValidator = async (req: Request, res: Response, next: NextFunction) => {
   const { email, birthday } = req.body;
   const errors = [];
-
   try {
     const age = calculateAge(birthday);
     const userFound = await prisma.user.findFirst({

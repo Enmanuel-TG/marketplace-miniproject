@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import { register, login, logout } from '../controllers/auth.controller';
-import registerValidator from '../validators/register.validator.ts';
+import {authRegisterValidator} from '../validators/auth.validators.ts';
 import loginValidator from '../validators/login.validators.ts';
+import registerValidator  from "../validators/register.validator.ts";
 import validateToken from '../middlewares/validate-token.middleware.ts';
+import validateSchema from '../middlewares/validator.middleware.ts';
 
 const router = Router();
 
-router.post('/register', registerValidator, register);
+router.post('/register',registerValidator, validateSchema(authRegisterValidator), register);
 router.post('/login', loginValidator, login);
 router.post('/logout', validateToken, logout);
 

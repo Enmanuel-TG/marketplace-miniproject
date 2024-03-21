@@ -3,9 +3,9 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-  "name":"Enmanuel",
-  "email":"enmanueltg1@gmail.com",
-  "password":"123456",
+  "name":"",
+  "email":"enmanu@gmail.com",
+  "password":"123",
   "birthday":"2000-01-25T12:34:56Z",
   "phoneNumber":"8295168214"
 }

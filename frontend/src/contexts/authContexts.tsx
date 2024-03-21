@@ -5,7 +5,6 @@ import { registerRequest } from '../api/auth';
 interface useContextType {
   signUp: ( user: User) => void;
 }
-
 const AuthContext = createContext<useContextType | null>(null);
 
 export const useAuth = () => {
