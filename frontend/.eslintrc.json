@@ -3,33 +3,23 @@
     "browser": true,
     "es2021": true
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "prettier"
-  ],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react/recommended", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "react",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "react", "prettier"],
   "rules": {
     "indent": ["error", 2],
-    "semi": ["error", "always"],
     "quotes": ["error", "single"],
+    "semi": ["error", "always"],
     "comma-dangle": ["error", "always-multiline"],
-    "no-unused-vars": "error",
     "arrow-spacing": ["error", { "before": true, "after": true }],
     "no-console": "warn",
     "eqeqeq": "error",
     "no-eval": "error",
     "space-infix-ops": "error",
-    "react/react-in-jsx-scope":"off"
+    "react/react-in-jsx-scope": "off"
   }
 }
