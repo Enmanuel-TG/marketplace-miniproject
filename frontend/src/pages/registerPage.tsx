@@ -3,11 +3,17 @@ import { useAuth } from '../contexts/authContexts';
 import { User } from '../utility/interfaces';
 
 const RegisterPages = () => {
-  const { setUser, signUp } = useAuth();
+  const { signUp } = useAuth();
   const { handleSubmit, register } = useForm<User>();
   const onSubmit = (data: User) => {
-    setUser(data);
-    signUp(data);
+    const userRegister = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      birthday: data.birthday + 'T00:00:00Z',
+      phoneNumber: data.phoneNumber,
+    };
+    signUp(userRegister);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -21,7 +27,7 @@ const RegisterPages = () => {
         <input type="password" {...register('password', { required: true })} placeholder="Password" />
       </div>
       <div>
-        <input type="text" {...register('birthday', { required: true })} placeholder="birthday" />
+        <input type="date" {...register('birthday', { required: true })} placeholder="birthday" />
       </div>
       <div>
         <input type="tel" {...register('phoneNumber', { required: true })} placeholder="Number Phone" />
