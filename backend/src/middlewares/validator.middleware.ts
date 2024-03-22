@@ -1,4 +1,5 @@
-import {Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
+
 const validateSchema = (Schema:any) => (req: Request, res: Response, next: NextFunction) => {
     try{
         Schema.parse(req.body);
@@ -11,4 +12,3 @@ const validateSchema = (Schema:any) => (req: Request, res: Response, next: NextF
 
 export default validateSchema;
 
-//error.errors.map(error => error.message)

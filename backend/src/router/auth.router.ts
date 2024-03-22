@@ -8,7 +8,7 @@ import validateSchema from '../middlewares/validator.middleware.ts';
 
 const router = Router();
 
-router.post('/register',registerValidator, validateSchema(authRegisterValidator), register);
+router.post('/register', registerValidator, validateSchema(authRegisterValidator), register);
 router.post('/login', loginValidator, login);
 router.post('/logout', validateToken, logout);
 

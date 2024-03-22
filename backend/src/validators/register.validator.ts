@@ -4,7 +4,7 @@ import calculateAge from '../utilities/calculate-age.utility';
 import { LEGAL_AGE } from '../utilities/consts.utility';
 
 const registerValidator = async (req: Request, res: Response, next: NextFunction) => {
-  const { email, birthday } = req.body;
+  const { email, name, birthday } = req.body;
   const errors = [];
   try {
     const age = calculateAge(birthday);
@@ -18,7 +18,14 @@ const registerValidator = async (req: Request, res: Response, next: NextFunction
         type: 'email',
         message: 'Email is already in use',
       });
-    }
+    };
+    if (!name || name == " ") {
+      errors.push({
+        type: 'name',
+        message:'Invalid name'
+      })
+     };
+
     if (age < LEGAL_AGE) {
       errors.push({
         type: 'age',
