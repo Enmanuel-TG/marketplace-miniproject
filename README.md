@@ -1,3 +1,40 @@
+# Steps to Run the Project
+
+## #1 Install Dependencies
+
+Navigate from the root folder to the backend folder to install all dependencies with the command `npm i` in the terminal. Then return to the root folder to move to the frontend, where you will execute the same command to install the necessary dependencies for the frontend.
+
+## #2 Configure Environment Variables
+
+For the project to work correctly, you must set the environment variables within a **.env** file, which are as follows:
+
+- TOKEN_SECRET: Key used by tokens for protection.
+- DATABASE_URL: Contains the URL that connects you to the database.
+- PORT: Port where the server is hosted.
+- TOKEN_EXPIRES: Set the time when the token will expire.
+
+- CLOUD_NAME, API_KEY, API_SECRET: Connections with the Cloudinary cloud, which you can obtain by creating an account on their website.
+
+**Note:** Remember that the **.env** file must be in the **src** folder in the backend.
+
+## #3 Execute Commands to Run the Program
+
+First, navigate to the backend and execute the following commands in the terminal:
+- npm run docker
+- npm run dev
+
+**npm run docker**: This command will raise Docker, which has an image with PostgreSQL, which is being used as the database in this project.
+
+**Note:** Remember to give all necessary permissions to Docker before executing the command, as it will not work otherwise. If you are using Windows, and if you are using Ubuntu, add `sudo` before the command and enter your device's password to give Docker permissions (sudo npm run docker).
+
+**npm run dev**: This command is responsible for starting the server and putting it into operation. Once the server is up and running, everything will be ready on the backend.
+
+With the backend running, open another console and navigate to the frontend folder where you will execute the following command.
+
+**npm run dev**: With this command, Vite will launch a local or remote server. Select the link you want to use the program with.
+
+
+
 # Workflow
 
 The development of this project is based on two of the most modern and optimal collaborative work strategies, which are **GitHub Flow** and **Ship/Show/Ask**.
@@ -51,39 +88,3 @@ It is a meeting between the student and the coach where the student demonstrates
    3. In case of **Ask** create a branch from `main`, assign and notify the PR to the developer who will be reviewing that _issue_, when approved merge with `main`.
 
 **Note:** Conventional Commits should be used at all times with _issue ID_. **Example:** `docs: clean readme (#3)`.
-
-# Steps to Run the Project
-
-## #1 Install Dependencies
-
-Navigate from the root folder to the backend folder to install all dependencies with the command `npm i` in the terminal. Then return to the root folder to move to the frontend, where you will execute the same command to install the necessary dependencies for the frontend.
-
-## #2 Configure Environment Variables
-
-For the project to work correctly, you must set the environment variables within a **.env** file, which are as follows:
-
-- TOKEN_SECRET: Key used by tokens for protection.
-- DATABASE_URL: Contains the URL that connects you to the database.
-- PORT: Port where the server is hosted.
-- TOKEN_EXPIRES: Set the time when the token will expire.
-
-- CLOUD_NAME, API_KEY, API_SECRET: Connections with the Cloudinary cloud, which you can obtain by creating an account on their website.
-
-**Note:** Remember that the **.env** file must be in the **src** folder in the backend.
-
-## #3 Execute Commands to Run the Program
-
-First, navigate to the backend and execute the following commands in the terminal:
-- npm run docker
-- npm run dev
-
-**npm run docker**: This command will raise Docker, which has an image with PostgreSQL, which is being used as the database in this project.
-
-**Note:** Remember to give all necessary permissions to Docker before executing the command, as it will not work otherwise. If you are using Windows, and if you are using Ubuntu, add `sudo` before the command and enter your device's password to give Docker permissions (sudo npm run docker).
-
-**npm run dev**: This command is responsible for starting the server and putting it into operation. Once the server is up and running, everything will be ready on the backend.
-
-With the backend running, open another console and navigate to the frontend folder where you will execute the following command.
-
-**npm run dev**: With this command, Vite will launch a local or remote server. Select the link you want to use the program with.
-
