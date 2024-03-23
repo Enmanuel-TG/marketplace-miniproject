@@ -22,7 +22,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
 
-  const [section, setSection] = useState(true);
+  const [section, setSection] = useState(false);
   const [account, setAccount] = useState({});
   const [dataAccount, setDataAccount] = useState({});
 

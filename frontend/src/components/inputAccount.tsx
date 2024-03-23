@@ -6,7 +6,7 @@ const InputAccount = () => {
   const { setSection, setAccount } = useAuth();
   const { handleSubmit, register } = useForm<Account>();
   const onSubmit = (data: Account) => {
-    setSection(false);
+    setSection(true);
     setAccount(data);
   };
   return (
@@ -19,7 +19,7 @@ const InputAccount = () => {
           <input type="password" {...register('password', { required: true })} placeholder="Password" />
         </div>
         <div>
-          <button type="submit">Click</button>
+          <button type="submit">Siguiente</button>
         </div>
       </form>
     </div>

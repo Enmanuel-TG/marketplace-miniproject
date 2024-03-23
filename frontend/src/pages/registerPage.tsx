@@ -3,23 +3,22 @@ import InputAccount from '../components/inputAccount';
 import InputDataAccount from '../components/inputDataAccount';
 
 const RegisterPages = () => {
-  const { signUp } = useAuth();
+  const { signUp, section } = useAuth();
   const onSubmit = () => {
     signUp();
   };
   return (
     <div>
       <div>
-        <button onClick={onSubmit}>Click</button>
+        {section ? <InputDataAccount/> : <InputAccount />}
       </div>
       <br/>
       <br/>
       <br/>
-      <InputAccount />
       <br/>
-      <br/>
-      <br />
-      <InputDataAccount/>
+      <div>
+        <button onClick={onSubmit}>Click</button>
+      </div>
     </div>
   );
 };
