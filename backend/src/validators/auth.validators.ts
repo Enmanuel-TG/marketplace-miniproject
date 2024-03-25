@@ -1,18 +1,15 @@
-import { z } from "zod";
+import { z } from 'zod';
 
-    export const authRegisterValidator = z.object({
-        name: z.string({ required_error: "Name is required", }),
+export const authRegisterValidator = z.object({
+  name: z.string({ required_error: 'Name is required' }),
 
-        email: z
-        .string({required_error: "Email is required"})
-        .email({ message: "Invalid email" }),
+  email: z.string({ required_error: 'Email is required' }).email({ message: 'Invalid email' }),
 
-        password: z
-        .string({required_error: "Password is required"})
-        .min(4, { message: "password must to be least 4 characters" }),
+  password: z
+    .string({ required_error: 'Password is required' })
+    .min(4, { message: 'password must to be least 4 characters' }),
 
-        birthday: z.string({ required_error: "Birthday is required" }),
+  birthday: z.string({ required_error: 'Birthday is required' }),
 
-        phoneNumber: z.string({required_error:"Phone Number is required"})
-    });
-
+  phoneNumber: z.string({ required_error: 'Phone Number is required' }),
+});

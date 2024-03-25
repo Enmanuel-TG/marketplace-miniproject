@@ -4,11 +4,22 @@ import { prisma } from '../utilities/prisma.utility.ts';
 import { NAME_TOKEN } from '../utilities/consts.utility.ts';
 import { IMG_DEFAULT } from '../utilities/consts.utility.ts';
 import bcrypt from 'bcryptjs';
+import calculateAge from '../utilities/calculate-age.utility.ts';
+import { LEGAL_AGE } from '../utilities/consts.utility';
 
 export const register = async (req: Request, res: Response) => {
   const { name, email, password, birthday, phoneNumber } = req.body;
   const passwordhash = await bcrypt.hash(password, 10);
+
+  const age = calculateAge(birthday);
   try {
+    const userFound = await prisma.user.findUnique({ where: { email: email } });
+    if (userFound) {
+      return res.status(400).json(['the email is already in use']);
+    }
+    if (age < LEGAL_AGE) {
+      return res.status(400).json(['You need to be of legal age']);
+    }
     const user = await prisma.user.create({
       data: {
         name,
@@ -44,7 +55,7 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
-  const { email } = req.body;
+  const { email, password } = req.body;
   const userFound = await prisma.user.findUnique({
     where: {
       email,
@@ -52,6 +63,10 @@ export const login = async (req: Request, res: Response) => {
   });
   if (!userFound) {
     return res.status(400).json(['User not found']);
+  }
+  const isMatch = await bcrypt.compare(password, userFound.password);
+  if (!isMatch) {
+    return res.status(400).json(['Incorrect data']);
   }
   const token = await createAccessToken({ id: userFound.id });
   return res
