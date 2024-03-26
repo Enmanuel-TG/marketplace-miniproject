@@ -9,7 +9,7 @@ import uploadRouter from './router/upload.router';
 import userRouter from './router/user.router';
 
 const app: express.Application = express();
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(
