@@ -39,22 +39,25 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         birthday: (dataAccount as DataAccount).birthday +   'T00:00:00Z',
         phoneNumber: (dataAccount as DataAccount).phoneNumber,
       };
-      console.log(userRegister);
       await registerRequest(userRegister);
     } catch (error) {
-      console.log(error);
+      throw new Error('Error to ' + error);
     }
   };
 
   const signIn = async () => {
-    if (!account) {
+    try {
+      if (!account) {
+        throw new Error('Account not set');
+      }
+      const userLogin = {
+        email: (account as Account).email,
+        password: (account as Account).password,
+      };
+      await LoginRequest(userLogin);
+    } catch (error) {
       throw new Error('Account not set');
     }
-    const userLogin = {
-      email: (account as Account).email,
-      password: (account as Account).password,
-    };
-    await LoginRequest(userLogin);
   };
 
   return <AuthContext.Provider
