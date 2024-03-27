@@ -1,7 +1,9 @@
+import InputAccount from '../components/inputAccount';
+
 const LoginPages = () => {
   return (
     <div>
-      <h1>login pages</h1>
+      <InputAccount/>
     </div>
   );
 };

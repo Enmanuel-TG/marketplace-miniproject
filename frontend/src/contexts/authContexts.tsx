@@ -1,9 +1,10 @@
 import { createContext, useContext, useState } from 'react';
 import { AuthProviderProps, Account, DataAccount } from '../utility/interfaces';
-import { registerRequest } from '../api/auth';
+import { registerRequest, LoginRequest } from '../api/auth';
 
 interface useContextType {
   signUp: () => void;
+  signIn: () => void;
   section: boolean;
   setSection: (value: boolean) => void;
   setAccount: (value: Account) => void;
@@ -35,18 +36,31 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         name: (dataAccount as DataAccount).name + ' ' + (dataAccount as DataAccount).last_name,
         email: (account as Account).email,
         password: (account as Account).password,
-        birthday: (dataAccount as DataAccount).birthday + + 'T00:00:00Z',
+        birthday: (dataAccount as DataAccount).birthday +   'T00:00:00Z',
         phoneNumber: (dataAccount as DataAccount).phoneNumber,
       };
+      console.log(userRegister);
       await registerRequest(userRegister);
     } catch (error) {
-      throw new Error('Problem' + error);
+      console.log(error);
     }
+  };
+
+  const signIn = async () => {
+    if (!account) {
+      throw new Error('Account not set');
+    }
+    const userLogin = {
+      email: (account as Account).email,
+      password: (account as Account).password,
+    };
+    await LoginRequest(userLogin);
   };
 
   return <AuthContext.Provider
     value={{
       signUp,
+      signIn,
       section,
       setSection,
       setAccount,

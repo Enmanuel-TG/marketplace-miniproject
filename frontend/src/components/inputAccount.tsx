@@ -19,7 +19,7 @@ const InputAccount = () => {
           <input type="password" {...register('password', { required: true })} placeholder="Password" />
         </div>
         <div>
-          <button type="submit">Siguiente</button>
+          <button type="submit">Next</button>
         </div>
       </form>
     </div>

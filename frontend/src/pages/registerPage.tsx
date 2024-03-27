@@ -14,8 +14,6 @@ const RegisterPages = () => {
       </div>
       <br/>
       <br/>
-      <br/>
-      <br/>
       <div>
         <button onClick={onSubmit}>Click</button>
       </div>
