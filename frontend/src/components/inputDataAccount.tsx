@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../contexts/authContexts';
-import {DataAccount} from '../utility/interfaces';
+import { DataAccount } from '../utility/interfaces';
 
 const InputDataAccount = () => {
-  const {setDataAccount} = useAuth();
+  const { setDataAccount } = useAuth();
   const { handleSubmit, register } = useForm<DataAccount>();
-  const onSubmit = (data: DataAccount) =>  {
+  const onSubmit = (data: DataAccount) => {
     setDataAccount(data);
   };
   return (

@@ -1,14 +1,18 @@
 import { createContext, useContext, useState } from 'react';
 import { AuthProviderProps, Account, DataAccount } from '../utility/interfaces';
-import { registerRequest, LoginRequest } from '../api/auth';
+import { registerRequest, loginRequest } from '../api/auth';
 
 interface useContextType {
   signUp: () => void;
   signIn: () => void;
   section: boolean;
   setSection: (value: boolean) => void;
+  setIsAuthenticated: (value: boolean) => void;
   setAccount: (value: Account) => void;
   setDataAccount: (value: DataAccount | object) => void;
+  isAuthenticated: boolean;
+  setLoading: (value: boolean) => void;
+  loading: boolean;
 }
 
 const AuthContext = createContext<useContextType | null>(null);
@@ -22,10 +26,11 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-
   const [section, setSection] = useState(false);
   const [account, setAccount] = useState({});
   const [dataAccount, setDataAccount] = useState({});
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const signUp = async () => {
     try {
@@ -36,10 +41,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         name: (dataAccount as DataAccount).name + ' ' + (dataAccount as DataAccount).last_name,
         email: (account as Account).email,
         password: (account as Account).password,
-        birthday: (dataAccount as DataAccount).birthday +   'T00:00:00Z',
+        birthday: (dataAccount as DataAccount).birthday + 'T00:00:00Z',
         phoneNumber: (dataAccount as DataAccount).phoneNumber,
       };
       await registerRequest(userRegister);
+      setIsAuthenticated(true);
     } catch (error) {
       throw new Error('Error to ' + error);
     }
@@ -54,20 +60,29 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         email: (account as Account).email,
         password: (account as Account).password,
       };
-      await LoginRequest(userLogin);
+      await loginRequest(userLogin);
+      setIsAuthenticated(true);
     } catch (error) {
       throw new Error('Account not set');
     }
   };
 
-  return <AuthContext.Provider
-    value={{
-      signUp,
-      signIn,
-      section,
-      setSection,
-      setAccount,
-      setDataAccount,
-    }}>{children}
-  </AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{
+        signUp,
+        signIn,
+        section,
+        setSection,
+        setAccount,
+        setDataAccount,
+        isAuthenticated,
+        setIsAuthenticated,
+        setLoading,
+        loading,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
