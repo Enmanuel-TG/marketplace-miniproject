@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { AuthProviderProps, Account, DataAccount } from '../utility/interfaces';
-import { registerRequest, loginRequest } from '../api/auth';
+import { registerRequest, loginRequest} from '../api/auth';
 
 interface useContextType {
   signUp: () => void;
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const signIn = async () => {
     try {
       if (!account) {
-        throw new Error('Account not set');
+        throw new Error('Account error');
       }
       const userLogin = {
         email: (account as Account).email,
@@ -63,9 +63,22 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       await loginRequest(userLogin);
       setIsAuthenticated(true);
     } catch (error) {
-      throw new Error('Account not set');
+      throw new Error('Account error');
     }
   };
+
+  // useEffect(() => {
+  //   const checkAuth = async () => {
+  //     const res =  await profileRequest();
+  //     console.log(res);
+  //     try {
+  //       console.log('hi');
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   checkAuth();
+  // }, []);
 
   return (
     <AuthContext.Provider

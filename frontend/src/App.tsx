@@ -4,6 +4,8 @@ import RegisterPages from './pages/registerPage';
 import ProtectedRouter  from './ProtectedRouter';
 import LoginPages from './pages/loginPage';
 import HomePages from './pages/homePage';
+//import { useEffect } from 'react';
+//import { profileRequest } from './api/auth';
 
 
 
@@ -13,13 +15,14 @@ const router = createBrowserRouter([
   {
     element: <ProtectedRouter />,
     children: [
-      { path: '/',
+      { path: '',
         element: <HomePages />,
       }],
   },
 ]);
 
 function App() {
+
   return (
     <AuthProvider>
       <RouterProvider router={router} />
