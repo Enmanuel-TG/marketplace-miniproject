@@ -44,7 +44,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       await registerRequest(userRegister);
       setIsAuthenticated(true);
     } catch (error) {
-      throw new Error('Error to ' + error);
+      console.log(error);
+      //  throw new Error('Error to ' + error);
     }
   };
 

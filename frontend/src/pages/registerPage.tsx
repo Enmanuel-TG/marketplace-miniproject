@@ -6,11 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 const RegisterPages = () => {
 
-  const { signUp, section, isAuthenticated } = useAuth();
+  const {section, isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  const onSubmit = () => {
-    signUp();
-  };
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -21,11 +18,6 @@ const RegisterPages = () => {
   return (
     <div>
       <div>{section ? <InputDataAccount /> : <InputAccount />}</div>
-      <br />
-      <br />
-      <div>
-        <button onClick={onSubmit}>Click</button>
-      </div>
     </div>
   );
 };
