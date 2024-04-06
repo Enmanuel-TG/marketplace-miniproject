@@ -7,11 +7,10 @@ const buttonLogout = () => {
 
   const logout = async () => {
     try {
-      const res = await logoutRequest();
-      console.log(res);
+      await logoutRequest();
       setIsAuthenticated(false);
     } catch (error) {
-      console.log(error);
+      throw new Error('' + error);
     }
   };
   return (

@@ -1,6 +1,6 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { AuthProviderProps, Account, DataAccount } from '../utility/interfaces';
-import { registerRequest, loginRequest} from '../api/auth';
+import { registerRequest, loginRequest, profileRequest} from '../api/auth';
 
 interface useContextType {
   signUp: () => void;
@@ -67,18 +67,22 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
-  // useEffect(() => {
-  //   const checkAuth = async () => {
-  //     const res =  await profileRequest();
-  //     console.log(res);
-  //     try {
-  //       console.log('hi');
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   checkAuth();
-  // }, []);
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await profileRequest();
+        if (!res.data) {
+          setIsAuthenticated(false);
+          console.log(res);
+        };
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.log(error);
+        setIsAuthenticated(false);
+      }
+    };
+    checkAuth();
+  }, []);
 
   return (
     <AuthContext.Provider
