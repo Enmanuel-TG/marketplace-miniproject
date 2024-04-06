@@ -11,8 +11,6 @@ interface useContextType {
   setAccount: (value: Account) => void;
   setDataAccount: (value: DataAccount | object) => void;
   isAuthenticated: boolean;
-  setLoading: (value: boolean) => void;
-  loading: boolean;
 }
 
 const AuthContext = createContext<useContextType | null>(null);
@@ -30,7 +28,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [account, setAccount] = useState({});
   const [dataAccount, setDataAccount] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const signUp = async () => {
     try {
@@ -73,9 +70,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         const res = await profileRequest();
         if (!res.data) {
           setIsAuthenticated(false);
-          console.log(res);
         };
         setIsAuthenticated(true);
+        console.log(res);
       } catch (error) {
         console.log(error);
         setIsAuthenticated(false);
@@ -95,8 +92,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setDataAccount,
         isAuthenticated,
         setIsAuthenticated,
-        setLoading,
-        loading,
       }}
     >
       {children}
