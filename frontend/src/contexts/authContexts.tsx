@@ -49,7 +49,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {
-          console.log(error.response.data);
           setErrors(error.response.data);
         }
       }
@@ -68,7 +67,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       await loginRequest(userLogin);
       setIsAuthenticated(true);
     } catch (error) {
-      throw new Error('Account error');
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
     }
   };
   useEffect(() => {
