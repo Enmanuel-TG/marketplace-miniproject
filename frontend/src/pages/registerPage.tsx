@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const RegisterPages = () => {
 
-  const {section, isAuthenticated } = useAuth();
+  const {section, isAuthenticated, errors: errorRegister } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,6 +17,11 @@ const RegisterPages = () => {
 
   return (
     <div>
+      <div>
+        {errorRegister.map((error,  i) => (
+          <div key={i}>{error}</div>
+        ))}
+      </div>
       <div>{section ? <InputDataAccount /> : <InputAccount />}</div>
     </div>
   );

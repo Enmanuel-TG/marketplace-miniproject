@@ -5,10 +5,12 @@ import { DataAccount } from '../utility/interfaces';
 const InputDataAccount = () => {
   const { setDataAccount, signUp,  setSection } = useAuth();
   const { handleSubmit, register } = useForm<DataAccount>();
+
   const onSubmit = (data: DataAccount) => {
     setDataAccount(data);
     signUp();
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { AuthProviderProps, Account, DataAccount } from '../utility/interfaces';
 import { registerRequest, loginRequest, profileRequest} from '../api/auth';
-
+import axios from 'axios';
 interface useContextType {
   signUp: () => void;
   signIn: () => void;
@@ -11,6 +11,7 @@ interface useContextType {
   setAccount: (value: Account) => void;
   setDataAccount: (value: DataAccount | object) => void;
   isAuthenticated: boolean;
+  errors: string[];
 }
 
 const AuthContext = createContext<useContextType | null>(null);
@@ -28,6 +29,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [account, setAccount] = useState({});
   const [dataAccount, setDataAccount] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   const signUp = async () => {
     try {
@@ -43,9 +45,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       };
       await registerRequest(userRegister);
       setIsAuthenticated(true);
+
     } catch (error) {
-      console.log(error);
-      //  throw new Error('Error to ' + error);
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          console.log(error.response.data);
+          setErrors(error.response.data);
+        }
+      }
     }
   };
 
@@ -64,6 +71,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       throw new Error('Account error');
     }
   };
+  useEffect(() => {
+    if (errors.length > 0) {
+      const timer = setTimeout(() => {
+        setErrors([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errors]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -93,6 +108,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setDataAccount,
         isAuthenticated,
         setIsAuthenticated,
+        errors,
       }}
     >
       {children}
