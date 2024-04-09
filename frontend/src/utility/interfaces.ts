@@ -23,3 +23,15 @@ export interface DataAccount {
   birthday: string;
   phoneNumber: string;
 }
+
+export interface useContextType {
+  signUp: () => void;
+  signIn: () => void;
+  section: boolean;
+  setSection: (value: boolean) => void;
+  setIsAuthenticated: (value: boolean) => void;
+  setAccount: (value: Account) => void;
+  setDataAccount: (value: DataAccount | object) => void;
+  isAuthenticated: boolean;
+  errors: string[];
+}

@@ -10,7 +10,7 @@ const buttonLogout = () => {
       await logoutRequest();
       setIsAuthenticated(false);
     } catch (error) {
-      throw new Error('' + error);
+      alert(error);//TODO fix this
     }
   };
   return (

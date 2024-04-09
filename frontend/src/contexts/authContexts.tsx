@@ -1,18 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { AuthProviderProps, Account, DataAccount } from '../utility/interfaces';
-import { registerRequest, loginRequest, profileRequest} from '../api/auth';
+import { registerRequest, loginRequest, profileRequest } from '../api/auth';
+import { useContextType } from '../utility/interfaces';
 import axios from 'axios';
-interface useContextType {
-  signUp: () => void;
-  signIn: () => void;
-  section: boolean;
-  setSection: (value: boolean) => void;
-  setIsAuthenticated: (value: boolean) => void;
-  setAccount: (value: Account) => void;
-  setDataAccount: (value: DataAccount | object) => void;
-  isAuthenticated: boolean;
-  errors: string[];
-}
 
 const AuthContext = createContext<useContextType | null>(null);
 
@@ -91,9 +81,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           setIsAuthenticated(false);
         };
         setIsAuthenticated(true);
-        console.log(res);
       } catch (error) {
-        console.log(error);
         setIsAuthenticated(false);
       }
     };
