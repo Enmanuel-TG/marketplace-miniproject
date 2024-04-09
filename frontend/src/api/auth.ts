@@ -1,4 +1,7 @@
 import axios from './axios';
-import { User } from '../utility/interfaces';
+import { Account, User } from '../utility/interfaces';
 
 export const registerRequest = async (user: User) => await axios.post('/auth/register', user);
+export const logoutRequest = async () => await axios.post('/auth/logout');
+export const loginRequest = async (user: Account) => await axios.post('/auth/login', user);
+export const profileRequest = async () => await axios.post('/user/profile');
