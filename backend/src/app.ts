@@ -7,6 +7,7 @@ import express, { Request, Response } from 'express';
 import fileUpload from 'express-fileupload';
 import uploadRouter from './router/upload.router';
 import userRouter from './router/user.router';
+import productRouter from './router/product.router';
 
 const app: express.Application = express();
 app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
@@ -25,6 +26,7 @@ app.get('/', (_req: Request, res: Response) => {
 app.use('/api/auth', authRouter);
 app.use('/api/upload', uploadRouter);
 app.use('/api/user', userRouter);
+app.use('/api/product', productRouter);
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`server is running in port ${PORT}`);

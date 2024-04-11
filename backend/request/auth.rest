@@ -4,8 +4,8 @@ Content-Type: application/json
 
 {
   "name":"Enmanuel",
-  "email":"endaJdsfsadsdfaa@gmail.com",
-  "password":"124fsd5",
+  "email":"enmanuel@gmail.com",
+  "password":"123456",
   "birthday":"2000-01-25T12:34:56Z",
   "phoneNumber":"8295168214"
 }

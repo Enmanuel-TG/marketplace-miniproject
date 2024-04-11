@@ -8,27 +8,30 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   name        String
-  email       String   @unique
+  email       String    @unique
   password    String
   birthday    DateTime
   phoneNumber String
   photo       String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Products    Product[]
 }
 
 model Product {
-  id           Int      @id @default(autoincrement())
-  name         String
-  price        String
-  descriptions String
-  location     String
-  state        String
-  category     String
-  stock        String
-  photo        String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  name        String
+  price       String
+  description String
+  location    String
+  state       String
+  category    String
+  stock       String
+  photo       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      Int?
 }
