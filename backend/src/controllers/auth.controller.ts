@@ -85,7 +85,7 @@ export const login = async (req: Request, res: Response) => {
     });
 };
 
-export const logout = (_req: Request, res: Response) => {
+export const logout = (res: Response) => {
   try {
     res.cookie(NAME_TOKEN, '', {
       expires: new Date(0),
