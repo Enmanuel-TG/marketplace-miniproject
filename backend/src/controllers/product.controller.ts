@@ -1,6 +1,8 @@
 import { prisma } from '../utilities/prisma.utility';
 import { Response, Request } from 'express';
 import getTokenId from '../utilities/get-token-id.ts';
+import { NAME_TOKEN } from '../utilities/consts.utility.ts';
+import { createAccessToken } from '../utilities/jwt.utility.ts';
 
 export const createPost = async (req: Request, res: Response) => {
   const { name, price, description, location, state, category, stock, photo } = req.body;
@@ -19,7 +21,24 @@ export const createPost = async (req: Request, res: Response) => {
         userId: id,
       },
     });
-    return res.status(200).json(product);
+    const token = await createAccessToken({ id: product.id });
+    return res
+      .cookie(NAME_TOKEN, token, { httpOnly: true })
+      .status(200)
+      .json({
+        message: 'Product created successfully',
+        product: {
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          description: product.description,
+          location: product.location,
+          state: product.state,
+          category: product.category,
+          stock: product.stock,
+          photo: product.photo,
+        },
+      });
   } catch (error) {
     return res.status(500).json({
       message: '',
