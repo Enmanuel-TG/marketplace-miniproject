@@ -4,7 +4,7 @@ import getTokenId from '../utilities/get-token-id.ts';
 import { NAME_TOKEN } from '../utilities/consts.utility.ts';
 import { createAccessToken } from '../utilities/jwt.utility.ts';
 
-export const createPost = async (req: Request, res: Response) => {
+export const createProduct = async (req: Request, res: Response) => {
   const { name, price, description, location, state, category, stock, photo } = req.body;
   const id = getTokenId(req);
   try {
@@ -47,7 +47,7 @@ export const createPost = async (req: Request, res: Response) => {
   }
 };
 
-export const deletePost = async (req: Request, res: Response) => {
+export const deleteProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const product = await prisma.product.delete({
@@ -67,7 +67,7 @@ export const deletePost = async (req: Request, res: Response) => {
   }
 };
 
-export const updatePost = async (req: Request, res: Response) => {
+export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, price, description, location, state, category, stock, photo } = req.body;
   try {
@@ -98,7 +98,7 @@ export const updatePost = async (req: Request, res: Response) => {
   }
 };
 
-export const getPost = async (req: Request, res: Response) => {
+export const getProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const product = await prisma.product.findUnique({
@@ -115,7 +115,7 @@ export const getPost = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllPost = async (req: Request, res: Response) => {
+export const getAllProduct = async (req: Request, res: Response) => {
   try {
     const products = await prisma.product.findMany({
       where: {
