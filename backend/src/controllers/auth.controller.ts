@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 import { createAccessToken } from '../utilities/jwt.utility.ts';
 import { prisma } from '../utilities/prisma.utility.ts';
-import { NAME_TOKEN, IMG_DEFAULT, LEGAL_AGE, ROLE_USER } from '../utilities/consts.utility.ts';
+import { NAME_TOKEN, IMG_DEFAULT, LEGAL_AGE } from '../utilities/consts.utility.ts';
 import bcrypt from 'bcryptjs';
 import calculateAge from '../utilities/calculate-age.utility.ts';
 
@@ -26,10 +26,8 @@ export const register = async (req: Request, res: Response) => {
         birthday,
         phoneNumber,
         photo: IMG_DEFAULT,
-        role: ROLE_USER,
       },
     });
-
     const token = await createAccessToken({ id: user.id });
     return res
       .cookie(NAME_TOKEN, token, { httpOnly: true })
