@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface AuthProviderProps {
+export interface ProviderProps {
   children: ReactNode;
 }
 
@@ -32,6 +32,18 @@ export interface useContextType {
   setIsAuthenticated: (value: boolean) => void;
   setAccount: (value: Account) => void;
   setDataAccount: (value: DataAccount | object) => void;
-  isAuthenticated: boolean;
+  isAuthenticated: boolean | null;
   errors: string[];
+}
+
+//---------------------------------------------------------------------------
+
+export interface Product {
+  name: string;
+  price: number;
+  description: string;
+  location: string;
+  state: string;
+  category: string;
+  stock: number;
 }
