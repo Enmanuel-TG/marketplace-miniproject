@@ -9,6 +9,7 @@ export const TOKEN_EXPIRES = process.env.TOKEN_EXPIRES || '7d';
 export const CLOUDINARY_NAME = process.env.CLOUD_NAME;
 export const KEY = process.env.API_KEY;
 export const SECRET = process.env.API_SECRET;
+export const ROLE_USER = 'user';
 
 //-------------------------CONST-------------------------------------
 export const LEGAL_AGE = 18;
