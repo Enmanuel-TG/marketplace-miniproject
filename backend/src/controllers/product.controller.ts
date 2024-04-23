@@ -1,6 +1,6 @@
 import { prisma } from '../utilities/prisma.utility';
 import { Response, Request } from 'express';
-import getTokenId from '../utilities/get-token-id.ts';
+import getTokenId from '../utilities/get.token.id.ts';
 import { NAME_TOKEN } from '../utilities/consts.utility.ts';
 import { createAccessToken } from '../utilities/jwt.utility.ts';
 
