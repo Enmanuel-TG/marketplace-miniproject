@@ -14,7 +14,7 @@ For the project to work correctly, you must set the environment variables within
 - TOKEN_EXPIRES: Set the time when the token will expire.
 
 - CLOUD_NAME, API_KEY, API_SECRET: Connections with the Cloudinary cloud, which you can obtain by creating an account on their website.
-- MAIN_ADMIN: Here should be the main account for the main admin
+- MAIN_ADMIN: Here should be the main account for the main admin.
 
 **Note:** Remember that the **.env** file must be in the **src** folder in the backend.
 
