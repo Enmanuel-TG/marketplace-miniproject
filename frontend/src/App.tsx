@@ -5,10 +5,6 @@ import RegisterPages from './pages/registerPage';
 import ProtectedRouter  from './ProtectedRouter';
 import LoginPages from './pages/loginPage';
 import HomePages from './pages/homePage';
-//import { useEffect } from 'react';
-//import { profileRequest } from './api/auth';
-
-
 
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },
@@ -24,7 +20,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-
   return (
     <AuthProvider>
       <RouterProvider router={router} />

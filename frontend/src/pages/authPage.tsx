@@ -1,7 +1,16 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/authContexts';
 
 function AuthPage() {
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated]);
+
   return (
     <div>
       <div>AuthPage</div>

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { AuthProviderProps, Account, DataAccount } from '../utility/interfaces';
+import { ProviderProps, Account, DataAccount } from '../utility/interfaces';
 import { registerRequest, loginRequest, profileRequest } from '../api/auth';
 import { useContextType } from '../utility/interfaces';
 import axios from 'axios';
@@ -14,11 +14,11 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider = ({ children }: AuthProviderProps) => {
+export const AuthProvider = ({ children }: ProviderProps) => {
   const [section, setSection] = useState(false);
   const [account, setAccount] = useState({});
   const [dataAccount, setDataAccount] = useState({});
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState([]);
 
   const signUp = async () => {
@@ -87,7 +87,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
     checkAuth();
   }, []);
-
   return (
     <AuthContext.Provider
       value={{

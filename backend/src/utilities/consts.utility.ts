@@ -9,6 +9,11 @@ export const TOKEN_EXPIRES = process.env.TOKEN_EXPIRES || '7d';
 export const CLOUDINARY_NAME = process.env.CLOUD_NAME;
 export const KEY = process.env.API_KEY;
 export const SECRET = process.env.API_SECRET;
+export const enum ROLES {
+  admin = 'admin',
+  user = 'user',
+}
+export const MAIN_ADMIN = process.env.MAIN_ADMIN;
 
 //-------------------------CONST-------------------------------------
 export const LEGAL_AGE = 18;

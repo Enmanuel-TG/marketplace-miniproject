@@ -1,11 +1,9 @@
 import { Response, Request } from 'express';
 import { createAccessToken } from '../utilities/jwt.utility.ts';
 import { prisma } from '../utilities/prisma.utility.ts';
-import { NAME_TOKEN } from '../utilities/consts.utility.ts';
-import { IMG_DEFAULT } from '../utilities/consts.utility.ts';
+import { NAME_TOKEN, IMG_DEFAULT, LEGAL_AGE } from '../utilities/consts.utility.ts';
 import bcrypt from 'bcryptjs';
 import calculateAge from '../utilities/calculate-age.utility.ts';
-import { LEGAL_AGE } from '../utilities/consts.utility';
 
 export const register = async (req: Request, res: Response) => {
   const { name, email, password, birthday, phoneNumber } = req.body;
@@ -30,7 +28,6 @@ export const register = async (req: Request, res: Response) => {
         photo: IMG_DEFAULT,
       },
     });
-
     const token = await createAccessToken({ id: user.id });
     return res
       .cookie(NAME_TOKEN, token, { httpOnly: true })
@@ -81,6 +78,7 @@ export const login = async (req: Request, res: Response) => {
         birthday: userFound.birthday,
         phoneNumber: userFound.phoneNumber,
         photo: userFound.photo,
+        role: userFound.role,
       },
     });
 };
@@ -94,4 +92,9 @@ export const logout = (_req: Request, res: Response) => {
   } catch (error) {
     return res.status(500).json(['Error internal server']);
   }
+};
+
+//TODO  delete this
+export const test = (_req: Request, res: Response) => {
+  return res.status(200).json({ message: 'test' });
 };
