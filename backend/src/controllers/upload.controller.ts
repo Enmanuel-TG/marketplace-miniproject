@@ -12,11 +12,11 @@ const getImg = async (req: Request, res: Response) => {
       const file = req.files.photo as UploadedFile;
       const tempFilePath = file.tempFilePath;
       const result = await uploadImage(tempFilePath, PHOTO_PROFILE_FOLDER);
-      return res.status(200).json(result);
+      return result;
     }
-    return res.status(200).json('Complete');
+    return;
   } catch (error) {
-    return res.status(400).json(error);
+    return res.status(500).json(error);
   }
 };
 
