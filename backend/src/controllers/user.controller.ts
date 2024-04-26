@@ -3,14 +3,10 @@ import { ExtendedRequest } from '../types.d';
 import { prisma } from '../utilities/prisma.utility.ts';
 import getImg from '../controllers/upload.controller.ts';
 import { CloudinaryUploadResponse } from '../types.d';
+import getTokenId from '../utilities/get.token.id.ts';
 
 export const profile = async (req: ExtendedRequest, res: Response) => {
   const id = req.userId;
-  if (!id) {
-    return res.status(404).json({
-      message: 'User not found',
-    });
-  }
   const userFound = await prisma.user.findUnique({
     where: {
       id,
@@ -32,7 +28,12 @@ export const profile = async (req: ExtendedRequest, res: Response) => {
 };
 
 export const updatePhotoProfile = async (req: ExtendedRequest, res: Response) => {
-  const id = req.userId;
+  const id = getTokenId(req);
+  if (!id) {
+    return res.status(404).json({
+      message: 'User not found',
+    });
+  }
   const result = (await getImg(req, res)) as CloudinaryUploadResponse;
 
   if (!result) {
