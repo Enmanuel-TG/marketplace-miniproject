@@ -53,6 +53,7 @@ export const updatePhotoProfile = async (req: ExtendedRequest, res: Response) =>
   }
   return res.json({
     id: userFound.id,
-    photo: userFound.photo,
+    name: userFound.name,
+    newPhoto: userFound.photo,
   });
 };
