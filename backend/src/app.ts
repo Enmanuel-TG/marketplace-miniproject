@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Request, Response } from 'express';
 import fileUpload from 'express-fileupload';
-import uploadRouter from './router/upload.router';
 import userRouter from './router/user.router';
 import productRouter from './router/product.router';
 import rolesRouter from './router/roles.router';
@@ -25,7 +24,6 @@ app.get('/', (_req: Request, res: Response) => {
   res.send('Hi, world!');
 });
 app.use('/api/auth', authRouter);
-app.use('/api/upload', uploadRouter);
 app.use('/api/user', userRouter);
 app.use('/api/product', productRouter);
 app.use('/api/roles', rolesRouter);
