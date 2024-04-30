@@ -7,30 +7,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-  model User {
-    id          Int       @id @default(autoincrement())
-    name        String
-    email       String    @unique
-    password    String
-    birthday    DateTime
-    phoneNumber String
-    photo       String
-    role        Role      @default(user)
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
-    products    Product[]
-  }
+model User {
+  id          Int       @id @default(autoincrement())
+  name        String
+  email       String    @unique
+  password    String
+  birthday    DateTime
+  phoneNumber String
+  photo       String
+  role        Role      @default(user)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
 
 model Product {
   id          Int      @id @default(autoincrement())
   name        String
-  price       Int
+  price       String
   description String
   location    String
   state       String
   category    String
-  stock       Int
-  photo       String?
+  stock       String
+  photos      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   userId      Int
