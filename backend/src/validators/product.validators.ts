@@ -32,4 +32,3 @@ const ProductValidator = z.object({
 });
 
 export default ProductValidator;
-//, invalid_type_error: 'stock must be a number'
