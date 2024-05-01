@@ -3,10 +3,13 @@ import { Response, Request } from 'express';
 import getTokenId from '../utilities/get.token.id.ts';
 import { NAME_TOKEN } from '../utilities/consts.utility.ts';
 import { createAccessToken } from '../utilities/jwt.utility.ts';
+import getImg from './upload.controller.ts';
+import { CloudinaryUploadResponse } from '../types.d';
 
 export const createProduct = async (req: Request, res: Response) => {
-  const { name, price, description, location, state, category, stock, photo } = req.body;
+  const { name, price, description, location, state, category, stock } = req.body;
   const id = getTokenId(req);
+  const Photo = (await getImg(req, res)) as CloudinaryUploadResponse;
   try {
     const product = await prisma.product.create({
       data: {
@@ -17,7 +20,7 @@ export const createProduct = async (req: Request, res: Response) => {
         state,
         category,
         stock,
-        photo,
+        photos: Photo.url,
         userId: id,
       },
     });
@@ -36,12 +39,12 @@ export const createProduct = async (req: Request, res: Response) => {
           state: product.state,
           category: product.category,
           stock: product.stock,
-          photo: product.photo,
+          photo: product.photos,
         },
       });
   } catch (error) {
     return res.status(500).json({
-      message: '',
+      message: 'Error to create product',
       error: error,
     });
   }
@@ -69,7 +72,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
 
 export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, price, description, location, state, category, stock, photo } = req.body;
+  const { name, price, description, location, state, category, stock, photos } = req.body;
   try {
     const product = await prisma.product.update({
       where: {
@@ -83,7 +86,7 @@ export const updateProduct = async (req: Request, res: Response) => {
         state,
         category,
         stock,
-        photo,
+        photos,
       },
     });
     return res.status(200).json({
