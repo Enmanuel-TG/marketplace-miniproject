@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { ProviderProps, Account, DataAccount } from '../utility/interfaces';
-import { registerRequest, loginRequest, profileRequest } from '../api/auth';
+import { ProviderProps, Account, DataAccount, Profile } from '../utility/interfaces';
+import { registerRequest, loginRequest, profileRequest} from '../api/auth';
 import { useContextType } from '../utility/interfaces';
 import axios from 'axios';
 
@@ -20,6 +20,9 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [dataAccount, setDataAccount] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState([]);
+  const [user, setUser] = useState<Profile | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const signUp = async () => {
     try {
@@ -44,7 +47,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       }
     }
   };
-
   const signIn = async () => {
     try {
       if (!account) {
@@ -64,6 +66,9 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       }
     }
   };
+  // const updatePhotoProfile = async () => {
+  //   const res = await updatePhotoProfileRequest();
+  // };
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -72,24 +77,32 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       return () => clearTimeout(timer);
     }
   }, [errors]);
-
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await profileRequest();
-        if (!res.data) {
-          setIsAuthenticated(false);
-        };
-        setIsAuthenticated(true);
-      } catch (error) {
+  const checkAuth = async () => {
+    try {
+      const res = await profileRequest();
+      if (!res.data) {
+        setUser(null);
         setIsAuthenticated(false);
-      }
-    };
+      };
+      setUser(res.data);
+      setIsAuthenticated(true);
+    } catch (error) {
+      setIsAuthenticated(false);
+    }
+  };
+  useEffect(() => {
     checkAuth();
   }, []);
+
   return (
     <AuthContext.Provider
       value={{
+        selectedFile,
+        setSelectedFile,
+        isEdit,
+        setIsEdit,
+        user,
+        //checkAuth,   -------------------------------------------
         signUp,
         signIn,
         section,
