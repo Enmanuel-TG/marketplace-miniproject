@@ -3,15 +3,15 @@ import { ReactNode } from 'react';
 export interface ProviderProps {
   children: ReactNode;
 }
-
 export interface User {
   name: string;
   email: string;
-  password: string;
   birthday: string;
   phoneNumber: string;
 }
-
+export interface Profile extends User {
+  photo: string;
+}
 export interface Account {
   email: string;
   password: string;
@@ -24,6 +24,7 @@ export interface DataAccount {
   phoneNumber: string;
 }
 
+
 export interface useContextType {
   signUp: () => void;
   signIn: () => void;
@@ -34,6 +35,12 @@ export interface useContextType {
   setDataAccount: (value: DataAccount | object) => void;
   isAuthenticated: boolean | null;
   errors: string[];
+  //checkAuth: () => void;     -----------------------------------------
+  user: Profile | null;
+  isEdit: boolean;
+  setIsEdit: (value: boolean) => void;
+  selectedFile: File | null;
+  setSelectedFile: (value: File | null) => void;
 }
 
 //---------------------------------------------------------------------------

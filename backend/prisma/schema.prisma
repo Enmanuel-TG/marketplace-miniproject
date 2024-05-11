@@ -30,7 +30,7 @@ model Product {
   state       String
   category    String
   stock       String
-  photos      String
+  photos      String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   userId      Int

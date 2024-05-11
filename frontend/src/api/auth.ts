@@ -5,3 +5,4 @@ export const registerRequest = async (user: User) => await axios.post('/auth/reg
 export const logoutRequest = async () => await axios.post('/auth/logout');
 export const loginRequest = async (user: Account) => await axios.post('/auth/login', user);
 export const profileRequest = async () => await axios.post('/user/profile');
+export const updatePhotoProfileRequest = async (photo: File) => await axios.post('/user/update', photo);
