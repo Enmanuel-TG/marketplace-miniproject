@@ -1,32 +1,19 @@
 import { prisma } from '../utilities/prisma.utility';
 import { Response, Request } from 'express';
-import getTokenId from '../utilities/get.token.id.ts';
+import getTokenId from '../utilities/get-token-id.utility.ts';
 import { NAME_TOKEN, PHOTOS_PRODUCT_FOLDER } from '../utilities/consts.utility.ts';
 import { createAccessToken } from '../utilities/jwt.utility.ts';
 import { UploadedFile } from 'express-fileupload';
-import uploadImage from '../utilities/cloudinary.utility.ts';
+import uploadedPhotos from '../utilities/uploaded-photo.utility.ts';
 
 export const createProduct = async (req: Request, res: Response) => {
   const { name, price, description, location, state, category, stock } = req.body;
   const id = getTokenId(req);
   const photos = req.files?.photos;
-  const images: string[] = [];
   if (!photos) {
     return res.status(400).json({ message: 'No photo uploaded.' });
   }
-  if (Array.isArray(photos)) {
-    for (const photo of photos) {
-      const file = photo as UploadedFile;
-      const tempFilePath = file.tempFilePath;
-      const result = await uploadImage(tempFilePath, PHOTOS_PRODUCT_FOLDER);
-      images.push(result.url);
-    }
-  } else {
-    const file = photos as UploadedFile;
-    const tempFilePath = file.tempFilePath;
-    const result = await uploadImage(tempFilePath, PHOTOS_PRODUCT_FOLDER);
-    images.push(result.url);
-  }
+  const images: string[] = await uploadedPhotos(photos as UploadedFile, PHOTOS_PRODUCT_FOLDER);
   try {
     const product = await prisma.product.create({
       data: {
