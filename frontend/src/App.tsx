@@ -6,6 +6,10 @@ import ProtectedRouter  from './components/ProtectedRouter';
 import LoginPages from './pages/LoginPage';
 import HomePages from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { Button, Box, Typography } from '@mui/material';
 
 const AuthPage = () => {
   const { isAuthenticated } = useAuth();
@@ -12,13 +13,13 @@ const AuthPage = () => {
   }, [isAuthenticated]);
 
   return (
-    <div>
-      <div>AuthPage</div>
-      <div>
-        <button onClick={() => navigate('/register')}>Register</button>
-        <button onClick={() => navigate('/login')}>Login</button>
-      </div>
-    </div>
+    <Box>
+      <Typography variant='h4'component='div'>AuthPage</Typography>
+      <Box>
+        <Button variant="contained" onClick={() => navigate('/register')}>Register</Button>
+        <Button variant="outlined" onClick={() => navigate('/login')}>Login</Button>
+      </Box>
+    </Box>
   );
 };
 
