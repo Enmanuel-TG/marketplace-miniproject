@@ -1,5 +1,6 @@
-import { useAuth } from '../contexts/authContexts';
-import GetPicture from '../components/getPicture';
+import { useAuth } from '../contexts/AuthContext';
+import GetPicture from '../components/GetPicture';
+
 const profilePage = () => {
   const { user, isEdit, setIsEdit, updatePhotoProfile } = useAuth();
   return (
@@ -17,5 +18,6 @@ const profilePage = () => {
     </div>
   );
 };
+
 export default profilePage;
 

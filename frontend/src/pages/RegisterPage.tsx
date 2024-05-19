@@ -1,6 +1,6 @@
-import { useAuth } from '../contexts/authContexts';
-import InputAccount from '../components/inputAccount';
-import InputDataAccount from '../components/inputDataAccount';
+import { useAuth } from '../contexts/AuthContext';
+import InputAccount from '../components/InputAccount';
+import InputDataAccount from '../components/InputDataAccount';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -26,4 +26,5 @@ const RegisterPages = () => {
     </div>
   );
 };
+
 export default RegisterPages;

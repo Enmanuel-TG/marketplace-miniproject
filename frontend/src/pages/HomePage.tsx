@@ -1,5 +1,5 @@
-import { logoutRequest } from '../api/auth';
-import { useAuth } from '../contexts/authContexts';
+import { logoutRequest } from '../services/auth.service';
+import { useAuth } from '../contexts/AuthContext';
 
 const HomePages = () => {
   const { setIsAuthenticated } = useAuth();
@@ -18,4 +18,5 @@ const HomePages = () => {
     </div>
   );
 };
+
 export default HomePages;

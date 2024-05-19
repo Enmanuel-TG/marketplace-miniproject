@@ -1,4 +1,4 @@
-import { useAuth } from '../contexts/authContexts';
+import { useAuth } from '../contexts/AuthContext';
 const GetPicture = () => {
   const { setSelectedFile, setIsEdit } = useAuth();
 
@@ -9,7 +9,6 @@ const GetPicture = () => {
       setSelectedFile(file);
     }
   };
-
   return (
     <div>
       <input type="file" accept="image/*" onChange={handleFileChange} />

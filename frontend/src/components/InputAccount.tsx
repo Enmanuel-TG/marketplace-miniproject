@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../contexts/authContexts';
-import { Account } from '../utility/interfaces';
+import { useAuth } from '../contexts/AuthContext';
+import { Account } from '../utilities/interfaces.utility';
 
 const InputAccount = () => {
   const { setSection, setAccount } = useAuth();

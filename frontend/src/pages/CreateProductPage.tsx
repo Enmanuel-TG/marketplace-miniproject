@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
-import { Product } from '../utility/interfaces';
+import { Product } from '../utilities/interfaces.utility';
 
-function CreateProductPage() {
+const CreateProductPage = () => {
   const { register, handleSubmit } = useForm<Product>();
 
   const onSubmit = (data: Product) => {
@@ -22,6 +22,6 @@ function CreateProductPage() {
       </form>
     </div>
   );
-}
+};
 
 export default CreateProductPage;
