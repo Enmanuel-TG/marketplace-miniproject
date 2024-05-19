@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ProviderProps, Account, DataAccount, Profile } from '../utility/interfaces';
-import { registerRequest, loginRequest, profileRequest} from '../api/auth';
+import { registerRequest, loginRequest, profileRequest, updatePhotoProfileRequest} from '../api/auth';
 import { useContextType } from '../utility/interfaces';
 import axios from 'axios';
 
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState([]);
   const [user, setUser] = useState<Profile | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedFile, setSelectedFile] = useState< File | null >(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const signUp = async () => {
@@ -66,9 +66,24 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       }
     }
   };
-  // const updatePhotoProfile = async () => {
-  //   const res = await updatePhotoProfileRequest();
-  // };
+  const updatePhotoProfile = async () => {
+    try {
+      if (!selectedFile) {
+        throw new Error('SelectedFile error');
+      }
+      const res = await updatePhotoProfileRequest(selectedFile);
+      const photo = res.data.newPhoto as string;
+      setUser((prev) => {
+        if (!prev) return null;
+        return {
+          ...prev,
+          photo,
+        };
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -102,7 +117,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         isEdit,
         setIsEdit,
         user,
-        //checkAuth,   -------------------------------------------
         signUp,
         signIn,
         section,
@@ -112,6 +126,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         isAuthenticated,
         setIsAuthenticated,
         errors,
+        updatePhotoProfile,
       }}
     >
       {children}

@@ -1,21 +1,22 @@
 import { useAuth } from '../contexts/authContexts';
-
 const GetPicture = () => {
-  const { setSelectedFile, setIsEdit  } = useAuth();
+  const { setSelectedFile, setIsEdit } = useAuth();
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setSelectedFile(e.target.files[0]);
-      setIsEdit(true);
+    const file = e.target.files?.[0];
+    if (file) {
+      setIsEdit(false);
+      setSelectedFile(file);
     }
   };
+
   return (
     <div>
       <input type="file" accept="image/*" onChange={handleFileChange} />
+      <button onClick={() => setIsEdit(false)}>back</button>
     </div>
   );
 };
 
 export default GetPicture;
-
-
 
