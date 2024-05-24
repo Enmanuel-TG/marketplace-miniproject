@@ -3,12 +3,10 @@ import { useAuth } from '../contexts/AuthContext';
 
 const HomePages = () => {
   const { setIsAuthenticated } = useAuth();
-
   const logout = async () => {
     await logoutRequest();
     setIsAuthenticated(false);
   };
-
   return (
     <div>
       <h1>Home pages</h1>
