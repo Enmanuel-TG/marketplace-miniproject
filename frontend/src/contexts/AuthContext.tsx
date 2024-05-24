@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         };
       });
     } catch (error) {
-      console.log(error);
+      alert(error); //TODO: fix this ---------------------------------------------------
     }
   };
   useEffect(() => {
