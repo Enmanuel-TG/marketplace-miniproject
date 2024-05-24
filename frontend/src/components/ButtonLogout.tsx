@@ -1,7 +1,7 @@
-import { logoutRequest } from '../api/auth';
-import { useAuth } from '../contexts/authContexts';
+import { logoutRequest } from '../services/auth.service';
+import { useAuth } from '../contexts/AuthContext';
 
-const buttonLogout = () => {
+const ButtonLogout = () => {
 
   const { setIsAuthenticated } = useAuth();
 
@@ -20,4 +20,4 @@ const buttonLogout = () => {
   );
 };
 
-export default buttonLogout;
+export default ButtonLogout;

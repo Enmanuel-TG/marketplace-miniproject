@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import InputAccount from '../components/inputAccount';
-import { useAuth } from '../contexts/authContexts';
+import InputAccount from '../components/InputAccount';
+import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPages = () => {

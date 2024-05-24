@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { ProviderProps } from '../utility/interfaces';
+import { ProviderProps } from '../utilities/interfaces.utility';
 
 const ProductContext = createContext(null);
 

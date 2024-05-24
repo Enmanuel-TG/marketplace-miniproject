@@ -24,10 +24,10 @@ export interface DataAccount {
   phoneNumber: string;
 }
 
-
 export interface useContextType {
   signUp: () => void;
   signIn: () => void;
+  updatePhotoProfile: () => void;
   section: boolean;
   setSection: (value: boolean) => void;
   setIsAuthenticated: (value: boolean) => void;
@@ -35,12 +35,11 @@ export interface useContextType {
   setDataAccount: (value: DataAccount | object) => void;
   isAuthenticated: boolean | null;
   errors: string[];
-  //checkAuth: () => void;     -----------------------------------------
   user: Profile | null;
   isEdit: boolean;
   setIsEdit: (value: boolean) => void;
-  selectedFile: File | null;
-  setSelectedFile: (value: File | null) => void;
+  selectedFile: File  | null;
+  setSelectedFile: (value: File) => void;
 }
 
 //---------------------------------------------------------------------------

@@ -1,6 +1,6 @@
-import { useAuth } from './contexts/authContexts';
+import { useAuth } from '../contexts/AuthContext';
 import { Outlet, useNavigate } from 'react-router-dom';
-import  Loading  from './components/loading';
+import  Loading  from './Loading';
 
 const ProtectedRouter = () => {
   const navigate = useNavigate();

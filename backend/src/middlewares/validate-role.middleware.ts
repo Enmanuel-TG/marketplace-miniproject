@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { getTokenId } from '../utilities/get.token.id.ts';
+import { getTokenId } from '../utilities/get-token-id.utility.ts';
 import { prisma } from '../utilities/prisma.utility.ts';
 import { MAIN_ADMIN, ROLES } from '../utilities/consts.utility.ts';
 export const getUserAndRole = async (req: Request, res: Response, next: NextFunction) => {

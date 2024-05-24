@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../contexts/authContexts';
-import { DataAccount } from '../utility/interfaces';
+import { useAuth } from '../contexts/AuthContext';
+import { DataAccount } from '../utilities/interfaces.utility';
 
 const InputDataAccount = () => {
   const { setDataAccount, signUp,  setSection } = useAuth();

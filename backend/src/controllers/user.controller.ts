@@ -1,10 +1,10 @@
 import { Response } from 'express';
 import { ExtendedRequest } from '../types.d';
 import { prisma } from '../utilities/prisma.utility.ts';
-import getTokenId from '../utilities/get.token.id.ts';
-import { UploadedFile } from 'express-fileupload';
+import getTokenId from '../utilities/get-token-id.utility.ts';
+import uploadedPhotos from '../utilities/uploaded-photo.utility.ts';
 import { PHOTO_PROFILE_FOLDER } from '../utilities/consts.utility.ts';
-import uploadImage from '../utilities/cloudinary.utility.ts';
+import { UploadedFile } from 'express-fileupload';
 
 export const profile = async (req: ExtendedRequest, res: Response) => {
   const id = req.userId;
@@ -40,15 +40,10 @@ export const updatePhotoProfile = async (req: ExtendedRequest, res: Response) =>
   if (!photo) {
     return res.status(400).json('No photo uploaded.');
   }
-
-  const file = photo as UploadedFile;
-  const tempFilePath = file.tempFilePath;
-  const result = await uploadImage(tempFilePath, PHOTO_PROFILE_FOLDER);
-  const urlPhoto = result.url;
-
+  const urlPhoto = await uploadedPhotos(photo as UploadedFile, PHOTO_PROFILE_FOLDER);
   const userFound = await prisma.user.update({
     where: { id },
-    data: { photo: urlPhoto },
+    data: { photo: urlPhoto[0] },
   });
   if (!userFound) {
     return res.status(404).json({
