@@ -24,7 +24,7 @@ export interface DataAccount {
   phoneNumber: string;
 }
 
-export interface useContextType {
+export interface authContextType {
   signUp: () => void;
   signIn: () => void;
   updatePhotoProfile: () => void;
@@ -43,6 +43,10 @@ export interface useContextType {
 }
 
 //---------------------------------------------------------------------------
+
+export interface ProductContextType {
+  getAllProducts: () => void;
+}
 
 export interface Product {
   name: string;

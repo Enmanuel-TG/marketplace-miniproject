@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ProviderProps, Account, DataAccount, Profile } from '../utilities/interfaces.utility';
 import { registerRequest, loginRequest, profileRequest, updatePhotoProfileRequest} from '../services/auth.service';
-import { useContextType } from '../utilities/interfaces.utility';
+import { authContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
 
-const AuthContext = createContext<useContextType | null>(null);
+const AuthContext = createContext<authContextType | null>(null);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
