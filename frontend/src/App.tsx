@@ -1,15 +1,12 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { ProductProvider } from './contexts/ProductContext';
 import AuthPages from './pages/AuthPage';
 import RegisterPages from './pages/RegisterPage';
 import ProtectedRouter  from './components/ProtectedRouter';
 import LoginPages from './pages/LoginPage';
 import HomePages from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
 
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },
@@ -30,9 +27,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <ProductProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ProductProvider>
   );
 }
 export default App;
