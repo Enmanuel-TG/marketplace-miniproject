@@ -2,6 +2,7 @@
 //import { useAuth } from '../contexts/AuthContext';
 import { useProduct } from '../contexts/ProductContext';
 
+
 const HomePages = () => {
   const { getAllProducts } = useProduct();
   //const { setIsAuthenticated } = useAuth();
@@ -12,7 +13,7 @@ const HomePages = () => {
   return (
     <div>
       <h1>Home pages</h1>
-      <button onClick={() => getAllProducts() }>Click</button>
+      <button onClick={() => getAllProducts()}>Click</button>
       <br/>
       <br/>
     </div>

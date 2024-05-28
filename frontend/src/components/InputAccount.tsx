@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../contexts/AuthContext';
 import { Account } from '../utilities/interfaces.utility';
+import Input from './ui/Input';
 
 const InputAccount = () => {
   const { setSection, setAccount } = useAuth();
@@ -12,12 +13,8 @@ const InputAccount = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <input type="email" {...register('email', { required: true })} placeholder="Email" />
-        </div>
-        <div>
-          <input type="password" {...register('password', { required: true })} placeholder="Password" />
-        </div>
+        <Input fieldname="Email" type="email" {...register('email', { required: true })} />
+        <Input fieldname="Password" type="password" {...register('password', { required: true })} />
         <div>
           <button type="submit">Next</button>
         </div>

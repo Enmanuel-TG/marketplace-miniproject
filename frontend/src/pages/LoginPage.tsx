@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginPages = () => {
   const navigate = useNavigate();
-  const { signIn, isAuthenticated, errors: errorLogin} = useAuth();
+  const { signIn, isAuthenticated, errors: errorLogin } = useAuth();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -19,7 +19,7 @@ const LoginPages = () => {
   return (
     <div>
       <div>
-        {errorLogin.map((error,  i) => (
+        {errorLogin.map((error, i) => (
           <div key={i}>{error}</div>
         ))}
       </div>
