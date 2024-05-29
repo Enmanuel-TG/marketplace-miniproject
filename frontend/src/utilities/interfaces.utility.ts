@@ -26,7 +26,7 @@ export interface DataAccount {
 
 export interface authContextType {
   signUp: () => void;
-  signIn: () => void;
+  signIn: (data: Account) => void;
   updatePhotoProfile: () => void;
   section: boolean;
   setSection: (value: boolean) => void;

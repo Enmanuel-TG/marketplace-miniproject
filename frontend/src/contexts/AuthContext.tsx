@@ -47,14 +47,11 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       }
     }
   };
-  const signIn = async () => {
+  const signIn = async (data: Account) => {
     try {
-      if (!account) {
-        throw new Error('Account error');
-      }
       const userLogin = {
-        email: (account as Account).email,
-        password: (account as Account).password,
+        email: data.email,
+        password: data.password,
       };
       await loginRequest(userLogin);
       setIsAuthenticated(true);
