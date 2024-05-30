@@ -7,7 +7,6 @@ import ProtectedRouter  from './components/ProtectedRouter';
 import LoginPages from './pages/LoginPage';
 import HomePages from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
-import Container from './components/ui/Container';
 
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },
@@ -28,13 +27,13 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <Container>
-      <ProductProvider>
-        <AuthProvider>
-          <RouterProvider router={router} />
-        </AuthProvider>
-      </ProductProvider>
-    </Container>
+
+    <ProductProvider>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </ProductProvider>
+
   );
 }
 export default App;
