@@ -8,7 +8,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ fieldname, ...props },
   return (
     <label className="flex flex-col mt-3 ">
       <span>{fieldname}</span>
-      <input ref={ref} {...props} className="border-solid  border-2 border-black  rounded-md h-10 " />
+      <input ref={ref} {...props} className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
     </label>
   );
 });

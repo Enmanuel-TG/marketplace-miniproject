@@ -6,7 +6,7 @@ import {
   getProduct,
   updateProduct,
 } from '../controllers/product.controller';
-import ProductValidator from '../validators/product.validators.ts';
+import ProductValidator from '../validators/product.validator.ts';
 import validateSchema from '../middlewares/validator.middleware.ts';
 
 const router = Router();
