@@ -28,15 +28,16 @@ const RegisterPage = () => {
   const sliderSettings = {
     dots: true,
     infinite: false,
-    speed: 500,
+    speed: 600,
     slidesToShow: 1,
     slidesToScroll: 1,
     adaptiveHeight: true,
+    arrows: false,
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100">
-      <div className="border border-gray-300 bg-white p-8 rounded-lg shadow-lg w-full max-w-md mx-auto">
+      <div className="w-full max-w-md mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center text-gray-700">Register</h1>
         <Slider ref={sliderRef} {...sliderSettings}>
           <div>
@@ -45,7 +46,9 @@ const RegisterPage = () => {
               />
               <Input fieldname="Last Name" type="text" {...register('lastName', { required: true })} className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <Button fieldname="Next" type="button" onClick={() => sliderRef.current?.slickNext()} />
+              <div className='flex justify-end'>
+                <Button fieldname="Next" type="button" onClick={() => sliderRef.current?.slickNext()} />
+              </div>
             </form>
           </div>
           <div>
@@ -54,7 +57,10 @@ const RegisterPage = () => {
               />
               <Input fieldname="Phone Number"
                 type="tel" {...register('phoneNumber', { required: true })} className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
-              <Button fieldname="Next" type="button" onClick={() => sliderRef.current?.slickNext()} />
+              <div className='flex justify-between'>
+                <Button fieldname="Back" type="button" onClick={() => sliderRef.current?.slickPrev()} />
+                <Button fieldname="Next" type="button" onClick={() => sliderRef.current?.slickNext()} />
+              </div>
             </form>
           </div>
           <div>
@@ -62,7 +68,8 @@ const RegisterPage = () => {
               <Input fieldname="Email" type="email" {...register('email', { required: true })}
                 className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
               <Input fieldname="Password" type="password" {...register('password', { required: true })} className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"/>
-              <div className="flex justify-end">
+              <div className="flex justify-between">
+                <Button fieldname="Back" type="button" onClick={() => sliderRef.current?.slickPrev()} />
                 <Button fieldname="Register" type="submit"/>
               </div>
             </form>
