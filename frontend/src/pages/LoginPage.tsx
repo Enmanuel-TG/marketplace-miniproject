@@ -23,7 +23,7 @@ const LoginPages = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100">
-      <div className="border-solid border-2 border-gray-300 bg-white p-8 rounded-lg shadow-md w-full max-w-md mx-auto">
+      <div className="w-full max-w-md mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center">Login</h1>
         <div>
           {errorLogin.map((error, i) => (

@@ -9,7 +9,7 @@ const profilePage = () => {
     setIsAuthenticated(false);
   };
   return (
-    <div> 
+    <div>
       <button onClick={logout}>Click</button>
       <div>
         <img src={user?.photo} alt="" width={200} height={200} style={{ borderRadius: '50%' }}/>
