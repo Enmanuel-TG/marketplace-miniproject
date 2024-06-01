@@ -11,7 +11,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const { signUp, isAuthenticated } = useAuth();
+  const { signUp, isAuthenticated, errors } = useAuth();
   const { handleSubmit, register } = useForm<DataAccount>();
   const sliderRef = useRef<Slider>(null);
 
@@ -39,6 +39,11 @@ const RegisterPage = () => {
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100">
       <div className="w-full max-w-md mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center text-gray-700">Register</h1>
+        <div>
+          {errors.map((error, i) => (
+            <div key={i} className="text-red-500 mb-2">{error}</div>
+          ))}
+        </div>
         <Slider ref={sliderRef} {...sliderSettings}>
           <div>
             <form>
