@@ -1,19 +1,28 @@
 import { createContext, useContext } from 'react';
-import { ProviderProps } from '../utilities/interfaces.utility';
+import { ProviderProps, ProductContextType } from '../utilities/interfaces.utility';
+import { getAllProductsRequest } from '../services/product.service';
 
-const ProductContext = createContext(null);
+const ProductContext = createContext<ProductContextType | null>(null);
 
-export const useAuth = () => {
+export const useProduct = () => {
   const context = useContext(ProductContext);
   if (!context) {
-    throw new Error('useAuth  in AuthProvider');
+    throw new Error('useProduct  in ProductProvider');
   }
   return context;
 };
 
 export const ProductProvider = ({ children }: ProviderProps) => {
 
-  return <ProductContext.Provider value={null}>{children}</ProductContext.Provider>;
+  const getAllProducts = async () => {
+    const products = await getAllProductsRequest();
+    console.log(products.data);
+    return products;
+  };
+
+  return <ProductContext.Provider value={{
+    getAllProducts,
+  }}>{children}</ProductContext.Provider>;
 };
 
 

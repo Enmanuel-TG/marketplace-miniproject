@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ProviderProps, Account, DataAccount, Profile } from '../utilities/interfaces.utility';
 import { registerRequest, loginRequest, profileRequest, updatePhotoProfileRequest} from '../services/auth.service';
-import { useContextType } from '../utilities/interfaces.utility';
+import { authContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
 
-const AuthContext = createContext<useContextType | null>(null);
+const AuthContext = createContext<authContextType | null>(null);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -15,26 +15,20 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: ProviderProps) => {
-  const [section, setSection] = useState(false);
-  const [account, setAccount] = useState({});
-  const [dataAccount, setDataAccount] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState([]);
   const [user, setUser] = useState<Profile | null>(null);
   const [selectedFile, setSelectedFile] = useState< File | null >(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
-  const signUp = async () => {
+  const signUp = async (data: DataAccount) => {
     try {
-      if (!account || !dataAccount) {
-        throw new Error('Account or DataAccount not set');
-      }
       const userRegister = {
-        name: (dataAccount as DataAccount).name + ' ' + (dataAccount as DataAccount).last_name,
-        email: (account as Account).email,
-        password: (account as Account).password,
-        birthday: (dataAccount as DataAccount).birthday + 'T00:00:00Z',
-        phoneNumber: (dataAccount as DataAccount).phoneNumber,
+        name: data.firstName + ' ' + data.lastName,
+        email: data.email,
+        password: data.password,
+        birthday: data.birthday + 'T00:00:00Z',
+        phoneNumber: data.phoneNumber,
       };
       await registerRequest(userRegister);
       setIsAuthenticated(true);
@@ -47,14 +41,11 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       }
     }
   };
-  const signIn = async () => {
+  const signIn = async (data: Account) => {
     try {
-      if (!account) {
-        throw new Error('Account error');
-      }
       const userLogin = {
-        email: (account as Account).email,
-        password: (account as Account).password,
+        email: data.email,
+        password: data.password,
       };
       await loginRequest(userLogin);
       setIsAuthenticated(true);
@@ -119,10 +110,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         user,
         signUp,
         signIn,
-        section,
-        setSection,
-        setAccount,
-        setDataAccount,
         isAuthenticated,
         setIsAuthenticated,
         errors,

@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 export interface ProviderProps {
   children: ReactNode;
 }
+
 export interface User {
   name: string;
   email: string;
@@ -17,22 +18,18 @@ export interface Account {
   password: string;
 }
 
-export interface DataAccount {
-  name: string;
-  last_name: string;
+export interface DataAccount extends Account {
+  firstName: string;
+  lastName: string;
   birthday: string;
   phoneNumber: string;
 }
 
-export interface useContextType {
-  signUp: () => void;
-  signIn: () => void;
+export interface authContextType {
+  signUp: (data: DataAccount  ) => void;
+  signIn: (data: Account) => void;
   updatePhotoProfile: () => void;
-  section: boolean;
-  setSection: (value: boolean) => void;
   setIsAuthenticated: (value: boolean) => void;
-  setAccount: (value: Account) => void;
-  setDataAccount: (value: DataAccount | object) => void;
   isAuthenticated: boolean | null;
   errors: string[];
   user: Profile | null;
@@ -43,6 +40,10 @@ export interface useContextType {
 }
 
 //---------------------------------------------------------------------------
+
+export interface ProductContextType {
+  getAllProducts: () => void;
+}
 
 export interface Product {
   name: string;

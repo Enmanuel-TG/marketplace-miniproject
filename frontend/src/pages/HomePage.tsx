@@ -1,16 +1,19 @@
-import { logoutRequest } from '../services/auth.service';
-import { useAuth } from '../contexts/AuthContext';
+//import { logoutRequest } from '../services/auth.service';
+//import { useAuth } from '../contexts/AuthContext';
+import { useProduct } from '../contexts/ProductContext';
+
 
 const HomePages = () => {
-  const { setIsAuthenticated } = useAuth();
-  const logout = async () => {
-    await logoutRequest();
-    setIsAuthenticated(false);
-  };
+  const { getAllProducts } = useProduct();
+  //const { setIsAuthenticated } = useAuth();
+  // const logout = async () => {
+  //   await logoutRequest();
+  //   setIsAuthenticated(false);
+  // };
   return (
     <div>
       <h1>Home pages</h1>
-      <button onClick={logout}>Click</button>
+      <button onClick={() => getAllProducts()}>Click</button>
       <br/>
       <br/>
     </div>

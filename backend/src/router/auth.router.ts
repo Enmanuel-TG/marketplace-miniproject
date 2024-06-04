@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { register, login, logout, test } from '../controllers/auth.controller';
-import { authRegisterValidator, authLoginValidator } from '../validators/auth.validators.ts';
+import { authRegisterValidator, authLoginValidator } from '../validators/auth.validator.ts';
 import validateToken from '../middlewares/validate-token.middleware.ts';
 import validateSchema from '../middlewares/validator.middleware.ts';
 import { getUserAndRole } from '../middlewares/validate-role.middleware.ts';
