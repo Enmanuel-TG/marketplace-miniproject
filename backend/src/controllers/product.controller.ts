@@ -13,6 +13,9 @@ export const createProduct = async (req: Request, res: Response) => {
   if (!photos) {
     return res.status(400).json({ message: 'No photo uploaded.' });
   }
+  if (Array.isArray(photos) && photos.length > 10) {
+    return res.status(400).json({ message: 'You can only upload up to 10 photos.' });
+  }
   const images: string[] = await uploadedPhotos(photos as UploadedFile, PHOTOS_PRODUCT_FOLDER);
   try {
     const product = await prisma.product.create({
