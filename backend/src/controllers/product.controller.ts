@@ -1,8 +1,7 @@
 import { prisma } from '../utilities/prisma.utility';
 import { Response, Request } from 'express';
 import getTokenId from '../utilities/get-token-id.utility.ts';
-import { NAME_TOKEN, PHOTOS_PRODUCT_FOLDER } from '../utilities/consts.utility.ts';
-import { createAccessToken } from '../utilities/jwt.utility.ts';
+import { PHOTOS_PRODUCT_FOLDER } from '../utilities/consts.utility.ts';
 import { UploadedFile } from 'express-fileupload';
 import uploadedPhotos from '../utilities/uploaded-photo.utility.ts';
 
@@ -14,7 +13,7 @@ export const createProduct = async (req: Request, res: Response) => {
     return res.status(400).json({ message: 'No photo uploaded.' });
   }
   if (Array.isArray(photos) && photos.length > 10) {
-    return res.status(400).json({ message: 'You can only upload up to 10 photos.' });
+    return res.status(400).json(['You can only upload up to 10 photos']);
   }
   const images: string[] = await uploadedPhotos(photos as UploadedFile, PHOTOS_PRODUCT_FOLDER);
   try {
@@ -31,24 +30,20 @@ export const createProduct = async (req: Request, res: Response) => {
         userId: id,
       },
     });
-    const token = await createAccessToken({ id: product.id });
-    return res
-      .cookie(NAME_TOKEN, token, { httpOnly: true })
-      .status(200)
-      .json({
-        message: 'Product created successfully',
-        product: {
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          description: product.description,
-          location: product.location,
-          state: product.state,
-          category: product.category,
-          stock: product.stock,
-          photo: product.photos,
-        },
-      });
+    return res.status(200).json({
+      message: 'Product created successfully',
+      product: {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        description: product.description,
+        location: product.location,
+        state: product.state,
+        category: product.category,
+        stock: product.stock,
+        photo: product.photos,
+      },
+    });
   } catch (error) {
     return res.status(500).json({
       message: 'Error to create product',
