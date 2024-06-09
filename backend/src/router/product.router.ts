@@ -2,7 +2,7 @@ import { Router } from 'express';
 import {
   createProduct,
   deleteProduct,
-  getAllProduct,
+  getAllUserProduct,
   getProduct,
   updateProduct,
 } from '../controllers/product.controller';
@@ -15,6 +15,6 @@ router.post('/create', validateSchema(ProductValidator), createProduct);
 router.delete('/delete/:id', deleteProduct);
 router.put('/update/:id', validateSchema(ProductValidator), updateProduct);
 router.get('/:id', getProduct);
-router.get('/', getAllProduct);
+router.get('/:id', getAllUserProduct);
 
 export default router;
