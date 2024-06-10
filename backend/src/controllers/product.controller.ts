@@ -122,13 +122,24 @@ export const getProduct = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllProduct = async (req: Request, res: Response) => {
+export const getAllUserProduct = async (req: Request, res: Response) => {
   try {
     const products = await prisma.product.findMany({
       where: {
         userId: getTokenId(req),
       },
     });
+    return res.status(200).json(products);
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error to get products',
+      error,
+    });
+  }
+};
+export const getAllProduct = async (_req: Request, res: Response) => {
+  try {
+    const products = await prisma.product.findMany();
     return res.status(200).json(products);
   } catch (error) {
     return res.status(500).json({
