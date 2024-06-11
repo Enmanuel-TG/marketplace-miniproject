@@ -162,3 +162,25 @@ export const getProductsByCategory = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const searchProduct = async (req: Request, res: Response) => {
+  const { name } = req.body;
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        name: {
+          contains: name,
+          mode: 'insensitive',
+        },
+      },
+    });
+    if (products.length === 0) {
+      return res.status(404).json({ message: 'Products not found' });
+    }
+    return res.status(200).json(products);
+  } catch (error) {
+    return res.status(400).json({
+      error,
+    });
+  }
+};

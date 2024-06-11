@@ -6,6 +6,7 @@ import {
   getAllUserProduct,
   getProduct,
   getProductsByCategory,
+  searchProduct,
   updateProduct,
 } from '../controllers/product.controller';
 import validateSchema from '../middlewares/validator.middleware';
@@ -20,5 +21,6 @@ router.get('/product/:id', getProduct);
 router.get('/userProduct/:id', getAllUserProduct);
 router.get('/allProduct', getAllProduct);
 router.get('/category', getProductsByCategory);
+router.get('/search', searchProduct);
 
 export default router;
