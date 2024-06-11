@@ -135,3 +135,55 @@ export const getAllUserProduct = async (req: Request, res: Response) => {
     });
   }
 };
+export const getAllProduct = async (_req: Request, res: Response) => {
+  try {
+    const products = await prisma.product.findMany();
+    return res.status(200).json(products);
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error to get products',
+      error,
+    });
+  }
+};
+
+export const getProductsByCategory = async (req: Request, res: Response) => {
+  const { category } = req.body;
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        category: category,
+      },
+    });
+    if (products.length === 0) {
+      return res.status(404).json(['No products in this category']);
+    }
+    return res.status(200).json(products);
+  } catch (error) {
+    return res.status(400).json({
+      error,
+    });
+  }
+};
+
+export const searchProduct = async (req: Request, res: Response) => {
+  const { name } = req.body;
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        name: {
+          contains: name,
+          mode: 'insensitive',
+        },
+      },
+    });
+    if (products.length === 0) {
+      return res.status(404).json({ message: 'Products not found' });
+    }
+    return res.status(200).json(products);
+  } catch (error) {
+    return res.status(400).json({
+      error,
+    });
+  }
+};
