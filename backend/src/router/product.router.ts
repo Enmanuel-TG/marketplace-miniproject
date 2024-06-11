@@ -18,10 +18,9 @@ router.post('/create', validateSchema(ProductValidator), createProduct);
 router.delete('/delete/:id', deleteProduct);
 router.put('/update/:id', validateSchema(ProductValidator), updateProduct);
 router.get('/product/:id', getProduct);
-router.get('/userProduct/:id', getAllUserProduct);
+router.get('/userProduct', getAllUserProduct);
 router.get('/allProduct', getAllProduct);
 router.get('/category', getProductsByCategory);
 router.get('/search', searchProduct);
 
 export default router;
-
