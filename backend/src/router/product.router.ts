@@ -24,3 +24,4 @@ router.get('/category', getProductsByCategory);
 router.get('/search', searchProduct);
 
 export default router;
+

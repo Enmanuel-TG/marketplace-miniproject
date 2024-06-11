@@ -4,12 +4,17 @@ import { prisma } from '../utilities/prisma.utility.ts';
 import { NAME_TOKEN, IMG_DEFAULT, LEGAL_AGE } from '../utilities/consts.utility.ts';
 import bcrypt from 'bcryptjs';
 import calculateAge from '../utilities/calculate-age.utility.ts';
-
+import { Role } from '@prisma/client';
 export const register = async (req: Request, res: Response) => {
   const { name, email, password, birthday, phoneNumber } = req.body;
   const passwordhash = await bcrypt.hash(password, 10);
-
   const age = calculateAge(birthday);
+  let userRol: Role = Role.user;
+
+  const count = await prisma.user.count();
+  if (count === 0) {
+    userRol = Role.admin;
+  }
   try {
     const userFound = await prisma.user.findUnique({ where: { email: email } });
     if (userFound) {
@@ -18,6 +23,7 @@ export const register = async (req: Request, res: Response) => {
     if (age < LEGAL_AGE) {
       return res.status(400).json(['You need to be of legal age']);
     }
+
     const user = await prisma.user.create({
       data: {
         name,
@@ -26,6 +32,7 @@ export const register = async (req: Request, res: Response) => {
         birthday,
         phoneNumber,
         photo: IMG_DEFAULT,
+        role: userRol,
       },
     });
     const token = await createAccessToken({ id: user.id });
