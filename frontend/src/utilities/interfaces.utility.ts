@@ -37,6 +37,7 @@ export interface authContextType {
   setIsEdit: (value: boolean) => void;
   selectedFile: File  | null;
   setSelectedFile: (value: File) => void;
+  authWithGoogle: () => void;
 }
 
 //---------------------------------------------------------------------------

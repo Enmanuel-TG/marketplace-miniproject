@@ -3,6 +3,7 @@ import { ProviderProps, Account, DataAccount, Profile } from '../utilities/inter
 import { registerRequest, loginRequest, profileRequest, updatePhotoProfileRequest} from '../services/auth.service';
 import { authContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
+import { TokenResponse, useGoogleLogin } from '@react-oauth/google';
 
 const AuthContext = createContext<authContextType | null>(null);
 
@@ -18,9 +19,12 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState([]);
   const [user, setUser] = useState<Profile | null>(null);
+  const [googleUser, setGoogleUser] = useState<TokenResponse | null>(null);
   const [selectedFile, setSelectedFile] = useState< File | null >(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [ profile, setProfile ] = useState([]);
 
+  console.log(googleUser, profile);
   const signUp = async (data: DataAccount) => {
     try {
       const userRegister = {
@@ -56,6 +60,31 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         }
       }
     }
+  };
+  const authWithGoogle = () => {
+    const login = useGoogleLogin({
+      onSuccess: (codeResponse) => {setGoogleUser(codeResponse), console.log(codeResponse);},
+      onError: (error) => console.log('Login Failed:', error),
+    });
+    login();
+    useEffect(
+      () => {
+        if (googleUser) {
+          axios
+            .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
+              headers: {
+                Authorization: `Bearer ${googleUser.access_token}`,
+                Accept: 'application/json',
+              },
+            })
+            .then((res) => {
+              setProfile(res.data);
+            })
+            .catch((err) => console.log(err));
+        }
+      },
+      [ googleUser ],
+    );
   };
   const updatePhotoProfile = async () => {
     try {
@@ -114,6 +143,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         setIsAuthenticated,
         errors,
         updatePhotoProfile,
+        authWithGoogle,
       }}
     >
       {children}
