@@ -1,13 +1,13 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { ProductProvider } from './contexts/ProductContext';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import AuthPages from './pages/AuthPage';
 import RegisterPages from './pages/RegisterPage';
 import ProtectedRouter  from './components/ProtectedRouter';
 import LoginPages from './pages/LoginPage';
 import HomePages from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GOOGLE_CLIENT_ID } from './utilities/consts.utility';
 
 const router = createBrowserRouter([
@@ -29,13 +29,13 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ProductProvider>
-      <AuthProvider>
-        <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
+      <ProductProvider>
+        <AuthProvider>
           <RouterProvider router={router} />
-        </GoogleOAuthProvider>
-      </AuthProvider>
-    </ProductProvider>
+        </AuthProvider>
+      </ProductProvider>
+    </GoogleOAuthProvider>
   );
 }
 export default App;

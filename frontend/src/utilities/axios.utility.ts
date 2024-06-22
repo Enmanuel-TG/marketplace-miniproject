@@ -1,8 +1,13 @@
 import axios from 'axios';
 import { API_URL } from './consts.utility';
 
-const server = axios.create({
+export const server = axios.create({
   baseURL: API_URL,
   withCredentials: true,
 });
-export default server;
+
+export const googleServer = axios.create({
+  baseURL: 'https://www.googleapis.com/oauth2/v1',
+});
+
+

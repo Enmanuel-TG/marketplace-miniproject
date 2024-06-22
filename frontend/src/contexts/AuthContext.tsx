@@ -1,16 +1,16 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ProviderProps, Account, DataAccount, Profile } from '../utilities/interfaces.utility';
-import { registerRequest, loginRequest, profileRequest, updatePhotoProfileRequest} from '../services/auth.service';
+import { registerRequest, loginRequest, profileRequest, updatePhotoProfileRequest, authWithGoogle } from '../services/auth.service';
 import { authContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
-import { TokenResponse, useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 
 const AuthContext = createContext<authContextType | null>(null);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth  in AuthProvider');
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 };
@@ -19,12 +19,24 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState([]);
   const [user, setUser] = useState<Profile | null>(null);
-  const [googleUser, setGoogleUser] = useState<TokenResponse | null>(null);
-  const [selectedFile, setSelectedFile] = useState< File | null >(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [ profile, setProfile ] = useState([]);
 
-  console.log(googleUser, profile);
+  const login = useGoogleLogin({
+    onSuccess: async (codeResponse) => {
+      const profileData = await authWithGoogle(codeResponse.access_token);
+      setUser(profileData);
+      setIsAuthenticated(true);
+    },
+    onError: (error) => console.log('Login Failed:', error), //Change this -----------------------------
+  });
+
+  const logOut = () => {
+    googleLogout();
+    setUser(null);
+    setIsAuthenticated(false);
+  };
+
   const signUp = async (data: DataAccount) => {
     try {
       const userRegister = {
@@ -36,7 +48,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       };
       await registerRequest(userRegister);
       setIsAuthenticated(true);
-
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {
@@ -45,6 +56,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       }
     }
   };
+
   const signIn = async (data: Account) => {
     try {
       const userLogin = {
@@ -61,31 +73,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       }
     }
   };
-  const authWithGoogle = () => {
-    const login = useGoogleLogin({
-      onSuccess: (codeResponse) => {setGoogleUser(codeResponse), console.log(codeResponse);},
-      onError: (error) => console.log('Login Failed:', error),
-    });
-    login();
-    useEffect(
-      () => {
-        if (googleUser) {
-          axios
-            .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
-              headers: {
-                Authorization: `Bearer ${googleUser.access_token}`,
-                Accept: 'application/json',
-              },
-            })
-            .then((res) => {
-              setProfile(res.data);
-            })
-            .catch((err) => console.log(err));
-        }
-      },
-      [ googleUser ],
-    );
-  };
+
   const updatePhotoProfile = async () => {
     try {
       if (!selectedFile) {
@@ -104,6 +92,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       alert(error); //TODO: fix this ---------------------------------------------------
     }
   };
+
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -112,19 +101,21 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       return () => clearTimeout(timer);
     }
   }, [errors]);
+
   const checkAuth = async () => {
     try {
       const res = await profileRequest();
       if (!res.data) {
         setUser(null);
         setIsAuthenticated(false);
-      };
+      }
       setUser(res.data);
       setIsAuthenticated(true);
     } catch (error) {
       setIsAuthenticated(false);
     }
   };
+
   useEffect(() => {
     checkAuth();
   }, []);
@@ -143,7 +134,8 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         setIsAuthenticated,
         errors,
         updatePhotoProfile,
-        authWithGoogle,
+        login,
+        logOut,
       }}
     >
       {children}

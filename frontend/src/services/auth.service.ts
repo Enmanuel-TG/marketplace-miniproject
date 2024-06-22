@@ -1,18 +1,30 @@
-import axios from '../utilities/axios.utility';
+import {server,  googleServer} from '../utilities/axios.utility';
 import { Account, User } from '../utilities/interfaces.utility';
 
-export const registerRequest = async (user: User) => await axios.post('/auth/register', user);
-export const logoutRequest = async () => await axios.post('/auth/logout');
-export const loginRequest = async (user: Account) => await axios.post('/auth/login', user);
-export const profileRequest = async () => await axios.post('/user/profile');
+export const registerRequest = async (user: User) => await server.post('/auth/register', user);
+export const logoutRequest = async () => await server.post('/auth/logout');
+export const loginRequest = async (user: Account) => await server.post('/auth/login', user);
+export const profileRequest = async () => await server.post('/user/profile');
 
 export const updatePhotoProfileRequest = async (photo:  File) => {
   const formData = new FormData();
   formData.append('photo', photo);
 
-  return await axios.post('/user/update', formData, {
+  return await server.post('/user/update', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
+};
+export const authWithGoogle = async (accessToken: string) => {
+  const response = await googleServer.get(
+    `/userinfo?access_token=${accessToken}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        Accept: 'application/json',
+      },
+    },
+  );
+  return response.data;
 };
