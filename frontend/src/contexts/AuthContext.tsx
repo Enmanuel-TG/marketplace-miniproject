@@ -1,6 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ProviderProps, Account, DataAccount, Profile } from '../utilities/interfaces.utility';
-import { registerRequest, loginRequest, profileRequest, updatePhotoProfileRequest, authWithGoogle } from '../services/auth.service';
+import {
+  registerRequest,
+  loginRequest,
+  profileRequest,
+  updatePhotoProfileRequest,
+  authWithGoogle,
+} from '../services/auth.service';
 import { authContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
@@ -19,6 +25,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState([]);
   const [user, setUser] = useState<Profile | null>(null);
+  console.log(user);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
