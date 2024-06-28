@@ -4,7 +4,6 @@ import { authRegisterValidator, authLoginValidator } from '../validators/auth.va
 import validateToken from '../middlewares/validate-token.middleware.ts';
 import validateSchema from '../middlewares/validator.middleware.ts';
 import { getUserAndRole } from '../middlewares/validate-role.middleware.ts';
-
 const router = Router();
 
 router.post('/register', validateSchema(authRegisterValidator), register);

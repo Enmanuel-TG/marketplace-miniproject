@@ -14,6 +14,8 @@ export const enum ROLES {
   user = 'user',
 }
 export const MAIN_ADMIN = process.env.MAIN_ADMIN;
+export const ACCOUNT = process.env.EMAIL;
+export const PASSWORD = process.env.PASSWORD;
 
 //-------------------------CONST-------------------------------------
 export const LEGAL_AGE = 18;
