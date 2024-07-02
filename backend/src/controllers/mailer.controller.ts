@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../utilities/prisma.utility';
-import { TOKEN_SECRET, PASSWORD, ACCOUNT } from '../utilities/consts.utility';
+import { TOKEN_SECRET, PASSWORD, ACCOUNT, FRONTEND_URL } from '../utilities/consts.utility';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 
@@ -27,7 +27,7 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
         resetTokenExpiry: new Date(Date.now() + 3600000),
       },
     });
-    const resetUrl = `http://localhost:3000/reset-password?token=${token}`;
+    const resetUrl = `${FRONTEND_URL}/ForgetPassword?token=${token}`;
     await transporter.sendMail({
       to: user.email,
       subject: 'Password Reset',
