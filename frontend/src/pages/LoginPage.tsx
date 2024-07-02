@@ -11,7 +11,6 @@ const LoginPages = () => {
   const { signIn, isAuthenticated, errors: errorLogin, login } = useAuth();
   const { handleSubmit, register } = useForm<Account>();
 
-
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/');
@@ -36,6 +35,11 @@ const LoginPages = () => {
             <Input fieldname="Password" type="password" {...register('password',
               { required: true })}
             />
+            <div  className="flex justify-end" >
+              <button className="text-blue-500 hover:text-blue-700 text-sm hover:underline" onClick={() => {navigate('/ForgetPassword');}}>
+      Forget Password?
+              </button>
+            </div>
             <div className="flex justify-between items-center mb-6">
               <div className='w-3/4'>
                 <span className="mr-2">Do not have an account?</span>
@@ -47,7 +51,7 @@ const LoginPages = () => {
               <Button fieldname="Login" type="submit" />
             </div>
           </form>
-          <button className='w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={login}>Sign in with Google 🚀 </button>
+          <button className='w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={login}>Sign in with Google 🚀</button>
         </div>
       </div>
     </div>
