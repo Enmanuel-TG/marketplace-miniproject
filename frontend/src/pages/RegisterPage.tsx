@@ -11,7 +11,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const { signUp, isAuthenticated, errors } = useAuth();
+  const { signUp, isAuthenticated, errors, login } = useAuth();
   const { handleSubmit, register } = useForm<DataAccount>();
   const sliderRef = useRef<Slider>(null);
 
@@ -80,6 +80,7 @@ const RegisterPage = () => {
             </form>
           </div>
         </Slider>
+        <button className='w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-6 rounded' onClick={login}>Sign in with Google 🚀</button>
         <div className="mt-4 text-center flex justify-center items-center space-x-2">
           <h1 className="text-gray-600">Already have an account?</h1>
           <span className="text-blue-500 cursor-pointer hover:underline" onClick={() => navigate('/login')}> Login </span>
