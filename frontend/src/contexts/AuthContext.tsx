@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { ProviderProps, Account, DataAccount, Profile } from '../utilities/interfaces.utility';
+import { ProviderProps, Account, DataAccount, Profile, forgetPasswordProps } from '../utilities/interfaces.utility';
 import {
   registerRequest,
   loginRequest,
   profileRequest,
   updatePhotoProfileRequest,
   authWithGoogle,
+  forgetPasswordRequest,
 } from '../services/auth.service';
 import { authContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
@@ -25,7 +26,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState([]);
   const [user, setUser] = useState<Profile | null>(null);
-  console.log(user);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       setUser(profileData);
       setIsAuthenticated(true);
     },
-    onError: (error) => console.log('Login Failed:', error), //Change this -----------------------------
+    onError: () => {}, //Change this -----------------------------
   });
 
   const logOut = () => {
@@ -100,6 +100,18 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     }
   };
 
+  const forgetPassword = async (email:forgetPasswordProps) => {
+    try {
+      await forgetPasswordRequest(email);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+          console.log(error.response.data);
+        }
+      }
+    }
+  };
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -143,6 +155,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         updatePhotoProfile,
         login,
         logOut,
+        forgetPassword,
       }}
     >
       {children}

@@ -12,7 +12,7 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
       return res.status(404).json(['User not found']);
     }
     const token = jwt.sign({ userId: user.id }, TOKEN_SECRET, { expiresIn: '1h' });
-    const resetUrl = `${FRONTEND_URL}/reset-password/${token}`;
+    const resetUrl = `${FRONTEND_URL}/reset-password/?token=${token}`;
     await emailTransporter.sendMail({
       to: user.email,
       subject: 'Password Reset',

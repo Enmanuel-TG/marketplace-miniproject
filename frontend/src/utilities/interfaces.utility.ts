@@ -24,9 +24,12 @@ export interface DataAccount extends Account {
   birthday: string;
   phoneNumber: string;
 }
+export interface forgetPasswordProps {
+  email: string
+}
 
 export interface authContextType {
-  signUp: (data: DataAccount  ) => void;
+  signUp: (data: DataAccount) => void;
   signIn: (data: Account) => void;
   updatePhotoProfile: () => void;
   setIsAuthenticated: (value: boolean) => void;
@@ -39,6 +42,7 @@ export interface authContextType {
   setSelectedFile: (value: File) => void;
   login: () => void;
   logOut: () => void;
+  forgetPassword: (email: forgetPasswordProps) => void;
 }
 
 //---------------------------------------------------------------------------

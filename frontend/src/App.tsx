@@ -9,11 +9,13 @@ import ProfilePage from './pages/ProfilePage';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GOOGLE_CLIENT_ID } from './utilities/consts.utility';
 import { ForgetPasswordPage } from './pages/ForgetPasswordPage';
+import { ResetPasswordPage } from './pages/ResetPasswordPage';
 
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },
   { path: '/login', element: <LoginPages /> },
-  { path: '/ForgetPassword', element: <ForgetPasswordPage /> },
+  { path: '/forget-password', element: <ForgetPasswordPage /> },
+  { path: '/reset-password', element: <ResetPasswordPage /> },
   {
     element: <ProtectedRouter />,
     children: [
