@@ -1,16 +1,8 @@
 import { Request, Response } from 'express';
 import { prisma } from '../utilities/prisma.utility';
-import { TOKEN_SECRET, PASSWORD, ACCOUNT, FRONTEND_URL } from '../utilities/consts.utility';
+import { TOKEN_SECRET, FRONTEND_URL } from '../utilities/consts.utility';
 import jwt from 'jsonwebtoken';
-import nodemailer from 'nodemailer';
-
-const transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: ACCOUNT,
-    pass: PASSWORD,
-  },
-});
+import { emailTransporter } from '../utilities/email-transporter.utility.ts';
 
 export const requestPasswordReset = async (req: Request, res: Response) => {
   const { email } = req.body;
@@ -20,15 +12,8 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
       return res.status(404).json(['User not found']);
     }
     const token = jwt.sign({ userId: user.id }, TOKEN_SECRET, { expiresIn: '1h' });
-    await prisma.user.update({
-      where: { email },
-      data: {
-        resetToken: token,
-        resetTokenExpiry: new Date(Date.now() + 3600000),
-      },
-    });
-    const resetUrl = `${FRONTEND_URL}/ForgetPassword?token=${token}`;
-    await transporter.sendMail({
+    const resetUrl = `${FRONTEND_URL}/reset-password/${token}`;
+    await emailTransporter.sendMail({
       to: user.email,
       subject: 'Password Reset',
       html: `<a href="${resetUrl}">Reset your password</a>`,

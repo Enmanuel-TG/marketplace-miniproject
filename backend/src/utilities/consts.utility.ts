@@ -9,14 +9,10 @@ export const TOKEN_EXPIRES = process.env.TOKEN_EXPIRES || '7d';
 export const CLOUDINARY_NAME = process.env.CLOUD_NAME;
 export const KEY = process.env.API_KEY;
 export const SECRET = process.env.API_SECRET;
-export const enum ROLES {
-  admin = 'admin',
-  user = 'user',
-}
 export const MAIN_ADMIN = process.env.MAIN_ADMIN;
-export const ACCOUNT = process.env.EMAIL;
-export const PASSWORD = process.env.PASSWORD;
-export const FRONTEND_URL = process.env.FRONTEND_URL
+export const EMAIL_ACCOUNT = process.env.EMAIL_ACCOUNT;
+export const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
+export const FRONTEND_URL = process.env.FRONTEND_URL;
 
 //-------------------------CONST-------------------------------------
 export const LEGAL_AGE = 18;
@@ -25,4 +21,7 @@ export const PHOTO_PROFILE_FOLDER = 'ftProfile';
 export const PHOTOS_PRODUCT_FOLDER = 'ftProduct';
 export const IMG_DEFAULT =
   'https://res.cloudinary.com/dvqevobqi/image/upload/v1708961063/Default/30349e17-b84b-4ae7-ae0e-db4802a3dcfd.png';
-  
+export const enum ROLES {
+  admin = 'admin',
+  user = 'user',
+}

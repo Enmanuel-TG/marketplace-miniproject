@@ -5,11 +5,12 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const resetPassword = async (req: Request, res: Response) => {
-  const { token, newPassword } = req.body;
+  const { newPassword } = req.body;
+  const token = req.headers.authorization as string;
   try {
-    const decoded: any = jwt.verify(token, TOKEN_SECRET);
+    const decoded = jwt.verify(token, TOKEN_SECRET) as { userId: number };
     const user = await prisma.user.findUnique({ where: { id: decoded.userId } });
-    if (!user || user.resetToken !== token || new Date() > user.resetTokenExpiry!) {
+    if (!user) {
       return res.status(400).json(['Invalid or expired token']);
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -17,8 +18,6 @@ export const resetPassword = async (req: Request, res: Response) => {
       where: { id: user.id },
       data: {
         password: hashedPassword,
-        resetToken: null,
-        resetTokenExpiry: null,
       },
     });
     return res.status(200).json(['Password reset successful']);
