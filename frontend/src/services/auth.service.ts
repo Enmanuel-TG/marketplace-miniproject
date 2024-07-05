@@ -24,3 +24,14 @@ export const authWithGoogle = async (accessToken: string) => {
 
 export const forgetPasswordRequest = async (email: forgetPasswordProps) =>
   await server.post('/user/request-password-reset', email);
+
+export const resetPasswordRequest = async (password: string, token: string) =>
+  await server.post(
+    '/user/reset-password',
+    { newPassword: password },
+    {
+      headers: {
+        authorization: token,
+      },
+    },
+  );

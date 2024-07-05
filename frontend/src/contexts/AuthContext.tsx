@@ -7,6 +7,7 @@ import {
   updatePhotoProfileRequest,
   authWithGoogle,
   forgetPasswordRequest,
+  resetPasswordRequest,
 } from '../services/auth.service';
 import { authContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
@@ -24,7 +25,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }: ProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState<string[]>([]);
   const [user, setUser] = useState<Profile | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -100,16 +101,25 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     }
   };
 
-  const forgetPassword = async (email:forgetPasswordProps) => {
+  const forgetPassword = async (email: forgetPasswordProps) => {
     try {
       await forgetPasswordRequest(email);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {
           setErrors(error.response.data);
-          console.log(error.response.data);
         }
       }
+    }
+  };
+  const resetPassword = async (password: string, confirm: string, token: string) => {
+    if (password !== confirm) {
+      setErrors(['Password does not match']);
+    }
+    try {
+      await resetPasswordRequest(password, token);
+    } catch (error) {
+      setErrors([error as never]);
     }
   };
   useEffect(() => {
@@ -156,6 +166,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         login,
         logOut,
         forgetPassword,
+        resetPassword,
       }}
     >
       {children}

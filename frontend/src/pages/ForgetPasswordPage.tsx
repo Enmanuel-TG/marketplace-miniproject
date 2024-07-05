@@ -8,7 +8,6 @@ export const ForgetPasswordPage = () => {
   const { forgetPassword } = useAuth();
   const setData = (data: FieldValues) => {
     forgetPassword(data as forgetPasswordProps);
-    console.log(data);
   };
 
   const { handleSubmit, register } = useForm();

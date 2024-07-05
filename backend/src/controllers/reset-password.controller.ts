@@ -22,6 +22,6 @@ export const resetPassword = async (req: Request, res: Response) => {
     });
     return res.status(200).json(['Password reset successful']);
   } catch (error) {
-    return res.status(400).json(['Invalid token']);
+    return res.status(400).json(error);
   }
 };
