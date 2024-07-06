@@ -4,11 +4,13 @@ import { authRegisterValidator, authLoginValidator } from '../validators/auth.va
 import validateToken from '../middlewares/validate-token.middleware.ts';
 import validateSchema from '../middlewares/validator.middleware.ts';
 import { getUserAndRole } from '../middlewares/validate-role.middleware.ts';
+import { googleAuth } from '../controllers/google.controller.ts';
 const router = Router();
 
 router.post('/register', validateSchema(authRegisterValidator), register);
 router.post('/login', validateSchema(authLoginValidator), login);
 router.post('/logout', validateToken, logout);
+router.post('/google-auth', validateSchema(authRegisterValidator), googleAuth);
 router.get('/test', getUserAndRole, test);
 
 export default router;

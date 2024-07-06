@@ -22,6 +22,8 @@ export const authWithGoogle = async (accessToken: string) => {
   return response.data;
 };
 
+export const saveUserGoogleRequest = async (user: User) => await server.post('/auth/google-auth', user);
+
 export const forgetPasswordRequest = async (email: forgetPasswordProps) =>
   await server.post('/user/request-password-reset', email);
 

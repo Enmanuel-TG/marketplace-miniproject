@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { ProviderProps, Account, DataAccount, Profile, forgetPasswordProps } from '../utilities/interfaces.utility';
+import { ProviderProps, Account, DataAccount, Profile, forgetPasswordProps, User} from '../utilities/interfaces.utility';
 import {
   registerRequest,
   loginRequest,
@@ -8,6 +8,7 @@ import {
   authWithGoogle,
   forgetPasswordRequest,
   resetPasswordRequest,
+  saveUserGoogleRequest,
 } from '../services/auth.service';
 import { authContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
@@ -35,9 +36,27 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       const profileData = await authWithGoogle(codeResponse.access_token);
       setUser(profileData);
       setIsAuthenticated(true);
+      saveUser();
     },
     onError: () => {}, //Change this -----------------------------
   });
+  const saveUser = async () => {
+    if (user) {
+      const googleUser: User = {
+        name: user.name,
+        email: user.email,
+        password: 'password',
+        photo: user.picture,
+        phoneNumber: '00000000000',
+        birthday: '0000-00-00T00:00:00Z',
+      };
+      try {
+        await saveUserGoogleRequest(googleUser);
+      } catch (error) {
+        setIsAuthenticated(false);
+      }
+    }
+  };
 
   const logOut = () => {
     googleLogout();

@@ -9,9 +9,13 @@ export interface User {
   email: string;
   birthday: string;
   phoneNumber: string;
+  password?: string;
+  photo?: string;
 }
+
 export interface Profile extends User {
   photo: string;
+  picture?: string;
 }
 export interface Account {
   email: string;
