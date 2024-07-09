@@ -13,6 +13,7 @@ export const MAIN_ADMIN = process.env.MAIN_ADMIN;
 export const EMAIL_ACCOUNT = process.env.EMAIL_ACCOUNT;
 export const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
 export const FRONTEND_URL = process.env.FRONTEND_URL;
+export const GOOGLE_API_URL = process.env.GOOGLE_API_URL;
 
 //-------------------------CONST-------------------------------------
 export const LEGAL_AGE = 18;

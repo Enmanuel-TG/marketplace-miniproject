@@ -29,7 +29,7 @@ export interface DataAccount extends Account {
   phoneNumber: string;
 }
 export interface forgetPasswordProps {
-  email: string
+  email: string;
 }
 
 export interface authContextType {
@@ -42,9 +42,10 @@ export interface authContextType {
   user: Profile | null;
   isEdit: boolean;
   setIsEdit: (value: boolean) => void;
-  selectedFile: File  | null;
+  selectedFile: File | null;
   setSelectedFile: (value: File) => void;
-  login: () => void;
+  loginWithGoogle: () => void;
+  registerWithGoogle: () => void;
   logOut: () => void;
   forgetPassword: (email: forgetPasswordProps) => void;
   resetPassword: (password: string, confirmPassword: string, token: string) => void;

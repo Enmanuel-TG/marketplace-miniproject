@@ -8,7 +8,7 @@ import { Account } from '../utilities/interfaces.utility';
 
 const LoginPages = () => {
   const navigate = useNavigate();
-  const { signIn, isAuthenticated, errors: errorLogin, login } = useAuth();
+  const { signIn, isAuthenticated, errors: errorLogin, loginWithGoogle } = useAuth();
   const { handleSubmit, register } = useForm<Account>();
 
   useEffect(() => {
@@ -61,9 +61,8 @@ const LoginPages = () => {
           </form>
           <button
             className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            onClick={login}
-          >
-            Sign in with Google 🚀
+            onClick={loginWithGoogle}>
+            Login with Google 🚀
           </button>
         </div>
       </div>

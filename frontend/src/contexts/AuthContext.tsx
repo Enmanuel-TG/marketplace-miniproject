@@ -1,14 +1,14 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { ProviderProps, Account, DataAccount, Profile, forgetPasswordProps, User} from '../utilities/interfaces.utility';
+import { ProviderProps, Account, DataAccount, Profile, forgetPasswordProps } from '../utilities/interfaces.utility';
 import {
   registerRequest,
   loginRequest,
   profileRequest,
   updatePhotoProfileRequest,
-  authWithGoogle,
   forgetPasswordRequest,
   resetPasswordRequest,
-  saveUserGoogleRequest,
+  loginWithGoogleRequest,
+  registerWithGoogleRequest,
 } from '../services/auth.service';
 import { authContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
@@ -31,32 +31,23 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
-  const login = useGoogleLogin({
-    onSuccess: async (codeResponse) => {
-      const profileData = await authWithGoogle(codeResponse.access_token);
-      setUser(profileData);
+  const loginWithGoogle = useGoogleLogin({
+    onSuccess: async (response) => {
+      const { data } = await loginWithGoogleRequest(response.access_token);
+      setUser(data);
       setIsAuthenticated(true);
-      saveUser();
     },
     onError: () => {}, //Change this -----------------------------
   });
-  const saveUser = async () => {
-    if (user) {
-      const googleUser: User = {
-        name: user.name,
-        email: user.email,
-        password: 'password',
-        photo: user.picture,
-        phoneNumber: '00000000000',
-        birthday: '0000-00-00T00:00:00Z',
-      };
-      try {
-        await saveUserGoogleRequest(googleUser);
-      } catch (error) {
-        setIsAuthenticated(false);
-      }
-    }
-  };
+
+  const registerWithGoogle = useGoogleLogin({
+    onSuccess: async (response) => {
+      const { data } = await registerWithGoogleRequest(response.access_token, new Date().toISOString(), '00000000000');
+      setUser(data);
+      setIsAuthenticated(true);
+    },
+    onError: () => {}, //Change this -----------------------------
+  });
 
   const logOut = () => {
     googleLogout();
@@ -182,7 +173,8 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         setIsAuthenticated,
         errors,
         updatePhotoProfile,
-        login,
+        loginWithGoogle,
+        registerWithGoogle,
         logOut,
         forgetPassword,
         resetPassword,

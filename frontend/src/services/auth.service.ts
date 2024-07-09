@@ -1,4 +1,4 @@
-import { server, googleServer } from '../utilities/axios.utility';
+import { server } from '../utilities/axios.utility';
 import { Account, User, forgetPasswordProps } from '../utilities/interfaces.utility';
 
 export const registerRequest = async (user: User) => await server.post('/auth/register', user);
@@ -11,18 +11,6 @@ export const updatePhotoProfileRequest = async (photo: File) => {
   formData.append('photo', photo);
   return await server.post('/user/update', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 };
-
-export const authWithGoogle = async (accessToken: string) => {
-  const response = await googleServer.get(`/userinfo?access_token=${accessToken}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      Accept: 'application/json',
-    },
-  });
-  return response.data;
-};
-
-export const saveUserGoogleRequest = async (user: User) => await server.post('/auth/google-auth', user);
 
 export const forgetPasswordRequest = async (email: forgetPasswordProps) =>
   await server.post('/user/request-password-reset', email);
@@ -37,3 +25,30 @@ export const resetPasswordRequest = async (password: string, token: string) =>
       },
     },
   );
+
+export const loginWithGoogleRequest = async (accessToken: string) => {
+  return await server.post(
+    '/auth/google/login',
+    {},
+    {
+      headers: {
+        authorization: accessToken,
+      },
+    },
+  );
+};
+
+export const registerWithGoogleRequest = async (accessToken: string, birthday: string, phoneNumber: string) => {
+  return await server.post(
+    '/auth/google/register',
+    {
+      birthday,
+      phoneNumber,
+    },
+    {
+      headers: {
+        authorization: accessToken,
+      },
+    },
+  );
+};
