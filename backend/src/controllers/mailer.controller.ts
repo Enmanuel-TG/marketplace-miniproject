@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { prisma } from '../utilities/prisma.utility';
-import { TOKEN_SECRET, FRONTEND_URL } from '../utilities/consts.utility';
+import { TOKEN_SECRET, FRONTEND_URL, TOKEN_PASSWORD_RESET } from '../utilities/consts.utility';
 import jwt from 'jsonwebtoken';
 import { emailTransporter } from '../utilities/email-transporter.utility.ts';
 
@@ -11,7 +11,7 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(404).json(['User not found']);
     }
-    const token = jwt.sign({ userId: user.id }, TOKEN_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.id }, TOKEN_SECRET, { expiresIn: TOKEN_PASSWORD_RESET });
     const resetUrl = `${FRONTEND_URL}/reset-password/?token=${token}`;
     await emailTransporter.sendMail({
       to: user.email,
