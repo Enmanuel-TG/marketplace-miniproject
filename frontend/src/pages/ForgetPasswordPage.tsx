@@ -26,9 +26,6 @@ export const ForgetPasswordPage = () => {
         <form onSubmit={handleSubmit(setData)} className="space-y-4">
           <Input fieldname="Email" type="email" placeholder="Enter your email" {...register('email', { required: true })} />
           <Button fieldname="Send" type="submit" />
-
-          {/* Opcional: Mensaje de error si el campo de correo electrónico es requerido */}
-          {/* {errors.email && <span>This field is required</span>} */}
         </form>
       </div>
     </div>
