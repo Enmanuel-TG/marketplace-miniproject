@@ -13,11 +13,11 @@ export const updatePhotoProfileRequest = async (photo: File) => {
 };
 
 export const forgetPasswordRequest = async (email: forgetPasswordProps) =>
-  await server.post('/user/request-password-reset', email);
+  await server.post('/resetPassword/request-password-reset', email);
 
 export const resetPasswordRequest = async (password: string, token: string) =>
   await server.post(
-    '/user/reset-password',
+    '/resetPassword/reset-password',
     { newPassword: password },
     {
       headers: {
@@ -28,7 +28,7 @@ export const resetPasswordRequest = async (password: string, token: string) =>
 
 export const loginWithGoogleRequest = async (accessToken: string) => {
   return await server.post(
-    '/auth/google/login',
+    '/google-auth/google/login',
     {},
     {
       headers: {
@@ -40,7 +40,7 @@ export const loginWithGoogleRequest = async (accessToken: string) => {
 
 export const registerWithGoogleRequest = async (accessToken: string, birthday: string, phoneNumber: string) => {
   return await server.post(
-    '/auth/google/register',
+    '/google-auth/google/register',
     {
       birthday,
       phoneNumber,

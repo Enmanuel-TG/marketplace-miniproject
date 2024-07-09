@@ -7,6 +7,8 @@ import express, { Request, Response } from 'express';
 import fileUpload from 'express-fileupload';
 import userRouter from './router/user.router';
 import productRouter from './router/product.router';
+import googleRouter from './router/google.router';
+import resetPasswordRouter from './router/user.router';
 import rolesRouter from './router/roles.router';
 
 const app: express.Application = express();
@@ -25,6 +27,8 @@ app.get('/', (_req: Request, res: Response) => {
 });
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+app.use('/api/google-auth', googleRouter);
+app.use('/api/resetPassword', resetPasswordRouter);
 app.use('/api/product', productRouter);
 app.use('/api/roles', rolesRouter);
 app.listen(PORT, () => {
