@@ -13,11 +13,11 @@ export const updatePhotoProfileRequest = async (photo: File) => {
 };
 
 export const forgetPasswordRequest = async (email: forgetPasswordProps) =>
-  await server.post('/resetPassword/request-password-reset', email);
+  await server.post('/recover-account/request-password-reset', email);
 
 export const resetPasswordRequest = async (password: string, token: string) =>
   await server.post(
-    '/resetPassword/reset-password',
+    '/recover-account/reset-password',
     { newPassword: password },
     {
       headers: {
