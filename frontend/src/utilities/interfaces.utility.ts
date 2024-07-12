@@ -49,6 +49,8 @@ export interface authContextType {
   logOut: () => void;
   forgetPassword: (email: forgetPasswordProps) => void;
   resetPassword: (password: string, confirmPassword: string, token: string) => void;
+  state: boolean;
+  setState: (value: boolean) => void;
 }
 
 //---------------------------------------------------------------------------

@@ -30,6 +30,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [user, setUser] = useState<Profile | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [state, setState] = useState(false);
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
@@ -113,8 +114,12 @@ export const AuthProvider = ({ children }: ProviderProps) => {
 
   const forgetPassword = async (email: forgetPasswordProps) => {
     try {
-      await forgetPasswordRequest(email);
+      const res = await forgetPasswordRequest(email);
+      if (res.status === 200) {
+        setState(true);
+      }
     } catch (error) {
+      setState(false);
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {
           setErrors(error.response.data);
@@ -125,17 +130,21 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const resetPassword = async (password: string, confirm: string, token: string) => {
     if (password !== confirm) {
       setErrors(['Password does not match']);
-    }
-    try {
-      await resetPasswordRequest(password, token);
-    } catch (error) {
-      setErrors([error as never]);
-    }
+      setState(false);
+    } else {
+      setState(true);
+      try {
+        await resetPasswordRequest(password, token);
+      } catch (error) {
+        setErrors([error as never]);
+      }
+    };
   };
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
         setErrors([]);
+        setState(false);
       }, 5000);
       return () => clearTimeout(timer);
     }
@@ -178,6 +187,8 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         logOut,
         forgetPassword,
         resetPassword,
+        setState,
+        state,
       }}
     >
       {children}
