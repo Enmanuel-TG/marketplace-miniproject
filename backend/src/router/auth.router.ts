@@ -11,5 +11,4 @@ router.post('/register', validateSchema(authRegisterValidator), register);
 router.post('/login', validateSchema(authLoginValidator), login);
 router.post('/logout', validateToken, logout);
 
-
 export default router;

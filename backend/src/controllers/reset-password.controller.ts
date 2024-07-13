@@ -17,7 +17,14 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
     await emailTransporter.sendMail({
       to: user.email,
       subject: 'Password Reset',
-      html: `<a href="${resetUrl}">Reset your password</a>`,
+      html: `
+        <p>Dear ${user.name},</p>
+        <p>We received a request to reset your password. Please click the link below to reset your password:</p>
+        <p><a href="${resetUrl}">Reset your password</a></p>
+        <p>If you did not request a password reset, please ignore this email or contact support if you have any questions.</p>
+        <p>Best regards,</p>
+        <p>Your Company Name</p>
+      `,
     });
 
     return res.status(200).json(['Password reset link sent']);

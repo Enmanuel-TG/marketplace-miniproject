@@ -14,3 +14,7 @@ export const authLoginValidator = z.object({
   email: z.string({ required_error: 'email is required' }).email({ message: 'invalid email' }),
   password: z.string({ required_error: 'password is required' }),
 });
+
+export const passwordValidator = z
+  .string({ required_error: 'Password is required' })
+  .min(4, { message: 'password must to be least 4 characters' });
