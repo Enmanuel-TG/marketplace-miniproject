@@ -4,6 +4,6 @@ import { getUserAndRole } from '../middlewares/validate-role.middleware.ts';
 
 const router = Router();
 
-router.post('/change', getUserAndRole, changeRolUser);
+router.post('/change', getUserAndRole, changeRolUser); //TODO: agregar schema
 
 export default router;

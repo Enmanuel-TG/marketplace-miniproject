@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { prisma } from '../utilities/prisma.utility';
+import { prisma } from '../utilities/prisma.utility.ts';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { TOKEN_SECRET, FRONTEND_URL, TOKEN_PASSWORD_RESET } from '../utilities/consts.utility';
+import { TOKEN_SECRET, FRONTEND_URL, TOKEN_PASSWORD_RESET } from '../utilities/consts.utility.ts';
 import { emailTransporter } from '../utilities/email-transporter.utility.ts';
 
 export const requestPasswordReset = async (req: Request, res: Response) => {

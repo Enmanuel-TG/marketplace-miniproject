@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { profile, updatePhotoProfile, changePassword } from '../controllers/user.controller';
 import validateToken from '../middlewares/validate-token.middleware.ts';
 import validateSchema from '../middlewares/validator.middleware.ts';
-import { passwordValidator } from '../validators/auth.validator.ts';
+import { passwordValidator } from '../validators/user.validator.ts';
 
 const router = Router();
 
