@@ -13,7 +13,7 @@ export const createProduct = async (req: Request, res: Response) => {
     return res.status(400).json({ message: 'No photo uploaded.' });
   }
   if (Array.isArray(photos) && photos.length > 10) {
-    return res.status(400).json(['You can only upload up to 10 photos']);
+    return res.status(400).json(['You can only upload up to 10 photos.']);
   }
   const images: string[] = await uploadedPhotos(photos as UploadedFile, PHOTOS_PRODUCT_FOLDER);
   try {
@@ -31,7 +31,7 @@ export const createProduct = async (req: Request, res: Response) => {
       },
     });
     return res.status(200).json({
-      message: 'Product created successfully',
+      message: 'Product created successfully.',
       product: {
         id: product.id,
         name: product.name,
@@ -46,7 +46,7 @@ export const createProduct = async (req: Request, res: Response) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error to create product',
+      message: 'Error to create product.',
       error: error,
     });
   }
@@ -61,12 +61,12 @@ export const deleteProduct = async (req: Request, res: Response) => {
       },
     });
     return res.status(200).json({
-      message: 'Product deleted successfully',
+      message: 'Product deleted successfully.',
       product,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error to delete product',
+      message: 'Error to delete product.',
       error,
     });
   }
@@ -92,12 +92,12 @@ export const updateProduct = async (req: Request, res: Response) => {
       },
     });
     return res.status(200).json({
-      message: 'Product updated successfully',
+      message: 'Product updated successfully.',
       product,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error to update product',
+      message: 'Error to update product.',
       error,
     });
   }
@@ -114,7 +114,7 @@ export const getProduct = async (req: Request, res: Response) => {
     return res.status(200).json(product);
   } catch (error) {
     return res.status(500).json({
-      message: 'Error to get product',
+      message: 'Error to get product.',
       error,
     });
   }
@@ -130,7 +130,7 @@ export const getAllUserProduct = async (req: Request, res: Response) => {
     return res.status(200).json(products);
   } catch (error) {
     return res.status(500).json({
-      message: 'Error to get products',
+      message: 'Error to get products.',
       error,
     });
   }
@@ -141,7 +141,7 @@ export const getAllProduct = async (_req: Request, res: Response) => {
     return res.status(200).json(products);
   } catch (error) {
     return res.status(500).json({
-      message: 'Error to get products',
+      message: 'Error to get products.',
       error,
     });
   }
@@ -156,7 +156,7 @@ export const getProductsByCategory = async (req: Request, res: Response) => {
       },
     });
     if (products.length === 0) {
-      return res.status(404).json(['No products in this category']);
+      return res.status(404).json(['No products in this category.']);
     }
     return res.status(200).json(products);
   } catch (error) {
@@ -178,7 +178,7 @@ export const searchProduct = async (req: Request, res: Response) => {
       },
     });
     if (products.length === 0) {
-      return res.status(404).json({ message: 'Products not found' });
+      return res.status(404).json({ message: 'Products not found.' });
     }
     return res.status(200).json(products);
   } catch (error) {

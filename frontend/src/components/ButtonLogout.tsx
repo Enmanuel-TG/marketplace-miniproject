@@ -2,7 +2,6 @@ import { logoutRequest } from '../services/auth.service';
 import { useAuth } from '../contexts/AuthContext';
 
 const ButtonLogout = () => {
-
   const { setIsAuthenticated } = useAuth();
 
   const logout = async () => {
@@ -10,12 +9,12 @@ const ButtonLogout = () => {
       await logoutRequest();
       setIsAuthenticated(false);
     } catch (error) {
-      alert(error);//TODO fix this
+      alert(error); //TODO fix this
     }
   };
   return (
     <div>
-      <button onClick={logout}></button>
+      <button onClick={logout}>LOGOUT</button>
     </div>
   );
 };

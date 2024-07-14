@@ -1,16 +1,14 @@
 import 'dotenv/config.js';
-import { PORT } from './utilities/consts.utility';
-import authRouter from './router/auth.router';
+import { PORT, FRONTEND_URL } from './utilities/consts.utility';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Application } from 'express';
 import fileUpload from 'express-fileupload';
-import userRouter from './router/user.router';
-import productRouter from './router/product.router';
-import rolesRouter from './router/roles.router';
+import apiRouter from './router/api.router';
 
-const app: express.Application = express();
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+const app: Application = express();
+
+app.use(cors({ origin: FRONTEND_URL, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -23,10 +21,9 @@ app.use(
 app.get('/', (_req: Request, res: Response) => {
   res.send('Hi, world!');
 });
-app.use('/api/auth', authRouter);
-app.use('/api/user', userRouter);
-app.use('/api/product', productRouter);
-app.use('/api/roles', rolesRouter);
+
+app.use('/api', apiRouter);
+
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`server is running in port ${PORT}`);

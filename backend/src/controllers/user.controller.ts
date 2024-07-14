@@ -1,10 +1,11 @@
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { ExtendedRequest } from '../types.d';
 import { prisma } from '../utilities/prisma.utility.ts';
 import getTokenId from '../utilities/get-token-id.utility.ts';
 import uploadedPhotos from '../utilities/uploaded-photo.utility.ts';
 import { PHOTO_PROFILE_FOLDER } from '../utilities/consts.utility.ts';
 import { UploadedFile } from 'express-fileupload';
+import bcrypt from 'bcryptjs';
 
 export const profile = async (req: ExtendedRequest, res: Response) => {
   const id = req.userId;
@@ -15,7 +16,7 @@ export const profile = async (req: ExtendedRequest, res: Response) => {
   });
   if (!userFound) {
     return res.status(404).json({
-      message: 'User not found',
+      message: 'User not found.',
     });
   }
   return res.json({
@@ -33,7 +34,7 @@ export const updatePhotoProfile = async (req: ExtendedRequest, res: Response) =>
   const photo = req.files?.photo;
   if (!id) {
     return res.status(404).json({
-      message: 'User not found',
+      message: 'User not found.',
     });
   }
 
@@ -47,7 +48,7 @@ export const updatePhotoProfile = async (req: ExtendedRequest, res: Response) =>
   });
   if (!userFound) {
     return res.status(404).json({
-      message: 'User not found',
+      message: 'User not found.',
     });
   }
   return res.json({
@@ -55,4 +56,29 @@ export const updatePhotoProfile = async (req: ExtendedRequest, res: Response) =>
     name: userFound.name,
     newPhoto: userFound.photo,
   });
+};
+
+export const changePassword = async (req: Request, res: Response) => {
+  const { oldPassword, newPassword } = req.body;
+  const id = getTokenId(req);
+  const userFound = await prisma.user.findUnique({
+    where: { id },
+  });
+  if (!userFound) {
+    return res.status(404).json(['User not found.']);
+  }
+  const isMatch = await bcrypt.compare(oldPassword, userFound.password);
+  if (!isMatch) {
+    return res.status(400).json(['Incorrect data.']);
+  }
+  const passwordhash = await bcrypt.hash(newPassword, 10);
+  try {
+    await prisma.user.update({
+      where: { id },
+      data: { password: passwordhash },
+    });
+    return res.json(['Password changed successfully.']);
+  } catch (error) {
+    return res.status(500).json(['Error to change password.']);
+  }
 };

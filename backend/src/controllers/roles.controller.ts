@@ -13,7 +13,7 @@ export const changeRolUser = async (req: Request, res: Response) => {
       },
     });
     return res.status(200).json({
-      message: 'User role updated successfully',
+      message: 'User role updated successfully.',
       user: {
         id: updatedUser.id,
         role: updatedUser.role,
@@ -24,7 +24,7 @@ export const changeRolUser = async (req: Request, res: Response) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Error to update user role',
+      message: 'Error to update user role.',
       error,
     });
   }
