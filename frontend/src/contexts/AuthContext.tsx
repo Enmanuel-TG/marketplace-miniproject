@@ -34,20 +34,46 @@ export const AuthProvider = ({ children }: ProviderProps) => {
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
-      const { data } = await loginWithGoogleRequest(response.access_token);
-      setUser(data);
-      setIsAuthenticated(true);
+      try {
+        const { data } = await loginWithGoogleRequest(response.access_token);
+        setUser(data);
+        setIsAuthenticated(true);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          if (error.response && error.response.data) {
+            setErrors(error.response.data);
+            setState(false);
+          }
+        }
+      }
     },
-    onError: () => {}, //Change this -----------------------------
+    onError: () => {
+      setErrors(['Login with google error']);
+    },
   });
 
   const registerWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
-      const { data } = await registerWithGoogleRequest(response.access_token, new Date().toISOString(), '00000000000');
-      setUser(data);
-      setIsAuthenticated(true);
+      try {
+        const { data } = await registerWithGoogleRequest(
+          response.access_token,
+          new Date().toISOString(),
+          '00000000000',
+        );
+        setUser(data);
+        setIsAuthenticated(true);
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          if (error.response && error.response.data) {
+            setErrors(error.response.data);
+            setState(false);
+          }
+        }
+      }
     },
-    onError: () => {}, //Change this -----------------------------
+    onError: () => {
+      setErrors(['Register with google error']);
+    },
   });
 
   const logOut = () => {

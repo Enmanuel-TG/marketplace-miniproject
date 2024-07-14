@@ -14,7 +14,7 @@ import { formSliderSettings } from '../utilities/slick.utility';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const { signUp, isAuthenticated, errors, registerWithGoogle } = useAuth();
+  const { signUp, isAuthenticated, errors: registerErrors, registerWithGoogle } = useAuth();
   const { handleSubmit, register } = useForm<DataAccount>();
   const sliderRef = useRef<Slider>(null);
 
@@ -25,8 +25,8 @@ const RegisterPage = () => {
   }, [isAuthenticated, navigate]);
 
   useEffect(() => {
-    errors.map((error) => toast.error(error, toastifyConfig));
-  }, [errors]);
+    registerErrors.map((error) => toast.error(error, toastifyConfig));
+  }, [registerErrors]);
 
   const setData = (data: DataAccount) => {
     signUp(data);

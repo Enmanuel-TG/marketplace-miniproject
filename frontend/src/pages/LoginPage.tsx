@@ -5,11 +5,17 @@ import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useForm } from 'react-hook-form';
 import { Account } from '../utilities/interfaces.utility';
+import { toast } from 'react-toastify';
+import { toastifyConfig } from '../utilities/toastify.utility';
 
 const LoginPages = () => {
   const navigate = useNavigate();
   const { signIn, isAuthenticated, errors: errorLogin, loginWithGoogle } = useAuth();
   const { handleSubmit, register } = useForm<Account>();
+
+  useEffect(() => {
+    errorLogin.map((error) => toast.error(error, toastifyConfig));
+  }, [errorLogin]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -24,13 +30,6 @@ const LoginPages = () => {
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100">
       <div className="w-full max-w-md mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center">Login</h1>
-        <div>
-          {errorLogin.map((error, i) => (
-            <div key={i} className="text-red-500 mb-2">
-              {error}
-            </div>
-          ))}
-        </div>
         <div>
           <form onSubmit={handleSubmit(setData)}>
             <Input fieldname="Email" type="email" {...register('email', { required: true })} />

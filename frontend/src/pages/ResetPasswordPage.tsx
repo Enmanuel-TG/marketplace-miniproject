@@ -5,7 +5,6 @@ import { useAuth } from '../contexts/AuthContext';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 
-
 export const ResetPasswordPage = () => {
   const { resetPassword, errors: resetPasswordErrors, state, setState } = useAuth();
   const { handleSubmit, register } = useForm();
@@ -21,7 +20,6 @@ export const ResetPasswordPage = () => {
   }, []);
   function back() {
     setState(false);
-    console.log('Hi');
     navigate('/login', { replace: true });
   }
   return (
@@ -33,14 +31,23 @@ export const ResetPasswordPage = () => {
             {error}
           </div>
         ))}
-        {state ? <div className="text-green-500 mb-2 flex justify-center">
-            Your password has been successfully reset.
-        </div> : null}
+        {state ? (
+          <div className="text-green-500 mb-2 flex justify-center">Your password has been successfully reset.</div>
+        ) : null}
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input fieldname="New password" type="password" {...register('password', { required: true })} />
           <Input fieldname="Confirm Password" type="password" {...register('confirm-password', { required: true })} />
         </form>
-        {state ? <Button fieldname="Back" onClick={() => { back();} }/> :  <Button fieldname="Save" type="submit" onClick={handleSubmit(onSubmit)} />}
+        {state ? (
+          <Button
+            fieldname="Back"
+            onClick={() => {
+              back();
+            }}
+          />
+        ) : (
+          <Button fieldname="Save" type="submit" onClick={handleSubmit(onSubmit)} />
+        )}
       </div>
     </div>
   );
