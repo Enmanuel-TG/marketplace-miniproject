@@ -155,7 +155,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   };
   const resetPassword = async (password: string, confirm: string, token: string) => {
     if (password !== confirm) {
-      setErrors(['Password does not match']);
+      setErrors(['Password does not match.']);
       setState(false);
     } else {
       try {
@@ -164,7 +164,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       } catch (error) {
         if (axios.isAxiosError(error)) {
           if (error.response && error.response.data) {
-            setErrors([error.response?.data.message]);
+            setErrors(error.response.data);
             setState(false);
           }
         }
