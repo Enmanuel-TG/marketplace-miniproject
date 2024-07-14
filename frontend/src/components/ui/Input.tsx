@@ -6,9 +6,13 @@ interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<H
 
 const Input = forwardRef<HTMLInputElement, InputProps>(({ fieldname, ...props }, ref) => {
   return (
-    <label className="flex flex-col mt-3 ">
+    <label className="flex flex-col mt-3 px-1">
       <span>{fieldname}</span>
-      <input ref={ref} {...props} className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <input
+        ref={ref}
+        {...props}
+        className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
     </label>
   );
 });

@@ -18,10 +18,10 @@ export const register = async (req: Request, res: Response) => {
   try {
     const userFound = await prisma.user.findUnique({ where: { email: email } });
     if (userFound) {
-      return res.status(400).json(['the email is already in use']);
+      return res.status(400).json(['The email is already in use.']);
     }
     if (age < LEGAL_AGE) {
-      return res.status(400).json(['You need to be of legal age']);
+      return res.status(400).json(['You need to be of legal age.']);
     }
 
     const user = await prisma.user.create({
@@ -40,7 +40,7 @@ export const register = async (req: Request, res: Response) => {
       .cookie(NAME_TOKEN, token, { httpOnly: true })
       .status(200)
       .json({
-        message: 'register successfully',
+        message: 'Register successfully.',
         user: {
           id: user.id,
           name: user.name,
@@ -52,7 +52,7 @@ export const register = async (req: Request, res: Response) => {
       });
   } catch (error) {
     return res.status(500).json({
-      message: 'error to register user',
+      message: 'Error to register user.',
       error: error,
     });
   }
@@ -66,18 +66,18 @@ export const login = async (req: Request, res: Response) => {
     },
   });
   if (!userFound) {
-    return res.status(400).json(['User not found']);
+    return res.status(400).json(['User not found.']);
   }
   const isMatch = await bcrypt.compare(password, userFound.password);
   if (!isMatch) {
-    return res.status(400).json(['Incorrect data']);
+    return res.status(400).json(['Incorrect data.']);
   }
   const token = await createAccessToken({ id: userFound.id });
   return res
     .cookie(NAME_TOKEN, token, { httpOnly: true })
     .status(200)
     .json({
-      message: 'login successfully',
+      message: 'Login successfully.',
       user: {
         id: userFound.id,
         name: userFound.name,
@@ -95,13 +95,8 @@ export const logout = (_req: Request, res: Response) => {
     res.cookie(NAME_TOKEN, '', {
       expires: new Date(0),
     });
-    return res.status(200).json({ message: 'Logout successfully' });
+    return res.status(200).json({ message: 'Logout successfully.' });
   } catch (error) {
-    return res.status(500).json(['Error internal server']);
+    return res.status(500).json(['Error internal server.']);
   }
-};
-
-//TODO  delete this
-export const test = (_req: Request, res: Response) => {
-  return res.status(200).json({ message: 'test' });
 };

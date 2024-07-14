@@ -8,6 +8,9 @@ import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { DataAccount } from '../utilities/interfaces.utility';
 import { useAuth } from '../contexts/AuthContext';
+import { toast } from 'react-toastify';
+import { toastifyConfig } from '../utilities/toastify.utility';
+import { formSliderSettings } from '../utilities/slick.utility';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -21,32 +24,19 @@ const RegisterPage = () => {
     }
   }, [isAuthenticated, navigate]);
 
+  useEffect(() => {
+    errors.map((error) => toast.error(error, toastifyConfig));
+  }, [errors]);
+
   const setData = (data: DataAccount) => {
     signUp(data);
-  };
-
-  const sliderSettings = {
-    dots: true,
-    infinite: false,
-    speed: 600,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    adaptiveHeight: true,
-    arrows: false,
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100">
       <div className="w-full max-w-md mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center text-gray-700">Register</h1>
-        <div>
-          {errors.map((error, i) => (
-            <div key={i} className="text-red-500 mb-2">
-              {error}
-            </div>
-          ))}
-        </div>
-        <Slider ref={sliderRef} {...sliderSettings}>
+        <Slider ref={sliderRef} {...formSliderSettings}>
           <div>
             <form>
               <Input
@@ -100,7 +90,7 @@ const RegisterPage = () => {
                 {...register('password', { required: true })}
                 className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <div className="flex justify-between">
+              <div className="flex justify-between ">
                 <Button fieldname="Back" type="button" onClick={() => sliderRef.current?.slickPrev()} />
                 <Button fieldname="Register" type="submit" />
               </div>

@@ -10,7 +10,7 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
   try {
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
-      return res.status(404).json(['User not found']);
+      return res.status(404).json(['User not found.']);
     }
     const token = jwt.sign({ userId: user.id }, TOKEN_SECRET, { expiresIn: TOKEN_PASSWORD_RESET });
     const resetUrl = `${FRONTEND_URL}/reset-password/?token=${token}`;
@@ -23,11 +23,11 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
         <p><a href="${resetUrl}">Reset your password</a></p>
         <p>If you did not request a password reset, please ignore this email or contact support if you have any questions.</p>
         <p>Best regards,</p>
-        <p>Your Company Name</p>
+        <p>Marketplace App Team</p>
       `,
     });
 
-    return res.status(200).json(['Password reset link sent']);
+    return res.status(200).json(['Password reset link sent.']);
   } catch (error) {
     return res.status(500).json({ message: 'Server error', error });
   }
@@ -40,7 +40,7 @@ export const resetPassword = async (req: Request, res: Response) => {
     const decoded = jwt.verify(token, TOKEN_SECRET) as { userId: number };
     const user = await prisma.user.findUnique({ where: { id: decoded.userId } });
     if (!user) {
-      return res.status(400).json(['Invalid or expired token']);
+      return res.status(400).json(['Invalid or expired token.']);
     }
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     await prisma.user.update({
@@ -49,7 +49,7 @@ export const resetPassword = async (req: Request, res: Response) => {
         password: hashedPassword,
       },
     });
-    return res.status(200).json(['Password reset successful']);
+    return res.status(200).json(['Password reset successful.']);
   } catch (error) {
     return res.status(400).json(error);
   }

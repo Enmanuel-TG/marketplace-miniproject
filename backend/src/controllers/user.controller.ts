@@ -16,7 +16,7 @@ export const profile = async (req: ExtendedRequest, res: Response) => {
   });
   if (!userFound) {
     return res.status(404).json({
-      message: 'User not found',
+      message: 'User not found.',
     });
   }
   return res.json({
@@ -34,7 +34,7 @@ export const updatePhotoProfile = async (req: ExtendedRequest, res: Response) =>
   const photo = req.files?.photo;
   if (!id) {
     return res.status(404).json({
-      message: 'User not found',
+      message: 'User not found.',
     });
   }
 
@@ -48,7 +48,7 @@ export const updatePhotoProfile = async (req: ExtendedRequest, res: Response) =>
   });
   if (!userFound) {
     return res.status(404).json({
-      message: 'User not found',
+      message: 'User not found.',
     });
   }
   return res.json({
@@ -65,11 +65,11 @@ export const changePassword = async (req: Request, res: Response) => {
     where: { id },
   });
   if (!userFound) {
-    return res.status(404).json(['User not found']);
+    return res.status(404).json(['User not found.']);
   }
   const isMatch = await bcrypt.compare(oldPassword, userFound.password);
   if (!isMatch) {
-    return res.status(400).json(['Incorrect data']);
+    return res.status(400).json(['Incorrect data.']);
   }
   const passwordhash = await bcrypt.hash(newPassword, 10);
   try {
@@ -77,8 +77,8 @@ export const changePassword = async (req: Request, res: Response) => {
       where: { id },
       data: { password: passwordhash },
     });
-    return res.json(['password changed successfully']);
+    return res.json(['Password changed successfully.']);
   } catch (error) {
-    return res.status(500).json(['Error to change password']);
+    return res.status(500).json(['Error to change password.']);
   }
 };

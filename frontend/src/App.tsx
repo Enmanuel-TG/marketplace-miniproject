@@ -10,6 +10,9 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GOOGLE_CLIENT_ID } from './utilities/consts.utility';
 import { ForgetPasswordPage } from './pages/ForgetPasswordPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },
@@ -34,6 +37,7 @@ function App() {
       <ProductProvider>
         <AuthProvider>
           <RouterProvider router={router} />
+          <ToastContainer />
         </AuthProvider>
       </ProductProvider>
     </GoogleOAuthProvider>

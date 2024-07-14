@@ -20,14 +20,14 @@ export const loginWithGoogle = async (req: Request, res: Response) => {
   });
 
   if (!userFound) {
-    return res.status(400).json(['User not found']);
+    return res.status(400).json(['User not found.']);
   }
   const token = await createAccessToken({ id: userFound.id });
   return res
     .cookie(NAME_TOKEN, token, { httpOnly: true })
     .status(200)
     .json({
-      message: 'login successfully',
+      message: 'Login successfully.',
       user: {
         id: userFound.id,
         name: userFound.name,
@@ -65,7 +65,7 @@ export const registerWithGoogle = async (req: Request, res: Response) => {
     },
   });
   if (userFound) {
-    return res.status(400).json(['User already exists']);
+    return res.status(400).json(['User already exists.']);
   }
   const user = await prisma.user.create({
     data: {
@@ -85,7 +85,7 @@ export const registerWithGoogle = async (req: Request, res: Response) => {
     .cookie(NAME_TOKEN, token, { httpOnly: true })
     .status(200)
     .json({
-      message: 'register successfully',
+      message: 'Register successfully.',
       user: {
         id: user.id,
         name: user.name,

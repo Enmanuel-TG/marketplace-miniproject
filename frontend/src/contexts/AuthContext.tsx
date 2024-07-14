@@ -132,13 +132,18 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       setErrors(['Password does not match']);
       setState(false);
     } else {
-      setState(true);
       try {
         await resetPasswordRequest(password, token);
+        setState(true);
       } catch (error) {
-        setErrors([error as never]);
+        if (axios.isAxiosError(error)) {
+          if (error.response && error.response.data) {
+            setErrors([error.response?.data.message]);
+            setState(false);
+          }
+        }
       }
-    };
+    }
   };
   useEffect(() => {
     if (errors.length > 0) {
