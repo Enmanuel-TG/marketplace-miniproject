@@ -3,6 +3,8 @@
 
 ### dotenv ###
 .env
+.env.*
+!.env.example
 
 ### react ###
 .DS_*
@@ -13,6 +15,7 @@ logs
 
 node_modules
 bower_components
+dist
 
 *.sublime*
 
