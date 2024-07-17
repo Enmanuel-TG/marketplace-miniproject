@@ -1,5 +1,5 @@
 import 'dotenv/config.js';
-import { PORT, FRONTEND_URL } from './utilities/consts.utility';
+import { PORT } from './utilities/consts.utility';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Request, Response, Application } from 'express';
@@ -8,7 +8,7 @@ import apiRouter from './router/api.router';
 
 const app: Application = express();
 
-app.use(cors({ origin: FRONTEND_URL, credentials: true }));
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(
