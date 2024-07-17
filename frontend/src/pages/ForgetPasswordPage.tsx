@@ -2,7 +2,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import { useAuth } from '../contexts/AuthContext';
-import { forgetPasswordProps } from '../utilities/interfaces.utility';
+import { ForgetPasswordProps } from '../utilities/interfaces.utility';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
@@ -11,7 +11,7 @@ import { toastifyConfig } from '../utilities/toastify.utility';
 export const ForgetPasswordPage = () => {
   const { forgetPassword, errors: forgetPasswordErrors, state, setState } = useAuth();
   const setData = (data: FieldValues) => {
-    forgetPassword(data as forgetPasswordProps);
+    forgetPassword(data as ForgetPasswordProps);
   };
   const { handleSubmit, register } = useForm();
   const navigate = useNavigate();

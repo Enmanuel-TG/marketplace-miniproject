@@ -1,5 +1,5 @@
 import { server } from '../utilities/axios.utility';
-import { Account, User, forgetPasswordProps } from '../utilities/interfaces.utility';
+import { Account, User, ForgetPasswordProps } from '../utilities/interfaces.utility';
 
 export const registerRequest = async (user: User) => await server.post('/auth/register', user);
 export const logoutRequest = async () => await server.post('/auth/logout');
@@ -12,7 +12,7 @@ export const updatePhotoProfileRequest = async (photo: File) => {
   return await server.post('/user/update', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 };
 
-export const forgetPasswordRequest = async (email: forgetPasswordProps) =>
+export const forgetPasswordRequest = async (email: ForgetPasswordProps) =>
   await server.post('/recover-account/request-password-reset', email);
 
 export const resetPasswordRequest = async (password: string, token: string) =>

@@ -28,11 +28,11 @@ export interface DataAccount extends Account {
   birthday: string;
   phoneNumber: string;
 }
-export interface forgetPasswordProps {
+export interface ForgetPasswordProps {
   email: string;
 }
 
-export interface authContextType {
+export interface AuthContextType {
   signUp: (data: DataAccount) => void;
   signIn: (data: Account) => void;
   updatePhotoProfile: () => void;
@@ -47,7 +47,7 @@ export interface authContextType {
   loginWithGoogle: () => void;
   registerWithGoogle: () => void;
   logOut: () => void;
-  forgetPassword: (email: forgetPasswordProps) => void;
+  forgetPassword: (email: ForgetPasswordProps) => void;
   resetPassword: (password: string, confirmPassword: string, token: string) => void;
   state: boolean;
   setState: (value: boolean) => void;
@@ -56,10 +56,11 @@ export interface authContextType {
 //---------------------------------------------------------------------------
 
 export interface ProductContextType {
-  getAllProducts: () => void;
+  products: Product[];
 }
 
 export interface Product {
+  id: number;
   name: string;
   price: number;
   description: string;
@@ -67,4 +68,5 @@ export interface Product {
   state: string;
   category: string;
   stock: number;
+  photos: string[];
 }

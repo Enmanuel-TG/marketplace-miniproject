@@ -17,12 +17,12 @@ import 'react-toastify/dist/ReactToastify.css';
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },
   { path: '/login', element: <LoginPages /> },
+  { path: '/', element: <HomePages /> },
   { path: '/forget-password', element: <ForgetPasswordPage /> },
   { path: '/reset-password', element: <ResetPasswordPage /> },
   {
     element: <ProtectedRouter />,
     children: [
-      { path: '/', element: <HomePages /> },
       {
         path: '/profile',
         element: <ProfilePage />,

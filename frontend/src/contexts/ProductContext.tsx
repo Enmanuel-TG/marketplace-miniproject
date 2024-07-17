@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { ProviderProps, ProductContextType } from '../utilities/interfaces.utility';
 import { getAllProductsRequest } from '../services/product.service';
 
@@ -13,15 +13,19 @@ export const useProduct = () => {
 };
 
 export const ProductProvider = ({ children }: ProviderProps) => {
+  const [products, setProducts] = useState([]);
 
   const getAllProducts = async () => {
-    const products = await getAllProductsRequest();
-    console.log(products.data);
-    return products;
+    const response = await getAllProductsRequest();
+    setProducts(response.data);
+    console.log(products);
   };
+  useEffect(() => {
+    getAllProducts();
+  }, []);
 
   return <ProductContext.Provider value={{
-    getAllProducts,
+    products,
   }}>{children}</ProductContext.Provider>;
 };
 

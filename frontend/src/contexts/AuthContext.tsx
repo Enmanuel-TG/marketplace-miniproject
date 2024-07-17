@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { ProviderProps, Account, DataAccount, Profile, forgetPasswordProps } from '../utilities/interfaces.utility';
+import { ProviderProps, Account, DataAccount, Profile, ForgetPasswordProps } from '../utilities/interfaces.utility';
 import {
   registerRequest,
   loginRequest,
@@ -10,11 +10,11 @@ import {
   loginWithGoogleRequest,
   registerWithGoogleRequest,
 } from '../services/auth.service';
-import { authContextType } from '../utilities/interfaces.utility';
+import { AuthContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 
-const AuthContext = createContext<authContextType | null>(null);
+const AuthContext = createContext<AuthContextType | null>(null);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -138,7 +138,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     }
   };
 
-  const forgetPassword = async (email: forgetPasswordProps) => {
+  const forgetPassword = async (email: ForgetPasswordProps) => {
     try {
       const res = await forgetPasswordRequest(email);
       if (res.status === 200) {

@@ -1,22 +1,20 @@
-//import { logoutRequest } from '../services/auth.service';
-//import { useAuth } from '../contexts/AuthContext';
 import ButtonLogout from '../components/ButtonLogout';
 import { useProduct } from '../contexts/ProductContext';
+import { ProductCard } from '../components/ProductCard';
 
 const HomePages = () => {
-  const { getAllProducts } = useProduct();
-  //const { setIsAuthenticated } = useAuth();
-  // const logout = async () => {
-  //   await logoutRequest();
-  //   setIsAuthenticated(false);
-  // };
+  const { products } = useProduct();
+
   return (
-    <div>
+    <div className="flex flex-col ">
       <h1>Home pages</h1>
-      <button onClick={() => getAllProducts()}>Click</button>
       <ButtonLogout />
       <br />
-      <br />
+      <div className="max-w-screen mx-auto flex flex-wrap">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 };
