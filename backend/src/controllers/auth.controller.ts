@@ -37,7 +37,7 @@ export const register = async (req: Request, res: Response) => {
     });
     const token = await createAccessToken({ id: user.id });
     return res
-      .cookie(NAME_TOKEN, token, { httpOnly: true })
+      .cookie(NAME_TOKEN, token, { httpOnly: true, secure: true, sameSite: 'none' })
       .status(200)
       .json({
         message: 'Register successfully.',
@@ -74,7 +74,7 @@ export const login = async (req: Request, res: Response) => {
   }
   const token = await createAccessToken({ id: userFound.id });
   return res
-    .cookie(NAME_TOKEN, token, { httpOnly: true })
+    .cookie(NAME_TOKEN, token, { httpOnly: true, secure: true, sameSite: 'none' })
     .status(200)
     .json({
       message: 'Login successfully.',
@@ -94,6 +94,8 @@ export const logout = (_req: Request, res: Response) => {
   try {
     res.cookie(NAME_TOKEN, '', {
       expires: new Date(0),
+      secure: true,
+      sameSite: 'none',
     });
     return res.status(200).json({ message: 'Logout successfully.' });
   } catch (error) {
