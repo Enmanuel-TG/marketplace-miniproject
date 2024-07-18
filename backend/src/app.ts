@@ -1,5 +1,5 @@
 import 'dotenv/config.js';
-import { PORT, FRONTEND_URL } from './utilities/consts.utility';
+import { PORT } from './utilities/consts.utility';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express, { Request, Response, Application } from 'express';
@@ -10,7 +10,7 @@ const app: Application = express();
 
 app.use(
   cors({
-    origin: FRONTEND_URL,
+    origin: 'https://marketplace-miniproject.vercel.app',
     credentials: true,
   }),
 );

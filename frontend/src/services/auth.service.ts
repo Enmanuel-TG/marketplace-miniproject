@@ -3,13 +3,7 @@ import { Account, User, forgetPasswordProps } from '../utilities/interfaces.util
 
 export const registerRequest = async (user: User) => await server.post('/auth/register', user);
 export const logoutRequest = async () => await server.post('/auth/logout');
-export const loginRequest = async (user: Account) =>
-  await server.post('/auth/login', user, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      credentials: 'include',
-    },
-  });
+export const loginRequest = async (user: Account) => await server.post('/auth/login', user);
 export const profileRequest = async () => await server.get('/user/profile');
 
 export const updatePhotoProfileRequest = async (photo: File) => {
