@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -98,17 +98,16 @@ const RegisterPage = () => {
           </div>
         </Slider>
         <button
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-6 rounded"
+          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-8 rounded"
           onClick={registerWithGoogle}
         >
           Register with Google 🚀
         </button>
         <div className="mt-4 text-center flex justify-center items-center space-x-2">
           <h1 className="text-gray-600">Already have an account?</h1>
-          <span className="text-blue-500 cursor-pointer hover:underline" onClick={() => navigate('/login')}>
-            {' '}
-            Login{' '}
-          </span>
+          <Link className="text-blue-500 cursor-pointer hover:underline" to='/login'>
+            Login
+          </Link>
         </div>
       </div>
     </div>
