@@ -1,7 +1,14 @@
 import { z } from 'zod';
 
 export const authRegisterValidator = z.object({
-  name: z.string({ required_error: 'Name is required.' }),
+  name: z.string({ required_error: 'Name is required.' }).refine(
+    (value) => {
+      return value.trim().length > 0;
+    },
+    {
+      message: 'String must not be empty or contain only spaces',
+    },
+  ),
   email: z.string({ required_error: 'Email is required.' }).email({ message: 'Invalid email.' }),
   password: z
     .string({ required_error: 'Password is required.' })
