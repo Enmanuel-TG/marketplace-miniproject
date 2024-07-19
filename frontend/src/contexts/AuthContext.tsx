@@ -3,7 +3,6 @@ import { ProviderProps, Account, DataAccount, Profile, forgetPasswordProps } fro
 import {
   registerRequest,
   loginRequest,
-  profileRequest,
   updatePhotoProfileRequest,
   forgetPasswordRequest,
   resetPasswordRequest,
@@ -181,24 +180,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     }
   }, [errors]);
 
-  const checkAuth = async () => {
-    try {
-      const res = await profileRequest();
-      if (!res.data) {
-        setUser(null);
-        setIsAuthenticated(false);
-      }
-      setUser(res.data);
-      setIsAuthenticated(true);
-    } catch (error) {
-      setIsAuthenticated(false);
-    }
-  };
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
   return (
     <AuthContext.Provider
       value={{
@@ -207,6 +188,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         isEdit,
         setIsEdit,
         user,
+        setUser,
         signUp,
         signIn,
         isAuthenticated,
