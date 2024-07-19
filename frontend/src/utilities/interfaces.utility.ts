@@ -17,6 +17,7 @@ export interface Profile extends User {
   photo: string;
   picture?: string;
 }
+
 export interface Account {
   email: string;
   password: string;
@@ -40,6 +41,7 @@ export interface authContextType {
   isAuthenticated: boolean | null;
   errors: string[];
   user: Profile | null;
+  setUser: (value: Profile | null) => void;
   isEdit: boolean;
   setIsEdit: (value: boolean) => void;
   selectedFile: File | null;

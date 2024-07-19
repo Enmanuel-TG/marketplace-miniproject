@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useForm } from 'react-hook-form';
@@ -35,25 +35,16 @@ const LoginPages = () => {
             <Input fieldname="Email" type="email" {...register('email', { required: true })} />
             <Input fieldname="Password" type="password" {...register('password', { required: true })} />
             <div className="flex justify-end">
-              <button
-                className="text-blue-500 hover:text-blue-700 text-sm hover:underline"
-                onClick={() => {
-                  navigate('/forget-password');
-                }}
-              >
+              <Link className="text-blue-500 hover:text-blue-700 text-sm hover:underline" to="/forget-password">
                 Forget Password?
-              </button>
+              </Link>
             </div>
             <div className="flex justify-between items-center mb-6">
               <div className="w-3/4">
                 <span className="mr-2">Do not have an account?</span>
-                <button
-                  type="button"
-                  className="text-blue-500 hover:text-blue-700 font-bold"
-                  onClick={() => navigate('/register')}
-                >
+                <Link type="button" className="text-blue-500 hover:text-blue-700 font-bold" to="/register">
                   Register
-                </button>
+                </Link>
               </div>
               <Button fieldname="Login" type="submit" />
             </div>
