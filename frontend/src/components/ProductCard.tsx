@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Product } from '../utilities/interfaces.utility';
 
 interface ProductCardProps {
@@ -6,24 +7,14 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <a href="#">
-        <img className="m-auto h-2/3 rounded-t-lg" src={product.photos[0]} alt="product image" />
-      </a>
-      <div className="px-5 pb-5">
-        <a href="#">
-          <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.name}</h5>
-        </a>
-        <div className="flex items-center justify-between">
-          <span className="text-3xl font-bold text-gray-900 dark:text-white">${product.price}</span>
-          <a
-            href="#"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Add to cart
-          </a>
-        </div>
+    <div className="w-full max-w-md m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-96 flex flex-col">
+      <div className="px-5 py-5 flex flex-row justify-between">
+        <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.name}</h5>
+        <span className="mr-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">${product.price}</span>
       </div>
+      <img className="m-auto rounded-t-lg mt-3 object-cover h-60 px-5 pb-5 w-full" src={product.photos[0]} alt={`Image of ${product.name}`} />
+      <Link to="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm mb-2 mx-5 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-1/3"> Buy </Link>
     </div>
   );
 };
+
