@@ -13,6 +13,7 @@ import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ProductPage } from './pages/ProductPage';
+import CreateProductPage from './pages/CreateProductPage';
 
 
 const router = createBrowserRouter([
@@ -23,12 +24,17 @@ const router = createBrowserRouter([
   { path: '/reset-password', element: <ResetPasswordPage /> },
   { path: '/product/:id', element: <ProductPage /> },
   {
+    path: '/create-product',
+    element: <CreateProductPage />
+  },
+  {
     element: <ProtectedRouter />,
     children: [
       {
         path: '/profile',
         element: <ProfilePage />,
       },
+      
     ],
   },
 ]);
