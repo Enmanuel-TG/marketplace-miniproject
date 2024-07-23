@@ -59,6 +59,7 @@ export interface AuthContextType {
 
 export interface ProductContextType {
   products: Product[];
+  getProduct: (id: number) => void;
 }
 
 export interface Product {

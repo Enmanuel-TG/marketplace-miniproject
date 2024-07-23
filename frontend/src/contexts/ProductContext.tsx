@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ProviderProps, ProductContextType } from '../utilities/interfaces.utility';
-import { getAllProductsRequest } from '../services/product.service';
+import { getAllProductsRequest, getProductRequest } from '../services/product.service';
 
 const ProductContext = createContext<ProductContextType | null>(null);
 
@@ -20,12 +20,20 @@ export const ProductProvider = ({ children }: ProviderProps) => {
     setProducts(response.data);
     console.log(products);
   };
+
+  const getProduct = async (id: number) => {
+    const response = await getProductRequest(id);
+    console.log(response.data);
+  };
+
+  //------------------------------
   useEffect(() => {
     getAllProducts();
   }, []);
 
   return <ProductContext.Provider value={{
     products,
+    getProduct,
   }}>{children}</ProductContext.Provider>;
 };
 
