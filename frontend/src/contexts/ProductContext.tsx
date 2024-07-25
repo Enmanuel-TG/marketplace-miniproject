@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { ProviderProps, ProductContextType } from '../utilities/interfaces.utility';
-import { getAllProductsRequest, getProductRequest } from '../services/product.service';
+import { ProviderProps, ProductContextType, Product } from '../utilities/interfaces.utility';
+import { createProductRequest, getAllProductsRequest, getProductRequest } from '../services/product.service';
 
 const ProductContext = createContext<ProductContextType | null>(null);
 
@@ -15,6 +15,14 @@ export const useProduct = () => {
 export const ProductProvider = ({ children }: ProviderProps) => {
   const [products, setProducts] = useState([]);
 
+  const createProduct = async(dataProduct:Product) => {
+    try {
+      const res = await createProductRequest(dataProduct);
+      console.log(res.status);
+    } catch (error) {
+      console.log('Hi');
+    }
+  };
   const getAllProducts = async () => {
     const response = await getAllProductsRequest();
     setProducts(response.data);
@@ -33,6 +41,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
 
   return <ProductContext.Provider value={{
     products,
+    createProduct,
     getProduct,
   }}>{children}</ProductContext.Provider>;
 };
