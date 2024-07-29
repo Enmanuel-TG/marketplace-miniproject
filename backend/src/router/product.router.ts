@@ -21,6 +21,6 @@ router.get('/product/:id', getProduct);
 router.get('/userProduct', getAllUserProduct);
 router.get('/allProduct', getAllProduct);
 router.get('/category', getProductsByCategory);
-router.get('/search', searchProduct);
+router.post('/search', searchProduct);
 
 export default router;
