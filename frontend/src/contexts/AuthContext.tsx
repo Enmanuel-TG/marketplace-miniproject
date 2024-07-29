@@ -8,6 +8,7 @@ import {
   resetPasswordRequest,
   loginWithGoogleRequest,
   registerWithGoogleRequest,
+  profileRequest,
 } from '../services/auth.service';
 import { AuthContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
@@ -179,6 +180,25 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       return () => clearTimeout(timer);
     }
   }, [errors]);
+  const checkAuth = async () => {
+    try {
+      const res = await profileRequest();
+      if (!res.data) {
+        setUser(null);
+        setIsAuthenticated(false);
+      } else {
+        setUser(res.data);
+        setIsAuthenticated(true);
+      }
+    } catch (error) {
+      setUser(null);
+      setIsAuthenticated(false);
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   return (
     <AuthContext.Provider
