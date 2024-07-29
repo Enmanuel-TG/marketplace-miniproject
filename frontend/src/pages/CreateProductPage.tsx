@@ -4,31 +4,14 @@ import { Product } from '../utilities/interfaces.utility';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useProduct } from '../contexts/ProductContext';
+import { categoryOptions,  stateOptions } from '../utilities/selectOption';
 
-const stateOptions = [
-  { value: 'new', label: 'New' },
-  { value: 'used like new', label: 'Used - Like New' },
-  { value: 'used', label: 'Used' },
-];
-
-const categoryOptions = [
-  { value: 'others', label: 'Others' },
-  { value: 'clothing', label: 'Clothing' },
-  { value: 'electronics', label: 'Electronics' },
-  { value: 'tools', label: 'Tools' },
-  { value: 'video_games', label: 'Video Games' },
-  { value: 'vehicles', label: 'Vehicles' },
-  { value: 'sports', label: 'Sports' },
-  { value: 'garments', label: 'Garments' },
-  { value: 'services', label: 'Services' },
-];
 
 const CreateProductPage = () => {
   const { register, handleSubmit, setValue } = useForm<Product>();
   const { createProduct } = useProduct();
 
   const onSubmit = (data: Product) => {
-    console.log(data.photos);
     createProduct(data);
   };
 
