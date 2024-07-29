@@ -58,9 +58,11 @@ export interface AuthContextType {
 //---------------------------------------------------------------------------
 
 export interface ProductContextType {
-  products: Product[];
+  allProducts: Product[];
+  product: Product;
   getProduct: (id: number) => void;
   createProduct: (dataProduct: Product) => void;
+  searchProduct: (name: string) => void;
 }
 
 export interface Product {
