@@ -9,7 +9,7 @@ interface ProductCardProps {
 export const ProductCard = ({ product }: ProductCardProps) => {
   const { getProduct } = useProduct();
   return (
-    <div className="w-full max-w-md m-2 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-96 flex flex-col no-select no-drag">
+    <div className="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-96 flex flex-col no-select no-drag">
       <div className="px-5 py-5 flex flex-row justify-between">
         <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.name}</h5>
         <span className="mr-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">${product.price}</span>
