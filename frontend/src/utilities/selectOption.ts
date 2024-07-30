@@ -9,6 +9,7 @@ export const categoryOptions = [
   { value: 'toys_games', label: 'Toys & Games' },
   { value: 'groceries', label: 'Groceries' },
   { value: 'pet_supplies', label: 'Pet Supplies' },
+  { value: 'others', label: 'Others' },
 ];
 
 export const stateOptions = [

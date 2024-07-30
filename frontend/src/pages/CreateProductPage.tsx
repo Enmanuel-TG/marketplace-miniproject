@@ -38,6 +38,9 @@ const CreateProductPage = () => {
             <div className='w-full'>
               <label htmlFor="category" className='block'>Category</label>
               <select id="category" {...register('category', { required: true })} className='w-full p-3 border border-gray-300 rounded'>
+                <option value="" disabled selected>
+                  Select Category
+                </option>
                 {categoryOptions.map(option => (
                   <option key={option.value} value={option.value}>{option.label}</option>
                 ))}

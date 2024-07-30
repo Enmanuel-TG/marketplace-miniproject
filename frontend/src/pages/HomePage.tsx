@@ -8,9 +8,9 @@ const HomePages = () => {
   const { user, isAuthenticated } = useAuth();
   return (
     <div className="flex flex-col">
-      <div className='flex flex-row'>
+      <div className='flex'>
         <SearchBar />
-        {isAuthenticated && <img className='m-3 bg-white w-11 h-11 rounded-full object-cover no-select no-drag' draggable="false" src={user?.photo}/>}
+        {isAuthenticated && <img className='mt-1 mx-3 bg-white w-11 h-11 rounded-full object-cover no-select no-drag self-end' src={user?.photo}/>}
       </div>
       <div className="max-w-screen w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {allProducts.map((product) => (
@@ -22,3 +22,4 @@ const HomePages = () => {
 };
 
 export default HomePages;
+

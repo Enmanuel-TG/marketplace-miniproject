@@ -20,7 +20,7 @@ router.put('/update/:id', validateSchema(ProductValidator), updateProduct);
 router.get('/product/:id', getProduct);
 router.get('/userProduct', getAllUserProduct);
 router.get('/allProduct', getAllProduct);
-router.get('/category', getProductsByCategory);
+router.post('/category', getProductsByCategory);
 router.post('/search', searchProduct);
 
 export default router;
