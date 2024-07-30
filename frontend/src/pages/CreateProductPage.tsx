@@ -36,9 +36,9 @@ const CreateProductPage = () => {
           </div>
           <div className='my-4 flex justify-between w-full gap-4'>
             <div className='w-full'>
-              <label htmlFor="category" className='block'>Category</label>
+              <label defaultValue='' htmlFor="category" className='block'>Category</label>
               <select id="category" {...register('category', { required: true })} className='w-full p-3 border border-gray-300 rounded'>
-                <option value="" disabled selected>
+                <option value="" disabled>
                   Select Category
                 </option>
                 {categoryOptions.map(option => (

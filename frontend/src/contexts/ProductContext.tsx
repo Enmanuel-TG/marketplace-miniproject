@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ProviderProps, ProductContextType, Product } from '../utilities/interfaces.utility';
-import { createProductRequest, getAllProductsRequest, getProductRequest, searchProductRequest } from '../services/product.service';
+import { createProductRequest, getAllProductsRequest, getProductByCategoryRequest, getProductRequest, searchProductRequest } from '../services/product.service';
 
 const ProductContext = createContext<ProductContextType | null>(null);
 
@@ -46,12 +46,21 @@ export const ProductProvider = ({ children }: ProviderProps) => {
     }
   };
 
+  const filterCategory = async (category: string)=>{
+    try {
+      const res = await getProductByCategoryRequest(category);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);      
+    }
+  }
   //------------------------------
   useEffect(() => {
     getAllProducts();
   }, []);
 
   return <ProductContext.Provider value={{
+    filterCategory,
     allProducts,
     product,
     createProduct,

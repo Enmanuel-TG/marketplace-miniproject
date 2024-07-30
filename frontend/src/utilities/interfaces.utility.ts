@@ -63,6 +63,7 @@ export interface ProductContextType {
   getProduct: (id: number) => void;
   createProduct: (dataProduct: Product) => void;
   searchProduct: (name: string) => void;
+  filterCategory:(category: string) => void;
 }
 
 export interface Product {
