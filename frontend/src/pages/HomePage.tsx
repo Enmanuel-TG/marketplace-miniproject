@@ -17,6 +17,12 @@ const HomePages = () => {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+      <a
+        href="#top"
+        className="fixed bottom-4 right-4 z-10 p-3 bg-blue-600 text-white rounded-full shadow-md transition-opacity duration-300"
+        aria-label="Scroll to top"
+      >
+      </a>
     </div>
   );
 };
