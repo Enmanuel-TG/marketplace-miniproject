@@ -18,4 +18,5 @@ export const createProductRequest = async (product: Product) => {
 export const getAllProductsRequest = async () => await server.get('/product/allProduct');
 export const getProductRequest = async (id: number) => await server.get(`/product/product/${id}`);
 export const searchProductRequest = async (name: string) => {return await server.post('/product/search',{ name });};
-export const getProductByCategoryRequest = async (category: string) => { return await server.post('/product/category', category); };
+export const getProductByCategoryRequest = async (category: string) => {return await server.post('/product/category', {category});
+};

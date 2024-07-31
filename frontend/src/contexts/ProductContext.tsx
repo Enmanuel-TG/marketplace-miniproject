@@ -46,14 +46,18 @@ export const ProductProvider = ({ children }: ProviderProps) => {
     }
   };
 
-  const filterCategory = async (category: string)=>{
+  const filterCategory = async (category: string) => {
+    if (category === 'All') {
+      getAllProducts();
+      return;
+    };
     try {
       const res = await getProductByCategoryRequest(category);
-      console.log(res.data);
+      setAllProducts(res.data);
     } catch (error) {
-      console.log(error);      
+      console.log(error);
     }
-  }
+  };
   //------------------------------
   useEffect(() => {
     getAllProducts();

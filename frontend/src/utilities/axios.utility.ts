@@ -1,9 +1,9 @@
 import axios from 'axios';
-//import { API_URL } from './consts.utility';
+import { API_URL } from './consts.utility';
 
 export const server = axios.create({
-  baseURL:'https://marketplace-miniproject.onrender.com/api',
+  baseURL:API_URL,
   withCredentials: true,
 });
 
-
+//'https://marketplace-miniproject.onrender.com/api'
