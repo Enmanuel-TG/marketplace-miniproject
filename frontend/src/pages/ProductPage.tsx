@@ -2,8 +2,6 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '../contexts/ProductContext';
 import PhotoProduct from '../components/PhotoProduct';
-
-
 export const ProductPage = () => {
   const { getProduct, product } = useProduct();
   const { id } = useParams();
@@ -15,13 +13,16 @@ export const ProductPage = () => {
     }
   }, [null]);
   const imgs: string[] = product.photos as unknown as string[];
-  if (!imgs)
+  if (!imgs) {
     return <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">Loading...</div>;
+
+  }
+  console.log(imgs);
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white shadow-lg rounded-lg max-w-5xl w-full overflow-hidden p-6">
         <div >
-          <PhotoProduct imgs={imgs}/>
+          <PhotoProduct images={imgs}/>
         </div>
         <div className="flex flex-col md:flex-row mb-4">
           <h1 className="text-3xl font-bold">{product.name}</h1>
