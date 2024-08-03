@@ -21,7 +21,7 @@ export const ProductPage = () => {
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white shadow-lg rounded-lg max-w-5xl w-full overflow-hidden p-6">
-        <div >
+        <div className='h-96 w-full'>
           <PhotoProduct images={imgs}/>
         </div>
         <div className="flex flex-col md:flex-row mb-4">
