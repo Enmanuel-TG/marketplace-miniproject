@@ -6,13 +6,11 @@ interface SliderProps {
 }
 
 const PhotoProduct = ({ images }: SliderProps) => {
-  console.log(images);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hasMultipleImages, setHasMultipleImages] = useState(images.length > 1);
 
   useEffect(() => {
-    // Update `hasMultipleImages` when images length changes
     setHasMultipleImages(images.length > 1);
   }, [images]);
 
