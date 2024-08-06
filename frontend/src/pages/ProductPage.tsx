@@ -4,11 +4,11 @@ import { useProduct } from '../contexts/ProductContext';
 import PhotoProduct from '../components/PhotoProduct';
 import MyIconProfile from '../components/IconProfile';
 import { useAuth } from '../contexts/AuthContext';
+
 export const ProductPage = () => {
   const { getProduct, product } = useProduct();
   const { user } = useAuth();
-  //console.log(user);
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const productID = id?.split(':')[1];
   const [productOwner, setProductOwner] = useState<boolean>(false);
 
@@ -20,26 +20,23 @@ export const ProductPage = () => {
     if (productID) {
       getProduct(Number(productID));
     }
-    setProductOwner(false);
-  }, []);
+  }, [productID]);
+
   useEffect(() => {
-    if (user?.id === product?.userId) {
+    if (user && product && user.id === product.userId) {
       setProductOwner(true);
-    };
-    //console.log(productOwner);
-  }, [productOwner]);
-  //console.log(product);
+    }
+  }, [user, product]);
 
   if (!product.photos) {
     return <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">Loading...</div>;
-  };
-
+  }
   return (
     <div className="flex flex-col items-center min-h-screen bg-gray-100 p-4">
       <MyIconProfile className='mx-3 bg-white w-11 h-11 rounded-full no-select no-drag absolute right-0'/>
       <div className="bg-white shadow-lg rounded-lg max-w-5xl w-full overflow-hidden px-6">
         <div className='h-96 w-full mt-10'>
-          <PhotoProduct images={product.photos as unknown as string[]}/>
+          <PhotoProduct images={product.photos as unknown as string[]} />
         </div>
         <div className="my-4 flex justify-between">
           <div className='flex'>
@@ -47,8 +44,16 @@ export const ProductPage = () => {
             <span className="text-3xl text-green-600 ml-4">${product.price}</span>
           </div>
           <div>
-            {productOwner ? <div><button className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors" onClick={Edit}>Edit</button></div> : <div>
-            </div>}
+            {productOwner ? (
+              <button
+                className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
+                onClick={Edit}
+              >
+                Edit
+              </button>
+            ) : (
+              <img src={undefined} alt="Seller" className="w-10 h-10 rounded-full" />
+            )}
           </div>
         </div>
         <div className="mb-4 border border-gray-300">
