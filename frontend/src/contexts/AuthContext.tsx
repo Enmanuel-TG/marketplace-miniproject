@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [user, setUser] = useState<Profile | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const [state, setState] = useState(false);
+  const [isResetPasswordEmailSent, setIsResetPasswordEmailSent] = useState(false);
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         if (axios.isAxiosError(error)) {
           if (error.response && error.response.data) {
             setErrors(error.response.data);
-            setState(false);
+            setIsResetPasswordEmailSent(false);
           }
         }
       }
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         if (axios.isAxiosError(error)) {
           if (error.response && error.response.data) {
             setErrors(error.response.data);
-            setState(false);
+            setIsResetPasswordEmailSent(false);
           }
         }
       }
@@ -142,10 +142,10 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     try {
       const res = await forgetPasswordRequest(email);
       if (res.status === 200) {
-        setState(true);
+        setIsResetPasswordEmailSent(true);
       }
     } catch (error) {
-      setState(false);
+      setIsResetPasswordEmailSent(false);
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {
           setErrors(error.response.data);
@@ -156,16 +156,16 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const resetPassword = async (password: string, confirm: string, token: string) => {
     if (password !== confirm) {
       setErrors(['Password does not match.']);
-      setState(false);
+      setIsResetPasswordEmailSent(false);
     } else {
       try {
         await resetPasswordRequest(password, token);
-        setState(true);
+        setIsResetPasswordEmailSent(true);
       } catch (error) {
         if (axios.isAxiosError(error)) {
           if (error.response && error.response.data) {
             setErrors(error.response.data);
-            setState(false);
+            setIsResetPasswordEmailSent(false);
           }
         }
       }
@@ -175,7 +175,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
         setErrors([]);
-        setState(false);
+        setIsResetPasswordEmailSent(false);
       }, 5000);
       return () => clearTimeout(timer);
     }
@@ -210,9 +210,9 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         user,
         setUser,
         signUp,
-        signIn,
         isAuthenticated,
         setIsAuthenticated,
+        signIn,
         errors,
         updatePhotoProfile,
         loginWithGoogle,
@@ -220,8 +220,8 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         logOut,
         forgetPassword,
         resetPassword,
-        setState,
-        state,
+        isResetPasswordEmailSent: isResetPasswordEmailSent,
+        setIsResetPasswordEmailSent: setIsResetPasswordEmailSent,
       }}
     >
       {children}

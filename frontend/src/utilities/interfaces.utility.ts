@@ -14,6 +14,7 @@ export interface User {
 }
 
 export interface Profile extends User {
+  id?: number;
   photo: string;
   picture?: string;
 }
@@ -51,8 +52,8 @@ export interface AuthContextType {
   logOut: () => void;
   forgetPassword: (email: ForgetPasswordProps) => void;
   resetPassword: (password: string, confirmPassword: string, token: string) => void;
-  state: boolean;
-  setState: (value: boolean) => void;
+  isResetPasswordEmailSent: boolean;
+  setIsResetPasswordEmailSent: (value: boolean) => void;
 }
 
 //---------------------------------------------------------------------------
@@ -63,10 +64,11 @@ export interface ProductContextType {
   getProduct: (id: number) => void;
   createProduct: (dataProduct: Product) => void;
   searchProduct: (name: string) => void;
-  filterCategory:(category: string) => void;
+  filterCategory: (category: string) => void;
 }
 
 export interface Product {
+  userId: number;
   id: number;
   name: string;
   price: string;

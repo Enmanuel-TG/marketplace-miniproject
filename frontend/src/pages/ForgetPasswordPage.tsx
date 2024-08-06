@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 
 export const ForgetPasswordPage = () => {
-  const { forgetPassword, errors: forgetPasswordErrors, state, setState } = useAuth();
+  const { forgetPassword, errors: forgetPasswordErrors, isResetPasswordEmailSent: state, setIsResetPasswordEmailSent: setState } = useAuth();
   const setData = (data: FieldValues) => {
     forgetPassword(data as ForgetPasswordProps);
   };
