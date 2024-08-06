@@ -15,7 +15,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ProductPage } from './pages/ProductPage';
 import CreateProductPage from './pages/CreateProductPage';
 
-
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },
   { path: '/login', element: <LoginPages /> },
@@ -24,17 +23,16 @@ const router = createBrowserRouter([
   { path: '/reset-password', element: <ResetPasswordPage /> },
   { path: '/product/:id', element: <ProductPage /> },
   {
-    path: '/create-product',
-    element: <CreateProductPage />,
-  },
-  {
     element: <ProtectedRouter />,
     children: [
       {
         path: '/profile',
         element: <ProfilePage />,
       },
-      
+      {
+        path: '/create-product',
+        element: <CreateProductPage />,
+      },
     ],
   },
 ]);
@@ -42,12 +40,12 @@ const router = createBrowserRouter([
 function App() {
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <ProductProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <ProductProvider>
           <RouterProvider router={router} />
           <ToastContainer />
-        </AuthProvider>
-      </ProductProvider>
+        </ProductProvider>
+      </AuthProvider>
     </GoogleOAuthProvider>
   );
 }

@@ -2,17 +2,15 @@ import { useAuth } from '../contexts/AuthContext';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Loading from './Loading';
 
-
 const ProtectedRouter = () => {
   const navigate = useNavigate();
-  const { isAuthenticated} = useAuth();
+  const { isAuthenticated } = useAuth();
 
-
-
-  if (!isAuthenticated) {
-    navigate('/login', { replace: true });
+  if (isAuthenticated === false) {
+    navigate('/', { replace: true });
     return <Loading />;
   }
+
   return <Outlet />;
 };
 
