@@ -1,6 +1,6 @@
 import { useProduct } from '../contexts/ProductContext';
 import { ProductCard } from '../components/ProductCard';
-import  IconProfile  from '../components/IconProfile';
+import  IconProfile  from '../components/MyIconProfile';
 import SearchBar from '../components/SearchBar';
 
 const HomePages = () => {
