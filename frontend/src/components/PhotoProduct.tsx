@@ -26,14 +26,14 @@ const PhotoProduct = ({ images }: SliderProps) => {
 
   return (
     <div className="relative w-full max-w-3xl mx-auto">
-      <div className="overflow-hidden relative h-96 bg-gray-200 flex items-center justify-center">
+      <div className="overflow-hidden relative h-96 flex items-center justify-center">
         {images.map((image, index) => (
           <div
             key={index}
             className={`absolute inset-0 transition-transform transform ${index === currentIndex ? 'translate-x-0' : 'translate-x-full'} ${index < currentIndex ? '-translate-x-full' : ''}`}
             style={{ transitionDuration: '500ms' }}
           >
-            <div className="relative w-full h-full flex items-center justify-center no-drag no-select bg-gray-200">
+            <div className="relative w-full h-full flex items-center justify-center no-drag no-select">
               <img
                 src={image}
                 alt={`Slide ${index}`}
