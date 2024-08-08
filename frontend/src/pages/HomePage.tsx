@@ -2,9 +2,16 @@ import { useProduct } from '../contexts/ProductContext';
 import { ProductCard } from '../components/ProductCard';
 import  IconProfile  from '../components/MyIconProfile';
 import SearchBar from '../components/SearchBar';
+import { toast } from 'react-toastify';
+import { toastifyConfig } from '../utilities/toastify.utility';
+import { useEffect } from 'react';
 
 const HomePages = () => {
-  const { allProducts } = useProduct();
+  const { allProducts, errors } = useProduct();
+
+  useEffect(() => {
+    errors.map((error) => toast.error(error, toastifyConfig));
+  }, [errors]);
   return (
     <div className="flex flex-col">
       <div className='flex'>

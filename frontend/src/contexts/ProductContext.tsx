@@ -15,7 +15,7 @@ export const useProduct = () => {
 
 export const ProductProvider = ({ children }: ProviderProps) => {
   const  [allProducts, setAllProducts] = useState([]);
-  const [product, setProduct] = useState({} as Product);
+  const  [product, setProduct] = useState({} as Product);
   const  [errors, setErrors] = useState<string[]>([]);
 
   const createProduct = async(dataProduct:Product) => {
@@ -47,7 +47,11 @@ export const ProductProvider = ({ children }: ProviderProps) => {
       const response = await getProductRequest(id);
       setProduct(response.data);
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
     }
   };
 
@@ -56,7 +60,11 @@ export const ProductProvider = ({ children }: ProviderProps) => {
       const res = await searchProductRequest(name);
       setAllProducts(res.data);
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
     }
   };
 
@@ -69,7 +77,11 @@ export const ProductProvider = ({ children }: ProviderProps) => {
       const res = await getProductByCategoryRequest(category);
       setAllProducts(res.data);
     } catch (error) {
-      console.log(error);
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
     }
   };
   //------------------------------
