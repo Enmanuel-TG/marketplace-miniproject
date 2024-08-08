@@ -65,6 +65,7 @@ export interface ProductContextType {
   createProduct: (dataProduct: Product) => void;
   searchProduct: (name: string) => void;
   filterCategory: (category: string) => void;
+  errors: string[];
 }
 
 export interface Product {
