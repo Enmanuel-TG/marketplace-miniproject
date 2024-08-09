@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Product } from '../utilities/interfaces.utility';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useProduct } from '../contexts/ProductContext';
 import { categoryOptions,  stateOptions } from '../utilities/selectOption';
+import { useAuth } from '../contexts/AuthContext';
 
 
 const CreateProductPage = () => {
   const { register, handleSubmit, setValue } = useForm<Product>();
   const { createProduct } = useProduct();
+  const { user } = useAuth();
 
   const onSubmit = (data: Product) => {
     createProduct(data);
   };
+  
+  useEffect(() => {
+    console.log('CreateProductPage');
+    console.log(user);
+  }, []);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {

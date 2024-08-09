@@ -58,7 +58,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         const { data } = await registerWithGoogleRequest(
           response.access_token,
           new Date().toISOString(),
-          '00000000000',
         );
         setUser(data);
         setIsAuthenticated(true);

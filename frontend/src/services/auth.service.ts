@@ -38,12 +38,11 @@ export const loginWithGoogleRequest = async (accessToken: string) => {
   );
 };
 
-export const registerWithGoogleRequest = async (accessToken: string, birthday: string, phoneNumber: string) => {
+export const registerWithGoogleRequest = async (accessToken: string, birthday: string) => {
   return await server.post(
     '/google-auth/google/register',
     {
       birthday,
-      phoneNumber,
     },
     {
       headers: {

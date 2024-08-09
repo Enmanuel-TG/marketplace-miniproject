@@ -43,7 +43,7 @@ export const loginWithGoogle = async (req: Request, res: Response) => {
 
 export const registerWithGoogle = async (req: Request, res: Response) => {
   const accessToken = req.headers.authorization as string;
-  const { phoneNumber, birthday } = req.body;
+  const { birthday } = req.body;
   let userRol: Role = Role.user;
 
   const count = await prisma.user.count();
@@ -72,7 +72,7 @@ export const registerWithGoogle = async (req: Request, res: Response) => {
       name,
       email,
       birthday,
-      phoneNumber,
+      phoneNumber: '0000000000',
       photo: picture,
       role: userRol,
       password: '',
