@@ -12,6 +12,7 @@ const HomePages = () => {
   useEffect(() => {
     errors.map((error) => toast.error(error, toastifyConfig));
   }, [errors]);
+
   return (
     <div className="flex flex-col">
       <div className='flex'>

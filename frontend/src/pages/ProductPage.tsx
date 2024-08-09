@@ -4,6 +4,7 @@ import { useProduct } from '../contexts/ProductContext';
 import PhotoProduct from '../components/PhotoProduct';
 import MyIconProfile from '../components/MyIconProfile';
 import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export const ProductPage = () => {
   const { getProduct, product } = useProduct();
@@ -11,9 +12,14 @@ export const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const productID = id?.split(':')[1];
   const [productOwner, setProductOwner] = useState<boolean>(false);
+  const navigate = useNavigate();
+
 
   const Edit = () => {
     console.log('Edit');
+  };
+  const back = () => {
+    navigate('/', { replace: true });
   };
 
   useEffect(() => {
@@ -28,6 +34,10 @@ export const ProductPage = () => {
     }
   }, [user, product]);
 
+  if (!product) {
+    return <div className="flex flex-row items-center justify-center min-h-screen bg-gray-100 p-4">This Product Does Not Exist<button className='ml-4 border border border-gray-500 px-3 py-1 rounded' onClick={back}>back</button>
+    </div>;
+  }
   if (!product.photos) {
     return <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">Loading...</div>;
   }
@@ -54,7 +64,7 @@ export const ProductPage = () => {
             ) : (
               <div className="flex items-center">
                 <img src={user?.photo} className="w-10 h-10 rounded-full mr-2" />
-                <div>
+                <div className="flex flex-row">
                   <p className="text-gray-500">Seller:</p>
                   <div>{undefined}</div>
                 </div>
