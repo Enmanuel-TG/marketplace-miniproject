@@ -13,7 +13,7 @@ export const ProductPage = () => {
   const productID = id?.split(':')[1];
   const [productOwner, setProductOwner] = useState<boolean>(false);
   const navigate = useNavigate();
-
+  console.log(product);
 
   const Edit = () => {
     console.log('Edit');

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ProviderProps, ProductContextType, Product } from '../utilities/interfaces.utility';
-import { createProductRequest, getAllProductsRequest, getProductByCategoryRequest, getProductRequest, searchProductRequest } from '../services/product.service';
+import { createProductRequest, getAllProductsRequest, getProductByCategoryRequest, getProductRequest, searchProductRequest, updateProductRequest } from '../services/product.service';
 import axios from 'axios';
 
 const ProductContext = createContext<ProductContextType | null>(null);
@@ -84,6 +84,18 @@ export const ProductProvider = ({ children }: ProviderProps) => {
       }
     }
   };
+
+  const updateProduct = async (dataProduct: Product) => {
+    try {
+      await updateProductRequest(dataProduct);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
+    }
+  };
   //------------------------------
   useEffect(() => {
     getAllProducts();
@@ -91,6 +103,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
 
   return <ProductContext.Provider value={{
     filterCategory,
+    updateProduct,
     allProducts,
     product,
     createProduct,
