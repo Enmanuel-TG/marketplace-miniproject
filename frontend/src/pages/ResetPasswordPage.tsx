@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 
 export const ResetPasswordPage = () => {
-  const { resetPassword, errors: resetPasswordErrors, state, setState } = useAuth();
+  const { resetPassword, errors: resetPasswordErrors, isResetPasswordEmailSent: state, setIsResetPasswordEmailSent: setState } = useAuth();
   const { handleSubmit, register } = useForm();
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');

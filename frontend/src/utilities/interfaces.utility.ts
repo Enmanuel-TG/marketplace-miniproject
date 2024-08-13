@@ -14,6 +14,7 @@ export interface User {
 }
 
 export interface Profile extends User {
+  id?: number;
   photo: string;
   picture?: string;
 }
@@ -29,11 +30,11 @@ export interface DataAccount extends Account {
   birthday: string;
   phoneNumber: string;
 }
-export interface forgetPasswordProps {
+export interface ForgetPasswordProps {
   email: string;
 }
 
-export interface authContextType {
+export interface AuthContextType {
   signUp: (data: DataAccount) => void;
   signIn: (data: Account) => void;
   updatePhotoProfile: () => void;
@@ -49,24 +50,34 @@ export interface authContextType {
   loginWithGoogle: () => void;
   registerWithGoogle: () => void;
   logOut: () => void;
-  forgetPassword: (email: forgetPasswordProps) => void;
+  forgetPassword: (email: ForgetPasswordProps) => void;
   resetPassword: (password: string, confirmPassword: string, token: string) => void;
-  state: boolean;
-  setState: (value: boolean) => void;
+  isResetPasswordEmailSent: boolean;
+  setIsResetPasswordEmailSent: (value: boolean) => void;
 }
 
 //---------------------------------------------------------------------------
 
 export interface ProductContextType {
-  getAllProducts: () => void;
+  allProducts: Product[];
+  product: Product;
+  getProduct: (id: number) => void;
+  createProduct: (dataProduct: Product) => void;
+  searchProduct: (name: string) => void;
+  filterCategory: (category: string) => void;
+  errors: string[];
+  updateProduct: (dataProduct: Product) => void;
 }
 
 export interface Product {
+  userId: number;
+  id: number;
   name: string;
-  price: number;
+  price: string;
   description: string;
   location: string;
   state: string;
   category: string;
-  stock: number;
+  stock: string;
+  photos: File[];
 }

@@ -178,7 +178,7 @@ export const searchProduct = async (req: Request, res: Response) => {
       },
     });
     if (products.length === 0) {
-      return res.status(404).json({ message: 'Products not found.' });
+      return res.status(404).json(['No products found.']);
     }
     return res.status(200).json(products);
   } catch (error) {

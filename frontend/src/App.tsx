@@ -12,20 +12,31 @@ import { ForgetPasswordPage } from './pages/ForgetPasswordPage';
 import { ResetPasswordPage } from './pages/ResetPasswordPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { ProductPage } from './pages/ProductPage';
+import CreateProductPage from './pages/CreateProductPage';
+import UpdateProductPage from './pages/UpdataProductPage';
 
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },
   { path: '/login', element: <LoginPages /> },
+  { path: '/', element: <HomePages /> },
   { path: '/forget-password', element: <ForgetPasswordPage /> },
   { path: '/reset-password', element: <ResetPasswordPage /> },
+  { path: '/product/:id', element: <ProductPage /> },
   {
     element: <ProtectedRouter />,
     children: [
-      { path: '/', element: <HomePages /> },
       {
         path: '/profile',
         element: <ProfilePage />,
+      },
+      {
+        path: '/create-product',
+        element: <CreateProductPage />,
+      },
+      {
+        path:'/update-product',
+        element:<UpdateProductPage/>,
       },
     ],
   },
@@ -34,12 +45,12 @@ const router = createBrowserRouter([
 function App() {
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <ProductProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <ProductProvider>
           <RouterProvider router={router} />
           <ToastContainer />
-        </AuthProvider>
-      </ProductProvider>
+        </ProductProvider>
+      </AuthProvider>
     </GoogleOAuthProvider>
   );
 }
