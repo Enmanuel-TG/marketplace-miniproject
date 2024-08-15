@@ -8,17 +8,19 @@ datasource db {
 }
 
 model User {
-  id          Int       @id @default(autoincrement())
-  name        String
-  email       String    @unique
-  password    String
-  birthday    DateTime
-  phoneNumber String
-  photo       String
-  role        Role      @default(user)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  products    Product[]
+  id              Int       @id @default(autoincrement())
+  name            String
+  email           String    @unique
+  password        String
+  birthday        DateTime
+  phoneNumber     String
+  photo           String
+  role            Role      @default(user)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  products        Product[]
+  ratingsGiven    Rating[]  @relation("ReviewerRelation")
+  ratingsReceived Rating[]  @relation("SellerRelation")
 }
 
 model Product {
@@ -40,4 +42,14 @@ model Product {
 enum Role {
   user
   admin
+}
+
+model Rating {
+  id         Int      @id @default(autoincrement())
+  rate       Int      @default(0)
+  reviewerId Int
+  reviewer   User     @relation("ReviewerRelation", fields: [reviewerId], references: [id])
+  sellerId   Int
+  seller     User     @relation("SellerRelation", fields: [sellerId], references: [id])
+  createdAt  DateTime @default(now())
 }

@@ -82,3 +82,28 @@ export const changePassword = async (req: Request, res: Response) => {
     return res.status(500).json(['Error to change password.']);
   }
 };
+export const getUser = async (req: Request, res: Response) => {
+  const { id } = req.body;
+  try {
+    const userFound = await prisma.user.findUnique({
+      where: {
+        id: Number(id),
+      },
+    });
+    if (!userFound) {
+      return res.status(404).json({
+        message: 'User not found.',
+      });
+    }
+    return res.status(200).json({
+      id: userFound.id,
+      name: userFound.name,
+      photo: userFound.photo,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error to get user.',
+      error,
+    });
+  }
+};
