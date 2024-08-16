@@ -4,7 +4,6 @@ import { logoutRequest } from '../services/auth.service';
 
 const ProfilePage = () => {
   const { user, isEdit, setIsEdit, setIsAuthenticated } = useAuth();
-  console.log(user);
 
   const logout = async () => {
     await logoutRequest();
