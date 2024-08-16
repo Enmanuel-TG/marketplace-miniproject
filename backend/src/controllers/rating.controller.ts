@@ -41,3 +41,29 @@ export const createOrUpdateRating = async (req: Request, res: Response) => {
     return res.status(500).json({ error: 'An error occurred while creating or updating the rating.' });
   }
 };
+
+export const getRatingAverage = async (req: Request, res: Response) => {
+  const { sellerId } = req.body;
+  try {
+    // average and count
+    const rating = await prisma.rating.aggregate({
+      where: {
+        sellerId,
+      },
+      _avg: {
+        rate: true,
+      },
+      _count: {
+        rate: true,
+      },
+    });
+
+    return res.status(200).json({
+      average: rating._avg.rate,
+      count: rating._count.rate,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'An error occurred while getting the rating average.' });
+  }
+};
