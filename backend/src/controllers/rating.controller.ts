@@ -37,7 +37,6 @@ export const createOrUpdateRating = async (req: Request, res: Response) => {
       return res.status(201).json(newRating);
     }
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ error: 'An error occurred while creating or updating the rating.' });
   }
 };
@@ -59,11 +58,10 @@ export const getRatingAverage = async (req: Request, res: Response) => {
     });
 
     return res.status(200).json({
-      average: rating._avg.rate,
-      count: rating._count.rate,
+      average: Math.round(rating._avg.rate ?? 0),
+      count: rating._count.rate ?? 0,
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ error: 'An error occurred while getting the rating average.' });
   }
 };
