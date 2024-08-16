@@ -197,7 +197,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
 
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider
