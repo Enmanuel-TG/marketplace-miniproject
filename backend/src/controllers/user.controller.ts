@@ -26,6 +26,7 @@ export const profile = async (req: ExtendedRequest, res: Response) => {
     birthday: userFound.birthday,
     phoneNumber: userFound.phoneNumber,
     photo: userFound.photo,
+    createdAt: userFound.createdAt,
   });
 };
 

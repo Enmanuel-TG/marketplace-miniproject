@@ -11,6 +11,7 @@ export interface User {
   phoneNumber: string;
   password?: string;
   photo?: string;
+  createdAt?: string;
 }
 
 export interface Profile extends User {

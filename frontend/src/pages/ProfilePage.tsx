@@ -4,6 +4,7 @@ import { logoutRequest } from '../services/auth.service';
 
 const ProfilePage = () => {
   const { user, isEdit, setIsEdit, setIsAuthenticated } = useAuth();
+  console.log(user);
 
   const logout = async () => {
     await logoutRequest();
@@ -21,18 +22,27 @@ const ProfilePage = () => {
         <img src={user?.photo} className="w-48 h-48 rounded-full shadow-lg" />
         <div className=''>
           {isEdit ? <GetPicture /> :
-          <button onClick={() => setIsEdit(true)} className="relative bottom-7 left-16 px-3 py-1 bg-blue-500 text-white rounded-lg">
+            <button onClick={() => setIsEdit(true)} className="relative bottom-7 left-16 px-3 py-1 bg-blue-500 text-white rounded-lg">
             Edit</button>
-        }</div>
+          }</div>
       </div>
       <div className="space-y-4 text-center">
-        <div className="text-2xl font-semibold">{user?.name}</div>
-        <div className="text-gray-600">{user?.email}</div>
-        <div className="text-gray-600">{user?.phoneNumber}</div>
-        <div className="text-gray-600">{user?.birthday}</div>
+        <div className="text-white text-2xl font-semibold">{user?.name}</div>
+        <div className="text-white">{user?.email}</div>
+        <div className="text-white">{user?.phoneNumber}</div>
+        {
+          user?.createdAt &&
+            <div className="text-white">
+              Joined on {new Date(user?.createdAt).toLocaleDateString('en-US', {
+                month: 'long',
+                year: 'numeric',
+              })}
+            </div>
+        }
+
       </div>
       <div className="mt-8 text-center">
-        <h2 className="text-xl font-semibold mb-2">Rating</h2>
+        <h2 className="text-white text-xl font-semibold mb-2">Rating</h2>
         <div className="flex justify-center items-center">
           {[...Array(4)].map((_, i) => (
             <svg
