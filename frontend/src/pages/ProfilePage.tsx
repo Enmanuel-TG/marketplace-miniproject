@@ -56,7 +56,7 @@ const ProfilePage = () => {
             </svg>
           ))}
           <svg
-            className="w-6 h-6 ms-1 text-gray-300 dark:text-gray-500"
+            className="w-6 h-6 ms-1 text-gray-500"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
