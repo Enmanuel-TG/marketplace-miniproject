@@ -10,9 +10,9 @@ const HomePages = () => {
   const { allProducts, errors } = useProduct();
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
-    errors && errors.map((error) => toast.error(error, toastifyConfig));
+    errors.map((error) => toast.error(error, toastifyConfig));
   }, [errors]);
 
   return (
