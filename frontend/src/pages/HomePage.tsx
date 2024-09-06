@@ -5,12 +5,23 @@ import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const HomePages = () => {
   const { allProducts, errors } = useProduct();
+  const { isAuthenticated } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-  
+
+  const verifyAuthStatus = (where: string) => {
+    if (!isAuthenticated) {
+      toast.error('Please login first', toastifyConfig);
+      navigate('/login', { replace: true });
+      return;
+    }
+    navigate(`/${where}`, { replace: true });
+  };
+
   useEffect(() => {
     errors.map((error) => toast.error(error, toastifyConfig));
   }, [errors]);
@@ -27,12 +38,12 @@ const HomePages = () => {
       </div>
       <div className='fixed bottom-10 right-4 z-10 py-11 text-white rounded-full shadow-md transition-opacity duration-300 '>
         {menuOpen && <div className='flex flex-col'>
-          <img onClick={() => {navigate('/create-product');}} className="bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400" src="/create.svg"/>
-          <img onClick={() => {navigate('/profile');}} className="bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400" src="/profile.svg"/>
-          <img onClick={() => {navigate('/profile');}} className="bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400" src="/myProduct.svg"/>
+          <img onClick={() => { verifyAuthStatus('create-product'); }} className="bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400" src="/create.svg" />
+          <img onClick={() => { verifyAuthStatus('profile'); }} className="bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400" src="/profile.svg" />
+          <img onClick={() => { verifyAuthStatus('profile'); }} className="bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400" src="/myProduct.svg" />
         </div>}
         <div onClick={() => setMenuOpen(!menuOpen)} className="fixed bottom-4 right-4 z-10 p-4 bg-blue-600 text-white rounded-full shadow-md transition-opacity duration-300 ">
-          <img src="/menu.svg" className='w-8'/>
+          <img src="/menu.svg" className='w-8' />
         </div>
       </div>
     </div>
