@@ -36,13 +36,14 @@ export const ResetPasswordPage = () => {
   }, [resetPasswordErrors]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100">
-      <div className="w-full max-w-lg mx-auto bg-white shadow-md rounded p-8">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full max-w-lg mx-auto p-8">
         <h2 className="text-4xl text-center font-bold mb-6">Password Reset</h2>
-
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input fieldname="New password" type="password" {...register('password', { required: true })} />
+          <br/>
           <Input fieldname="Confirm Password" type="password" {...register('confirm-password', { required: true })} />
+          <br/>
         </form>
         {state ? (
           <Button
