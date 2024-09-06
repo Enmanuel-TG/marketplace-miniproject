@@ -20,12 +20,12 @@ const CreateProductPage = () => {
   };
 
   return (
-    <div className='flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100'>
-      <div className='max-w-3xl p-5 m-auto bg-white border border-gray-200 rounded-lg shadow'>
-        <h1 className="text-3xl font-bold mb-8 text-center text-gray-700">Create Product</h1>
+    <div className='flex items-center justify-center min-h-screen'>
+      <div className='max-w-3xl p-5 m-auto'>
+        <h1 className="text-3xl font-bold mb-8 text-center text-white">Create Product</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input type="text" fieldname="Title" {...register('name', { required: true })} />
-          <Input type="file" fieldname='Select Image' onChange={handleFileChange} accept='image/*' multiple />
+          <Input type="file" fieldname='Select Image' className='bg-white' onChange={handleFileChange} accept='image/*' multiple />
           <div className='flex w-full justify-between'>
             <Input type=" text" fieldname="Price" {...register('price', { required: true })} />
             <Input type="text" fieldname="Stock" {...register('stock', { required: true })} />
@@ -33,7 +33,7 @@ const CreateProductPage = () => {
           </div>
           <div className='my-4 flex justify-between w-full gap-4'>
             <div className='w-full'>
-              <label defaultValue='' htmlFor="category" className='block'>Category</label>
+              <label defaultValue='' htmlFor="category" className='block text-white'>Category</label>
               <select id="category" {...register('category', { required: true })} className='w-full p-3 border border-gray-300 rounded'>
                 <option value="" disabled>
                   Select Category
@@ -44,7 +44,7 @@ const CreateProductPage = () => {
               </select>
             </div>
             <div className='w-full'>
-              <label htmlFor="state" className='block'>State</label>
+              <label htmlFor="state" className='block text-white'>State</label>
               <select id="state" {...register('state', { required: true })} className='w-full p-3 border border-gray-300 rounded'>
                 {stateOptions.map(option => (
                   <option key={option.value} value={option.value}>{option.label}</option>
