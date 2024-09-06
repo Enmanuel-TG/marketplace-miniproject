@@ -27,9 +27,9 @@ const LoginPages = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center">Login</h1>
+        <h1 className="text-3xl font-bold mb-8 text-center text-white">Login</h1>
         <div>
           <form onSubmit={handleSubmit(setData)}>
             <Input fieldname="Email" type="email" {...register('email', { required: true })} />
@@ -41,7 +41,7 @@ const LoginPages = () => {
             </div>
             <div className="flex justify-between items-center mb-6">
               <div className="w-3/4">
-                <span className="mr-2">Do not have an account?</span>
+                <span className="mr-2 text-white">Do not have an account?</span>
                 <Link type="button" className="text-blue-500 hover:text-blue-700 font-bold" to="/register">
                   Register
                 </Link>
