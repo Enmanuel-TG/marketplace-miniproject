@@ -16,7 +16,7 @@ export const ProductPage = () => {
   console.log(product);
 
   const Edit = () => {
-    console.log('Edit');
+    navigate(`/update-product/${productID}`);
   };
   const back = () => {
     navigate('/', { replace: true });
@@ -35,22 +35,28 @@ export const ProductPage = () => {
   }, [user, product]);
 
   if (!product) {
-    return <div className="flex flex-row items-center justify-center min-h-screen bg-gray-100 p-4">This Product Does Not Exist<button className='ml-4 border border border-gray-500 px-3 py-1 rounded' onClick={back}>back</button>
-    </div>;
+    return (
+      <div className="flex flex-row items-center justify-center min-h-screen bg-gray-100 p-4">
+        This Product Does Not Exist
+        <button className="ml-4 border border border-gray-500 px-3 py-1 rounded" onClick={back}>
+          back
+        </button>
+      </div>
+    );
   }
   if (!product.photos) {
     return <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">Loading...</div>;
   }
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <MyIconProfile className="mx-3 bg-white w-11 h-11 rounded-full no-select no-drag absolute right-5 top-5 shadow-lg" />
-      <div className="bg-white shadow-lg rounded-lg max-w-5xl w-full overflow-hidden px-6 pb-4">
+      <div className="shadow-lg rounded-lg max-w-5xl w-full overflow-hidden px-6 pb-4">
         <div className="h-96 w-full mt-10 flex items-center justify-center">
           <PhotoProduct images={product.photos as unknown as string[]} />
         </div>
         <div className="my-6 flex justify-between items-center">
           <div className="flex items-center">
-            <h1 className="text-3xl font-bold text-gray-700 mr-4 no-drag">{product.name}</h1>
+            <h1 className="text-3xl font-bold text-white mr-4 no-drag">{product.name}</h1>
             <span className="text-3xl text-green-600 font-semibold no-drag">${product.price}</span>
           </div>
           <div>
@@ -73,15 +79,15 @@ export const ProductPage = () => {
           </div>
         </div>
         <div className="mb-8">
-          <h2 className="text-xl pb-2 mb-2 font-semibold text-gray-700 no-drag no-select">Description</h2>
-          <p className="text-gray-700">{product.description}</p>
+          <h2 className="text-xl text-white pb-2 mb-2 font-semibold text-gray-700 no-drag no-select">Description</h2>
+          <p className="text-gray-300">{product.description}</p>
         </div>
         <div className="mb-4">
-          <p className="text-gray-500">
-            <strong className="mr-2 no-drag no-select">Location:</strong> {product.location}
+          <p className="text-gray-300">
+            <strong className="mr-2 text-white no-drag no-select">Location:</strong> {product.location}
           </p>
-          <p className="text-gray-500">
-            <strong className="mr-2 no-drag no-select">Stock:</strong> {product.stock}
+          <p className="text-gray-300">
+            <strong className="mr-2 text-white no-drag no-select">Stock:</strong> {product.stock}
           </p>
         </div>
         <a
