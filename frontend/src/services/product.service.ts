@@ -33,5 +33,7 @@ export const updateProductRequest = async (product: Product) => {
   product.photos.forEach((photo) => {
     formData.append('photos', photo);
   });
-  return await server.post('/product/update', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+  return await server.post(`/product/update/:${product.id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 };
+
+export const getAllUSerProductsRequest = async () => { return await server.get('/product/userProduct');};
