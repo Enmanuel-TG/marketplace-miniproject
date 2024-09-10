@@ -10,5 +10,6 @@
     "tailwindcss",
     "toastify"
   ],
-  "css.lint.unknownAtRules": "ignore"
+  "css.lint.unknownAtRules": "ignore",
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
