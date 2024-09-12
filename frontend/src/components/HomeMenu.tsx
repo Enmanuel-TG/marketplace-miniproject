@@ -17,6 +17,7 @@ export const HomeMenu = () => {
     }
     navigate(`/${where}`);
   };
+
   return (
     <div>
       {menuOpen && (
