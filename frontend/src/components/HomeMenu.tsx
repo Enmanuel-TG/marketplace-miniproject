@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { toast } from 'react-toastify';
 
+const style: string = 'bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400 hover:cursor-pointer no-select no-drag';
+
 export const HomeMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isAuthenticated } = useAuth();
@@ -26,21 +28,21 @@ export const HomeMenu = () => {
             onClick={() => {
               verifyAuthStatus('create-product');
             }}
-            className="bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400"
+            className={style}
             src="/create.svg"
           />
           <img
             onClick={() => {
               verifyAuthStatus('profile');
             }}
-            className="bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400"
+            className={style}
             src="/profile.svg"
           />
           <img
             onClick={() => {
               verifyAuthStatus('history');
             }}
-            className="bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400"
+            className={style}
             src="/myProduct.svg"
           />
         </div>
