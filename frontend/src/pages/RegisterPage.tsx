@@ -33,9 +33,9 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center text-gray-700">Register</h1>
+        <h1 className="text-3xl font-bold mb-8 text-center text-white">Register</h1>
         <Slider ref={sliderRef} {...formSliderSettings}>
           <div>
             <form>
@@ -104,7 +104,7 @@ const RegisterPage = () => {
           Register with Google 🚀
         </button>
         <div className="mt-4 text-center flex justify-center items-center space-x-2">
-          <h1 className="text-gray-600">Already have an account?</h1>
+          <h1 className="text-white">Already have an account?</h1>
           <Link className="text-blue-500 cursor-pointer hover:underline" to='/login'>
             Login
           </Link>

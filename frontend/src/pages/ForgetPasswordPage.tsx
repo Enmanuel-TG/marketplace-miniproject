@@ -27,14 +27,16 @@ export const ForgetPasswordPage = () => {
   }, [state]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-100">
-      <div className="w-full max-w-lg mx-auto bg-white shadow-md rounded p-8">
-        <button onClick={back}>Back</button>
-        <h2 className="text-4xl text-center font-bold mb-6">Password Reset</h2>
-        <p className="text-gray-700 text-base mb-3">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full max-w-lg mx-auto p-8">
+        <button className='text-white hover:text-blue-700 text-lg hover:underline mb-3 no-select no-drag' onClick={back}>Back</button>
+        <h2 className="text-4xl text-center font-bold mb-6 text-white ">Password Reset</h2>
+        <p className="text-white text-base mb-3">
           Please enter the email address associated with your account to reset your password.
         </p>
-        <p className="text-gray-700 text-base mb-4">You will receive an email with a link to reset your password.</p>
+        <p className="text-white text-base mb-4">You will receive an email with a link to reset your password.</p>
+        <br />
+        <br />
         <div>
           {forgetPasswordErrors.map((error, i) => (
             <div key={i} className="text-red-500 mb-2">

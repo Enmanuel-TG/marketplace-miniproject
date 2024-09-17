@@ -1,0 +1,13 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="feather feather-shopping-bag"
+>
+  <path d="M6 2l1.25 4h9.5L18 2H6zM2 8h20l-1 14H3L2 8z"></path>
+  <path d="M16 11a4 4 0 1 1-8 0"></path>
+</svg>

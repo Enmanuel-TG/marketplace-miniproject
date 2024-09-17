@@ -63,13 +63,19 @@ export interface ProductContextType {
   allProducts: Product[];
   product: Product;
   getProduct: (id: number) => void;
-  createProduct: (dataProduct: Product) => void;
+  createProduct: (dataProduct: Product) => Promise<CreateProductResponse>;
   searchProduct: (name: string) => void;
   filterCategory: (category: string) => void;
   errors: string[];
   updateProduct: (dataProduct: Product) => void;
+  getAllUSerProducts: () => void;
+  deleteProduct:(id: number) => void;
 }
 
+export interface CreateProductResponse {
+  message: string;
+  product: Product;
+}
 export interface Product {
   userId: number;
   id: number;

@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ProductPage } from './pages/ProductPage';
 import CreateProductPage from './pages/CreateProductPage';
 import UpdateProductPage from './pages/UpdataProductPage';
+import HistoryPage from './pages/HistoryPage';
 
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },
@@ -35,8 +36,12 @@ const router = createBrowserRouter([
         element: <CreateProductPage />,
       },
       {
-        path:'/update-product',
-        element:<UpdateProductPage/>,
+        path: '/update-product/:id',
+        element: <UpdateProductPage />,
+      },
+      {
+        path: '/History',
+        element: <HistoryPage />,
       },
     ],
   },

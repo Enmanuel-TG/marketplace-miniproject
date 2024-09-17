@@ -1,6 +1,15 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ProviderProps, ProductContextType, Product } from '../utilities/interfaces.utility';
-import { createProductRequest, getAllProductsRequest, getProductByCategoryRequest, getProductRequest, searchProductRequest, updateProductRequest } from '../services/product.service';
+import {
+  createProductRequest,
+  getAllProductsRequest,
+  getProductByCategoryRequest,
+  getProductRequest,
+  searchProductRequest,
+  updateProductRequest,
+  getAllUSerProductsRequest,
+  deleteProductRequest,
+} from '../services/product.service';
 import axios from 'axios';
 
 const ProductContext = createContext<ProductContextType | null>(null);
@@ -14,13 +23,14 @@ export const useProduct = () => {
 };
 
 export const ProductProvider = ({ children }: ProviderProps) => {
-  const  [allProducts, setAllProducts] = useState([]);
-  const  [product, setProduct] = useState({} as Product);
-  const  [errors, setErrors] = useState<string[]>([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [product, setProduct] = useState({} as Product);
+  const [errors, setErrors] = useState<string[]>([]);
 
-  const createProduct = async(dataProduct:Product) => {
+  const createProduct = async (dataProduct: Product) => {
     try {
-      await createProductRequest(dataProduct);
+      const res = await createProductRequest(dataProduct);
+      return res.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {
@@ -72,7 +82,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
     if (category === 'All') {
       getAllProducts();
       return;
-    };
+    }
     try {
       const res = await getProductByCategoryRequest(category);
       setAllProducts(res.data);
@@ -96,22 +106,52 @@ export const ProductProvider = ({ children }: ProviderProps) => {
       }
     }
   };
+  const getAllUSerProducts = async () => {
+    try {
+      const res = await getAllUSerProductsRequest();
+      setAllProducts(res.data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
+    }
+  };
+  const deleteProduct = async (id: number) => {
+    try {
+      await deleteProductRequest(id);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
+    }
+  };
   //------------------------------
   useEffect(() => {
     getAllProducts();
   }, []);
 
-  return <ProductContext.Provider value={{
-    filterCategory,
-    updateProduct,
-    allProducts,
-    product,
-    createProduct,
-    getProduct,
-    searchProduct,
-    errors,
-  }}>{children}</ProductContext.Provider>;
+  return (
+    <ProductContext.Provider
+      value={{
+        deleteProduct,
+        filterCategory,
+        updateProduct,
+        allProducts,
+        product,
+        createProduct,
+        getProduct,
+        searchProduct,
+        errors,
+        getAllUSerProducts,
+      }}
+    >
+      {children}
+    </ProductContext.Provider>
+  );
 };
-
 
 export default ProductContext;
