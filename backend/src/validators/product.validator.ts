@@ -6,9 +6,11 @@ const ProductValidator = z.object({
     .min(3, { message: 'Name must be at least 3 characters.' })
     .max(50, { message: 'Name must be at most 50 characters.' }),
   price: z
-    .string({ required_error: 'Price is required' })
-    .min(0, { message: 'Price must be greater than or equal to 0.' })
-    .max(1000000, { message: 'Price must be less than or equal to 1000000.' }),
+    .string({
+      required_error: 'Price is required',
+      invalid_type_error: 'Price must be a number',
+    })
+    .regex(/^(0|[1-9][0-9]*)(\.[0-9]{1,2})?$/, { message: 'Price must be a number.' }),
   location: z
     .string({ required_error: 'Location is required.' })
     .min(3, { message: 'Location must be at least 3 characters.' })
@@ -22,9 +24,11 @@ const ProductValidator = z.object({
     .min(2, { message: 'Category must be at least 2 characters.' })
     .max(30, { message: 'Category must be at most 30 characters.' }),
   stock: z
-    .string({ required_error: 'Stock is required.' })
-    .min(0, { message: 'Stock must be greater than or equal to 0.' })
-    .max(1000, { message: 'Stock must be less than or equal to 1000.' }),
+    .string({
+      required_error: 'Stock is required',
+      invalid_type_error: 'Stock must be a number',
+    })
+    .regex(/^(0|[1-9][0-9]*)(\.[0-9]{1,2})?$/, { message: 'Price must be a number.' }),
   description: z
     .string({ required_error: 'Description is required.' })
     .min(10, { message: 'Description must be at least 10 characters.' })

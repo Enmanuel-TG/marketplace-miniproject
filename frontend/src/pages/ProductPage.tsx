@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useProduct } from '../contexts/ProductContext';
 import PhotoProduct from '../components/PhotoProduct';
-import MyIconProfile from '../components/MyIconProfile';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import MyIconProfile from '../components/ui/MyIconProfile';
 
 export const ProductPage = () => {
   const { getProduct, product } = useProduct();
