@@ -69,6 +69,7 @@ export interface ProductContextType {
   errors: string[];
   updateProduct: (dataProduct: Product) => void;
   getAllUSerProducts: () => void;
+  deleteProduct:(id: number) => void;
 }
 
 export interface CreateProductResponse {

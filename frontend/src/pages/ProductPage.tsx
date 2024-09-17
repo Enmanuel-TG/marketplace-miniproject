@@ -7,19 +7,25 @@ import { useNavigate } from 'react-router-dom';
 import MyIconProfile from '../components/ui/MyIconProfile';
 
 export const ProductPage = () => {
-  const { getProduct, product } = useProduct();
+  const { getProduct, product, deleteProduct } = useProduct();
   const { user } = useAuth();
   const { id } = useParams<{ id: string }>();
   const productID = id?.split(':')[1];
   const [productOwner, setProductOwner] = useState<boolean>(false);
   const navigate = useNavigate();
-  console.log(product);
 
   const Edit = () => {
     navigate(`/update-product/${productID}`);
   };
   const back = () => {
     navigate('/', { replace: true });
+  };
+
+  const ProductDelete = async () => {
+    deleteProduct(productID as unknown as number);
+    setTimeout(() => {
+      back();
+    }, 2000);
   };
 
   useEffect(() => {
@@ -61,12 +67,19 @@ export const ProductPage = () => {
           </div>
           <div>
             {productOwner ? (
-              <button
-                className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
-                onClick={Edit}
-              >
-                Edit
-              </button>
+              <div>
+                <button
+                  className="bg-red-500 text-white mr-2 py-2 px-4 rounded-lg hover:bg-red-600 transition-colors"
+                  onClick={ProductDelete}>
+                  Delete
+                </button>
+                <button
+                  className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
+                  onClick={Edit}
+                >
+                  Edit
+                </button>
+              </div>
             ) : (
               <div className="flex items-center">
                 <img src={user?.photo} className="w-10 h-10 rounded-full mr-2" />

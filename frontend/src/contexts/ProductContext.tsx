@@ -8,6 +8,7 @@ import {
   searchProductRequest,
   updateProductRequest,
   getAllUSerProductsRequest,
+  deleteProductRequest,
 } from '../services/product.service';
 import axios from 'axios';
 
@@ -96,8 +97,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
 
   const updateProduct = async (dataProduct: Product) => {
     try {
-      const res = await updateProductRequest(dataProduct);
-      console.log(res.data);
+      await updateProductRequest(dataProduct);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {
@@ -116,7 +116,18 @@ export const ProductProvider = ({ children }: ProviderProps) => {
           setErrors(error.response.data);
         }
       }
-    };
+    }
+  };
+  const deleteProduct = async (id: number) => {
+    try {
+      await deleteProductRequest(id);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
+    }
   };
   //------------------------------
   useEffect(() => {
@@ -126,6 +137,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
   return (
     <ProductContext.Provider
       value={{
+        deleteProduct,
         filterCategory,
         updateProduct,
         allProducts,
