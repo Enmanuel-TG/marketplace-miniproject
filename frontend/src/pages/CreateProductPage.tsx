@@ -7,23 +7,26 @@ import Button from '../components/ui/Button';
 import HeadPage from '../components/HeadPage';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const CreateProductPage = () => {
   const { register, handleSubmit, setValue } = useForm<Product>();
   const { createProduct, errors } = useProduct();
   const { reset } = useForm<Product>();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     errors.map((error) => toast.error(error, toastifyConfig));
   }, [errors]);
 
   const onSubmit = async (data: Product): Promise<void> => {
+    setIsLoading(true);
     const res = await createProduct(data);
     if (res) {
       toast.success(res.message, toastifyConfig);
       reset();
     }
+    setIsLoading(false);
   };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -103,7 +106,7 @@ const CreateProductPage = () => {
             </div>
             <Input type="text" fieldname="Description" {...register('description', { required: true })} />
             <div>
-              <Button type="submit" fieldname="Create Product" />
+              <Button type="submit" fieldname="Create Product" disabled={isLoading} />
             </div>
           </form>
         </div>
