@@ -38,8 +38,8 @@ const CreateProductPage = () => {
   return (
     <div>
       <HeadPage namePage="Create Product" />
-      <div className="flex min-h-screen">
-        <div className="max-w-3xl pt-12 px-4 mx-auto">
+      <div className="flex">
+        <div className="max-w-3xl pt-20 px-4 mx-auto">
           <form onSubmit={handleSubmit(onSubmit)}>
             <Input type="text" fieldname="Title" {...register('name', { required: true })} />
             <Input
