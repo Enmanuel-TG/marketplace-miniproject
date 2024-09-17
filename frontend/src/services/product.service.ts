@@ -13,11 +13,13 @@ export const createProductRequest = async (product: Product) => {
   product.photos.forEach((photo) => {
     formData.append('photos', photo);
   });
-  return await server.post('/product/create', formData, { headers: { 'Content-Type': 'multipart/form-data' }});
+  return await server.post('/product/create', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 };
 export const getAllProductsRequest = async () => await server.get('/product/allProduct');
 export const getProductRequest = async (id: number) => await server.get(`/product/product/${id}`);
-export const searchProductRequest = async (name: string) => {return await server.post('/product/search',{ name });};
+export const searchProductRequest = async (name: string) => {
+  return await server.post('/product/search', { name });
+};
 export const getProductByCategoryRequest = async (category: string) => {
   return await server.post('/product/category', { category });
 };
@@ -33,7 +35,13 @@ export const updateProductRequest = async (product: Product) => {
   product.photos.forEach((photo) => {
     formData.append('photos', photo);
   });
-  return await server.post(`/product/update/:${product.id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+  return await server.put(`/product/update/${product.id}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 };
 
-export const getAllUSerProductsRequest = async () => { return await server.get('/product/userProduct');};
+export const getAllUSerProductsRequest = async () => {
+  return await server.get('/product/userProduct');
+};
+
+export const deleteProductRequest = async (id: number) => await server.delete(`/product/delete/${id}`);

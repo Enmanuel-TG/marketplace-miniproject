@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 const UpdateProductPage = () => {
   const { product, updateProduct } = useProduct();
-  const { register, handleSubmit } = useForm<Product>({ defaultValues: product });
+  const { register, handleSubmit, setValue } = useForm<Product>({ defaultValues: product });
   const Navigate = useNavigate();
 
   useEffect(() => {
@@ -27,12 +27,26 @@ const UpdateProductPage = () => {
   const onSubmit = (data: Product) => {
     updateProduct(data);
   };
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      setValue('photos', filesArray);
+    }
+  };
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="max-w-3xl p-5 m-auto">
         <h1 className="text-3xl font-bold mb-8 text-center text-white">Update Product</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input type="text" fieldname="Title" {...register('name', { required: true })} />
+          <Input
+            type="file"
+            fieldname="Select Image"
+            className="bg-white"
+            onChange={handleFileChange}
+            accept="image/*"
+            multiple
+          />
           <div className="flex w-full justify-between">
             <Input type="text" fieldname="Price" {...register('price', { required: true })} />
             <Input type="text" fieldname="Stock" {...register('stock', { required: true })} />

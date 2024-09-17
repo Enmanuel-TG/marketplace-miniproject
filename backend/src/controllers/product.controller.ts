@@ -74,7 +74,15 @@ export const deleteProduct = async (req: Request, res: Response) => {
 
 export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, price, description, location, state, category, stock, photos } = req.body;
+  const { name, price, description, location, state, category, stock } = req.body;
+  const photos = req.files?.photos;
+  if (!photos) {
+    return res.status(400).json({ message: 'No photo uploaded.' });
+  }
+  if (Array.isArray(photos) && photos.length > 10) {
+    return res.status(400).json(['You can only upload up to 10 photos.']);
+  }
+  const images: string[] = await uploadedPhotos(photos as UploadedFile, PHOTOS_PRODUCT_FOLDER);
   try {
     const product = await prisma.product.update({
       where: {
@@ -88,7 +96,7 @@ export const updateProduct = async (req: Request, res: Response) => {
         state,
         category,
         stock,
-        photos,
+        photos: images,
       },
     });
     return res.status(200).json({
