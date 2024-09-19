@@ -55,10 +55,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const registerWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
       try {
-        const { data } = await registerWithGoogleRequest(
-          response.access_token,
-          new Date().toISOString(),
-        );
+        const { data } = await registerWithGoogleRequest(response.access_token, new Date().toISOString());
         setUser(data);
         setIsAuthenticated(true);
       } catch (error) {
@@ -121,7 +118,8 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const updatePhotoProfile = async () => {
     try {
       if (!selectedFile) {
-        throw new Error('SelectedFile error');
+        setErrors(['Please select a file.']);
+        return;
       }
       const res = await updatePhotoProfileRequest(selectedFile);
       const photo = res.data.newPhoto as string;
@@ -133,7 +131,11 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         };
       });
     } catch (error) {
-      alert(error); //TODO: fix this ---------------------------------------------------
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
     }
   };
 
