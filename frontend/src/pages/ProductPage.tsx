@@ -104,7 +104,7 @@ export const ProductPage = () => {
             </div>
           </div>
           <div className="mb-8">
-            <h2 className="text-xl text-white pb-2 mb-2 font-semibold text-gray-700 no-drag no-select">Description</h2>
+            <h2 className="text-xl text-white pb-2 mb-2 font-semibold no-drag no-select">Description</h2>
             <p className="text-gray-300">{product.description}</p>
           </div>
           <div className="mb-4">

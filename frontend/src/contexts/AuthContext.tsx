@@ -28,7 +28,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const [user, setUser] = useState<Profile | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isResetPasswordEmailSent, setIsResetPasswordEmailSent] = useState(false);
 
@@ -115,12 +114,8 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     }
   };
 
-  const updatePhotoProfile = async () => {
+  const updatePhotoProfile = async (selectedFile:File) => {
     try {
-      if (!selectedFile) {
-        setErrors(['Please select a file.']);
-        return;
-      }
       const res = await updatePhotoProfileRequest(selectedFile);
       const photo = res.data.newPhoto as string;
       setUser((prev) => {
@@ -204,8 +199,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   return (
     <AuthContext.Provider
       value={{
-        selectedFile,
-        setSelectedFile,
         isEdit,
         setIsEdit,
         user,

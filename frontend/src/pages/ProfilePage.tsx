@@ -1,12 +1,13 @@
 import { useAuth } from '../contexts/AuthContext';
 import GetPicture from '../components/GetPicture';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const ProfilePage = () => {
   const { user, setIsEdit, errors } = useAuth();
+  const [previewPhoto, setPreviewPhoto] = useState<string | undefined>(user?.photo);
 
   useEffect(() => {
     errors.map((error) => toast.error(error, toastifyConfig));
@@ -43,8 +44,8 @@ const ProfilePage = () => {
         <DialogHeader>
           <DialogTitle>Change your photo profile</DialogTitle>
         </DialogHeader>
-        <img src={user?.photo} className="w-48 h-48 no-select no-drag rounded-full shadow-lg" />
-        <GetPicture />
+        <img src={previewPhoto || user?.photo} className="w-48 h-48 no-select no-drag rounded-full shadow-lg" />
+        <GetPicture onPhotoChange={setPreviewPhoto} />
       </DialogContent>
     </Dialog>
   );

@@ -38,7 +38,7 @@ export interface ForgetPasswordProps {
 export interface AuthContextType {
   signUp: (data: DataAccount) => void;
   signIn: (data: Account) => void;
-  updatePhotoProfile: () => void;
+  updatePhotoProfile: (selectedFile: File) => void;
   setIsAuthenticated: (value: boolean) => void;
   isAuthenticated: boolean | null;
   errors: string[];
@@ -46,8 +46,6 @@ export interface AuthContextType {
   setUser: (value: Profile | null) => void;
   isEdit: boolean;
   setIsEdit: (value: boolean) => void;
-  selectedFile: File | null;
-  setSelectedFile: (value: File) => void;
   loginWithGoogle: () => void;
   registerWithGoogle: () => void;
   logOut: () => void;
