@@ -12,5 +12,9 @@
   ],
   "css.lint.unknownAtRules": "ignore",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "remote.autoForwardPortsFallback": 0
+  "remote.autoForwardPortsFallback": 0,
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
+  "tailwindCSS.classAttributes": ["className", "tw", "variants"]
 }
