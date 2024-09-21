@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "name":"Enmanuel",
-  "email":"enmanuel@gmail.com",
+  "email":"enmanueltaverasgomez@gmail.com",
   "password":"123456",
   "birthday":"2000-01-25T12:34:56Z",
   "phoneNumber":"8295168214"
@@ -17,7 +17,7 @@ Content-Type: application/json
 
 {
   "email":"enmanueltaverasgomez@gmail.com",
-  "password":"123456789"
+  "password":"123456"
 }
 
 ###Logout
