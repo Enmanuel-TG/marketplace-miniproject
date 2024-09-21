@@ -14,6 +14,8 @@ export interface User {
   createdAt?: string;
 }
 
+export type UpdateUser = Pick<User, 'name' | 'birthday' | 'phoneNumber'>;
+
 export interface Profile extends User {
   id?: number;
   photo: string;
@@ -67,7 +69,7 @@ export interface ProductContextType {
   errors: string[];
   updateProduct: (dataProduct: Product) => void;
   getAllUSerProducts: () => void;
-  deleteProduct:(id: number) => void;
+  deleteProduct: (id: number) => void;
 }
 
 export interface CreateProductResponse {

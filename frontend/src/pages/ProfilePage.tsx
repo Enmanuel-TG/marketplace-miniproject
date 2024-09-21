@@ -3,13 +3,48 @@ import GetPicture from '../components/GetPicture';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ProductCard } from '@/components/ProductCard';
 import { useProduct } from '@/contexts/ProductContext';
+import Input from '@/components/ui/Input';
+import { useForm } from 'react-hook-form';
+import { UpdateUser } from '@/utilities/interfaces.utility';
+import { updateUserRequest } from '../services/auth.service';
+import Button from '@/components/ui/Button';
 
 const ProfilePage = () => {
-  const { user, setIsEdit, errors } = useAuth();
+  const { user, setUser, setIsEdit, errors } = useAuth();
   const [previewPhoto, setPreviewPhoto] = useState<string | undefined>(user?.photo);
+
+  const { register, handleSubmit, setValue } = useForm<UpdateUser>({
+    defaultValues: {
+      name: '',
+      birthday: '',
+      phoneNumber: '',
+    },
+  });
+
+  useEffect(() => {
+    if (!user) return;
+    setValue('name', user?.name);
+    setValue('birthday', user?.birthday ? new Date(user?.birthday).toISOString().split('T')[0] : '');
+    setValue('phoneNumber', user?.phoneNumber);
+  }, [user, setValue]);
+
+  const onSubmit = async (data: UpdateUser) => {
+    if (!user) return;
+
+    const newData = {
+      ...data,
+      birthday: new Date(data.birthday).toISOString(),
+    };
+
+    await updateUserRequest(newData);
+    setUser({
+      ...user,
+      ...newData,
+    });
+  };
 
   useEffect(() => {
     errors.map((error) => toast.error(error, toastifyConfig));
@@ -32,12 +67,40 @@ const ProfilePage = () => {
               />
               <DialogTrigger
                 className="absolute bottom-[1vw] right-[1vw] px-[1vw] py-[0.5vw] bg-blue-500 text-white rounded-lg"
-                onClick={() => setIsEdit(true)}>
+                onClick={() => setIsEdit(true)}
+              >
                 Edit
               </DialogTrigger>
             </div>
             <div className="text-center lg:text-left">
-              <p className="text-white mt-[2vw] text-[3vw] sm:text-[3vw] lg:text-[2.5vw] font-semibold">{user?.name}</p>
+              <Dialog>
+                <div className="flex flex-row items-center gap-4">
+                  <p className="text-white text-[3vw] lg:text-[2.5vw] font-semibold">{user?.name}</p>
+                  <DialogTrigger>
+                    <img
+                      src="/edit.svg"
+                      alt="edit"
+                      className="w-6 h-6 transition-all hover:w-7 hover:h-7"
+                      title="Edit"
+                    />
+                  </DialogTrigger>
+                </div>
+                <DialogContent className="p-[3vw]">
+                  <DialogHeader>
+                    <DialogTitle className="text-[4vw] lg:text-[2vw]">Update user data</DialogTitle>
+                  </DialogHeader>
+                  <div className="flex flex-col items-center">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <Input type="text" fieldname="Name" {...register('name', { required: true })} />
+                      <Input type="date" fieldname="Birthday" {...register('birthday', { required: true })} />
+                      <Input type="text" fieldname="Phone Number" {...register('phoneNumber', { required: true })} />
+                      <DialogClose>
+                        <Button type="submit" fieldname="Update Profile" />
+                      </DialogClose>
+                    </form>
+                  </div>
+                </DialogContent>
+              </Dialog>
               {user?.createdAt && (
                 <div className="text-white mt-[1vw] text-[2.5vw] sm:text-[1.5vw] lg:text-[1vw]">
                   Joined on{' '}
