@@ -31,7 +31,7 @@ model Product {
   location    String
   state       String
   category    String
-  stock       String
+  stock       Int
   photos      String[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

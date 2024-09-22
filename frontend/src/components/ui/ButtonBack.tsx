@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-export const ButtonBack = ({styles} : {styles: string}) => {
+import { type ClassValue } from 'clsx';
+import { cn } from '@/lib/utils';
+export const ButtonBack = ({ className }: { className: ClassValue }) => {
   const navigate = useNavigate();
   return (
     <div>
@@ -9,7 +11,7 @@ export const ButtonBack = ({styles} : {styles: string}) => {
           navigate('/');
         }}
         alt="Back"
-        className={`cursor-pointer w-10 h-10 ${styles}`}
+        className={cn('cursor-pointer w-10 h-10', className)}
       />
     </div>
   );

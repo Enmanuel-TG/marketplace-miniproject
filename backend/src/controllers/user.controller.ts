@@ -108,3 +108,40 @@ export const getUser = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const updateUser = async (req: ExtendedRequest, res: Response) => {
+  const id = getTokenId(req);
+  const { name, phoneNumber, birthday } = req.body;
+  const userFound = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+  if (!userFound) {
+    return res.status(404).json({
+      message: 'User not found.',
+    });
+  }
+  try {
+    const updatedUser = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+        phoneNumber,
+        birthday,
+      },
+    });
+    return res.status(200).json({
+      id: updatedUser.id,
+      name: updatedUser.name,
+      phoneNumber: updatedUser.phoneNumber,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error to update user.',
+      error,
+    });
+  }
+};

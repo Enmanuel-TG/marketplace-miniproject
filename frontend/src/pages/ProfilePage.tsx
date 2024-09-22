@@ -1,72 +1,182 @@
 import { useAuth } from '../contexts/AuthContext';
 import GetPicture from '../components/GetPicture';
-import { logoutRequest } from '../services/auth.service';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { toastifyConfig } from '../utilities/toastify.utility';
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { ProductCard } from '@/components/ProductCard';
+import { useProduct } from '@/contexts/ProductContext';
+import Input from '@/components/ui/Input';
+import { useForm } from 'react-hook-form';
+import { Product, UpdateUser } from '@/utilities/interfaces.utility';
+import { updateUserRequest } from '../services/auth.service';
+import Button from '@/components/ui/Button';
+import { Switch } from '@/components/ui/switch';
+import { filterStockProducts } from '@/utilities/filter-products.utility';
+import axios from 'axios';
 
 const ProfilePage = () => {
-  const { user, isEdit, setIsEdit, setIsAuthenticated } = useAuth();
+  const { user, setUser, setIsEdit, errors, setErrors } = useAuth();
+  const [previewPhoto, setPreviewPhoto] = useState<string | undefined>(user?.photo);
+  const { getAllUSerProducts, allProducts } = useProduct();
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [isAvailable, setIsAvailable] = useState(true);
 
-  const logout = async () => {
-    await logoutRequest();
-    setIsAuthenticated(false);
+  const { register, handleSubmit, setValue } = useForm<UpdateUser>({
+    defaultValues: {
+      name: '',
+      birthday: '',
+      phoneNumber: '',
+    },
+  });
+
+  useEffect(() => {
+    if (!user) return;
+    setValue('name', user?.name);
+    setValue('birthday', user?.birthday ? new Date(user?.birthday).toISOString().split('T')[0] : '');
+    setValue('phoneNumber', user?.phoneNumber);
+  }, [user, setValue]);
+
+  const onSubmit = async (data: UpdateUser) => {
+    if (!user) return;
+
+    const newData = {
+      ...data,
+      birthday: new Date(data.birthday).toISOString(),
+    };
+
+    try {
+      const res = await updateUserRequest(newData);
+      if (res.status === 200) {
+        setUser({
+          ...user,
+          ...newData,
+        });
+        toast.success('User updated successfully', toastifyConfig);
+      }
+    } catch (error) {
+      setValue('name', user?.name);
+      setValue('birthday', user?.birthday ? new Date(user?.birthday).toISOString().split('T')[0] : '');
+      setValue('phoneNumber', user?.phoneNumber);
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
+    }
   };
 
-  return (
-    <div className="container mx-auto p-4">
-      <button
-        onClick={logout}
-        className="px-4 py-2 bg-red-500 text-white rounded-lg mb-4">
-        Logout
-      </button>
-      <div className="flex flex-col items-center">
-        <img src={user?.photo} className="w-48 h-48 rounded-full shadow-lg" />
-        <div className=''>
-          {isEdit ? <GetPicture /> :
-            <button onClick={() => setIsEdit(true)} className="relative bottom-7 left-16 px-3 py-1 bg-blue-500 text-white rounded-lg">
-            Edit</button>
-          }</div>
-      </div>
-      <div className="space-y-4 text-center">
-        <div className="text-white text-2xl font-semibold">{user?.name}</div>
-        <div className="text-white">{user?.email}</div>
-        <div className="text-white">{user?.phoneNumber}</div>
-        {
-          user?.createdAt &&
-            <div className="text-white">
-              Joined on {new Date(user?.createdAt).toLocaleDateString('en-US', {
-                month: 'long',
-                year: 'numeric',
-              })}
-            </div>
-        }
+  useEffect(() => {
+    errors.map((error) => toast.error(error, toastifyConfig));
+  }, [errors]);
 
+  useEffect(() => {
+    const filtered = filterStockProducts(allProducts, isAvailable);
+    setFilteredProducts(filtered);
+  }, [allProducts]);
+
+  useEffect(() => {
+    const filtered = filterStockProducts(allProducts, isAvailable);
+    setFilteredProducts(filtered);
+  }, [isAvailable]);
+
+  useEffect(() => {
+    getAllUSerProducts();
+  }, []);
+
+  return (
+    <Dialog>
+      <div>
+        <div className="bg-gray-900 mt-10 mx-auto w-full max-w-[80vw] no-drag no-select p-[4vw] sm:p-[3vw] lg:p-[2vw] rounded-lg shadow-md">
+          <div className="flex flex-col lg:flex-row gap-[5vw] items-center lg:items-start">
+            <div className="relative">
+              <img
+                src={user?.photo}
+                className="no-select no-drag rounded-full shadow-lg w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] object-cover"
+              />
+              <DialogTrigger
+                className="absolute bottom-[1vw] right-[1vw] px-[1vw] py-[0.5vw] bg-blue-500 text-white rounded-lg"
+                onClick={() => setIsEdit(true)}
+              >
+                Edit
+              </DialogTrigger>
+            </div>
+            <div className="text-center lg:text-left">
+              <Dialog>
+                <div className="flex flex-row items-center gap-4">
+                  <p className="text-white text-[3vw] lg:text-[2.5vw] font-semibold">{user?.name}</p>
+                  <DialogTrigger>
+                    <img
+                      src="/edit.svg"
+                      alt="edit"
+                      className="w-6 h-6 transition-all hover:w-7 hover:h-7"
+                      title="Edit"
+                    />
+                  </DialogTrigger>
+                </div>
+                <DialogContent className="p-[3vw]">
+                  <DialogHeader>
+                    <DialogTitle className="text-[4vw] lg:text-[2vw]">Update user data</DialogTitle>
+                  </DialogHeader>
+                  <div className="flex flex-col items-center">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <Input type="text" fieldname="Name" {...register('name', { required: true })} />
+                      <Input type="date" fieldname="Birthday" {...register('birthday', { required: true })} />
+                      <Input type="text" fieldname="Phone Number" {...register('phoneNumber', { required: true })} />
+                      <DialogClose>
+                        <Button type="submit" fieldname="Update Profile" />
+                      </DialogClose>
+                    </form>
+                  </div>
+                </DialogContent>
+              </Dialog>
+              {user?.createdAt && (
+                <div className="text-white mt-[1vw] text-[2.5vw] sm:text-[1.5vw] lg:text-[1vw]">
+                  Joined on{' '}
+                  {new Date(user?.createdAt).toLocaleDateString('en-US', {
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+        <DialogContent className="p-[3vw]">
+          <DialogHeader>
+            <DialogTitle className="text-[4vw] lg:text-[2vw]">Change your profile photo</DialogTitle>
+          </DialogHeader>
+          <div className="flex flex-col items-center">
+            <img
+              src={previewPhoto || user?.photo}
+              className="w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] no-select no-drag rounded-full shadow-lg object-cover"
+            />
+            <GetPicture onPhotoChange={setPreviewPhoto} />
+          </div>
+        </DialogContent>
       </div>
-      <div className="mt-8 text-center">
-        <h2 className="text-white text-xl font-semibold mb-2">Rating</h2>
-        <div className="flex justify-center items-center">
-          {[...Array(4)].map((_, i) => (
-            <svg
-              key={i}
-              className="w-6 h-6 text-yellow-300 ms-1"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
+      <br />
+      <div className="w-[80vw] mx-auto">
+        <hr />
+        <p className="text-white mt-7 text-[3vw] sm:text-[1.5vw] lg:text-[1.5vw] font-semibold">Product history</p>
+        <label htmlFor="showAvailableOnly">
+          <Switch
+            name="showAvailableOnly"
+            id="showAvailableOnly"
+            checked={isAvailable}
+            onCheckedChange={() => setIsAvailable(!isAvailable)}
+          />
+          <span className="text-white pl-2">Show available only</span>
+        </label>
+        <br />
+        <br />
+        <div className="max-w-screen mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4  ">
+          {filteredProducts.map((product) => (
+            <ProductCard title="See Details" key={product.id} product={product} />
           ))}
-          <svg
-            className="w-6 h-6 ms-1 text-gray-500"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 22 20"
-          >
-            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-          </svg>
         </div>
       </div>
-    </div>
+    </Dialog>
   );
 };
 

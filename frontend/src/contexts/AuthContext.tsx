@@ -13,6 +13,8 @@ import {
 import { AuthContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
+import { toast } from 'react-toastify';
+import { toastifyConfig } from '@/utilities/toastify.utility';
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -28,7 +30,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const [user, setUser] = useState<Profile | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isResetPasswordEmailSent, setIsResetPasswordEmailSent] = useState(false);
 
@@ -55,10 +56,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const registerWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
       try {
-        const { data } = await registerWithGoogleRequest(
-          response.access_token,
-          new Date().toISOString(),
-        );
+        const { data } = await registerWithGoogleRequest(response.access_token, new Date().toISOString());
         setUser(data);
         setIsAuthenticated(true);
       } catch (error) {
@@ -118,11 +116,9 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     }
   };
 
-  const updatePhotoProfile = async () => {
+  const updatePhotoProfile = async (selectedFile:File) => {
     try {
-      if (!selectedFile) {
-        throw new Error('SelectedFile error');
-      }
+      toast.info('Updating profile picture...', toastifyConfig);
       const res = await updatePhotoProfileRequest(selectedFile);
       const photo = res.data.newPhoto as string;
       setUser((prev) => {
@@ -133,7 +129,11 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         };
       });
     } catch (error) {
-      alert(error); //TODO: fix this ---------------------------------------------------
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
     }
   };
 
@@ -202,8 +202,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   return (
     <AuthContext.Provider
       value={{
-        selectedFile,
-        setSelectedFile,
+        setErrors,
         isEdit,
         setIsEdit,
         user,

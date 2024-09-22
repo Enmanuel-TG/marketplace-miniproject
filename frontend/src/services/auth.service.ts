@@ -1,5 +1,5 @@
 import { server } from '../utilities/axios.utility';
-import { Account, User, ForgetPasswordProps } from '../utilities/interfaces.utility';
+import { Account, User, ForgetPasswordProps, UpdateUser } from '../utilities/interfaces.utility';
 
 export const registerRequest = async (user: User) => await server.post('/auth/register', user);
 export const logoutRequest = async () => await server.post('/auth/logout');
@@ -51,3 +51,5 @@ export const registerWithGoogleRequest = async (accessToken: string, birthday: s
     },
   );
 };
+
+export const updateUserRequest = async (user: UpdateUser) => await server.put('/user/profile', user);
