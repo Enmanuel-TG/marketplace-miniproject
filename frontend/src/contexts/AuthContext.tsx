@@ -13,6 +13,8 @@ import {
 import { AuthContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
+import { toast } from 'react-toastify';
+import { toastifyConfig } from '@/utilities/toastify.utility';
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -116,6 +118,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
 
   const updatePhotoProfile = async (selectedFile:File) => {
     try {
+      toast.info('Updating profile picture...', toastifyConfig);
       const res = await updatePhotoProfileRequest(selectedFile);
       const photo = res.data.newPhoto as string;
       setUser((prev) => {
