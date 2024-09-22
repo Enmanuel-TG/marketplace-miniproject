@@ -199,6 +199,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   return (
     <AuthContext.Provider
       value={{
+        setErrors,
         isEdit,
         setIsEdit,
         user,

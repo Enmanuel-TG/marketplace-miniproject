@@ -44,6 +44,7 @@ export interface AuthContextType {
   setIsAuthenticated: (value: boolean) => void;
   isAuthenticated: boolean | null;
   errors: string[];
+  setErrors:(value: string[]) => void;
   user: Profile | null;
   setUser: (value: Profile | null) => void;
   isEdit: boolean;

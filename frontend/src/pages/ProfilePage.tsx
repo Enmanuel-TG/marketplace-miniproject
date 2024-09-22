@@ -13,9 +13,10 @@ import { updateUserRequest } from '../services/auth.service';
 import Button from '@/components/ui/Button';
 import { Switch } from '@/components/ui/switch';
 import { filterStockProducts } from '@/utilities/filter-products.utility';
+import axios from 'axios';
 
 const ProfilePage = () => {
-  const { user, setUser, setIsEdit, errors } = useAuth();
+  const { user, setUser, setIsEdit, errors, setErrors } = useAuth();
   const [previewPhoto, setPreviewPhoto] = useState<string | undefined>(user?.photo);
 
   const { register, handleSubmit, setValue } = useForm<UpdateUser>({
@@ -41,11 +42,25 @@ const ProfilePage = () => {
       birthday: new Date(data.birthday).toISOString(),
     };
 
-    await updateUserRequest(newData);
-    setUser({
-      ...user,
-      ...newData,
-    });
+    try {
+      const res = await updateUserRequest(newData);
+      if (res.status === 200) {
+        setUser({
+          ...user,
+          ...newData,
+        });
+        toast.success('User updated successfully', toastifyConfig);
+      }
+    } catch (error) {
+      setValue('name', user?.name);
+      setValue('birthday', user?.birthday ? new Date(user?.birthday).toISOString().split('T')[0] : '');
+      setValue('phoneNumber', user?.phoneNumber);
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
+    }
   };
 
   useEffect(() => {
