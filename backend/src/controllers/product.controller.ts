@@ -25,7 +25,7 @@ export const createProduct = async (req: Request, res: Response) => {
         location,
         state,
         category,
-        stock,
+        stock: parseInt(stock),
         photos: images,
         userId: id,
       },

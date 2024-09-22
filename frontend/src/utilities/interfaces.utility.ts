@@ -85,6 +85,6 @@ export interface Product {
   location: string;
   state: string;
   category: string;
-  stock: string;
+  stock: number;
   photos: File[];
 }

@@ -26,7 +26,7 @@ CREATE TABLE "Product" (
     "location" TEXT NOT NULL,
     "state" TEXT NOT NULL,
     "category" TEXT NOT NULL,
-    "stock" TEXT NOT NULL,
+    "stock" INTEGER NOT NULL,
     "photos" TEXT[],
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
