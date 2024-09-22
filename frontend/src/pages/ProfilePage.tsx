@@ -8,9 +8,11 @@ import { ProductCard } from '@/components/ProductCard';
 import { useProduct } from '@/contexts/ProductContext';
 import Input from '@/components/ui/Input';
 import { useForm } from 'react-hook-form';
-import { UpdateUser } from '@/utilities/interfaces.utility';
+import { Product, UpdateUser } from '@/utilities/interfaces.utility';
 import { updateUserRequest } from '../services/auth.service';
 import Button from '@/components/ui/Button';
+import { Switch } from '@/components/ui/switch';
+import { filterStockProducts } from '@/utilities/filter-products.utility';
 
 const ProfilePage = () => {
   const { user, setUser, setIsEdit, errors } = useAuth();
@@ -51,6 +53,19 @@ const ProfilePage = () => {
   }, [errors]);
 
   const { getAllUSerProducts, allProducts } = useProduct();
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [isAvailable, setIsAvailable] = useState(true);
+
+  useEffect(() => {
+    const filtered = filterStockProducts(allProducts, isAvailable);
+    setFilteredProducts(filtered);
+  }, [allProducts]);
+
+  useEffect(() => {
+    const filtered = filterStockProducts(allProducts, isAvailable);
+    setFilteredProducts(filtered);
+  }, [isAvailable]);
+
   useEffect(() => {
     getAllUSerProducts();
   }, []);
@@ -130,10 +145,19 @@ const ProfilePage = () => {
       <div className="w-[80vw] mx-auto">
         <hr />
         <p className="text-white mt-7 text-[3vw] sm:text-[1.5vw] lg:text-[1.5vw] font-semibold">Product history</p>
+        <label htmlFor="showAvailableOnly">
+          <Switch
+            name="showAvailableOnly"
+            id="showAvailableOnly"
+            checked={isAvailable}
+            onCheckedChange={() => setIsAvailable(!isAvailable)}
+          />
+          <span className="text-white pl-2">Show available only</span>
+        </label>
         <br />
         <br />
-        <div className="max-w-screen mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
-          {allProducts.map((product) => (
+        <div className="max-w-screen mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4  ">
+          {filteredProducts.map((product) => (
             <ProductCard title="See Details" key={product.id} product={product} />
           ))}
         </div>

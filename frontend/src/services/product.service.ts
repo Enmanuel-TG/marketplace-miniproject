@@ -9,7 +9,7 @@ export const createProductRequest = async (product: Product) => {
   formData.append('location', product.location);
   formData.append('state', product.state);
   formData.append('category', product.category);
-  formData.append('stock', product.stock);
+  formData.append('stock', product.stock.toString());
   product.photos.forEach((photo) => {
     formData.append('photos', photo);
   });
@@ -31,7 +31,7 @@ export const updateProductRequest = async (product: Product) => {
   formData.append('location', product.location);
   formData.append('state', product.state);
   formData.append('category', product.category);
-  formData.append('stock', product.stock);
+  formData.append('stock', product.stock.toString());
   product.photos.forEach((photo) => {
     formData.append('photos', photo);
   });
