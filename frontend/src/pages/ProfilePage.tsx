@@ -18,6 +18,9 @@ import axios from 'axios';
 const ProfilePage = () => {
   const { user, setUser, setIsEdit, errors, setErrors } = useAuth();
   const [previewPhoto, setPreviewPhoto] = useState<string | undefined>(user?.photo);
+  const { getAllUSerProducts, allProducts } = useProduct();
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [isAvailable, setIsAvailable] = useState(true);
 
   const { register, handleSubmit, setValue } = useForm<UpdateUser>({
     defaultValues: {
@@ -66,10 +69,6 @@ const ProfilePage = () => {
   useEffect(() => {
     errors.map((error) => toast.error(error, toastifyConfig));
   }, [errors]);
-
-  const { getAllUSerProducts, allProducts } = useProduct();
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [isAvailable, setIsAvailable] = useState(true);
 
   useEffect(() => {
     const filtered = filterStockProducts(allProducts, isAvailable);
