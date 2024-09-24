@@ -20,8 +20,11 @@ export const getRatingAverage = async (req: Request, res: Response) => {
       average: Math.round(rating._avg.rate ?? 0),
       count: rating._count.rate ?? 0,
     });
-  } catch (error: any) {
-    return res.status(400).json(error.errors.map((error: { message: any }) => error.message));
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error to create or update rating.',
+      error,
+    });
   }
 };
 
@@ -59,7 +62,10 @@ export const createOrUpdateRating = async (req: Request, res: Response) => {
       });
       return res.status(201).json(newRating);
     }
-  } catch (error: any) {
-    return res.status(400).json(error.errors.map((error: { message: any }) => error.message));
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error to create or update rating.',
+      error,
+    });
   }
 };

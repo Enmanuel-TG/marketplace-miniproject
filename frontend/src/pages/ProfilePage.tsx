@@ -14,6 +14,13 @@ import Button from '@/components/ui/Button';
 import { Switch } from '@/components/ui/switch';
 import { filterStockProducts } from '@/utilities/filter-products.utility';
 import axios from 'axios';
+import { getRating } from '../services/rating.service';
+import Rating from '@/components/Rating';
+
+interface RatingProps {
+  average: number;
+  count: number;
+};
 
 const ProfilePage = () => {
   const { user, setUser, setIsEdit, errors, setErrors } = useAuth();
@@ -21,6 +28,7 @@ const ProfilePage = () => {
   const { getAllUSerProducts, allProducts } = useProduct();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [isAvailable, setIsAvailable] = useState(true);
+  const [rating, setRating] = useState<RatingProps>({average: 0, count: 0});
 
   const { register, handleSubmit, setValue } = useForm<UpdateUser>({
     defaultValues: {
@@ -36,6 +44,17 @@ const ProfilePage = () => {
     setValue('birthday', user?.birthday ? new Date(user?.birthday).toISOString().split('T')[0] : '');
     setValue('phoneNumber', user?.phoneNumber);
   }, [user, setValue]);
+
+  const getUserRating = async (id: number) => {
+    const res = await getRating(id);
+    setRating(res.data);
+  };
+
+  useEffect(() => {
+    if (user) {
+      getUserRating(user?.id as number);
+    }
+  }, [user]);
 
   const onSubmit = async (data: UpdateUser) => {
     if (!user) return;
@@ -139,6 +158,9 @@ const ProfilePage = () => {
                   })}
                 </div>
               )}
+              <div>
+                <Rating data={rating} />
+              </div>
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@ import { putRatingValidator, getRatingValidator } from '../validators/rating.val
 
 const router = Router();
 
-router.get('/', validateSchema(getRatingValidator), getRatingAverage);
+router.post('/', validateSchema(getRatingValidator), getRatingAverage);
 router.put('/', validateSchema(putRatingValidator), createOrUpdateRating);
 
 export default router;
