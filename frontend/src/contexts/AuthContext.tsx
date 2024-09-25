@@ -9,6 +9,7 @@ import {
   loginWithGoogleRequest,
   registerWithGoogleRequest,
   profileRequest,
+  logoutRequest,
 } from '../services/auth.service';
 import { AuthContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
@@ -77,7 +78,9 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     googleLogout();
     setUser(null);
     setIsAuthenticated(false);
+    logoutRequest();
   };
+
 
   const signUp = async (data: DataAccount) => {
     try {

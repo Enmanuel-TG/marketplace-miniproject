@@ -20,15 +20,16 @@ import Rating from '@/components/Rating';
 interface RatingProps {
   average: number;
   count: number;
-};
+}
+
 
 const ProfilePage = () => {
-  const { user, setUser, setIsEdit, errors, setErrors } = useAuth();
+  const { user, setUser, setIsEdit, errors, setErrors, logOut } = useAuth();
   const [previewPhoto, setPreviewPhoto] = useState<string | undefined>(user?.photo);
   const { getAllUSerProducts, allProducts } = useProduct();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [isAvailable, setIsAvailable] = useState(true);
-  const [rating, setRating] = useState<RatingProps>({average: 0, count: 0});
+  const [rating, setRating] = useState<RatingProps>({ average: 0, count: 0 });
 
   const { register, handleSubmit, setValue } = useForm<UpdateUser>({
     defaultValues: {
@@ -37,6 +38,8 @@ const ProfilePage = () => {
       phoneNumber: '',
     },
   });
+
+
 
   useEffect(() => {
     if (!user) return;
@@ -132,6 +135,7 @@ const ProfilePage = () => {
                       title="Edit"
                     />
                   </DialogTrigger>
+                  <button onClick={logOut}>CLick</button>
                 </div>
                 <DialogContent className="p-[3vw]">
                   <DialogHeader>
