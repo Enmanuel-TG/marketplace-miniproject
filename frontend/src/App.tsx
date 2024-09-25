@@ -14,9 +14,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ProductPage } from './pages/ProductPage';
 import CreateProductPage from './pages/CreateProductPage';
-import UpdateProductPage from './pages/UpdataProductPage';
-import HistoryPage from './pages/HistoryPage';
-
+import UpdateProductPage from './pages/UpdateProductPage';
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },
   { path: '/login', element: <LoginPages /> },
@@ -38,10 +36,6 @@ const router = createBrowserRouter([
       {
         path: '/update-product/:id',
         element: <UpdateProductPage />,
-      },
-      {
-        path: '/History',
-        element: <HistoryPage />,
       },
     ],
   },
