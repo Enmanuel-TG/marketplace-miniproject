@@ -38,13 +38,6 @@ export const HomeMenu = () => {
             className={style}
             src="/profile.svg"
           />
-          <img
-            onClick={() => {
-              verifyAuthStatus('history');
-            }}
-            className={style}
-            src="/myProduct.svg"
-          />
         </div>
       )}
       <div
