@@ -9,7 +9,7 @@ const router = Router();
 
 router.get('/profile', validateToken, profile);
 router.post('/update', validateToken, updatePhotoProfile);
-router.get('/get-user', getUser);
+router.post('/get-user', getUser);
 router.put('/change-password', validateSchema(passwordValidator), changePassword);
 router.put('/profile', validateToken, validateSchema(UpdateProfileValidator), updateUser);
 

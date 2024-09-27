@@ -17,7 +17,7 @@ import Button from '@/components/ui/Button';
 
 export const ProductPage = () => {
   const { getProduct, product, deleteProduct } = useProduct();
-  const { user } = useAuth();
+  const { user, getDataUser, UserData } = useAuth();
   const { id } = useParams<{ id: string }>();
   const productID = id?.split(':')[1];
   const [productOwner, setProductOwner] = useState<boolean>(false);
@@ -36,6 +36,11 @@ export const ProductPage = () => {
       back();
     }, 2000);
   };
+  useEffect(() => {
+    if (product) {
+      getDataUser(product.userId);
+    }
+  }, [product]);
 
   useEffect(() => {
     if (productID) {
@@ -94,10 +99,10 @@ export const ProductPage = () => {
                 </div>
               ) : (
                 <div className="flex items-center">
-                  <img src={user?.photo} className="w-10 h-10 rounded-full mr-2" />
+                  <img src={UserData?.photo} className="w-10 h-10 rounded-full mr-2" />
                   <div className="flex flex-row">
-                    <p className="text-gray-500">Seller:</p>
-                    <div>{undefined}</div>
+                    <p className="text-gray-500 pr-2">Seller:</p>
+                    <div>{UserData?.name}</div>
                   </div>
                 </div>
               )}
@@ -132,7 +137,7 @@ export const ProductPage = () => {
           <DialogDescription>
             This action cannot be undone. This will permanently delete this product and remove the data from our
             servers.
-            <Button fieldname='Delete' onClick={ProductDelete} />
+            <Button fieldname="Delete" onClick={ProductDelete} />
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

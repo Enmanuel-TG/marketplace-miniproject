@@ -23,6 +23,7 @@ const router = createBrowserRouter([
   { path: '/forget-password', element: <ForgetPasswordPage /> },
   { path: '/reset-password', element: <ResetPasswordPage /> },
   { path: '/product/:id', element: <ProductPage /> },
+  { path: '/User-Profile', element: <UsersProfilePage />},
   {
     element: <ProtectedRouter />,
     children: [
@@ -37,10 +38,6 @@ const router = createBrowserRouter([
       {
         path: '/update-product/:id',
         element: <UpdateProductPage />,
-      },
-      {
-        path: '/User-Profile',
-        element: <UsersProfilePage />,
       },
     ],
   },

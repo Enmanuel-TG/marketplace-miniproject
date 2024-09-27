@@ -10,12 +10,14 @@ import {
   registerWithGoogleRequest,
   profileRequest,
   logoutRequest,
+  getUser,
 } from '../services/auth.service';
 import { AuthContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '@/utilities/toastify.utility';
+
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -33,6 +35,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [user, setUser] = useState<Profile | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isResetPasswordEmailSent, setIsResetPasswordEmailSent] = useState(false);
+  const [UserData, setUserData] = useState<Profile | null>(null);
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
@@ -81,7 +84,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     logoutRequest();
   };
 
-
   const signUp = async (data: DataAccount) => {
     try {
       const userRegister = {
@@ -119,7 +121,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     }
   };
 
-  const updatePhotoProfile = async (selectedFile:File) => {
+  const updatePhotoProfile = async (selectedFile: File) => {
     try {
       toast.info('Updating profile picture...', toastifyConfig);
       const res = await updatePhotoProfileRequest(selectedFile);
@@ -173,6 +175,19 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       }
     }
   };
+
+  const getDataUser = async (id: number) => {
+    try {
+      const res = await getUser(id);
+      setUserData(res.data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
+    }
+  };
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -221,8 +236,10 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         logOut,
         forgetPassword,
         resetPassword,
-        isResetPasswordEmailSent: isResetPasswordEmailSent,
-        setIsResetPasswordEmailSent: setIsResetPasswordEmailSent,
+        isResetPasswordEmailSent,
+        setIsResetPasswordEmailSent,
+        getDataUser,
+        UserData,
       }}
     >
       {children}

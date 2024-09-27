@@ -53,3 +53,7 @@ export const registerWithGoogleRequest = async (accessToken: string, birthday: s
 };
 
 export const updateUserRequest = async (user: UpdateUser) => await server.put('/user/profile', user);
+
+export const getUser = async (id: number) => {
+  return await server.post('/user/get-user', { id });
+};

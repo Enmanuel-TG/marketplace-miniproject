@@ -44,7 +44,7 @@ export interface AuthContextType {
   setIsAuthenticated: (value: boolean) => void;
   isAuthenticated: boolean | null;
   errors: string[];
-  setErrors:(value: string[]) => void;
+  setErrors: (value: string[]) => void;
   user: Profile | null;
   setUser: (value: Profile | null) => void;
   isEdit: boolean;
@@ -56,6 +56,8 @@ export interface AuthContextType {
   resetPassword: (password: string, confirmPassword: string, token: string) => void;
   isResetPasswordEmailSent: boolean;
   setIsResetPasswordEmailSent: (value: boolean) => void;
+  getDataUser: (id: number) => void;
+  UserData: Profile | null;
 }
 
 //---------------------------------------------------------------------------
