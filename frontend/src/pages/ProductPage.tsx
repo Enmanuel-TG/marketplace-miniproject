@@ -17,14 +17,14 @@ import Button from '@/components/ui/Button';
 
 export const ProductPage = () => {
   const { getProduct, product, deleteProduct } = useProduct();
-  const { user, getDataUser, UserData } = useAuth();
+  const { user, getDataUser, userData } = useAuth();
   const { id } = useParams<{ id: string }>();
   const productID = id?.split(':')[1];
   const [productOwner, setProductOwner] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const Edit = () => {
-    navigate(`/update-product/${productID}`);
+    navigate(`/update-product/:${productID}`);
   };
   const back = () => {
     navigate('/', { replace: true });
@@ -55,6 +55,10 @@ export const ProductPage = () => {
       setProductOwner(true);
     }
   }, [user, product]);
+
+  const userProfile = () => {
+    navigate(`/User-Profile/${product.userId}`);
+  };
 
   if (!product) {
     return (
@@ -99,10 +103,12 @@ export const ProductPage = () => {
                 </div>
               ) : (
                 <div className="flex items-center">
-                  <img src={UserData?.photo} className="w-10 h-10 rounded-full mr-2" />
+                  <img src={userData?.photo} onClick={userProfile} className="w-10 h-10 rounded-full mr-2" />
                   <div className="flex flex-row">
-                    <p className="text-gray-500 pr-2">Seller:</p>
-                    <div>{UserData?.name}</div>
+                    <p className="text-gray-500 pr-2 cursor-pointer">Seller:</p>
+                    <div className="cursor-pointer" onClick={userProfile}>
+                      {userData?.name}
+                    </div>
                   </div>
                 </div>
               )}

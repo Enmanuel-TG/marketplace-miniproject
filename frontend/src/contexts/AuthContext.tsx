@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [user, setUser] = useState<Profile | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isResetPasswordEmailSent, setIsResetPasswordEmailSent] = useState(false);
-  const [UserData, setUserData] = useState<Profile | null>(null);
+  const [userData, setUserData] = useState<Profile | null>(null);
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
@@ -239,7 +239,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         isResetPasswordEmailSent,
         setIsResetPasswordEmailSent,
         getDataUser,
-        UserData,
+        userData,
       }}
     >
       {children}

@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ProductPage } from './pages/ProductPage';
 import CreateProductPage from './pages/CreateProductPage';
 import UpdateProductPage from './pages/UpdateProductPage';
-import { UsersProfilePage } from './pages/UsersProfilePage';
+import ExternalProfilePage from './pages/UsersProfilePage';
 const router = createBrowserRouter([
   { path: '/register', element: <RegisterPages /> },
   { path: '/login', element: <LoginPages /> },
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   { path: '/forget-password', element: <ForgetPasswordPage /> },
   { path: '/reset-password', element: <ResetPasswordPage /> },
   { path: '/product/:id', element: <ProductPage /> },
-  { path: '/User-Profile', element: <UsersProfilePage />},
+  { path: '/User-Profile/:id', element: <ExternalProfilePage /> },
   {
     element: <ProtectedRouter />,
     children: [
