@@ -28,21 +28,21 @@ const ExternalProfilePage = () => {
     setRating(res.data);
   };
 
-  if (!userData) {
-    return <div>User no found</div>;
-  }
-
   useEffect(() => {
     if (userData === ({} as Profile)) return;
     getDataUser(Number(userId));
     getUserRating(Number(userId));
     getAllUSerProducts();
-  }, [userData, userId]);
+  }, []);
 
   useEffect(() => {
     const filtered = filterStockProducts(allProducts, isAvailable);
     setFilteredProducts(filtered);
   }, [allProducts, isAvailable]);
+
+  if (!userData) {
+    return <div>User no found</div>;
+  }
 
   return (
     <div className="mt-10 mx-auto w-full max-w-[80vw] no-drag no-select p-[4vw] sm:p-[3vw] lg:p-[2vw] ">
@@ -51,12 +51,12 @@ const ExternalProfilePage = () => {
           <div className="">
             <img
               src={userData.photo}
-              className="no-select no-drag rounded-full shadow-lg w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] object-cover"
+              className="no-select no-drag rounded-full shadow-lg w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] object-cover my-6 ml-6"
               alt={`${userData.name}'s profile`}
             />
           </div>
           <div className="text-center lg:text-left">
-            <div className="flex flex-row items-center gap-4">
+            <div className="flex flex-row items-center gap-4 mt-6">
               <p className="text-white text-[3vw] lg:text-[2.5vw] font-semibold">{userData.name}</p>
             </div>
             {userData.createdAt && (
