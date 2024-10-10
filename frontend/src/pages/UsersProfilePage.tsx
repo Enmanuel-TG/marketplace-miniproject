@@ -71,6 +71,9 @@ const ExternalProfilePage = () => {
             <div>
               <Rating data={rating} />
             </div>
+            <div className="w-full h-[7vw] mt-3 border mr-3 border-gray-300 rounded-md">
+              <p className="text-white">{userData?.description}</p>
+            </div>
           </div>
         </div>
       </div>

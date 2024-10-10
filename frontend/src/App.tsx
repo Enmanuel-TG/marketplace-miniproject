@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   { path: '/forget-password', element: <ForgetPasswordPage /> },
   { path: '/reset-password', element: <ResetPasswordPage /> },
   { path: '/product/:id', element: <ProductPage /> },
-  { path: '/User-Profile/:id', element: <ExternalProfilePage /> },
+  { path: '/user-Profile/:id', element: <ExternalProfilePage /> },
   {
     element: <ProtectedRouter />,
     children: [

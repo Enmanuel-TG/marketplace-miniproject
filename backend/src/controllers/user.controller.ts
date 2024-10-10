@@ -101,6 +101,7 @@ export const getUser = async (req: Request, res: Response) => {
       id: userFound.id,
       name: userFound.name,
       photo: userFound.photo,
+      description: userFound.description,
     });
   } catch (error) {
     return res.status(500).json({

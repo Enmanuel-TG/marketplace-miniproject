@@ -57,7 +57,7 @@ export const ProductPage = () => {
   }, [user, product]);
 
   const userProfile = () => {
-    navigate(`/User-Profile/id:${product.userId}`);
+    navigate(`/user-Profile/id:${product.userId}`);
   };
 
   if (!product) {

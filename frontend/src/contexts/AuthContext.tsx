@@ -33,7 +33,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const [user, setUser] = useState<Profile | null>(null);
-  console.log(user);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isResetPasswordEmailSent, setIsResetPasswordEmailSent] = useState(false);
   const [userData, setUserData] = useState<Profile | null>(null);
