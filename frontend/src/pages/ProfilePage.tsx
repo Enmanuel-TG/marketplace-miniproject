@@ -113,12 +113,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const filtered = filterStockProducts(allProducts, isAvailable);
     setFilteredProducts(filtered);
-  }, [allProducts]);
-
-  useEffect(() => {
-    const filtered = filterStockProducts(allProducts, isAvailable);
-    setFilteredProducts(filtered);
-  }, [isAvailable]);
+  }, [allProducts, isAvailable]);
 
   useEffect(() => {
     getAllUSerProducts();
