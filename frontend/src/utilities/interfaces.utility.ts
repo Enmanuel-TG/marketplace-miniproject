@@ -11,15 +11,17 @@ export interface User {
   phoneNumber: string;
   password?: string;
   photo?: string;
+  description?: string;
   createdAt?: string;
 }
 
-export type UpdateUser = Pick<User, 'name' | 'birthday' | 'phoneNumber'>;
+export type UpdateUser = Pick<User, 'name' | 'birthday' | 'phoneNumber' | 'description'>;
 
 export interface Profile extends User {
   id?: number;
   photo: string;
   picture?: string;
+  description: string;
 }
 
 export interface Account {
@@ -58,6 +60,7 @@ export interface AuthContextType {
   setIsResetPasswordEmailSent: (value: boolean) => void;
   getDataUser: (id: number) => void;
   userData: Profile | null;
+  updatedDescription: (description: Profile['description']) => void;
 }
 
 //---------------------------------------------------------------------------

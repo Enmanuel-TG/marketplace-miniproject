@@ -149,7 +149,6 @@ export const updateUser = async (req: ExtendedRequest, res: Response) => {
 
 export const updateDescription = async (req: Request, res: Response) => {
   const { description } = req.body;
-  console.log(description);
   const id = getTokenId(req);
   try {
     const userFound = await prisma.user.update({

@@ -57,3 +57,7 @@ export const updateUserRequest = async (user: UpdateUser) => await server.put('/
 export const getUser = async (id: number) => {
   return await server.post('/user/get-user', { id });
 };
+
+export const updateDescription = async (description: string) => {
+  return await server.put('/user/description', description);
+};

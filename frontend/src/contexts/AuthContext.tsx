@@ -11,13 +11,13 @@ import {
   profileRequest,
   logoutRequest,
   getUser,
+  updateDescription,
 } from '../services/auth.service';
 import { AuthContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '@/utilities/toastify.utility';
-
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
   const [user, setUser] = useState<Profile | null>(null);
+  console.log(user);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isResetPasswordEmailSent, setIsResetPasswordEmailSent] = useState(false);
   const [userData, setUserData] = useState<Profile | null>(null);
@@ -212,6 +213,25 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       setIsAuthenticated(false);
     }
   };
+  const updatedDescription = async (description: string) => {
+    if (!user) return;
+    try {
+      const res = await updateDescription(description);
+      if (res.status === 200) {
+        setUser({
+          ...user,
+          description,
+        });
+        toast.success('Description updated successfully', toastifyConfig);
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
+    }
+  };
 
   useEffect(() => {
     checkAuth();
@@ -240,6 +260,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         setIsResetPasswordEmailSent,
         getDataUser,
         userData,
+        updatedDescription,
       }}
     >
       {children}
