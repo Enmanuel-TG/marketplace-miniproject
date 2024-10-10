@@ -1,3 +1,12 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+
 const star = (
   <svg
     className="w-4 h-4 text-yellow-300 me-1"
@@ -18,18 +27,34 @@ interface RatingProps {
 }
 const Rating = ({ data }: RatingProps) => {
   return (
-    <div className="flex items-center">
-      {star}
-      {star}
-      {star}
-      {star}
-      {star}
-      <p className="ms-2 text-sm font-bold text-white dark:text-white">{data.average}</p>
-      <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
-      <a href="#" className="text-sm font-medium text-white underline hover:no-underline dark:text-white">
-        {data.count} reviews
-      </a>
-    </div>
+    <Dialog>
+      <div className="flex items-center">
+        {star}
+        {star}
+        {star}
+        {star}
+        {star}
+        <p className="ms-2 text-sm font-bold text-white dark:text-white">{data.average}</p>
+        <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+        <a href="#" className="text-sm font-medium text-white underline hover:no-underline dark:text-white">
+          {data.count} reviews
+        </a>
+        <DialogTrigger>
+          <div className="ml-3 pb-1">
+            <img src="/rating.svg" alt="Add Rating" />
+          </div>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add a review</DialogTitle>
+            <DialogDescription>
+              This action cannot be undone. This will permanently delete your account and remove your data from our
+              servers.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </div>
+    </Dialog>
   );
 };
 
