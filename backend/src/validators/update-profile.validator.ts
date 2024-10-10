@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const UpdateProfileValidator = z.object({
+export const updateProfileValidator = z.object({
   name: z.string({ required_error: 'Name is required.' }).refine(
     (value) => {
       return value.trim().length > 0;
