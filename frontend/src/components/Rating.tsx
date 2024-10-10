@@ -6,6 +6,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { FieldValues, useForm } from 'react-hook-form';
+import { createOrUpdateRating } from '../services/rating.service';
+import Input from './ui/Input';
+import Button from './ui/Button';
+import { useAuth } from '@/contexts/AuthContext';
 
 const star = (
   <svg
@@ -25,7 +30,15 @@ interface RatingProps {
     count: number;
   };
 }
+
 const Rating = ({ data }: RatingProps) => {
+  const { userData } = useAuth();
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data: FieldValues) => {
+    const sellerId = userData?.id as number;
+    createOrUpdateRating(sellerId, data.rating as number);
+  };
   return (
     <Dialog>
       <div className="flex items-center">
@@ -34,8 +47,8 @@ const Rating = ({ data }: RatingProps) => {
         {star}
         {star}
         {star}
-        <p className="ms-2 text-sm font-bold text-white dark:text-white">{data.average}</p>
-        <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+        <p className="ms-2 text-sm font-bold text-white">{data.average}</p>
+        <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full "></span>
         <a href="#" className="text-sm font-medium text-white underline hover:no-underline dark:text-white">
           {data.count} reviews
         </a>
@@ -48,8 +61,10 @@ const Rating = ({ data }: RatingProps) => {
           <DialogHeader>
             <DialogTitle>Add a review</DialogTitle>
             <DialogDescription>
-              This action cannot be undone. This will permanently delete your account and remove your data from our
-              servers.
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Input fieldname="Add review" type="number" {...register('rating')} min="1" max="5" />
+                <Button fieldname="Submit" type="submit" />
+              </form>
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
