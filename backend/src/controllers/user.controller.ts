@@ -25,6 +25,7 @@ export const profile = async (req: ExtendedRequest, res: Response) => {
     email: userFound.email,
     birthday: userFound.birthday,
     phoneNumber: userFound.phoneNumber,
+    description: userFound.description,
     photo: userFound.photo,
     createdAt: userFound.createdAt,
   });
@@ -100,6 +101,7 @@ export const getUser = async (req: Request, res: Response) => {
       id: userFound.id,
       name: userFound.name,
       photo: userFound.photo,
+      description: userFound.description,
     });
   } catch (error) {
     return res.status(500).json({
@@ -141,6 +143,30 @@ export const updateUser = async (req: ExtendedRequest, res: Response) => {
   } catch (error) {
     return res.status(500).json({
       message: 'Error to update user.',
+      error,
+    });
+  }
+};
+
+export const updateDescription = async (req: Request, res: Response) => {
+  const { description } = req.body;
+  const id = getTokenId(req);
+  try {
+    const userFound = await prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        description,
+      },
+    });
+    return res.status(200).json({
+      id: userFound.id,
+      description: userFound.description,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error to update description.',
       error,
     });
   }

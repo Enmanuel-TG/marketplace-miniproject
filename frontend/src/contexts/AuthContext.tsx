@@ -9,6 +9,9 @@ import {
   loginWithGoogleRequest,
   registerWithGoogleRequest,
   profileRequest,
+  logoutRequest,
+  getUser,
+  updateDescription,
 } from '../services/auth.service';
 import { AuthContextType } from '../utilities/interfaces.utility';
 import axios from 'axios';
@@ -32,6 +35,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   const [user, setUser] = useState<Profile | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isResetPasswordEmailSent, setIsResetPasswordEmailSent] = useState(false);
+  const [userData, setUserData] = useState<Profile | null>(null);
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
@@ -77,6 +81,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     googleLogout();
     setUser(null);
     setIsAuthenticated(false);
+    logoutRequest();
   };
 
   const signUp = async (data: DataAccount) => {
@@ -116,7 +121,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     }
   };
 
-  const updatePhotoProfile = async (selectedFile:File) => {
+  const updatePhotoProfile = async (selectedFile: File) => {
     try {
       toast.info('Updating profile picture...', toastifyConfig);
       const res = await updatePhotoProfileRequest(selectedFile);
@@ -170,6 +175,19 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       }
     }
   };
+
+  const getDataUser = async (id: number) => {
+    try {
+      const res = await getUser(id);
+      setUserData(res.data);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
+    }
+  };
   useEffect(() => {
     if (errors.length > 0) {
       const timer = setTimeout(() => {
@@ -192,6 +210,25 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     } catch (error) {
       setUser(null);
       setIsAuthenticated(false);
+    }
+  };
+  const updatedDescription = async (description: string) => {
+    if (!user) return;
+    try {
+      const res = await updateDescription(description);
+      if (res.status === 200) {
+        setUser({
+          ...user,
+          description,
+        });
+        toast.success('Description updated successfully', toastifyConfig);
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
     }
   };
 
@@ -218,8 +255,11 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         logOut,
         forgetPassword,
         resetPassword,
-        isResetPasswordEmailSent: isResetPasswordEmailSent,
-        setIsResetPasswordEmailSent: setIsResetPasswordEmailSent,
+        isResetPasswordEmailSent,
+        setIsResetPasswordEmailSent,
+        getDataUser,
+        userData,
+        updatedDescription,
       }}
     >
       {children}

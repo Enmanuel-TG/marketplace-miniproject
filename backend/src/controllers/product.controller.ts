@@ -95,7 +95,7 @@ export const updateProduct = async (req: Request, res: Response) => {
         location,
         state,
         category,
-        stock,
+        stock: parseInt(stock),
         photos: images,
       },
     });

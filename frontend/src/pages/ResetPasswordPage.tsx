@@ -32,7 +32,9 @@ export const ResetPasswordPage = () => {
   }, [state]);
 
   useEffect(() => {
-    resetPasswordErrors.map((error) => toast.error(error, toastifyConfig));
+    if (resetPasswordErrors.length > 0) {
+      resetPasswordErrors.map((error) => toast.error(error, toastifyConfig));
+    }
   }, [resetPasswordErrors]);
 
   return (

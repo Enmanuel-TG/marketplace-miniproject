@@ -7,29 +7,29 @@ import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTr
 import { ProductCard } from '@/components/ProductCard';
 import { useProduct } from '@/contexts/ProductContext';
 import Input from '@/components/ui/Input';
-import { useForm } from 'react-hook-form';
 import { Product, UpdateUser } from '@/utilities/interfaces.utility';
-import { updateUserRequest } from '../services/auth.service';
+import { updateDescription, updateUserRequest } from '../services/auth.service';
 import Button from '@/components/ui/Button';
 import { Switch } from '@/components/ui/switch';
 import { filterStockProducts } from '@/utilities/filter-products.utility';
 import axios from 'axios';
 import { getRating } from '../services/rating.service';
 import Rating from '@/components/Rating';
+import { useForm } from 'react-hook-form';
 
 interface RatingProps {
   average: number;
   count: number;
-};
+}
 
 const ProfilePage = () => {
-  const { user, setUser, setIsEdit, errors, setErrors } = useAuth();
+  const { user, setUser, setIsEdit, errors, setErrors, logOut } = useAuth();
   const [previewPhoto, setPreviewPhoto] = useState<string | undefined>(user?.photo);
   const { getAllUSerProducts, allProducts } = useProduct();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [isAvailable, setIsAvailable] = useState(true);
-  const [rating, setRating] = useState<RatingProps>({average: 0, count: 0});
-
+  const [rating, setRating] = useState<RatingProps>({ average: 0, count: 0 });
+  const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit, setValue } = useForm<UpdateUser>({
     defaultValues: {
       name: '',
@@ -58,12 +58,10 @@ const ProfilePage = () => {
 
   const onSubmit = async (data: UpdateUser) => {
     if (!user) return;
-
     const newData = {
       ...data,
       birthday: new Date(data.birthday).toISOString(),
     };
-
     try {
       const res = await updateUserRequest(newData);
       if (res.status === 200) {
@@ -85,19 +83,39 @@ const ProfilePage = () => {
     }
   };
 
+  const changeDescription = async (data: UpdateUser) => {
+    const description = data.description as string;
+    setIsOpen(true);
+    if (!user) return;
+    try {
+      const res = await updateDescription({ description } as unknown as string);
+      if (res.status === 200) {
+        setUser({
+          ...user,
+          description,
+        });
+        toast.success('Description updated successfully', toastifyConfig);
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
+    }
+    setIsOpen(false);
+  };
+
   useEffect(() => {
-    errors.map((error) => toast.error(error, toastifyConfig));
+    if (errors.length > 0) {
+      errors.map((error) => toast.error(error, toastifyConfig));
+    };
   }, [errors]);
 
   useEffect(() => {
     const filtered = filterStockProducts(allProducts, isAvailable);
     setFilteredProducts(filtered);
-  }, [allProducts]);
-
-  useEffect(() => {
-    const filtered = filterStockProducts(allProducts, isAvailable);
-    setFilteredProducts(filtered);
-  }, [isAvailable]);
+  }, [allProducts, isAvailable]);
 
   useEffect(() => {
     getAllUSerProducts();
@@ -120,7 +138,7 @@ const ProfilePage = () => {
                 Edit
               </DialogTrigger>
             </div>
-            <div className="text-center lg:text-left">
+            <div className="text-center lg:text-left w-2/3">
               <Dialog>
                 <div className="flex flex-row items-center gap-4">
                   <p className="text-white text-[3vw] lg:text-[2.5vw] font-semibold">{user?.name}</p>
@@ -132,6 +150,7 @@ const ProfilePage = () => {
                       title="Edit"
                     />
                   </DialogTrigger>
+                  <button onClick={logOut}>CLick</button>
                 </div>
                 <DialogContent className="p-[3vw]">
                   <DialogHeader>
@@ -159,8 +178,37 @@ const ProfilePage = () => {
                 </div>
               )}
               <div>
-                <Rating data={rating} />
+                <Rating allowRating={false} data={rating} />
               </div>
+              <Dialog>
+                <div className="flex flex-row">
+                  <div className="w-full h-[7vw] mt-3 border mr-3 border-gray-300 rounded-md">
+                    <p className="text-white">{user?.description}</p>
+                  </div>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Change description</DialogTitle>
+                      <form onSubmit={handleSubmit(changeDescription)}>
+                        <textarea
+                          className="w-full h-[10vw] border border-gray-300 rounded-lg p-2 resize-none"
+                          {...register('description')}
+                        ></textarea>
+                        <Button fieldname="Update" disabled={isOpen} type="submit" className="flex justify-center" />
+                      </form>
+                    </DialogHeader>
+                  </DialogContent>
+                  <div className="mt-4">
+                    <DialogTrigger>
+                      <img
+                        src="/edit.svg"
+                        alt="edit"
+                        className="w-6 h-6 transition-all hover:w-7 hover:h-7"
+                        title="Edit description"
+                      />
+                    </DialogTrigger>
+                  </div>
+                </div>
+              </Dialog>
             </div>
           </div>
         </div>

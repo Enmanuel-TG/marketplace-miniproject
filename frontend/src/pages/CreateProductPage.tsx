@@ -16,7 +16,9 @@ const CreateProductPage = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    errors.map((error) => toast.error(error, toastifyConfig));
+    if(errors.length > 0) {
+      errors.map((error) => toast.error(error, toastifyConfig));
+    }
   }, [errors]);
 
   const onSubmit = async (data: Product): Promise<void> => {

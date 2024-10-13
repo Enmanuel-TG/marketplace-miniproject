@@ -37,6 +37,7 @@ export const loginWithGoogle = async (req: Request, res: Response) => {
         photo: userFound.photo,
         role: userFound.role,
         password: '',
+        description: userFound.description,
       },
     });
 };
@@ -76,6 +77,7 @@ export const registerWithGoogle = async (req: Request, res: Response) => {
       photo: picture,
       role: userRol,
       password: '',
+      description: '',
     },
   });
 

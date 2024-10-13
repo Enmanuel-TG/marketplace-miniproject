@@ -25,7 +25,9 @@ const RegisterPage = () => {
   }, [isAuthenticated, navigate]);
 
   useEffect(() => {
-    registerErrors.map((error) => toast.error(error, toastifyConfig));
+    if (registerErrors.length > 0) {
+      registerErrors.map((error) => toast.error(error, toastifyConfig));
+    }
   }, [registerErrors]);
 
   const setData = (data: DataAccount) => {
@@ -105,7 +107,7 @@ const RegisterPage = () => {
         </button>
         <div className="mt-4 text-center flex justify-center items-center space-x-2">
           <h1 className="text-white">Already have an account?</h1>
-          <Link className="text-blue-500 cursor-pointer hover:underline" to='/login'>
+          <Link className="text-blue-500 cursor-pointer hover:underline" to="/login">
             Login
           </Link>
         </div>
