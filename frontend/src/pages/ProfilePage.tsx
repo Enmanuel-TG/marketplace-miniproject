@@ -138,7 +138,7 @@ const ProfilePage = () => {
                 Edit
               </DialogTrigger>
             </div>
-            <div className="text-center lg:text-left">
+            <div className="text-center lg:text-left w-2/3">
               <Dialog>
                 <div className="flex flex-row items-center gap-4">
                   <p className="text-white text-[3vw] lg:text-[2.5vw] font-semibold">{user?.name}</p>
@@ -178,7 +178,7 @@ const ProfilePage = () => {
                 </div>
               )}
               <div>
-                <Rating data={rating} />
+                <Rating allowRating={false} data={rating} />
               </div>
               <Dialog>
                 <div className="flex flex-row">
