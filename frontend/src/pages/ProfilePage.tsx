@@ -107,7 +107,9 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    errors.map((error) => toast.error(error, toastifyConfig));
+    if (errors.length > 0) {
+      errors.map((error) => toast.error(error, toastifyConfig));
+    };
   }, [errors]);
 
   useEffect(() => {

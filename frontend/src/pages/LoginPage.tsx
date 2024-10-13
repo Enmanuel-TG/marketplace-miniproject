@@ -14,7 +14,9 @@ const LoginPages = () => {
   const { handleSubmit, register } = useForm<Account>();
 
   useEffect(() => {
-    errorLogin.map((error) => toast.error(error, toastifyConfig));
+    if (errorLogin.length > 0) {
+      errorLogin.map((error) => toast.error(error, toastifyConfig));
+    }
   }, [errorLogin]);
 
   useEffect(() => {

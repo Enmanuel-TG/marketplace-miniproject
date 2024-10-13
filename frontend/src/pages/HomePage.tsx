@@ -10,7 +10,7 @@ const HomePages = () => {
   const { allProducts, errors } = useProduct();
 
   useEffect(() => {
-    if (Array.isArray(errors)) {
+    if (errors.length > 0) {
       errors.map((error) => toast.error(error, toastifyConfig));
     }
   }, [errors]);
