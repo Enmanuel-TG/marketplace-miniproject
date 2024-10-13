@@ -18,6 +18,7 @@ const ExternalProfilePage = () => {
   const { userData, getDataUser } = useAuth();
   const { getAllUSerProducts, allProducts } = useProduct();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+
   const [rating, setRating] = useState<RatingProps>({ average: 0, count: 0 });
   const [isAvailable, setIsAvailable] = useState(true);
   const { id } = useParams<{ id: string }>();
@@ -36,8 +37,10 @@ const ExternalProfilePage = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = filterStockProducts(allProducts, isAvailable);
-    setFilteredProducts(filtered);
+    if (allProducts.length > 0) {
+      const filtered = filterStockProducts(allProducts, isAvailable);
+      setFilteredProducts(filtered);
+    }
   }, [allProducts, isAvailable]);
 
   if (!userData) {
