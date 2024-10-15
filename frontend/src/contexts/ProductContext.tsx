@@ -103,6 +103,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
       if (res.status === 200) {
         toast.success('Product updated successfully', toastifyConfig);
       }
+      return res.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {

@@ -73,7 +73,7 @@ export interface ProductContextType {
   searchProduct: (name: string) => void;
   filterCategory: (category: string) => void;
   errors: string[];
-  updateProduct: (dataProduct: Product) => void;
+  updateProduct: (dataProduct: Product) => Promise<CreateProductResponse>;
   getAllUSerProducts: () => void;
   deleteProduct: (id: number) => void;
   setProduct: (value: Product) => void;

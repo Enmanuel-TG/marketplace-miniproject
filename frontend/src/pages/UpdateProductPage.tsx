@@ -12,15 +12,15 @@ import ImageUploader from '@/components/ImageUploader';
 import HeadPage from '@/components/HeadPage';
 
 const UpdateProductPage = () => {
-  const { product, updateProduct, errors } = useProduct();
+  const { product, updateProduct, errors, setProduct } = useProduct();
   const { register, handleSubmit, setValue } = useForm<Product>({ defaultValues: product });
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!product || Object.keys(product).length === 0) {
       toast.error('Product not found', toastifyConfig);
       setTimeout(() => {
-        Navigate('/');
+        navigate('/');
       }, 6000);
       return;
     }
@@ -32,8 +32,15 @@ const UpdateProductPage = () => {
     }
   }, [errors]);
 
-  const onSubmit = (data: Product) => {
-    updateProduct(data);
+  const onSubmit = async (data: Product) => {
+    const res = await updateProduct(data);
+    if (res) {
+      toast.success(res.message, toastifyConfig);
+    }
+    if (res.product.id) {
+      setProduct(res.product);
+      navigate(`/product/id:${res.product.id}`);
+    }
   };
 
   const handleFileChange = (files: File[]) => {
