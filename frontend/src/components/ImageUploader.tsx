@@ -7,7 +7,6 @@ interface ImageUploaderProps {
 }
 
 const ImageUploader = ({ onFilesChange, initialFiles = [] }: ImageUploaderProps) => {
-  console.log('Hi');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const handleDrop = (acceptedFiles: File[]) => {
@@ -28,7 +27,7 @@ const ImageUploader = ({ onFilesChange, initialFiles = [] }: ImageUploaderProps)
         {({ getRootProps, getInputProps }) => (
           <div {...getRootProps({ className: 'dropzone' })}>
             <input {...getInputProps()} />
-            <p className='cursor-pointer'>Drag & drop images here, or click to select files</p>
+            <p className="cursor-pointer">Drag & drop images here, or click to select files</p>
           </div>
         )}
       </Dropzone>

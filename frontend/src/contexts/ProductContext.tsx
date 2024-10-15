@@ -11,6 +11,8 @@ import {
   deleteProductRequest,
 } from '../services/product.service';
 import axios from 'axios';
+import { toastifyConfig } from '@/utilities/toastify.utility';
+import { toast } from 'react-toastify';
 
 const ProductContext = createContext<ProductContextType | null>(null);
 
@@ -97,7 +99,10 @@ export const ProductProvider = ({ children }: ProviderProps) => {
 
   const updateProduct = async (dataProduct: Product) => {
     try {
-      await updateProductRequest(dataProduct);
+      const res = await updateProductRequest(dataProduct);
+      if (res.status === 200) {
+        toast.success('Product updated successfully', toastifyConfig);
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {

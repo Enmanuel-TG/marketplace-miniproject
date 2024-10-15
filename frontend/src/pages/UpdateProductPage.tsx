@@ -8,9 +8,11 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { useNavigate } from 'react-router-dom';
+import ImageUploader from '@/components/ImageUploader';
+import HeadPage from '@/components/HeadPage';
 
 const UpdateProductPage = () => {
-  const { product, updateProduct } = useProduct();
+  const { product, updateProduct, errors } = useProduct();
   const { register, handleSubmit, setValue } = useForm<Product>({ defaultValues: product });
   const Navigate = useNavigate();
 
@@ -24,29 +26,27 @@ const UpdateProductPage = () => {
     }
   }, [product]);
 
-  const onSubmit = (data: Product) => {
-    updateProduct(data);
-  };
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const filesArray = Array.from(e.target.files);
-      setValue('photos', filesArray);
+  useEffect(() => {
+    if (errors.length > 0) {
+      errors.map((error) => toast.error(error, toastifyConfig));
     }
+  }, [errors]);
+
+  const onSubmit = (data: Product) => {
+    const res = updateProduct(data);
+    console.log(res);
+  };
+
+  const handleFileChange = (files: File[]) => {
+    setValue('photos', files);
   };
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex flex-col min-h-screen">
+      <HeadPage namePage="Update Product" />
       <div className="max-w-3xl p-5 m-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center text-white">Update Product</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <ImageUploader onFilesChange={handleFileChange} initialFiles={[]} />
           <Input type="text" fieldname="Title" {...register('name', { required: true })} />
-          <Input
-            type="file"
-            fieldname="Select Image"
-            className="bg-white"
-            onChange={handleFileChange}
-            accept="image/*"
-            multiple
-          />
           <div className="flex w-full justify-between">
             <Input type="text" fieldname="Price" {...register('price', { required: true })} />
             <Input type="text" fieldname="Stock" {...register('stock', { required: true })} />
