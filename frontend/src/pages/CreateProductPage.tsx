@@ -8,15 +8,15 @@ import HeadPage from '../components/HeadPage';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
+import ImageUploader from '@/components/ImageUploader';
 
 const CreateProductPage = () => {
-  const { register, handleSubmit, setValue } = useForm<Product>();
+  const { register, handleSubmit, setValue, reset } = useForm<Product>();
   const { createProduct, errors } = useProduct();
-  const { reset } = useForm<Product>();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if(errors.length > 0) {
+    if (errors.length > 0) {
       errors.map((error) => toast.error(error, toastifyConfig));
     }
   }, [errors]);
@@ -30,11 +30,9 @@ const CreateProductPage = () => {
     }
     setIsLoading(false);
   };
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const filesArray = Array.from(e.target.files);
-      setValue('photos', filesArray);
-    }
+
+  const handleFileChange = (files: File[]) => {
+    setValue('photos', files);
   };
 
   return (
@@ -43,15 +41,8 @@ const CreateProductPage = () => {
       <div className="flex">
         <div className="max-w-3xl pt-20 px-4 mx-auto">
           <form onSubmit={handleSubmit(onSubmit)}>
+            <ImageUploader onFilesChange={handleFileChange} initialFiles={[]} />
             <Input type="text" fieldname="Title" {...register('name', { required: true })} />
-            <Input
-              type="file"
-              fieldname="Select Image"
-              className="bg-white"
-              onChange={handleFileChange}
-              accept="image/*"
-              multiple
-            />
             <div className="flex w-full justify-between">
               <Input
                 type="text"
@@ -71,7 +62,7 @@ const CreateProductPage = () => {
             </div>
             <div className="my-4 flex justify-between w-full gap-4">
               <div className="w-full">
-                <label defaultValue="" htmlFor="category" className="block text-white">
+                <label htmlFor="category" className="block text-white">
                   Category
                 </label>
                 <select
@@ -116,5 +107,4 @@ const CreateProductPage = () => {
     </div>
   );
 };
-
 export default CreateProductPage;

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAuth } from '@/contexts/AuthContext';
 import { DialogClose } from '@/components/ui/dialog';
+
 const GetPicture = ({ onPhotoChange }: { onPhotoChange: (newPhoto: string) => void }) => {
   const { updatePhotoProfile } = useAuth();
   const [file, setFile] = useState<File | null>(null);
