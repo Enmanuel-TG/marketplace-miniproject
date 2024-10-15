@@ -152,6 +152,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
         searchProduct,
         errors,
         getAllUSerProducts,
+        setProduct,
       }}
     >
       {children}

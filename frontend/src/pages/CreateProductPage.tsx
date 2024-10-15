@@ -9,10 +9,12 @@ import { toastifyConfig } from '../utilities/toastify.utility';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import ImageUploader from '@/components/ImageUploader';
+import { useNavigate } from 'react-router-dom';
 
 const CreateProductPage = () => {
+  const navigate = useNavigate();
   const { register, handleSubmit, setValue, reset } = useForm<Product>();
-  const { createProduct, errors } = useProduct();
+  const { createProduct, errors, setProduct } = useProduct();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -28,7 +30,10 @@ const CreateProductPage = () => {
       toast.success(res.message, toastifyConfig);
       reset();
     }
-    setIsLoading(false);
+    if (res.product.id) {
+      setProduct(res.product);
+      navigate(`/product/id:${res.product.id}`);
+    }
   };
 
   const handleFileChange = (files: File[]) => {

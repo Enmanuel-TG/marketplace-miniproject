@@ -33,8 +33,7 @@ const UpdateProductPage = () => {
   }, [errors]);
 
   const onSubmit = (data: Product) => {
-    const res = updateProduct(data);
-    console.log(res);
+    updateProduct(data);
   };
 
   const handleFileChange = (files: File[]) => {
