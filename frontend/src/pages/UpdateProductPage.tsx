@@ -4,12 +4,13 @@ import { useProduct } from '../contexts/ProductContext';
 import { categoryOptions, stateOptions } from '../utilities/selectOption';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { useNavigate } from 'react-router-dom';
 import ImageUploader from '@/components/ImageUploader';
 import HeadPage from '@/components/HeadPage';
+
 
 const UpdateProductPage = () => {
   const { product, updateProduct, errors, setProduct } = useProduct();
@@ -17,7 +18,7 @@ const UpdateProductPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!product || Object.keys(product).length === 0) {
+    if (!product) {
       toast.error('Product not found', toastifyConfig);
       setTimeout(() => {
         navigate('/');
@@ -46,12 +47,13 @@ const UpdateProductPage = () => {
   const handleFileChange = (files: File[]) => {
     setValue('photos', files);
   };
+
   return (
     <div className="flex flex-col min-h-screen">
       <HeadPage namePage="Update Product" />
       <div className="max-w-3xl p-5 m-auto">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <ImageUploader onFilesChange={handleFileChange} initialFiles={[]} />
+          <ImageUploader onFilesChange={handleFileChange} imgs={product?.photos as unknown as string[]}/>
           <Input type="text" fieldname="Title" {...register('name', { required: true })} />
           <div className="flex w-full justify-between">
             <Input type="text" fieldname="Price" {...register('price', { required: true })} />

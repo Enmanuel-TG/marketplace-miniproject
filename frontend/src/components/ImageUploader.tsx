@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Dropzone from 'react-dropzone';
+import { downloadImg } from '../utilities/download-img.utility';
 
 interface ImageUploaderProps {
   onFilesChange: (files: File[]) => void;
-  initialFiles?: string[];
+  imgs?: string[];
 }
 
-const ImageUploader = ({ onFilesChange, initialFiles = [] }: ImageUploaderProps) => {
+const ImageUploader = ({ onFilesChange, imgs }: ImageUploaderProps) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [previewImage, setPreviewImage] = useState<File[]>([]);
 
   const handleDrop = (acceptedFiles: File[]) => {
     const updatedFiles = [...selectedFiles, ...acceptedFiles];
     setSelectedFiles(updatedFiles);
-    onFilesChange(updatedFiles);
+    onFilesChange([...updatedFiles, ...previewImage]);
   };
 
   const handleRemoveFile = (index: number) => {
@@ -20,6 +22,23 @@ const ImageUploader = ({ onFilesChange, initialFiles = [] }: ImageUploaderProps)
     setSelectedFiles(updatedFiles);
     onFilesChange(updatedFiles);
   };
+
+  const handleRemoveNewFile = (index: number) => {
+    const newImgs = previewImage.filter((_, i) => i !== index);
+    setPreviewImage(newImgs);
+  };
+
+  const getImgs = async () => {
+    const res = await downloadImg(imgs as unknown as string[]);
+    setPreviewImage(res as File[]);
+    onFilesChange(res as File[]);
+  };
+
+  useEffect(() => {
+    if (imgs) {
+      getImgs();
+    }
+  }, [imgs]);
 
   return (
     <div className="py-10 px-4 mb-2 border-dashed border-2 border-gray-300 rounded-md">
@@ -31,31 +50,33 @@ const ImageUploader = ({ onFilesChange, initialFiles = [] }: ImageUploaderProps)
           </div>
         )}
       </Dropzone>
-
       <div className="mt-4 flex flex-wrap gap-4">
-        {selectedFiles.map((file, idx) => (
-          <div key={idx} className="relative">
-            <img src={URL.createObjectURL(file)} alt={`preview-${idx}`} className="h-24 w-24 object-cover rounded" />
+        {selectedFiles.map((file, index) => (
+          <div key={index} className="relative">
+            <img src={URL.createObjectURL(file)} alt={`preview-${index}`} className="h-24 w-24 object-cover rounded" />
             <button
               type="button"
               className="absolute top-0 right-0 bg-red-500 text-white rounded-md m-auto p-1"
-              onClick={() => handleRemoveFile(idx)}
+              onClick={() => handleRemoveFile(index)}
             >
               x
             </button>
           </div>
         ))}
-        {initialFiles.length > 0 &&
-          initialFiles.map((fileUrl, idx) => (
-            <div key={idx} className="relative">
-              <img src={fileUrl} alt={`preview-${idx}`} className="object-cover rounded" />
-              <button
-                type="button"
-                className="absolute  bg-red-500 text-white rounded-md"
-                onClick={() => handleRemoveFile(idx)}
-              ></button>
-            </div>
-          ))}
+      </div>
+      <div className="flex flex-wrap gap-4">
+        {previewImage.map((file, index) => (
+          <div key={index} className="relative">
+            <img src={URL.createObjectURL(file)} alt={`preview-${index}`} className="h-24 w-24 object-cover rounded" />
+            <button
+              type="button"
+              className="absolute top-0 right-0 bg-red-500 text-white rounded-md m-auto p-1"
+              onClick={() => handleRemoveNewFile(index)}
+            >
+              x
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );

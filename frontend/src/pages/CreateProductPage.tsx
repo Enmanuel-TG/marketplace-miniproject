@@ -46,7 +46,7 @@ const CreateProductPage = () => {
       <div className="flex">
         <div className="max-w-3xl pt-20 px-4 mx-auto">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <ImageUploader onFilesChange={handleFileChange} initialFiles={[]} />
+            <ImageUploader onFilesChange={handleFileChange} />
             <Input type="text" fieldname="Title" {...register('name', { required: true })} />
             <div className="flex w-full justify-between">
               <Input
