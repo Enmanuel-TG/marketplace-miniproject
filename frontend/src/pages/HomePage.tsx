@@ -20,13 +20,13 @@ const HomePages = () => {
       <div className="flex">
         <SearchBar />
       </div>
-      <div className="max-w-screen w-11/12 mx-auto grid grid-cols-1
-       sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      {allProducts.length === 0 && <h1 className="text-3xl font-bold mx-auto mt-6 text-white">No products found</h1>}
+      <div className="max-w-screen w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {allProducts.map((product) => (
           <ProductCard key={product.id} title="Buy" product={product} />
         ))}
       </div>
-      <div className="fixed bottom-10 right-4 z-10 py-11 text-white rounded-full shadow-md        transition-opacity duration-300 ">
+      <div className="fixed bottom-10 right-4 z-10 py-11 text-white rounded-full shadow-md transition-opacity duration-300 ">
         <HomeMenu />
       </div>
     </div>
