@@ -17,7 +17,7 @@ import Button from '@/components/ui/Button';
 
 export const ProductPage = () => {
   const { getProduct, product, deleteProduct } = useProduct();
-  const { user, getDataUser, userData } = useAuth();
+  const { user, getDataUser, userData, isAuthenticated } = useAuth();
   const { id } = useParams<{ id: string }>();
   const productID = id?.split(':')[1];
   const [productOwner, setProductOwner] = useState<boolean>(false);
@@ -93,7 +93,6 @@ export const ProductPage = () => {
                     {' '}
                     Delete
                   </DialogTrigger>
-
                   <button
                     className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
                     onClick={Edit}
@@ -126,14 +125,20 @@ export const ProductPage = () => {
               <strong className="mr-2 text-white no-drag no-select">Stock:</strong> {product.stock}
             </p>
           </div>
-          <a
-            href={`https://wa.me/?text=I'm interested in ${product.name}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-auto bg-green-500 text-white py-2 my-4 px-4 rounded-lg hover:bg-green-600 transition-colors no-select no-drag"
-          >
-            Contact me
-          </a>
+          {isAuthenticated ? (
+            <div>
+              <a
+                href={`https://wa.me/?text=I'm interested in ${product.name}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto bg-green-500 text-white py-2 my-4 px-4 rounded-lg hover:bg-green-600 transition-colors no-select no-drag"
+              >
+                Contact me
+              </a>
+            </div>
+          ) : (
+            <div>You need to be logged in to contact me</div>
+          )}
         </div>
       </div>
 
