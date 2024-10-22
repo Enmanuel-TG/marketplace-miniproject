@@ -124,6 +124,10 @@ export const ProductPage = () => {
             <p className="text-gray-300">
               <strong className="mr-2 text-white no-drag no-select">Stock:</strong> {product.stock}
             </p>
+            <p className="text-gray-300">
+              <strong className="mr-2 text-white no-drag no-select">Category:</strong>
+              {product.category}
+            </p>
           </div>
           {isAuthenticated ? (
             <div>
