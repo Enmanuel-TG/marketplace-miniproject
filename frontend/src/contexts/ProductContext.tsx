@@ -32,6 +32,9 @@ export const ProductProvider = ({ children }: ProviderProps) => {
   const createProduct = async (dataProduct: Product) => {
     try {
       const res = await createProductRequest(dataProduct);
+      if (res.status === 200) {
+        getAllProducts();
+      }
       return res.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -92,6 +95,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {
           setErrors(error.response.data);
+          setAllProducts([]);
         }
       }
     }
@@ -101,6 +105,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
     try {
       const res = await updateProductRequest(dataProduct);
       if (res.status === 200) {
+        getAllProducts();
         toast.success('Product updated successfully', toastifyConfig);
       }
       return res.data;
@@ -126,7 +131,11 @@ export const ProductProvider = ({ children }: ProviderProps) => {
   };
   const deleteProduct = async (id: number) => {
     try {
-      await deleteProductRequest(id);
+      const res = await deleteProductRequest(id);
+      if (res.status === 200) {
+        getAllProducts();
+        toast.success('Product deleted successfully', toastifyConfig);
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {

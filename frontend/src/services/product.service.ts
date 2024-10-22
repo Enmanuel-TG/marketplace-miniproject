@@ -44,4 +44,4 @@ export const getAllUSerProductsRequest = async () => {
   return await server.get('/product/userProduct');
 };
 
-export const deleteProductRequest = async (id: number) => await server.delete(`/product/delete/${id}`);
+export const deleteProductRequest = async (id: number) => { return await server.delete(`/product/delete/${id}`); };
