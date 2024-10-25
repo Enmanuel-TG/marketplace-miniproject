@@ -195,3 +195,27 @@ export const searchProduct = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const updateStock = async (req: Request, res: Response) => {
+  const { stock, id } = req.body;
+  console.log(id, stock);
+  try {
+    const product = await prisma.product.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        stock: parseInt(stock),
+      },
+    });
+    return res.status(200).json({
+      message: 'Product updated successfully.',
+      product,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error to update product.',
+      error,
+    });
+  }
+};
