@@ -45,3 +45,7 @@ export const getAllUSerProductsRequest = async () => {
 };
 
 export const deleteProductRequest = async (id: number) => { return await server.delete(`/product/delete/${id}`); };
+
+export const updateStockRequest = async (stock: string, id: string) => {
+  return await server.put('/product/update-stock', { stock, id });
+};
