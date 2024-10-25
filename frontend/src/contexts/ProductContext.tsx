@@ -9,6 +9,7 @@ import {
   updateProductRequest,
   getAllUSerProductsRequest,
   deleteProductRequest,
+  updateStockRequest,
 } from '../services/product.service';
 import axios from 'axios';
 import { toastifyConfig } from '@/utilities/toastify.utility';
@@ -144,6 +145,24 @@ export const ProductProvider = ({ children }: ProviderProps) => {
       }
     }
   };
+
+  const updateStock = async (stock: string, id: string): Promise<number> => {
+    try {
+      const res = await updateStockRequest(stock, id);
+      if (res.status === 200) {
+        return 200;
+      }
+      return res.status || 500;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          setErrors(error.response.data);
+        }
+      }
+      return 500;
+    }
+  };
+
   //------------------------------
   useEffect(() => {
     getAllProducts();
@@ -163,6 +182,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
         errors,
         getAllUSerProducts,
         setProduct,
+        updateStock,
       }}
     >
       {children}

@@ -69,20 +69,22 @@ export interface ProductContextType {
   allProducts: Product[];
   product: Product;
   getProduct: (id: number) => void;
-  createProduct: (dataProduct: Product) => Promise<CreateProductResponse>;
+  createProduct: (dataProduct: Product) => Promise<ProductResponse>;
   searchProduct: (name: string) => void;
   filterCategory: (category: string) => void;
   errors: string[];
-  updateProduct: (dataProduct: Product) => Promise<CreateProductResponse>;
+  updateProduct: (dataProduct: Product) => Promise<ProductResponse>;
   getAllUSerProducts: () => void;
   deleteProduct: (id: number) => void;
   setProduct: (value: Product) => void;
+  updateStock: (stock: string, id: string) => Promise<number>;
 }
 
-export interface CreateProductResponse {
+export interface ProductResponse {
   message: string;
   product: Product;
 }
+
 export interface Product {
   userId: number;
   id: number;
