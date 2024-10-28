@@ -198,7 +198,6 @@ export const searchProduct = async (req: Request, res: Response) => {
 
 export const updateStock = async (req: Request, res: Response) => {
   const { stock, id } = req.body;
-  console.log(id, stock);
   try {
     const product = await prisma.product.update({
       where: {

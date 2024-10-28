@@ -25,19 +25,20 @@ export const ProductValidator = z.object({
     .max(30, { message: 'Category must be at most 30 characters.' }),
   stock: z
     .string({
-      required_error: 'Stock is required',
-      invalid_type_error: 'Stock must be a number',
+      required_error: 'Stock is required.',
+      invalid_type_error: 'Stock must be a number.',
     })
-    .regex(/^(0|[1-9][0-9]*)(\.[0-9]{1,2})?$/, { message: 'Price must be a number.' }),
+    .min(0, { message: 'Stock cannot be negative.' }),
   description: z
     .string({ required_error: 'Description is required.' })
     .min(10, { message: 'Description must be at least 10 characters.' })
     .max(500, { message: 'Description must be at most 500 characters.' }),
 });
-
 export const updateStockValidator = z.object({
-  stock: z.string({
-    required_error: 'Stock is required',
-    invalid_type_error: 'Stock must be a number',
-  }),
+  stock: z
+    .number({
+      required_error: 'Stock is required.',
+      invalid_type_error: 'Stock must be a number.',
+    })
+    .min(0, { message: 'Stock cannot be negative.' }),
 });
