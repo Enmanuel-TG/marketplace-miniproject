@@ -50,7 +50,7 @@ export const ProductPage = () => {
   };
 
   const markAsSold = async () => {
-    const res = await updateStock( 0 , productID as unknown as string);
+    const res = await updateStock(0, productID as unknown as string);
     if (res === 200) {
       toast.success('Marked as sold', toastifyConfig);
     }
@@ -191,7 +191,7 @@ export const ProductPage = () => {
               </div>
             ) : (
               <a
-                href={`https://wa.me/?text=I'm interested in ${product.name}`}
+                href={`https://wa.me/${userData?.phoneNumber}?text=I'm interested in ${product.name}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-auto bg-green-500 text-white py-2 my-4 px-4 rounded-lg hover:bg-green-600 transition-colors no-select no-drag"
