@@ -48,7 +48,7 @@ const CreateProductPage = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <ImageUploader onFilesChange={handleFileChange} />
             <Input type="text" fieldname="Title" {...register('name', { required: true })} />
-            <div className="flex w-full justify-between">
+            <div className="flex w-full justify-between mt-5">
               <Input
                 type="text"
                 title="Enter a price with numbers (Example: 0, 0.0, 0.00)"
@@ -65,7 +65,7 @@ const CreateProductPage = () => {
               />
               <Input type="text" fieldname="Location" {...register('location', { required: true })} />
             </div>
-            <div className="my-4 flex justify-between w-full gap-4">
+            <div className="my-5 flex justify-between w-full gap-4">
               <div className="w-full">
                 <label htmlFor="category" className="block text-white">
                   Category
@@ -103,7 +103,7 @@ const CreateProductPage = () => {
               </div>
             </div>
             <Input type="text" fieldname="Description" {...register('description', { required: true })} />
-            <div>
+            <div className="flex justify-end mt-5">
               <Button type="submit" fieldname="Create Product" disabled={isLoading} />
             </div>
           </form>

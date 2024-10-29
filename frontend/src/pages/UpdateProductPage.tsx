@@ -4,13 +4,12 @@ import { useProduct } from '../contexts/ProductContext';
 import { categoryOptions, stateOptions } from '../utilities/selectOption';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { useNavigate } from 'react-router-dom';
 import ImageUploader from '@/components/ImageUploader';
 import HeadPage from '@/components/HeadPage';
-
 
 const UpdateProductPage = () => {
   const { product, updateProduct, errors, setProduct } = useProduct();
@@ -53,14 +52,14 @@ const UpdateProductPage = () => {
       <HeadPage namePage="Update Product" />
       <div className="max-w-3xl p-5 m-auto">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <ImageUploader onFilesChange={handleFileChange} imgs={product?.photos as unknown as string[]}/>
+          <ImageUploader onFilesChange={handleFileChange} imgs={product?.photos as unknown as string[]} />
           <Input type="text" fieldname="Title" {...register('name', { required: true })} />
-          <div className="flex w-full justify-between">
+          <div className="flex w-full justify-between mt-5">
             <Input type="text" fieldname="Price" {...register('price', { required: true })} />
             <Input type="text" fieldname="Stock" {...register('stock', { required: true })} />
             <Input type="text" fieldname="Location" {...register('location', { required: true })} />
           </div>
-          <div className="my-4 flex justify-between w-full gap-4">
+          <div className="my-5 flex justify-between w-full gap-4">
             <div className="w-full">
               <label htmlFor="category" className="block text-white">
                 Category
@@ -98,7 +97,7 @@ const UpdateProductPage = () => {
             </div>
           </div>
           <Input type="text" fieldname="Description" {...register('description', { required: true })} />
-          <div>
+          <div className="flex justify-end mt-5">
             <Button type="submit" fieldname="Update Product" />
           </div>
         </form>
