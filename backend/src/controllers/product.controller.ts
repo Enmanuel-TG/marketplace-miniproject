@@ -179,10 +179,20 @@ export const searchProduct = async (req: Request, res: Response) => {
   try {
     const products = await prisma.product.findMany({
       where: {
-        name: {
-          contains: name,
-          mode: 'insensitive',
-        },
+        OR: [
+          {
+            name: {
+              contains: name,
+              mode: 'insensitive',
+            },
+          },
+          {
+            location: {
+              contains: name,
+              mode: 'insensitive',
+            },
+          },
+        ],
       },
     });
     if (products.length === 0) {
