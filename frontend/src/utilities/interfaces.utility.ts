@@ -77,7 +77,7 @@ export interface ProductContextType {
   getAllUSerProducts: () => void;
   deleteProduct: (id: number) => void;
   setProduct: (value: Product) => void;
-  updateStock: (stock: string, id: string) => Promise<number>;
+  updateStock: (stock: number, id: string) => Promise<number>;
 }
 
 export interface ProductResponse {

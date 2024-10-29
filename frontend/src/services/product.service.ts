@@ -1,6 +1,5 @@
 import { Product } from '../utilities/interfaces.utility';
 import { server } from '../utilities/axios.utility';
-
 export const createProductRequest = async (product: Product) => {
   const formData = new FormData();
   formData.append('name', product.name);
@@ -46,6 +45,6 @@ export const getAllUSerProductsRequest = async () => {
 
 export const deleteProductRequest = async (id: number) => { return await server.delete(`/product/delete/${id}`); };
 
-export const updateStockRequest = async (stock: string, id: string) => {
+export const updateStockRequest = async (stock: number, id: string) => {
   return await server.put('/product/update-stock', { stock, id });
 };

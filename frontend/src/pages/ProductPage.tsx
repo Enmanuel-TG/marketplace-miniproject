@@ -43,14 +43,14 @@ export const ProductPage = () => {
   };
 
   const onSubmit = async (data: FieldValues) => {
-    const res = await updateStock(data.Stock, productID as unknown as string);
+    const res = await updateStock(parseInt(data.stock), productID as unknown as string);
     if (res === 200) {
       toast.success('Stock Updated', toastifyConfig);
     }
   };
 
   const markAsSold = async () => {
-    const res = await updateStock('0', productID as unknown as string);
+    const res = await updateStock( 0 , productID as unknown as string);
     if (res === 200) {
       toast.success('Marked as sold', toastifyConfig);
     }
@@ -162,7 +162,7 @@ export const ProductPage = () => {
                     <DialogDescription>
                       If you send 0, you will mark the product as sold, or out of stock,
                       <form onSubmit={handleSubmit(onSubmit)}>
-                        <Input type="number" fieldname="Stock" {...register('Stock', { required: true })} />
+                        <Input min={0} type="number" fieldname="Stock" {...register('stock', { required: true })} />
                         <Button type="submit" fieldname="Change" />
                       </form>
                     </DialogDescription>

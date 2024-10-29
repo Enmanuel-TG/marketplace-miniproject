@@ -146,7 +146,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
     }
   };
 
-  const updateStock = async (stock: string, id: string): Promise<number> => {
+  const updateStock = async (stock: number, id: string): Promise<number> => {
     try {
       const res = await updateStockRequest(stock, id);
       if (res.status === 200) {
