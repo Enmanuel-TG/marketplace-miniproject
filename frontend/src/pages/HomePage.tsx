@@ -5,6 +5,7 @@ import SearchBar from '../components/SearchBar';
 import HomeMenu from '../components/HomeMenu';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
+import FooterPage from '../components/FooterPage';
 
 const HomePages = () => {
   const { allProducts, errors } = useProduct();
@@ -29,6 +30,7 @@ const HomePages = () => {
       <div className="fixed bottom-10 right-4 z-10 py-11 text-white rounded-full shadow-md transition-opacity duration-300 ">
         <HomeMenu />
       </div>
+      <FooterPage />
     </div>
   );
 };
