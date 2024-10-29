@@ -32,9 +32,9 @@ const LoginPages = () => {
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md mx-auto">
         <h1 className="text-3xl font-bold mb-8 text-center text-white">Login</h1>
-        <div>
+        <div >
           <form onSubmit={handleSubmit(setData)}>
-            <Input fieldname="Email" type="email" {...register('email', { required: true })} />
+            <Input className='mb-4' fieldname="Email" type="email" {...register('email', { required: true })} />
             <Input fieldname="Password" type="password" {...register('password', { required: true })} />
             <div className="flex justify-end">
               <Link className="text-blue-500 hover:text-blue-700 text-sm hover:underline" to="/forget-password">
