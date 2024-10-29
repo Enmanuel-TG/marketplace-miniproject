@@ -8,15 +8,17 @@ import HeadPage from '../components/HeadPage';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
+import ImageUploader from '@/components/ImageUploader';
+import { useNavigate } from 'react-router-dom';
 
 const CreateProductPage = () => {
-  const { register, handleSubmit, setValue } = useForm<Product>();
-  const { createProduct, errors } = useProduct();
-  const { reset } = useForm<Product>();
+  const navigate = useNavigate();
+  const { register, handleSubmit, setValue, reset } = useForm<Product>();
+  const { createProduct, errors, setProduct } = useProduct();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if(errors.length > 0) {
+    if (errors.length > 0) {
       errors.map((error) => toast.error(error, toastifyConfig));
     }
   }, [errors]);
@@ -28,13 +30,14 @@ const CreateProductPage = () => {
       toast.success(res.message, toastifyConfig);
       reset();
     }
-    setIsLoading(false);
-  };
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const filesArray = Array.from(e.target.files);
-      setValue('photos', filesArray);
+    if (res.product.id) {
+      setProduct(res.product);
+      navigate(`/product/id:${res.product.id}`);
     }
+  };
+
+  const handleFileChange = (files: File[]) => {
+    setValue('photos', files);
   };
 
   return (
@@ -43,16 +46,9 @@ const CreateProductPage = () => {
       <div className="flex">
         <div className="max-w-3xl pt-20 px-4 mx-auto">
           <form onSubmit={handleSubmit(onSubmit)}>
+            <ImageUploader onFilesChange={handleFileChange} />
             <Input type="text" fieldname="Title" {...register('name', { required: true })} />
-            <Input
-              type="file"
-              fieldname="Select Image"
-              className="bg-white"
-              onChange={handleFileChange}
-              accept="image/*"
-              multiple
-            />
-            <div className="flex w-full justify-between">
+            <div className="flex w-full justify-between mt-5">
               <Input
                 type="text"
                 title="Enter a price with numbers (Example: 0, 0.0, 0.00)"
@@ -69,9 +65,9 @@ const CreateProductPage = () => {
               />
               <Input type="text" fieldname="Location" {...register('location', { required: true })} />
             </div>
-            <div className="my-4 flex justify-between w-full gap-4">
+            <div className="my-5 flex justify-between w-full gap-4">
               <div className="w-full">
-                <label defaultValue="" htmlFor="category" className="block text-white">
+                <label htmlFor="category" className="block text-white">
                   Category
                 </label>
                 <select
@@ -107,7 +103,7 @@ const CreateProductPage = () => {
               </div>
             </div>
             <Input type="text" fieldname="Description" {...register('description', { required: true })} />
-            <div>
+            <div className="flex justify-end mt-5">
               <Button type="submit" fieldname="Create Product" disabled={isLoading} />
             </div>
           </form>
@@ -116,5 +112,4 @@ const CreateProductPage = () => {
     </div>
   );
 };
-
 export default CreateProductPage;

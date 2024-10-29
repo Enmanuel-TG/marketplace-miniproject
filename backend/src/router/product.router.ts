@@ -8,9 +8,10 @@ import {
   getProductsByCategory,
   searchProduct,
   updateProduct,
+  updateStock,
 } from '../controllers/product.controller';
 import validateSchema from '../middlewares/validator.middleware';
-import ProductValidator from '../validators/product.validator';
+import { ProductValidator, updateStockValidator } from '../validators/product.validator';
 
 const router = Router();
 
@@ -22,5 +23,6 @@ router.get('/userProduct', getAllUserProduct);
 router.get('/allProduct', getAllProduct);
 router.post('/category', getProductsByCategory);
 router.post('/search', searchProduct);
+router.put('/update-stock', validateSchema(updateStockValidator), updateStock);
 
 export default router;

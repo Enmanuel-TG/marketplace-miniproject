@@ -77,7 +77,7 @@ export const updateProduct = async (req: Request, res: Response) => {
   const { name, price, description, location, state, category, stock } = req.body;
   const photos = req.files?.photos;
   if (!photos) {
-    return res.status(400).json({ message: 'No photo uploaded.' });
+    return res.status(400).json(['No photo uploaded.']);
   }
   if (Array.isArray(photos) && photos.length > 10) {
     return res.status(400).json(['You can only upload up to 10 photos.']);
@@ -179,10 +179,20 @@ export const searchProduct = async (req: Request, res: Response) => {
   try {
     const products = await prisma.product.findMany({
       where: {
-        name: {
-          contains: name,
-          mode: 'insensitive',
-        },
+        OR: [
+          {
+            name: {
+              contains: name,
+              mode: 'insensitive',
+            },
+          },
+          {
+            location: {
+              contains: name,
+              mode: 'insensitive',
+            },
+          },
+        ],
       },
     });
     if (products.length === 0) {
@@ -191,6 +201,29 @@ export const searchProduct = async (req: Request, res: Response) => {
     return res.status(200).json(products);
   } catch (error) {
     return res.status(400).json({
+      error,
+    });
+  }
+};
+
+export const updateStock = async (req: Request, res: Response) => {
+  const { stock, id } = req.body;
+  try {
+    const product = await prisma.product.update({
+      where: {
+        id: Number(id),
+      },
+      data: {
+        stock: parseInt(stock),
+      },
+    });
+    return res.status(200).json({
+      message: 'Product updated successfully.',
+      product,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error to update product.',
       error,
     });
   }

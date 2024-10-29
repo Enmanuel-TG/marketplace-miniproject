@@ -8,51 +8,58 @@ import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { useNavigate } from 'react-router-dom';
+import ImageUploader from '@/components/ImageUploader';
+import HeadPage from '@/components/HeadPage';
 
 const UpdateProductPage = () => {
-  const { product, updateProduct } = useProduct();
+  const { product, updateProduct, errors, setProduct } = useProduct();
   const { register, handleSubmit, setValue } = useForm<Product>({ defaultValues: product });
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!product || Object.keys(product).length === 0) {
+    if (!product) {
       toast.error('Product not found', toastifyConfig);
       setTimeout(() => {
-        Navigate('/');
+        navigate('/');
       }, 6000);
       return;
     }
   }, [product]);
 
-  const onSubmit = (data: Product) => {
-    updateProduct(data);
-  };
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const filesArray = Array.from(e.target.files);
-      setValue('photos', filesArray);
+  useEffect(() => {
+    if (errors.length > 0) {
+      errors.map((error) => toast.error(error, toastifyConfig));
+    }
+  }, [errors]);
+
+  const onSubmit = async (data: Product) => {
+    const res = await updateProduct(data);
+    if (res) {
+      toast.success(res.message, toastifyConfig);
+    }
+    if (res.product.id) {
+      setProduct(res.product);
+      navigate(`/product/id:${res.product.id}`);
     }
   };
+
+  const handleFileChange = (files: File[]) => {
+    setValue('photos', files);
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex flex-col min-h-screen">
+      <HeadPage namePage="Update Product" />
       <div className="max-w-3xl p-5 m-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center text-white">Update Product</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <ImageUploader onFilesChange={handleFileChange} imgs={product?.photos as unknown as string[]} />
           <Input type="text" fieldname="Title" {...register('name', { required: true })} />
-          <Input
-            type="file"
-            fieldname="Select Image"
-            className="bg-white"
-            onChange={handleFileChange}
-            accept="image/*"
-            multiple
-          />
-          <div className="flex w-full justify-between">
+          <div className="flex w-full justify-between mt-5">
             <Input type="text" fieldname="Price" {...register('price', { required: true })} />
             <Input type="text" fieldname="Stock" {...register('stock', { required: true })} />
             <Input type="text" fieldname="Location" {...register('location', { required: true })} />
           </div>
-          <div className="my-4 flex justify-between w-full gap-4">
+          <div className="my-5 flex justify-between w-full gap-4">
             <div className="w-full">
               <label htmlFor="category" className="block text-white">
                 Category
@@ -90,7 +97,7 @@ const UpdateProductPage = () => {
             </div>
           </div>
           <Input type="text" fieldname="Description" {...register('description', { required: true })} />
-          <div>
+          <div className="flex justify-end mt-5">
             <Button type="submit" fieldname="Update Product" />
           </div>
         </form>
