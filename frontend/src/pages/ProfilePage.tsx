@@ -1,5 +1,6 @@
 import { useAuth } from '../contexts/AuthContext';
 import GetPicture from '../components/GetPicture';
+import { ButtonBack } from '../components/ui/ButtonBack';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
@@ -109,7 +110,7 @@ const ProfilePage = () => {
   useEffect(() => {
     if (errors.length > 0) {
       errors.map((error) => toast.error(error, toastifyConfig));
-    };
+    }
   }, [errors]);
 
   useEffect(() => {
@@ -123,6 +124,10 @@ const ProfilePage = () => {
 
   return (
     <Dialog>
+      <div className="flex mx-4">
+        <ButtonBack className="mt-4" />
+        <h1 className="text-3xl font-bold mb-8 text-white ml-4 mt-4 no-drag no-select">Profile</h1>
+      </div>
       <div>
         <div className="bg-gray-900 mt-10 mx-auto w-full max-w-[80vw] no-drag no-select p-[4vw] sm:p-[3vw] lg:p-[2vw] rounded-lg shadow-md">
           <div className="flex flex-col lg:flex-row gap-[5vw] items-center lg:items-start">

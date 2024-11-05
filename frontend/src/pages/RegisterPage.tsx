@@ -11,6 +11,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { formSliderSettings } from '../utilities/slick.utility';
+import HeadPage from '@/components/HeadPage';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -35,84 +36,86 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="w-full max-w-md mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center text-white">Register</h1>
-        <Slider ref={sliderRef} {...formSliderSettings}>
-          <div>
-            <form>
-              <Input
-                fieldname="First Name"
-                type="text"
-                {...register('firstName', { required: true })}
-                className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <Input
-                fieldname="Last Name"
-                type="text"
-                {...register('lastName', { required: true })}
-                className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <div className="flex justify-end">
-                <Button fieldname="Next" type="button" onClick={() => sliderRef.current?.slickNext()} />
-              </div>
-            </form>
+    <>
+      <HeadPage namePage="Register" />
+      <div className="flex my-28 justify-center min-h-screen">
+        <div className="w-full max-w-md mx-auto">
+          <Slider ref={sliderRef} {...formSliderSettings}>
+            <div>
+              <form>
+                <Input
+                  fieldname="First Name"
+                  type="text"
+                  {...register('firstName', { required: true })}
+                  className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <Input
+                  fieldname="Last Name"
+                  type="text"
+                  {...register('lastName', { required: true })}
+                  className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <div className="flex justify-end">
+                  <Button fieldname="Next" type="button" onClick={() => sliderRef.current?.slickNext()} />
+                </div>
+              </form>
+            </div>
+            <div>
+              <form>
+                <Input
+                  fieldname="Date of Birth"
+                  type="date"
+                  {...register('birthday', { required: true })}
+                  className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <Input
+                  fieldname="Phone Number"
+                  type="tel"
+                  {...register('phoneNumber', { required: true })}
+                  className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <div className="flex justify-between">
+                  <Button fieldname="Back" type="button" onClick={() => sliderRef.current?.slickPrev()} />
+                  <Button fieldname="Next" type="button" onClick={() => sliderRef.current?.slickNext()} />
+                </div>
+              </form>
+            </div>
+            <div>
+              <form onSubmit={handleSubmit(setData)}>
+                <Input
+                  fieldname="Email"
+                  type="email"
+                  {...register('email', { required: true })}
+                  className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <Input
+                  fieldname="Password"
+                  type="password"
+                  {...register('password', { required: true })}
+                  className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <div className="flex justify-between ">
+                  <Button fieldname="Back" type="button" onClick={() => sliderRef.current?.slickPrev()} />
+                  <Button fieldname="Register" type="submit" />
+                </div>
+              </form>
+            </div>
+          </Slider>
+          <button
+            className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-8 rounded"
+            onClick={registerWithGoogle}
+          >
+            Register with Google 🚀
+          </button>
+          <div className="mt-4 text-center flex justify-center items-center space-x-2">
+            <h1 className="text-white">Already have an account?</h1>
+            <Link className="text-blue-500 cursor-pointer hover:underline" to="/login">
+              Login
+            </Link>
           </div>
-          <div>
-            <form>
-              <Input
-                fieldname="Date of Birth"
-                type="date"
-                {...register('birthday', { required: true })}
-                className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <Input
-                fieldname="Phone Number"
-                type="tel"
-                {...register('phoneNumber', { required: true })}
-                className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <div className="flex justify-between">
-                <Button fieldname="Back" type="button" onClick={() => sliderRef.current?.slickPrev()} />
-                <Button fieldname="Next" type="button" onClick={() => sliderRef.current?.slickNext()} />
-              </div>
-            </form>
-          </div>
-          <div>
-            <form onSubmit={handleSubmit(setData)}>
-              <Input
-                fieldname="Email"
-                type="email"
-                {...register('email', { required: true })}
-                className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <Input
-                fieldname="Password"
-                type="password"
-                {...register('password', { required: true })}
-                className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <div className="flex justify-between ">
-                <Button fieldname="Back" type="button" onClick={() => sliderRef.current?.slickPrev()} />
-                <Button fieldname="Register" type="submit" />
-              </div>
-            </form>
-          </div>
-        </Slider>
-        <button
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-8 rounded"
-          onClick={registerWithGoogle}
-        >
-          Register with Google 🚀
-        </button>
-        <div className="mt-4 text-center flex justify-center items-center space-x-2">
-          <h1 className="text-white">Already have an account?</h1>
-          <Link className="text-blue-500 cursor-pointer hover:underline" to="/login">
-            Login
-          </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
