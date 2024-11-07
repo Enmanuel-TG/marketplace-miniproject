@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../components/ui/Input';
@@ -11,10 +11,16 @@ import HeadPage from '@/components/HeadPage';
 
 const LoginPages = () => {
   const navigate = useNavigate();
-  const { signIn, isAuthenticated, errors: errorLogin, loginWithGoogle } = useAuth();
+  const { signIn, isAuthenticated, errors: errorLogin, loginWithGoogle, setErrors } = useAuth();
   const { handleSubmit, register } = useForm<Account>();
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      setErrors([]);
+      isFirstRender.current = false;
+      return;
+    }
     if (errorLogin.length > 0) {
       errorLogin.map((error) => toast.error(error, toastifyConfig));
     }

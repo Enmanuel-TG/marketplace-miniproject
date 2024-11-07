@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useProduct } from '../contexts/ProductContext';
 import { ProductCard } from '../components/ProductCard';
 import SearchBar from '../components/SearchBar';
@@ -10,8 +10,9 @@ import { filterStockProducts } from '@/utilities/filter-products.utility';
 import { Product } from '@/utilities/interfaces.utility';
 
 const HomePages = () => {
-  const { allProducts, errors } = useProduct();
+  const { allProducts, errors, setErrors } = useProduct();
   const [availableProducts, setAvailableProducts] = useState<Product[]>([]);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     const filtered = filterStockProducts(allProducts, true);
@@ -19,6 +20,11 @@ const HomePages = () => {
   }, [allProducts]);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      setErrors([]);
+      isFirstRender.current = false;
+      return;
+    }
     if (errors.length > 0) {
       errors.map((error) => toast.error(error, toastifyConfig));
     }

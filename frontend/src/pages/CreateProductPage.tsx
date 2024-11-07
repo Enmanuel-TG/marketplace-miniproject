@@ -7,17 +7,23 @@ import Button from '../components/ui/Button';
 import HeadPage from '../components/HeadPage';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { toast } from 'react-toastify';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import ImageUploader from '@/components/ImageUploader';
 import { useNavigate } from 'react-router-dom';
 
 const CreateProductPage = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, setValue, reset } = useForm<Product>();
-  const { createProduct, errors, setProduct } = useProduct();
+  const { createProduct, errors, setProduct, setErrors } = useProduct();
   const [isLoading, setIsLoading] = useState(false);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      setErrors([]);
+      isFirstRender.current = false;
+      return;
+    }
     if (errors.length > 0) {
       errors.map((error) => toast.error(error, toastifyConfig));
     }

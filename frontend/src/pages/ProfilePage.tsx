@@ -1,7 +1,7 @@
 import { useAuth } from '../contexts/AuthContext';
 import GetPicture from '../components/GetPicture';
 import { ButtonBack } from '../components/ui/ButtonBack';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -31,6 +31,7 @@ const ProfilePage = () => {
   const [isAvailable, setIsAvailable] = useState(true);
   const [rating, setRating] = useState<RatingProps>({ average: 0, count: 0 });
   const [isOpen, setIsOpen] = useState(false);
+  const isFirstRender = useRef(true);
   const { register, handleSubmit, setValue } = useForm<UpdateUser>({
     defaultValues: {
       name: '',
@@ -108,6 +109,11 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      setErrors([]);
+      isFirstRender.current = false;
+      return;
+    }
     if (errors.length > 0) {
       errors.map((error) => toast.error(error, toastifyConfig));
     }
@@ -139,7 +145,9 @@ const ProfilePage = () => {
             </DialogTrigger>
             <DialogContent className="p-[3vw]">
               <DialogHeader>
-                <DialogTitle className="text-[2vw] lg:text-[1vw] flex justify-center">Are you sure you want to log out?</DialogTitle>
+                <DialogTitle className="text-[2vw] lg:text-[1vw] flex justify-center">
+                  Are you sure you want to log out?
+                </DialogTitle>
               </DialogHeader>
               <DialogClose>
                 <button

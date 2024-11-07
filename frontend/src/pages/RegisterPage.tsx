@@ -15,7 +15,7 @@ import HeadPage from '@/components/HeadPage';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const { signUp, isAuthenticated, errors: registerErrors, registerWithGoogle } = useAuth();
+  const { signUp, isAuthenticated, errors: registerErrors, registerWithGoogle, setErrors } = useAuth();
   const { handleSubmit, register } = useForm<DataAccount>();
   const sliderRef = useRef<Slider>(null);
 
@@ -25,7 +25,14 @@ const RegisterPage = () => {
     }
   }, [isAuthenticated, navigate]);
 
+  const isFirstRender = useRef(true);
+
   useEffect(() => {
+    if (isFirstRender.current) {
+      setErrors([]);
+      isFirstRender.current = false;
+      return;
+    }
     if (registerErrors.length > 0) {
       registerErrors.map((error) => toast.error(error, toastifyConfig));
     }

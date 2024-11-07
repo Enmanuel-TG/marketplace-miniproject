@@ -4,7 +4,7 @@ import { useProduct } from '../contexts/ProductContext';
 import { categoryOptions, stateOptions } from '../utilities/selectOption';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { useNavigate } from 'react-router-dom';
@@ -12,8 +12,9 @@ import ImageUploader from '@/components/ImageUploader';
 import HeadPage from '@/components/HeadPage';
 
 const UpdateProductPage = () => {
-  const { product, updateProduct, errors, setProduct } = useProduct();
+  const { product, updateProduct, errors, setProduct, setErrors } = useProduct();
   const { register, handleSubmit, setValue } = useForm<Product>({ defaultValues: product });
+  const isFirstRender = useRef(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +28,11 @@ const UpdateProductPage = () => {
   }, [product]);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      setErrors([]);
+      isFirstRender.current = false;
+      return;
+    }
     if (errors.length > 0) {
       errors.map((error) => toast.error(error, toastifyConfig));
     }
