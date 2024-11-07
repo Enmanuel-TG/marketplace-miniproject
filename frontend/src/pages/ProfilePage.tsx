@@ -130,6 +130,27 @@ const ProfilePage = () => {
       </div>
       <div>
         <div className="bg-gray-900 mt-10 mx-auto w-full max-w-[80vw] no-drag no-select p-[4vw] sm:p-[3vw] lg:p-[2vw] rounded-lg shadow-md">
+          <Dialog>
+            <DialogTrigger>
+              <Button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-5 top-5"
+                fieldname="Log out"
+              />
+            </DialogTrigger>
+            <DialogContent className="p-[3vw]">
+              <DialogHeader>
+                <DialogTitle className="text-[2vw] lg:text-[1vw] flex justify-center">Are you sure you want to log out?</DialogTitle>
+              </DialogHeader>
+              <DialogClose>
+                <button
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py  -2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  onClick={logOut}
+                >
+                  Log out
+                </button>
+              </DialogClose>
+            </DialogContent>
+          </Dialog>
           <div className="flex flex-col lg:flex-row gap-[5vw] items-center lg:items-start">
             <div className="relative">
               <img
@@ -155,7 +176,6 @@ const ProfilePage = () => {
                       title="Edit"
                     />
                   </DialogTrigger>
-                  <button onClick={logOut}>CLick</button>
                 </div>
                 <DialogContent className="p-[3vw]">
                   <DialogHeader>
