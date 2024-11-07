@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '../components/ui/Input';
@@ -7,13 +7,20 @@ import { useForm } from 'react-hook-form';
 import { Account } from '../utilities/interfaces.utility';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
+import HeadPage from '@/components/HeadPage';
 
 const LoginPages = () => {
   const navigate = useNavigate();
-  const { signIn, isAuthenticated, errors: errorLogin, loginWithGoogle } = useAuth();
+  const { signIn, isAuthenticated, errors: errorLogin, loginWithGoogle, setErrors } = useAuth();
   const { handleSubmit, register } = useForm<Account>();
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      setErrors([]);
+      isFirstRender.current = false;
+      return;
+    }
     if (errorLogin.length > 0) {
       errorLogin.map((error) => toast.error(error, toastifyConfig));
     }
@@ -29,12 +36,12 @@ const LoginPages = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="w-full max-w-md mx-auto">
-        <h1 className="text-3xl font-bold mb-8 text-center text-white">Login</h1>
-        <div >
+    <>
+      <HeadPage namePage="Login" />
+      <div className="flex justify-center min-h-screen">
+        <div className="w-full max-w-md mx-auto my-28">
           <form onSubmit={handleSubmit(setData)}>
-            <Input className='mb-4' fieldname="Email" type="email" {...register('email', { required: true })} />
+            <Input className="mb-4" fieldname="Email" type="email" {...register('email', { required: true })} />
             <Input fieldname="Password" type="password" {...register('password', { required: true })} />
             <div className="flex justify-end">
               <Link className="text-blue-500 hover:text-blue-700 text-sm hover:underline" to="/forget-password">
@@ -59,7 +66,7 @@ const LoginPages = () => {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

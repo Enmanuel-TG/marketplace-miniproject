@@ -78,6 +78,7 @@ export interface ProductContextType {
   deleteProduct: (id: number) => void;
   setProduct: (value: Product) => void;
   updateStock: (stock: number, id: string) => Promise<number>;
+setErrors: (value: string[]) => void;
 }
 
 export interface ProductResponse {

@@ -6,9 +6,15 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
+import HeadPage from '@/components/HeadPage';
 
 export const ResetPasswordPage = () => {
-  const { resetPassword, errors: resetPasswordErrors, isResetPasswordEmailSent: state, setIsResetPasswordEmailSent: setState } = useAuth();
+  const {
+    resetPassword,
+    errors: resetPasswordErrors,
+    isResetPasswordEmailSent: state,
+    setIsResetPasswordEmailSent: setState,
+  } = useAuth();
   const { handleSubmit, register } = useForm();
   const [searchParams] = useSearchParams();
   const token = searchParams.get('token');
@@ -38,26 +44,28 @@ export const ResetPasswordPage = () => {
   }, [resetPasswordErrors]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="w-full max-w-lg mx-auto p-8">
-        <h2 className="text-4xl text-center font-bold mb-6">Password Reset</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Input fieldname="New password" type="password" {...register('password', { required: true })} />
-          <br/>
-          <Input fieldname="Confirm Password" type="password" {...register('confirm-password', { required: true })} />
-          <br/>
-        </form>
-        {state ? (
-          <Button
-            fieldname="Back"
-            onClick={() => {
-              back();
-            }}
-          />
-        ) : (
-          <Button fieldname="Save" type="submit" onClick={handleSubmit(onSubmit)} />
-        )}
+    <>
+      <HeadPage namePage="Reset Password" />
+      <div className="flex m-28 justify-center min-h-screen">
+        <div className="w-full max-w-lg mx-auto p-8">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Input fieldname="New password" type="password" {...register('password', { required: true })} />
+            <br />
+            <Input fieldname="Confirm Password" type="password" {...register('confirm-password', { required: true })} />
+            <br />
+          </form>
+          {state ? (
+            <Button
+              fieldname="Back"
+              onClick={() => {
+                back();
+              }}
+            />
+          ) : (
+            <Button fieldname="Save" type="submit" onClick={handleSubmit(onSubmit)} />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };

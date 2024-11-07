@@ -171,6 +171,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
   return (
     <ProductContext.Provider
       value={{
+        setErrors,
         deleteProduct,
         filterCategory,
         updateProduct,
