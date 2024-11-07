@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useProduct } from '../contexts/ProductContext';
 import { ProductCard } from '../components/ProductCard';
 import SearchBar from '../components/SearchBar';
@@ -6,9 +6,17 @@ import HomeMenu from '../components/HomeMenu';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import FooterPage from '../components/FooterPage';
+import { filterStockProducts } from '@/utilities/filter-products.utility';
+import { Product } from '@/utilities/interfaces.utility';
 
 const HomePages = () => {
   const { allProducts, errors } = useProduct();
+  const [availableProducts, setAvailableProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const filtered = filterStockProducts(allProducts, true);
+    setAvailableProducts(filtered);
+  }, [allProducts]);
 
   useEffect(() => {
     if (errors.length > 0) {
@@ -21,9 +29,11 @@ const HomePages = () => {
       <div className="flex">
         <SearchBar />
       </div>
-      {allProducts.length === 0 && <h1 className="text-3xl font-bold mx-auto mt-6 text-white">No products found</h1>}
+      {availableProducts.length === 0 && (
+        <h1 className="text-3xl font-bold mx-auto mt-6 text-white">No products found</h1>
+      )}
       <div className="max-w-screen w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-        {allProducts.map((product) => (
+        {availableProducts.map((product) => (
           <ProductCard key={product.id} title="Buy" product={product} />
         ))}
       </div>
