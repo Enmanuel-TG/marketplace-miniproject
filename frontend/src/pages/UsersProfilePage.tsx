@@ -36,20 +36,22 @@ const ExternalProfilePage = () => {
   useEffect(() => {
     if (userData === ({} as Profile)) return;
     getDataUser(Number(userId));
+  }, []);
+
+  useEffect(() => {
     getUserRating(Number(userId));
     getAllUSerProducts();
   }, []);
 
   useEffect(() => {
     if (allProducts.length > 0) {
-      const filtered = filterStockProducts(allProducts, isAvailable);
+      const filtered = filterStockProducts(allProducts, isAvailable,  Number(userId));  
       setFilteredProducts(filtered);
     }
   }, [allProducts, isAvailable]);
 
   useEffect(() => {
     if (user?.role === 'admin') {
-      console.log(user);
       setIsAdmin(true);
     }
   }, [user]);
@@ -57,6 +59,7 @@ const ExternalProfilePage = () => {
   if (!userData) {
     return <div>User no found</div>;
   }
+  console.log(filteredProducts);
 
   return (
     <div>

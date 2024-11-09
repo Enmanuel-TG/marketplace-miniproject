@@ -40,24 +40,10 @@ const ProfilePage = () => {
     },
   });
 
-  useEffect(() => {
-    if (!user) return;
-    setValue('name', user?.name);
-    setValue('birthday', user?.birthday ? new Date(user?.birthday).toISOString().split('T')[0] : '');
-    setValue('phoneNumber', user?.phoneNumber);
-  }, [user, setValue]);
-
   const getUserRating = async (id: number) => {
     const res = await getRating(id);
     setRating(res.data);
   };
-
-  useEffect(() => {
-    if (user) {
-      getUserRating(user?.id as number);
-    }
-  }, [user]);
-
   const onSubmit = async (data: UpdateUser) => {
     if (!user) return;
     const newData = {
@@ -84,6 +70,19 @@ const ProfilePage = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (!user) return;
+    setValue('name', user?.name);
+    setValue('birthday', user?.birthday ? new Date(user?.birthday).toISOString().split('T')[0] : '');
+    setValue('phoneNumber', user?.phoneNumber);
+  }, [user, setValue]);
+
+  useEffect(() => {
+    if (user) {
+      getUserRating(user?.id as number);
+    }
+  }, [user]);
 
   const changeDescription = async (data: UpdateUser) => {
     const description = data.description as string;
