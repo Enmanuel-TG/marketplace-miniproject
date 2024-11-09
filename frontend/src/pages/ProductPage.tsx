@@ -185,7 +185,7 @@ export const ProductPage = () => {
               {productOwner ? (
                 <div>
                   <Button
-                    className="bg-red-500 px-4 py-2 rounded-md text-white"
+                    styles="bg-red-500 px-4 py-2 rounded-md text-white"
                     fieldname="Mark as sold"
                     onClick={markAsSold}
                   />

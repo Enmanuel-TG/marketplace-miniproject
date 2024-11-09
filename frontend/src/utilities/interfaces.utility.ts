@@ -22,6 +22,7 @@ export interface Profile extends User {
   photo: string;
   picture?: string;
   description: string;
+  role: string;
 }
 
 export interface Account {
@@ -78,7 +79,8 @@ export interface ProductContextType {
   deleteProduct: (id: number) => void;
   setProduct: (value: Product) => void;
   updateStock: (stock: number, id: string) => Promise<number>;
-setErrors: (value: string[]) => void;
+  setErrors: (value: string[]) => void;
+  getAllProducts: () => Promise<void>;
 }
 
 export interface ProductResponse {

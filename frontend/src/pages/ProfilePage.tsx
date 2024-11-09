@@ -139,7 +139,7 @@ const ProfilePage = () => {
           <Dialog>
             <DialogTrigger>
               <Button
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-5 top-5"
+                styles="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-5 top-5"
                 fieldname="Log out"
               />
             </DialogTrigger>
@@ -151,7 +151,7 @@ const ProfilePage = () => {
               </DialogHeader>
               <DialogClose>
                 <button
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py  -2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   onClick={logOut}
                 >
                   Log out
@@ -226,7 +226,7 @@ const ProfilePage = () => {
                           className="w-full h-[10vw] border border-gray-300 rounded-lg p-2 resize-none"
                           {...register('description')}
                         ></textarea>
-                        <Button fieldname="Update" disabled={isOpen} type="submit" className="flex justify-center" />
+                        <Button fieldname="Update" disabled={isOpen} type="submit" styles="flex justify-center" />
                       </form>
                     </DialogHeader>
                   </DialogContent>

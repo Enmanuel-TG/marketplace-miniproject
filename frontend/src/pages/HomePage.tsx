@@ -10,7 +10,7 @@ import { filterStockProducts } from '@/utilities/filter-products.utility';
 import { Product } from '@/utilities/interfaces.utility';
 
 const HomePages = () => {
-  const { allProducts, errors, setErrors } = useProduct();
+  const { allProducts, errors, setErrors, getAllProducts } = useProduct();
   const [availableProducts, setAvailableProducts] = useState<Product[]>([]);
   const isFirstRender = useRef(true);
 
@@ -29,6 +29,10 @@ const HomePages = () => {
       errors.map((error) => toast.error(error, toastifyConfig));
     }
   }, [errors]);
+
+  useEffect(() => {
+    getAllProducts();
+  }, []);
 
   return (
     <div className="flex flex-col">

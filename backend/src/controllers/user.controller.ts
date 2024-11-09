@@ -28,6 +28,7 @@ export const profile = async (req: ExtendedRequest, res: Response) => {
     description: userFound.description,
     photo: userFound.photo,
     createdAt: userFound.createdAt,
+    role: userFound.role,
   });
 };
 
@@ -103,6 +104,7 @@ export const getUser = async (req: Request, res: Response) => {
       photo: userFound.photo,
       description: userFound.description,
       phoneNumber: userFound.phoneNumber,
+      Role: userFound.role,
     });
   } catch (error) {
     return res.status(500).json({
