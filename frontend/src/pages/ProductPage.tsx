@@ -71,14 +71,13 @@ export const ProductPage = () => {
   useEffect(() => {
     if (!user) return;
     // user.role === 'admin'
-    if (user.id === product.userId) {
-      setProductOwner(true);
-    }
+    setProductOwner(user.id === product.userId);
   }, [user, product]);
 
   const userProfile = () => {
     navigate(`/user-Profile/id:${product.userId}`);
   };
+
 
   if (!product) {
     return (

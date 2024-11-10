@@ -22,7 +22,6 @@ const ExternalProfilePage = () => {
   const { getAllUSerProducts, allProducts } = useProduct();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
-
   const [rating, setRating] = useState<RatingProps>({ average: 0, count: 0 });
   const [isAvailable, setIsAvailable] = useState(true);
   const { id } = useParams<{ id: string }>();
@@ -45,7 +44,8 @@ const ExternalProfilePage = () => {
 
   useEffect(() => {
     if (allProducts.length > 0) {
-      const filtered = filterStockProducts(allProducts, isAvailable,  Number(userId));  
+      const userProducts = allProducts.filter((product) => product.userId === Number(userId));
+      const filtered = filterStockProducts(userProducts, isAvailable);
       setFilteredProducts(filtered);
     }
   }, [allProducts, isAvailable]);
@@ -58,8 +58,7 @@ const ExternalProfilePage = () => {
 
   if (!userData) {
     return <div>User no found</div>;
-  }
-  console.log(filteredProducts);
+  };
 
   return (
     <div>
