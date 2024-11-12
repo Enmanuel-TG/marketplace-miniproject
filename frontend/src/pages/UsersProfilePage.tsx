@@ -50,7 +50,7 @@ const ExternalProfilePage = () => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response && error.response.data) {
-          toast.error(error.response.data.message, toastifyConfig); 
+          toast.error(error.response.data.message, toastifyConfig);
         }
       }
     }
