@@ -61,6 +61,7 @@ export interface AuthContextType {
   setIsResetPasswordEmailSent: (value: boolean) => void;
   getDataUser: (id: number) => void;
   userData: Profile | null;
+  setUserData: (value: Profile | null) => void;
   updatedDescription: (description: Profile['description']) => void;
 }
 

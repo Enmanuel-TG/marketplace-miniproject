@@ -260,6 +260,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
         getDataUser,
         userData,
         updatedDescription,
+        setUserData,
       }}
     >
       {children}

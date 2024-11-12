@@ -11,6 +11,10 @@ import { Switch } from '@/components/ui/switch';
 import { ProductCard } from '@/components/ProductCard';
 import Button from '@/components/ui/Button';
 import HeadPage from '@/components/HeadPage';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { updateRoleRequest } from '@/services/role.service';
+import { toastifyConfig } from '@/utilities/toastify.utility';
 
 interface RatingProps {
   average: number;
@@ -18,8 +22,8 @@ interface RatingProps {
 }
 
 const ExternalProfilePage = () => {
-  const { userData, getDataUser, user } = useAuth();
-  const { getAllUSerProducts, allProducts } = useProduct();
+  const { userData, getDataUser, user, setUserData } = useAuth();
+  const { allProducts } = useProduct();
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [rating, setRating] = useState<RatingProps>({ average: 0, count: 0 });
@@ -32,14 +36,34 @@ const ExternalProfilePage = () => {
     setRating(res.data);
   };
 
+  const changeRole = async (id: number, role: string) => {
+    try {
+      if (role === userData?.role) {
+        toast.error('This user already has this role', toastifyConfig);
+        return;
+      }
+      const res = await updateRoleRequest(id, role);
+      if (res.status === 200) {
+        setUserData({ ...userData, role } as Profile);
+        toast.success(res.data.message, toastifyConfig);
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.data) {
+          toast.error(error.response.data.message, toastifyConfig); 
+        }
+      }
+    }
+  };
+
   useEffect(() => {
-    if (userData === ({} as Profile)) return;
-    getDataUser(Number(userId));
+    if (userData !== ({} as Profile)) {
+      getDataUser(Number(userId));
+    }
   }, []);
 
   useEffect(() => {
     getUserRating(Number(userId));
-    getAllUSerProducts();
   }, []);
 
   useEffect(() => {
@@ -58,7 +82,7 @@ const ExternalProfilePage = () => {
 
   if (!userData) {
     return <div>User no found</div>;
-  };
+  }
 
   return (
     <div>
@@ -79,8 +103,20 @@ const ExternalProfilePage = () => {
                   </DialogHeader>
                   <DialogClose>
                     <div className="flex justify-around w-5/6 m-auto gap-2 my-6">
-                      <Button fieldname="Change to user" styles="no-drag no-select py-2 px-4" />
-                      <Button fieldname="Change to admin" styles="no-drag no-select py-2 px-4" />
+                      <Button
+                        fieldname="Change to user"
+                        onClick={() => {
+                          changeRole(Number(userId), 'user');
+                        }}
+                        styles="no-drag no-select py-2 px-4"
+                      />
+                      <Button
+                        fieldname="Change to admin"
+                        onClick={() => {
+                          changeRole(Number(userId), 'admin');
+                        }}
+                        styles="no-drag no-select py-2 px-4"
+                      />
                     </div>
                   </DialogClose>
                 </DialogContent>

@@ -166,7 +166,6 @@ export const ProductProvider = ({ children }: ProviderProps) => {
   //------------------------------
   useEffect(() => {
     getAllProducts();
-    
   }, []);
 
   return (

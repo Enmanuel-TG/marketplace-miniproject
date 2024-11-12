@@ -1,9 +1,7 @@
 import { Router } from 'express';
-import { changeRolUser } from '../controllers/roles.controller';
-import { getUserAndRole } from '../middlewares/validate-role.middleware.ts';
+import { changeRoleUser } from '../controllers/roles.controller';
 
 const router = Router();
 
-router.post('/change', getUserAndRole, changeRolUser); //TODO: agregar schema
-
+router.put('/change', changeRoleUser); //TODO: agregar schema
 export default router;
