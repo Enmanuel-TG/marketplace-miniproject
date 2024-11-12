@@ -67,12 +67,16 @@ const Rating = ({ data, allowRating }: { data: { average: number; count: number 
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Add a review</DialogTitle>
+              <DialogTitle>
+                <h2>Add a review</h2>
+              </DialogTitle>
+              <br />
+              If you have already added a validation, when you re-rate, you change your previous rating.
               <DialogDescription>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <Input fieldname="Add review" type="number" {...register('rating')} min="1" max="5" />
+                <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
+                  <Input fieldname="" type="number" {...register('rating')} min="1" max="5" />
                   <br />
-                  <Button fieldname="Submit" type="submit" className="w-full" />
+                  <Button fieldname="Submit" type="submit" styles="w-full py-3" />
                 </form>
               </DialogDescription>
             </DialogHeader>
