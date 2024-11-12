@@ -70,10 +70,7 @@ export const ProductPage = () => {
 
   useEffect(() => {
     if (!user) return;
-    // user.role === 'admin'
-    if (user.id === product.userId) {
-      setProductOwner(true);
-    }
+    setProductOwner(user.id === product.userId);
   }, [user, product]);
 
   const userProfile = () => {
@@ -107,11 +104,10 @@ export const ProductPage = () => {
               <span className="text-3xl text-green-600 font-semibold no-drag">${product.price}</span>
             </div>
             <div>
-              {productOwner ? (
-                <div>
+              {productOwner || user?.role === 'admin' ? (
+                <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
                   <Dialog>
-                    <DialogTrigger className="bg-red-500 text-white mr-2 py-2 px-4 rounded-lg hover:bg-red-600 transition-colors">
-                      {' '}
+                    <DialogTrigger className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors">
                       Delete
                     </DialogTrigger>
                     <DialogContent>
@@ -144,6 +140,19 @@ export const ProductPage = () => {
                 </div>
               )}
             </div>
+          </div>
+          <div>
+            {user?.role === 'admin' && !productOwner && (
+              <div className="flex items-center">
+                <img src={userData?.photo} onClick={userProfile} className="w-10 h-10 rounded-full mr-2" />
+                <div className="flex flex-row">
+                  <p className="text-gray-500 pr-2 cursor-pointer">Seller:</p>
+                  <div className="cursor-pointer" onClick={userProfile}>
+                    {userData?.name}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="mb-8">
             <h2 className="text-xl text-white pb-2 mb-2 font-semibold no-drag no-select">Description</h2>
@@ -185,7 +194,7 @@ export const ProductPage = () => {
               {productOwner ? (
                 <div>
                   <Button
-                    className="bg-red-500 px-4 py-2 rounded-md text-white"
+                    styles="bg-red-500 px-4 py-2 rounded-md text-white"
                     fieldname="Mark as sold"
                     onClick={markAsSold}
                   />

@@ -18,7 +18,7 @@ import UpdateProductPage from './pages/UpdateProductPage';
 import ExternalProfilePage from './pages/UsersProfilePage';
 
 const router = createBrowserRouter([
-  {path: '*', element: <HomePages />},
+  { path: '*', element: <HomePages /> },
   { path: '/register', element: <RegisterPages /> },
   { path: '/login', element: <LoginPages /> },
   { path: '/', element: <HomePages /> },

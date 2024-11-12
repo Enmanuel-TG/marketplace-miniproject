@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import { prisma } from '../utilities/prisma.utility.ts';
 
-export const changeRolUser = async (req: Request, res: Response) => {
-  const { email, role } = req.body;
+export const changeRoleUser = async (req: Request, res: Response) => {
+  const { id, role } = req.body;
   try {
     const updatedUser = await prisma.user.update({
       where: {
-        email: email,
+        id,
       },
       data: {
-        role: role,
+        role,
       },
     });
     return res.status(200).json({

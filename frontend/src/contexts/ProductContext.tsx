@@ -184,6 +184,7 @@ export const ProductProvider = ({ children }: ProviderProps) => {
         getAllUSerProducts,
         setProduct,
         updateStock,
+        getAllProducts,
       }}
     >
       {children}
