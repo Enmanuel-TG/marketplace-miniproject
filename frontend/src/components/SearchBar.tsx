@@ -1,7 +1,7 @@
 import { FieldValues, useForm } from 'react-hook-form';
 import { useProduct } from '../contexts/ProductContext';
 import Input from './ui/Input';
-import { categoryOptions } from '../utilities/selectOption';
+import { categoryOptions } from '../utilities/select-option.utility';
 
 const SearchBar = () => {
   const { register, handleSubmit } = useForm();
@@ -16,7 +16,7 @@ const SearchBar = () => {
   };
 
   const getAllProducts = (data: string) => {
-    if(data === '') {
+    if (data === '') {
       filterCategory('All');
     }
   };

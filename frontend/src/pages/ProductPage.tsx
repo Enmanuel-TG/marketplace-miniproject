@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from '@/components/ui/Dialog';
 import Button from '@/components/ui/Button';
 import Input from '../components/ui/Input';
 import { FieldValues, useForm } from 'react-hook-form';
@@ -37,9 +37,7 @@ export const ProductPage = () => {
 
   const ProductDelete = async () => {
     deleteProduct(productID as unknown as number);
-    setTimeout(() => {
-      back();
-    }, 2000);
+    back();
   };
 
   const onSubmit = async (data: FieldValues) => {

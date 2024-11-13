@@ -16,9 +16,10 @@ import { ProductPage } from './pages/ProductPage';
 import CreateProductPage from './pages/CreateProductPage';
 import UpdateProductPage from './pages/UpdateProductPage';
 import ExternalProfilePage from './pages/UsersProfilePage';
+import { Navigate } from 'react-router-dom';
 
 const router = createBrowserRouter([
-  { path: '*', element: <HomePages /> },
+  { path: '*', element:  <Navigate to='/' /> },
   { path: '/register', element: <RegisterPages /> },
   { path: '/login', element: <LoginPages /> },
   { path: '/', element: <HomePages /> },

@@ -15,6 +15,7 @@ const ImageUploader = ({ onFilesChange, imgs }: ImageUploaderProps) => {
     const updatedFiles = [...selectedFiles, ...acceptedFiles];
     setSelectedFiles(updatedFiles);
     onFilesChange([...updatedFiles, ...previewImage]);
+    console.log(updatedFiles);
   };
 
   const handleRemoveFile = (index: number) => {
@@ -26,6 +27,7 @@ const ImageUploader = ({ onFilesChange, imgs }: ImageUploaderProps) => {
   const handleRemoveNewFile = (index: number) => {
     const newImgs = previewImage.filter((_, i) => i !== index);
     setPreviewImage(newImgs);
+    onFilesChange([...selectedFiles, ...newImgs]);
   };
 
   const getImgs = async () => {
@@ -33,6 +35,8 @@ const ImageUploader = ({ onFilesChange, imgs }: ImageUploaderProps) => {
     setPreviewImage(res as File[]);
     onFilesChange(res as File[]);
   };
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
     if (imgs) {

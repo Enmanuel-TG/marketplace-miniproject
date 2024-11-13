@@ -13,13 +13,17 @@ const FooterPage = () => {
           <div className="flex gap-4">
             <Button
               fieldname="Login"
-              onClick={() => { navigate('/login'); }}
-              className="text-white hover:text-blue-700 text-lg hover:underline no-select no-drag"
+              onClick={() => {
+                navigate('/login');
+              }}
+              styles="text-white hover:text-blue-700 text-lg hover:underline no-select no-drag"
             />
             <Button
               fieldname="Register"
-              onClick={() => {navigate('/register'); }}
-              className="text-white hover:text-blue-700 text-lg hover:underline no-select no-drag"
+              onClick={() => {
+                navigate('/register');
+              }}
+              styles="text-white hover:text-blue-700 text-lg hover:underline no-select no-drag"
             />
           </div>
         </div>

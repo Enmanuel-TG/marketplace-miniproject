@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { toast } from 'react-toastify';
 
-const style: string =
-  'bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400 hover:cursor-pointer no-select no-drag';
+const style = 'bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400 hover:cursor-pointer no-select no-drag';
 
 export const HomeMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
+  
 
   const verifyAuthStatus = (where: string) => {
     if (!isAuthenticated) {

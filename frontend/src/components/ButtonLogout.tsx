@@ -1,5 +1,7 @@
 import { logoutRequest } from '../services/auth.service';
 import { useAuth } from '../contexts/AuthContext';
+import { toast } from 'react-toastify';
+import { toastifyConfig } from '@/utilities/toastify.utility';
 
 const ButtonLogout = () => {
   const { setIsAuthenticated } = useAuth();
@@ -9,7 +11,7 @@ const ButtonLogout = () => {
       await logoutRequest();
       setIsAuthenticated(false);
     } catch (error) {
-      alert(error); //TODO fix this
+      toast.error('Error logging out', toastifyConfig);
     }
   };
   return (

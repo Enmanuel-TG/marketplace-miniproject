@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { Product } from '../utilities/interfaces.utility';
 import { useProduct } from '../contexts/ProductContext';
-import { categoryOptions, stateOptions } from '../utilities/selectOption';
+import { categoryOptions, stateOptions } from '../utilities/select-option.utility';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
 import { useEffect, useRef } from 'react';
@@ -20,10 +20,7 @@ const UpdateProductPage = () => {
   useEffect(() => {
     if (!product) {
       toast.error('Product not found', toastifyConfig);
-      setTimeout(() => {
-        navigate('/');
-      }, 6000);
-      return;
+      navigate('/');
     }
   }, [product]);
 

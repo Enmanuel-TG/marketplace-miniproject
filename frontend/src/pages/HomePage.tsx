@@ -9,8 +9,8 @@ import FooterPage from '../components/FooterPage';
 
 const HomePages = () => {
   const { allProducts, errors, setErrors, getAllProducts } = useProduct();
-  const isFirstRender = useRef(true);
   const ProductAvailable = allProducts.filter((product) => product.stock > 0);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     if (isFirstRender.current) {

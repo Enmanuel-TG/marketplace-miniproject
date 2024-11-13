@@ -1,5 +1,6 @@
 import { useAuth } from '../contexts/AuthContext';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Layout from './Layout';
 import Loading from './Loading';
 
 const ProtectedRouter = () => {
@@ -11,7 +12,11 @@ const ProtectedRouter = () => {
     return <Loading />;
   }
 
-  return <Outlet />;
+  return (
+    <Layout>
+      <Outlet />
+    </Layout>
+  );
 };
 
 export default ProtectedRouter;

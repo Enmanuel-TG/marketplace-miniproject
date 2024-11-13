@@ -4,14 +4,14 @@ import { ButtonBack } from '../components/ui/ButtonBack';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
-import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/Dialog';
 import { ProductCard } from '@/components/ProductCard';
 import { useProduct } from '@/contexts/ProductContext';
 import Input from '@/components/ui/Input';
 import { Product, UpdateUser } from '@/utilities/interfaces.utility';
 import { updateDescription, updateUserRequest } from '../services/auth.service';
 import Button from '@/components/ui/Button';
-import { Switch } from '@/components/ui/switch';
+import { Switch } from '@/components/ui/Switch';
 import { filterStockProducts } from '@/utilities/filter-products.utility';
 import axios from 'axios';
 import { getRating } from '../services/rating.service';
@@ -32,6 +32,8 @@ const ProfilePage = () => {
   const [rating, setRating] = useState<RatingProps>({ average: 0, count: 0 });
   const [isOpen, setIsOpen] = useState(false);
   const isFirstRender = useRef(true);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
   const { register, handleSubmit, setValue } = useForm<UpdateUser>({
     defaultValues: {
       name: '',
@@ -83,6 +85,12 @@ const ProfilePage = () => {
       getUserRating(user?.id as number);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (user?.phoneNumber === '0000000000') {
+      triggerRef.current?.click();
+    }
+  }, []);
 
   const changeDescription = async (data: UpdateUser) => {
     const description = data.description as string;
@@ -175,7 +183,7 @@ const ProfilePage = () => {
               <Dialog>
                 <div className="flex flex-row items-center gap-4">
                   <p className="text-white text-[3vw] lg:text-[2.5vw] font-semibold">{user?.name}</p>
-                  <DialogTrigger>
+                  <DialogTrigger ref={triggerRef}>
                     <img
                       src="/edit.svg"
                       alt="edit"

@@ -5,7 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from '@/components/ui/Dialog';
 import { FieldValues, useForm } from 'react-hook-form';
 import { createOrUpdateRating } from '../services/rating.service';
 import Input from './ui/Input';

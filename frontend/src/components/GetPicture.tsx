@@ -2,7 +2,7 @@ import { toastifyConfig } from '@/utilities/toastify.utility';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAuth } from '@/contexts/AuthContext';
-import { DialogClose } from '@/components/ui/dialog';
+import { DialogClose } from '@/components/ui/Dialog';
 
 const GetPicture = ({ onPhotoChange }: { onPhotoChange: (newPhoto: string) => void }) => {
   const { updatePhotoProfile } = useAuth();

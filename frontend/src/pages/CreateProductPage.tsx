@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { Product } from '../utilities/interfaces.utility';
 import Input from '../components/ui/Input';
 import { useProduct } from '../contexts/ProductContext';
-import { categoryOptions, stateOptions } from '../utilities/selectOption';
+import { categoryOptions, stateOptions } from '../utilities/select-option.utility';
 import Button from '../components/ui/Button';
 import HeadPage from '../components/HeadPage';
 import { toastifyConfig } from '../utilities/toastify.utility';

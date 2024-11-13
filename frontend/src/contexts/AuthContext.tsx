@@ -188,15 +188,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       }
     }
   };
-  useEffect(() => {
-    if (errors.length > 0) {
-      const timer = setTimeout(() => {
-        setErrors([]);
-        setIsResetPasswordEmailSent(false);
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [errors]);
+
   const checkAuth = async () => {
     try {
       const res = await profileRequest();
