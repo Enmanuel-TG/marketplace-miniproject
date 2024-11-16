@@ -16,6 +16,7 @@ import { ProductPage } from './pages/ProductPage';
 import CreateProductPage from './pages/CreateProductPage';
 import UpdateProductPage from './pages/UpdateProductPage';
 import ExternalProfilePage from './pages/UsersProfilePage';
+import RoleManager from './pages/RoleManager';
 import { Navigate } from 'react-router-dom';
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/update-product/:id',
         element: <UpdateProductPage />,
+      },
+      {
+        path: '/role-manager',
+        element: <RoleManager />,
       },
     ],
   },

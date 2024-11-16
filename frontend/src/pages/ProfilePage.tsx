@@ -203,7 +203,7 @@ const ProfilePage = () => {
                       <Input type="date" fieldname="Birthday" {...register('birthday', { required: true })} />
                       <Input type="text" fieldname="Phone Number" {...register('phoneNumber', { required: true })} />
                       <DialogClose>
-                        <Button type="submit" fieldname="Update Profile" />
+                        <Button type="submit" fieldname="Update Profile" styles="p-2 mt-4" />
                       </DialogClose>
                     </form>
                   </div>
@@ -234,7 +234,7 @@ const ProfilePage = () => {
                           className="w-full h-[10vw] border border-gray-300 rounded-lg p-2 resize-none"
                           {...register('description')}
                         ></textarea>
-                        <Button fieldname="Update" disabled={isOpen} type="submit" styles="flex justify-center" />
+                        <Button fieldname="Update" disabled={isOpen} type="submit" styles="flex justify-center mt-4 p-2" />
                       </form>
                     </DialogHeader>
                   </DialogContent>

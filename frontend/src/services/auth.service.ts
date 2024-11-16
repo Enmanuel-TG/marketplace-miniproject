@@ -61,3 +61,7 @@ export const getUser = async (id: number) => {
 export const updateDescription = async (description: string) => {
   return await server.put('/user/description', description);
 };
+
+export const getAllUsers = async () => {
+  return await server.get('/user/all-users');
+};
