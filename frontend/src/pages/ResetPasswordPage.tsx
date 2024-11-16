@@ -44,7 +44,7 @@ export const ResetPasswordPage = () => {
   }, [resetPasswordErrors]);
 
   return (
-    <>
+    <div>
       <HeadPage namePage="Reset Password" />
       <div className="flex m-28 justify-center min-h-screen">
         <div className="w-full max-w-lg mx-auto p-8">
@@ -62,10 +62,10 @@ export const ResetPasswordPage = () => {
               }}
             />
           ) : (
-            <Button fieldname="Save" type="submit" onClick={handleSubmit(onSubmit)} />
+            <Button fieldname="Save" styles="px-3 py-2" type="submit" onClick={handleSubmit(onSubmit)} />
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };

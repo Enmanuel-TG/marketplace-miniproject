@@ -110,7 +110,7 @@ const CreateProductPage = () => {
             </div>
             <Input type="text" fieldname="Description" {...register('description', { required: true })} />
             <div className="flex justify-end mt-5">
-              <Button type="submit" fieldname="Create Product" disabled={isLoading} />
+              <Button type="submit" fieldname="Create Product" disabled={isLoading} styles="p-3" />
             </div>
           </form>
         </div>

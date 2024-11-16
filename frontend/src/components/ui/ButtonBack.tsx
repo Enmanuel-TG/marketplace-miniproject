@@ -6,7 +6,7 @@ export const ButtonBack = ({ className }: { className: ClassValue }) => {
   return (
     <div>
       <img
-        src="/arrowBack.svg"
+        src="/home.svg"
         onClick={() => {
           navigate('/');
         }}

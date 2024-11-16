@@ -128,7 +128,8 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const filtered = filterStockProducts(allProducts, isAvailable);
-    setFilteredProducts(filtered);
+    const filterUserProducts = filtered.filter((product) => product.userId === user?.id);
+    setFilteredProducts(filterUserProducts);
   }, [allProducts, isAvailable]);
 
   useEffect(() => {
@@ -139,14 +140,14 @@ const ProfilePage = () => {
     <Dialog>
       <div className="flex mx-4">
         <ButtonBack className="mt-4" />
-        <h1 className="text-3xl font-bold mb-8 text-white ml-4 mt-4 no-drag no-select">Profile</h1>
+        <h1 className="text-3xl font-bold mb-8 ml-4 mt-4 no-drag no-select">Profile</h1>
       </div>
       <div>
-        <div className="bg-gray-900 mt-10 mx-auto w-full max-w-[80vw] no-drag no-select p-[4vw] sm:p-[3vw] lg:p-[2vw] rounded-lg shadow-md">
+        <div className="bg-background mt-10 mx-auto w-full max-w-[80vw] no-drag no-select p-[4vw] sm:p-[3vw] lg:p-[2vw] rounded-lg shadow-md">
           <Dialog>
             <DialogTrigger>
               <Button
-                styles="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-5 top-5"
+                styles="bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute right-5 top-5"
                 fieldname="Log out"
               />
             </DialogTrigger>
@@ -158,7 +159,7 @@ const ProfilePage = () => {
               </DialogHeader>
               <DialogClose>
                 <button
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   onClick={logOut}
                 >
                   Log out
@@ -173,7 +174,7 @@ const ProfilePage = () => {
                 className="no-select no-drag rounded-full shadow-lg w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] object-cover"
               />
               <DialogTrigger
-                className="absolute bottom-[1vw] right-[1vw] px-[1vw] py-[0.5vw] bg-blue-500 text-white rounded-lg"
+                className="absolute bottom-[1vw] right-[1vw] px-[1vw] py-[0.5vw] bg-blue-500 rounded-lg"
                 onClick={() => setIsEdit(true)}
               >
                 Edit
@@ -182,7 +183,7 @@ const ProfilePage = () => {
             <div className="text-center lg:text-left w-2/3">
               <Dialog>
                 <div className="flex flex-row items-center gap-4">
-                  <p className="text-white text-[3vw] lg:text-[2.5vw] font-semibold">{user?.name}</p>
+                  <p className=" text-[3vw] lg:text-[2.5vw] font-semibold">{user?.name}</p>
                   <DialogTrigger ref={triggerRef}>
                     <img
                       src="/edit.svg"
@@ -209,7 +210,7 @@ const ProfilePage = () => {
                 </DialogContent>
               </Dialog>
               {user?.createdAt && (
-                <div className="text-white mt-[1vw] text-[2.5vw] sm:text-[1.5vw] lg:text-[1vw]">
+                <div className=" mt-[1vw] text-[2.5vw] sm:text-[1.5vw] lg:text-[1vw]">
                   Joined on{' '}
                   {new Date(user?.createdAt).toLocaleDateString('en-US', {
                     month: 'long',
@@ -223,7 +224,7 @@ const ProfilePage = () => {
               <Dialog>
                 <div className="flex flex-row">
                   <div className="w-full h-[7vw] mt-3 border mr-3 border-gray-300 rounded-md">
-                    <p className="text-white">{user?.description}</p>
+                    <p className="">{user?.description}</p>
                   </div>
                   <DialogContent>
                     <DialogHeader>
@@ -268,7 +269,7 @@ const ProfilePage = () => {
       <br />
       <div className="w-[80vw] mx-auto">
         <hr />
-        <p className="text-white mt-7 text-[3vw] sm:text-[1.5vw] lg:text-[1.5vw] font-semibold">Product history</p>
+        <p className=" mt-7 text-[3vw] sm:text-[1.5vw] lg:text-[1.5vw] font-semibold">Product history</p>
         <label htmlFor="showAvailableOnly">
           <Switch
             name="showAvailableOnly"
@@ -276,7 +277,7 @@ const ProfilePage = () => {
             checked={isAvailable}
             onCheckedChange={() => setIsAvailable(!isAvailable)}
           />
-          <span className="text-white pl-2">Show available only</span>
+          <span className="pl-2">Show available only</span>
         </label>
         <br />
         <br />

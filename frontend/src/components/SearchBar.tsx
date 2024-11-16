@@ -46,7 +46,7 @@ const SearchBar = () => {
           <Input
             fieldname=""
             type="search"
-            className="w-full pl-10 text-sm border rounded-lg focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500"
+            className="w-full pl-10 text-sm text-primary border rounded-lg focus:border-blue-500 bg-muted focus:ring-blue-500"
             placeholder="Search product by Name or Location"
             {...register('search', { required: true, onChange: (e) => getAllProducts(e.target.value) })}
           />
@@ -56,7 +56,7 @@ const SearchBar = () => {
         id="category"
         defaultValue=""
         onChange={handleCategoryChange}
-        className="fl text-sm border rounded-lg bg-gray-700 border-gray-600 text-white focus:ring-blue-500 focus:border-blue-500"
+        className="ml-3 px-3 text-sm border rounded-lg bg-muted text-primary focus:ring-blue-500 focus:border-blue-500"
       >
         <option value="" disabled>
           Select Filter

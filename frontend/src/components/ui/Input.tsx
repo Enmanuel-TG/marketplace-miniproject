@@ -7,7 +7,7 @@ interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<H
 const Input = forwardRef<HTMLInputElement, InputProps>(({ fieldname, ...props }, ref) => {
   return (
     <label className="flex flex-col px-1">
-      <span className="text-white" >{fieldname}</span>
+      <span>{fieldname}</span>
       <input
         ref={ref}
         {...props}

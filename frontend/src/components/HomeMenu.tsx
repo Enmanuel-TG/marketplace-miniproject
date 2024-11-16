@@ -4,13 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { toast } from 'react-toastify';
 
-const style = 'bg-white my-2 p-2 placeholder: rounded-full shadow-md hover:bg-gray-400 hover:cursor-pointer no-select no-drag';
+const style = 'bg-white m-2 rounded-full hover:bg-gray-400 hover:cursor-pointer no-select no-drag aspect-square object-contain';
 
 export const HomeMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  
 
   const verifyAuthStatus = (where: string) => {
     if (!isAuthenticated) {
@@ -47,7 +46,23 @@ export const HomeMenu = () => {
         onClick={() => setMenuOpen(!menuOpen)}
         className="fixed bottom-4 right-4 z-10 p-4 bg-blue-600 text-white rounded-full shadow-md transition-opacity duration-300"
       >
-        <img src="/menu.svg" className="w-8" />
+        <svg
+          id="Menu--Streamline-Carbon.svg"
+          className="size-8 fill-secondary"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="-0.5 -0.5 16 16"
+          height="16"
+          width="16"
+        >
+          <desc>Menu Streamline Icon: https://streamlinehq.com</desc>
+          <defs></defs>
+          <title>menu</title>
+          <path d="M1.875 2.8125h11.25v0.9375H1.875Z" strokeWidth="1"></path>
+          <path d="M1.875 11.25h11.25v0.9375H1.875Z" strokeWidth="1"></path>
+          <path d="M1.875 5.625h11.25v0.9375H1.875Z" strokeWidth="1"></path>
+          <path d="M1.875 8.4375h11.25v0.9375H1.875Z" strokeWidth="1"></path>
+          <path id="_Transparent_Rectangle_" d="M0 0h15v15H0Z" fill="none" strokeWidth="1"></path>
+        </svg>
       </div>
     </div>
   );

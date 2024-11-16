@@ -4,7 +4,7 @@ import { useProduct } from '../contexts/ProductContext';
 import { categoryOptions, stateOptions } from '../utilities/select-option.utility';
 import Input from '../components/ui/Input';
 import Button from '../components/ui/Button';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +14,7 @@ import HeadPage from '@/components/HeadPage';
 const UpdateProductPage = () => {
   const { product, updateProduct, errors, setProduct, setErrors } = useProduct();
   const { register, handleSubmit, setValue } = useForm<Product>({ defaultValues: product });
+  const [isLoading, setIsLoading] = useState(false);
   const isFirstRender = useRef(true);
   const navigate = useNavigate();
 
@@ -36,6 +37,7 @@ const UpdateProductPage = () => {
   }, [errors]);
 
   const onSubmit = async (data: Product) => {
+    setIsLoading(true);
     const res = await updateProduct(data);
     if (res) {
       toast.success(res.message, toastifyConfig);
@@ -101,7 +103,7 @@ const UpdateProductPage = () => {
           </div>
           <Input type="text" fieldname="Description" {...register('description', { required: true })} />
           <div className="flex justify-end mt-5">
-            <Button type="submit" fieldname="Update Product" />
+            <Button type="submit" fieldname="Update Product" styles="p-3" disabled={isLoading} />
           </div>
         </form>
       </div>

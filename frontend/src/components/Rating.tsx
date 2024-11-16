@@ -53,9 +53,9 @@ const Rating = ({ data, allowRating }: { data: { average: number; count: number 
         .map((_, index) => (
           <div key={index}>{star}</div>
         ))}
-      <p className="ms-2 text-sm font-bold text-white">{data.average}</p>
+      <p className="ms-2 text-sm font-bold  ">{data.average}</p>
       <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full"></span>
-      <a href="#" className="text-sm font-medium text-white underline hover:no-underline dark:text-white">
+      <a href="#" className="text-sm font-medium underline hover:no-underline">
         {data.count} reviews
       </a>
       {allowRating && (

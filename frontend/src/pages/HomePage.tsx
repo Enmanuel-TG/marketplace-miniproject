@@ -28,12 +28,12 @@ const HomePages = () => {
   }, []);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-screen">
       <div className="flex">
         <SearchBar />
       </div>
       {ProductAvailable.length === 0 && (
-        <h1 className="text-3xl font-bold mx-auto mt-6 text-white">No products found</h1>
+        <h1 className="text-3xl font-bold mx-auto mt-6 bg-background  text-white">No products found</h1>
       )}
       <div className="max-w-screen w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {ProductAvailable.map((product) => (

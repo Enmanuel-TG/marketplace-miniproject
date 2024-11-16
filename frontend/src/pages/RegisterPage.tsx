@@ -43,10 +43,10 @@ const RegisterPage = () => {
   };
 
   return (
-    <>
+    <div>
       <HeadPage namePage="Register" />
-      <div className="flex my-28 justify-center min-h-screen">
-        <div className="w-full max-w-md mx-auto">
+      <div className="m-auto">
+        <div className="w-full max-w-md mx-auto my-28">
           <Slider ref={sliderRef} {...formSliderSettings}>
             <div>
               <form>
@@ -63,7 +63,12 @@ const RegisterPage = () => {
                   className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <div className="flex justify-end">
-                  <Button fieldname="Next" type="button" onClick={() => sliderRef.current?.slickNext()} />
+                  <Button
+                    styles="px-3 py-2"
+                    fieldname="Next"
+                    type="button"
+                    onClick={() => sliderRef.current?.slickNext()}
+                  />
                 </div>
               </form>
             </div>
@@ -82,8 +87,18 @@ const RegisterPage = () => {
                   className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <div className="flex justify-between">
-                  <Button fieldname="Back" type="button" onClick={() => sliderRef.current?.slickPrev()} />
-                  <Button fieldname="Next" type="button" onClick={() => sliderRef.current?.slickNext()} />
+                  <Button
+                    fieldname="Back"
+                    type="button"
+                    styles="px-3 py-2"
+                    onClick={() => sliderRef.current?.slickPrev()}
+                  />
+                  <Button
+                    fieldname="Next"
+                    type="button"
+                    styles="px-3 py-2"
+                    onClick={() => sliderRef.current?.slickNext()}
+                  />
                 </div>
               </form>
             </div>
@@ -102,27 +117,40 @@ const RegisterPage = () => {
                   className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <div className="flex justify-between ">
-                  <Button fieldname="Back" type="button" onClick={() => sliderRef.current?.slickPrev()} />
-                  <Button fieldname="Register" type="submit" />
+                  <Button
+                    fieldname="Back"
+                    type="button"
+                    styles="px-3 py-2"
+                    onClick={() => sliderRef.current?.slickPrev()}
+                  />
+                  <Button fieldname="Register" styles="px-3 py-2" type="submit" />
                 </div>
               </form>
             </div>
           </Slider>
+
+          <div className="flex items-center my-4">
+            <hr className="flex-grow border-t border-gray-300" />
+            <span className="px-4 text-gray-500 text-sm">or</span>
+            <hr className="flex-grow border-t border-gray-300" />
+          </div>
+
           <button
             className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-8 rounded"
             onClick={registerWithGoogle}
           >
             Register with Google 🚀
           </button>
-          <div className="mt-4 text-center flex justify-center items-center space-x-2">
-            <h1 className="text-white">Already have an account?</h1>
+
+          <div className="mt-4 flex space-x-2">
+            <h1>Already have an account?</h1>
             <Link className="text-blue-500 cursor-pointer hover:underline" to="/login">
               Login
             </Link>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

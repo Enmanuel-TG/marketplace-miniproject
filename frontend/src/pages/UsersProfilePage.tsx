@@ -93,7 +93,7 @@ const ExternalProfilePage = () => {
             <div>
               <Dialog>
                 <DialogTrigger>
-                  <div className="">
+                  <div>
                     <Button fieldname="Role" styles="w-14 h-8 no-drag no-select mt-4 mr-4" />
                   </div>
                 </DialogTrigger>
@@ -126,7 +126,7 @@ const ExternalProfilePage = () => {
         </div>
       </div>
       <div className="mt-6 mx-auto w-full max-w-[90vw] no-drag no-select p-[4vw] sm:p-[3vw] lg:p-[2vw] ">
-        <div className="bg-gray-900 rounded-lg ">
+        <div className="rounded-lg ">
           <div className="flex flex-col lg:flex-row gap-[5vw] items-center lg:items-start">
             <img
               src={userData.photo}
@@ -135,10 +135,10 @@ const ExternalProfilePage = () => {
             />
             <div className="text-center lg:text-left">
               <div className="flex flex-row items-center gap-4 mt-6">
-                <p className="text-white text-[3vw] lg:text-[2.5vw] font-semibold">{userData.name}</p>
+                <p className=" text-[3vw] lg:text-[2.5vw] font-semibold">{userData.name}</p>
               </div>
               {userData.createdAt && (
-                <div className="text-white mt-[1vw] text-[2.5vw] sm:text-[1.5vw] lg:text-[1vw]">
+                <div className=" mt-[1vw] text-[2.5vw] sm:text-[1.5vw] lg:text-[1vw]">
                   Joined on{' '}
                   {new Date(userData.createdAt).toLocaleDateString('en-US', {
                     month: 'long',
@@ -150,14 +150,14 @@ const ExternalProfilePage = () => {
                 <Rating allowRating={true} data={rating} />
               </div>
               <div className="w-full h-[7vw] mt-3 border mr-3 border-gray-300 rounded-md">
-                <p className="text-white">{userData?.description}</p>
+                <p>{userData?.description}</p>
               </div>
             </div>
           </div>
         </div>
         <div className="mx-auto mt-10">
           <hr />
-          <p className="text-white mt-7 text-[3vw] sm:text-[1.5vw] lg:text-[1.5vw] font-semibold">Product history</p>
+          <p className=" mt-7 text-[3vw] sm:text-[1.5vw] lg:text-[1.5vw] font-semibold">Product history</p>
           <label htmlFor="showAvailableOnly">
             <Switch
               name="showAvailableOnly"
@@ -165,7 +165,7 @@ const ExternalProfilePage = () => {
               checked={isAvailable}
               onCheckedChange={() => setIsAvailable(!isAvailable)}
             />
-            <span className="text-white pl-2">Show available only</span>
+            <span className="pl-2">Show available only</span>
           </label>
           <br />
           <br />

@@ -29,13 +29,13 @@ export const ForgetPasswordPage = () => {
 
   return (
     <>
-      <HeadPage namePage="Reset Password" />
+      <HeadPage namePage="Forget Password Page" />
       <div className="flex my-28 justify-center min-h-screen">
         <div className="w-full max-w-lg mx-auto p-8">
-          <p className="text-white text-base mb-3">
+          <p className="text-base mb-3">
             Please enter the email address associated with your account to reset your password.
           </p>
-          <p className="text-white text-base mb-4">You will receive an email with a link to reset your password.</p>
+          <p className="  text-base mb-4">You will receive an email with a link to reset your password.</p>
           <br />
           <br />
           <div>
@@ -52,7 +52,7 @@ export const ForgetPasswordPage = () => {
               placeholder="Enter your email"
               {...register('email', { required: true })}
             />
-            {state || <Button fieldname="Send" type="submit" />}
+            {state || <Button fieldname="Send" styles="px-3 py-2" type="submit" />}
           </form>
         </div>
       </div>
