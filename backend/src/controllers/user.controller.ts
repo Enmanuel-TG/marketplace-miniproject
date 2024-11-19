@@ -174,3 +174,23 @@ export const updateDescription = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getAllUsers = async (_req: Request, res: Response) => {
+  try {
+    const users = await prisma.user.findMany();
+    const allUsers = users.map((user) => {
+      return {
+        id: user.id,
+        name: user.name,
+        photo: user.photo,
+        role: user.role,
+      };
+    });
+    return res.status(200).json(allUsers);
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error to get users.',
+      error,
+    });
+  }
+};

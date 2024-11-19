@@ -8,7 +8,7 @@ const style = 'bg-white m-2 rounded-full hover:bg-gray-400 hover:cursor-pointer 
 
 export const HomeMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
 
   const verifyAuthStatus = (where: string) => {
@@ -40,6 +40,16 @@ export const HomeMenu = () => {
             className={style}
             src="/profile.svg"
           />
+          {isAuthenticated && user?.role === 'admin' && (
+            <img
+              title="Role-manager"
+              onClick={() => {
+                verifyAuthStatus('role-manager');
+              }}
+              className={style}
+              src="/role.svg"
+            />
+          )}
         </div>
       )}
       <div

@@ -6,6 +6,7 @@ import {
   getUser,
   updateUser,
   updateDescription,
+  getAllUsers,
 } from '../controllers/user.controller';
 import validateToken from '../middlewares/validate-token.middleware.ts';
 import validateSchema from '../middlewares/validator.middleware.ts';
@@ -20,5 +21,6 @@ router.post('/get-user', getUser);
 router.put('/change-password', validateSchema(passwordValidator), changePassword);
 router.put('/profile', validateToken, validateSchema(updateProfileValidator), updateUser);
 router.put('/description', validateToken, validateSchema(descriptionValidator), updateDescription);
+router.get('/all-users', getAllUsers);
 
 export default router;
