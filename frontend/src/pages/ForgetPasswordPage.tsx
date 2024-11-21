@@ -47,6 +47,7 @@ export const ForgetPasswordPage = () => {
           </div>
           <form onSubmit={handleSubmit(setData)} className="space-y-4">
             <Input
+              required
               fieldname="Email"
               type="email"
               placeholder="Enter your email"

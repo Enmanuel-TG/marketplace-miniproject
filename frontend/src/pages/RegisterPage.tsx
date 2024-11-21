@@ -52,12 +52,14 @@ const RegisterPage = () => {
               <form>
                 <Input
                   fieldname="First Name"
+                  required
                   type="text"
                   {...register('firstName', { required: true })}
                   className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Input
                   fieldname="Last Name"
+                  required
                   type="text"
                   {...register('lastName', { required: true })}
                   className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -76,6 +78,7 @@ const RegisterPage = () => {
               <form>
                 <Input
                   fieldname="Date of Birth"
+                  required
                   type="date"
                   {...register('birthday', { required: true })}
                   className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -83,6 +86,7 @@ const RegisterPage = () => {
                 <Input
                   fieldname="Phone Number"
                   type="tel"
+                  required
                   {...register('phoneNumber', { required: true })}
                   className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -106,12 +110,14 @@ const RegisterPage = () => {
               <form onSubmit={handleSubmit(setData)}>
                 <Input
                   fieldname="Email"
+                  required
                   type="email"
                   {...register('email', { required: true })}
                   className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Input
                   fieldname="Password"
+                  required
                   type="password"
                   {...register('password', { required: true })}
                   className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"

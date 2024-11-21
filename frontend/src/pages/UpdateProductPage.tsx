@@ -58,11 +58,11 @@ const UpdateProductPage = () => {
       <div className="max-w-3xl p-5 m-auto">
         <form onSubmit={handleSubmit(onSubmit)}>
           <ImageUploader onFilesChange={handleFileChange} imgs={product?.photos as unknown as string[]} />
-          <Input type="text" fieldname="Title" {...register('name', { required: true })} />
+          <Input type="text" fieldname="Title" required {...register('name', { required: true })} />
           <div className="flex w-full justify-between mt-5">
-            <Input type="text" fieldname="Price" {...register('price', { required: true })} />
-            <Input type="text" fieldname="Stock" {...register('stock', { required: true })} />
-            <Input type="text" fieldname="Location" {...register('location', { required: true })} />
+            <Input type="text" fieldname="Price" required {...register('price', { required: true })} />
+            <Input type="text" fieldname="Stock" required {...register('stock', { required: true })} />
+            <Input type="text" fieldname="Location" required {...register('location', { required: true })} />
           </div>
           <div className="my-5 flex justify-between w-full gap-4">
             <div className="w-full">
@@ -101,7 +101,7 @@ const UpdateProductPage = () => {
               </select>
             </div>
           </div>
-          <Input type="text" fieldname="Description" {...register('description', { required: true })} />
+          <Input type="text" fieldname="Description" required {...register('description', { required: true })} />
           <div className="flex justify-end mt-5">
             <Button type="submit" fieldname="Update Product" styles="p-3" disabled={isLoading} />
           </div>

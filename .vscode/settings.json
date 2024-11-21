@@ -7,6 +7,7 @@
     "filedupload",
     "fontsource",
     "iconify",
+    "miniproject",
     "tailwindcss",
     "toastify"
   ],
@@ -16,5 +17,8 @@
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
-  "tailwindCSS.classAttributes": ["className", "tw", "variants"]
+  "tailwindCSS.classAttributes": ["className", "tw", "variants"],
+  "[markdown]": {
+    "editor.defaultFormatter": "ms-vsliveshare.vsliveshare"
+  }
 }

@@ -4,11 +4,12 @@ interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<H
   fieldname: string;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(({ fieldname, ...props }, ref) => {
+const Input = forwardRef<HTMLInputElement, InputProps>(({ fieldname, required, ...props }, ref) => {
   return (
     <label className="flex flex-col px-1">
-      <span>{fieldname}</span>
+      <span className='mb-1'>{fieldname} {required && <span className='text-red-500' title={`The ${fieldname} is required.`}>*</span>}</span>
       <input
+        required={required}
         ref={ref}
         {...props}
         className={`w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${props.className}`}

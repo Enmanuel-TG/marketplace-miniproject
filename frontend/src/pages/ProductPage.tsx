@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -93,15 +94,18 @@ export const ProductPage = () => {
       <HeadPage namePage={'Product Page'} />
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
         <div className="shadow-2xl rounded-lg max-w-5xl w-full overflow-hidden px-6 pb-4">
-          <div className="h-96 w-full mt-10 flex items-center justify-center">
+          <div className="h-96 w-full mt-4 sm:mt-10 flex items-center justify-center">
             <PhotoProduct images={product.photos as unknown as string[]} />
           </div>
-          <div className="my-6 flex justify-between items-center">
-            <div className="flex items-center">
-              <h1 className="text-3xl font-bold mr-4 no-drag">{product.name}</h1>
+          <div className="my-6 flex flex-col sm:flex-row sm:justify-between sm:items-center">
+            {/* Product Name and Price */}
+            <div className="flex flex-row sm:flex-row sm:items-center">
+              <h1 className="text-3xl font-bold mr-4 no-drag truncate">{product.name}</h1>
               <span className="text-3xl text-green-600 font-semibold no-drag">${product.price}</span>
             </div>
-            <div>
+
+            {/* Seller Information or Admin Options */}
+            <div className="mt-4 sm:mt-0">
               {productOwner || user?.role === 'admin' ? (
                 <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
                   <Dialog>
@@ -111,10 +115,19 @@ export const ProductPage = () => {
                     <DialogContent>
                       <DialogHeader>
                         <DialogTitle>Are you absolutely sure?</DialogTitle>
+                        <br />
                         <DialogDescription>
-                          This action cannot be undone. This will permanently delete this product and remove the data
-                          from our servers.
-                          <Button fieldname="Delete" onClick={ProductDelete} />
+                          <p>
+                            This action cannot be undone. This will permanently delete this product and remove the data
+                            from our servers.
+                          </p>
+                          <DialogClose className="w-full flex justify-center">
+                            <Button
+                              fieldname="Delete"
+                              styles="p-2 w-1/6 mt-6 hover:bg-red-600 bg-red-500 text-white rounded-lg"
+                              onClick={ProductDelete}
+                            />
+                          </DialogClose>
                         </DialogDescription>
                       </DialogHeader>
                     </DialogContent>
@@ -126,18 +139,24 @@ export const ProductPage = () => {
                   />
                 </div>
               ) : (
-                <div className="flex items-center">
-                  <img src={userData?.photo} onClick={userProfile} className="w-10 h-10 rounded-full mr-2" />
-                  <div className="flex flex-row">
-                    <p className=" pr-2 cursor-pointer">Seller:</p>
-                    <div className="cursor-pointer" onClick={userProfile}>
+                <div className="flex flex-row gap-3">
+                  <img
+                    src={userData?.photo}
+                    onClick={userProfile}
+                    className="w-10 h-10 rounded-full object-cover"
+                    alt="Seller"
+                  />
+                  <div className="flex flex-row gap-2 items-center">
+                    <p className="text-sm font-semibold">Seller:</p>
+                    <p className="cursor-pointer font-medium text-sm" onClick={userProfile}>
                       {userData?.name}
-                    </div>
+                    </p>
                   </div>
                 </div>
               )}
             </div>
           </div>
+
           <div>
             {user?.role === 'admin' && !productOwner && (
               <div className="flex items-center">
@@ -151,18 +170,14 @@ export const ProductPage = () => {
               </div>
             )}
           </div>
-          <div className="mb-8">
-            <h2 className="text-xl pb-2 mb-2 font-semibold no-drag no-select">Description</h2>
-            <p className="">{product.description}</p>
-          </div>
-          <div className="mb-4">
+          <div className="mb-4 flex flex-col md:flex-row flex-wrap gap-x-8">
             <div>
-              <p className="">
+              <p>
                 <strong className="mr-2no-drag no-select">Stock:</strong> {product.stock}
                 {productOwner && (
                   <Dialog>
                     <DialogTrigger>
-                      <img src="/edit.svg" className="w-6 h-6 ml-2" alt="Edit Stock" />
+                      <img src="/edit.svg" className="w-3.5 h-3.5 ml-2" alt="Edit Stock" />
                     </DialogTrigger>
                     <DialogContent>
                       <DialogTitle>Change Stock</DialogTitle>
@@ -178,19 +193,23 @@ export const ProductPage = () => {
                 )}
               </p>
             </div>
-            <p>
+            <p className="capitalize">
               <strong className="mr-2 no-drag no-select">Location:</strong> {product.location}
             </p>
-            <p>
+            <p className="capitalize">
               <strong className="mr-2 no-drag no-select">Category:</strong>
               {product.category}
             </p>
+          </div>
+          <div className="mb-8">
+            <h2 className="text-xl pb-2 mb-2 font-semibold no-drag no-select">Description</h2>
+            <p className="">{product.description}</p>
           </div>
           {isAuthenticated ? (
             <div>
               {productOwner ? (
                 <div>
-                  <Button styles="bg-red-500 px-4 py-2 rounded-md" fieldname="Mark as sold" onClick={markAsSold} />
+                  <Button styles="bg-blue-500 px-4 py-2 rounded-md" fieldname="Mark as sold" onClick={markAsSold} />
                 </div>
               ) : (
                 <a
