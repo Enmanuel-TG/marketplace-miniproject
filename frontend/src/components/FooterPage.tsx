@@ -6,29 +6,29 @@ const FooterPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="">
+    <>
       {!isAuthenticated && (
-        <div className="w-2/3 mb-3 py-3 rounded-md bg-primary text-secondary fixed flex align-center justify-center bottom-0 left-1/2 transform -translate-x-1/2 ">
-          <p className="mr-4 text-lg ">For a better experience please login or register first:</p>
+        <div className="fixed bottom-0 left-0 right-0 mx-auto max-w-screen-md flex items-center justify-between bg-primary text-secondary p-4 gap-4 rounded-md shadow-lg">
+          <p className="text-sm md:text-base">For a better experience please login or register first:</p>
           <div className="flex gap-4">
             <Button
               fieldname="Login"
               onClick={() => {
                 navigate('/login');
               }}
-              styles="text-white text-lg hover:underline no-select no-drag px-4"
+              styles="text-white text-lg hover:underline px-4"
             />
             <Button
               fieldname="Register"
               onClick={() => {
                 navigate('/register');
               }}
-              styles="text-white text-lg hover:underline no-select no-drag px-3"
+              styles="text-white text-lg hover:underline px-3"
             />
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

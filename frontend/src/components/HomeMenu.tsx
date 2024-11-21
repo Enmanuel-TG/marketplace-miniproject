@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import { toast } from 'react-toastify';
 
-const style = 'bg-white m-2 rounded-full hover:bg-gray-400 hover:cursor-pointer no-select no-drag aspect-square object-contain';
+const style = 'bg-white m-2 rounded-full hover:bg-gray-400 hover:cursor-pointer aspect-square object-contain';
 
 export const HomeMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,9 +21,9 @@ export const HomeMenu = () => {
   };
 
   return (
-    <div>
+    <div className="cursor-pointer">
       {menuOpen && (
-        <div className="flex flex-col">
+        <div className="flex flex-col cursor-pointer">
           <img
             title="Create product"
             onClick={() => {

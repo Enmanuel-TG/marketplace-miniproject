@@ -6,9 +6,11 @@ import HomeMenu from '../components/HomeMenu';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
 import FooterPage from '../components/FooterPage';
+import { useAuth } from '@/contexts/AuthContext';
 
 const HomePages = () => {
   const { allProducts, errors, setErrors, getAllProducts } = useProduct();
+  const { isAuthenticated } = useAuth();
   const ProductAvailable = allProducts.filter((product) => product.stock > 0);
   const isFirstRender = useRef(true);
 
@@ -41,9 +43,8 @@ const HomePages = () => {
         ))}
       </div>
       <div className="fixed bottom-10 right-4 z-10 py-11 text-white rounded-full shadow-md transition-opacity duration-300 ">
-        <HomeMenu />
+        {isAuthenticated ? <HomeMenu /> : <FooterPage />}
       </div>
-      <FooterPage />
     </div>
   );
 };

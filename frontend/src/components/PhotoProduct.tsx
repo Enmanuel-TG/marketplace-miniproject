@@ -33,11 +33,11 @@ const PhotoProduct = ({ images }: SliderProps) => {
             className={`absolute inset-0 transition-transform transform ${index === currentIndex ? 'translate-x-0' : 'translate-x-full'} ${index < currentIndex ? '-translate-x-full' : ''}`}
             style={{ transitionDuration: '500ms' }}
           >
-            <div className="relative w-full h-full flex items-center justify-center no-drag no-select">
+            <div className="relative w-full h-full flex items-center justify-center">
               <img
                 src={image}
                 alt={`Slide ${index}`}
-                className="max-w-full max-h-full object-contain cursor-pointer no-drag"
+                className="max-w-full max-h-full object-contain cursor-pointer"
                 onClick={() => setIsModalOpen(true)}
               />
             </div>

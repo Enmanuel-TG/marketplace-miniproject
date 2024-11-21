@@ -100,8 +100,8 @@ export const ProductPage = () => {
           <div className="my-6 flex flex-col sm:flex-row sm:justify-between sm:items-center">
             {/* Product Name and Price */}
             <div className="flex flex-row sm:flex-row sm:items-center">
-              <h1 className="text-3xl font-bold mr-4 no-drag truncate">{product.name}</h1>
-              <span className="text-3xl text-green-600 font-semibold no-drag">${product.price}</span>
+              <h1 className="text-3xl font-bold mr-4  truncate">{product.name}</h1>
+              <span className="text-3xl text-green-600 font-semibold">${product.price}</span>
             </div>
 
             {/* Seller Information or Admin Options */}
@@ -173,7 +173,7 @@ export const ProductPage = () => {
           <div className="mb-4 flex flex-col md:flex-row flex-wrap gap-x-8">
             <div>
               <p>
-                <strong className="mr-2no-drag no-select">Stock:</strong> {product.stock}
+                <strong className="mr-2">Stock:</strong> {product.stock}
                 {productOwner && (
                   <Dialog>
                     <DialogTrigger>
@@ -194,15 +194,15 @@ export const ProductPage = () => {
               </p>
             </div>
             <p className="capitalize">
-              <strong className="mr-2 no-drag no-select">Location:</strong> {product.location}
+              <strong className="mr-2">Location:</strong> {product.location}
             </p>
             <p className="capitalize">
-              <strong className="mr-2 no-drag no-select">Category:</strong>
+              <strong className="mr-2">Category:</strong>
               {product.category}
             </p>
           </div>
           <div className="mb-8">
-            <h2 className="text-xl pb-2 mb-2 font-semibold no-drag no-select">Description</h2>
+            <h2 className="text-xl pb-2 mb-2 font-semibold">Description</h2>
             <p className="">{product.description}</p>
           </div>
           {isAuthenticated ? (
@@ -216,7 +216,7 @@ export const ProductPage = () => {
                   href={`https://wa.me/${userData?.phoneNumber}?text=I'm interested in ${product.name}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-auto bg-green-500 py-2 my-4 px-4 rounded-lg hover:bg-green-600 transition-colors no-select no-drag"
+                  className="mt-auto bg-green-500 py-2 my-4 px-4 rounded-lg hover:bg-green-600 transition-colors"
                 >
                   Contact me
                 </a>

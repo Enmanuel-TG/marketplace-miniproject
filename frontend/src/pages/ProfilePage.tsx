@@ -140,10 +140,10 @@ const ProfilePage = () => {
     <Dialog>
       <div className="flex mx-4">
         <ButtonBack className="mt-4" />
-        <h1 className="text-3xl font-bold mb-8 ml-4 mt-4 no-drag no-select">Profile</h1>
+        <h1 className="text-3xl font-bold mb-8 ml-4 mt-4">Profile</h1>
       </div>
       <div>
-        <div className="bg-background mt-10 mx-auto w-full max-w-[80vw] no-drag no-select p-[4vw] sm:p-[3vw] lg:p-[2vw] rounded-lg shadow-md">
+        <div className="bg-background mt-10 mx-auto w-full max-w-[80vw] p-[4vw] sm:p-[3vw] lg:p-[2vw] rounded-lg shadow-md">
           <Dialog>
             <DialogTrigger>
               <Button
@@ -171,7 +171,7 @@ const ProfilePage = () => {
             <div className="relative">
               <img
                 src={user?.photo}
-                className="no-select no-drag rounded-full shadow-lg w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] object-cover"
+                className=" rounded-full shadow-lg w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] object-cover"
               />
               <DialogTrigger
                 className="absolute bottom-[1vw] right-[1vw] px-[1vw] py-[0.5vw] bg-blue-500 rounded-lg"
@@ -270,7 +270,7 @@ const ProfilePage = () => {
           <div className="flex flex-col items-center">
             <img
               src={previewPhoto || user?.photo}
-              className="w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] no-select no-drag rounded-full shadow-lg object-cover"
+              className="w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] rounded-full shadow-lg object-cover"
             />
             <GetPicture onPhotoChange={setPreviewPhoto} />
           </div>

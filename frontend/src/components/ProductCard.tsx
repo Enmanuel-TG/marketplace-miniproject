@@ -10,9 +10,9 @@ interface ProductCardProps {
 export const ProductCard = ({ product, title }: ProductCardProps) => {
   const { getProduct } = useProduct();
   return (
-    <div className="w-full max-w-md text-primary pb-6 flex flex-col no-select no-drag shadow-lg rounded-md overflow-hidden">
+    <div className="w-full max-w-md text-primary pb-6 flex flex-col shadow-lg rounded-md overflow-hidden">
       <img
-        className="mb-3 rounded-t-lg object-cover w-full no-select no-drag aspect-square"
+        className="mb-3 rounded-t-lg object-cover w-full aspect-square"
         width={200}
         height={200}
         src={product.photos[0] as unknown as string}
@@ -28,7 +28,7 @@ export const ProductCard = ({ product, title }: ProductCardProps) => {
           onClick={() => {
             getProduct(product.id);
           }}
-          className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm mb-2 mx-5 py-2 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 w-1/3 no-select no-drag"
+          className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm mb-2 mx-5 py-2 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 w-1/3 "
         >
           {title}
         </Link>

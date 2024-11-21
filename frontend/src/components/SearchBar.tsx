@@ -23,7 +23,7 @@ const SearchBar = () => {
 
   return (
     <div className="flex justify-center w-full pt-5">
-      <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 no-select no-drag flex items-center">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 flex items-center">
         <label className="mb-2 text-sm sr-only text-white">Search</label>
         <div className="relative flex-grow">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">

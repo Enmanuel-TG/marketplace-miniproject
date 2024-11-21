@@ -94,7 +94,7 @@ const ExternalProfilePage = () => {
               <Dialog>
                 <DialogTrigger>
                   <div>
-                    <Button fieldname="Role" styles="w-14 h-8 no-drag no-select mt-4 mr-4" />
+                    <Button fieldname="Role" styles="w-14 h-8 mt-4 mr-4" />
                   </div>
                 </DialogTrigger>
                 <DialogContent>
@@ -108,14 +108,14 @@ const ExternalProfilePage = () => {
                         onClick={() => {
                           changeRole(Number(userId), 'user');
                         }}
-                        styles="no-drag no-select py-2 px-4"
+                        styles="py-2 px-4"
                       />
                       <Button
                         fieldname="Change to admin"
                         onClick={() => {
                           changeRole(Number(userId), 'admin');
                         }}
-                        styles="no-drag no-select py-2 px-4"
+                        styles="py-2 px-4"
                       />
                     </div>
                   </DialogClose>
@@ -125,12 +125,12 @@ const ExternalProfilePage = () => {
           )}
         </div>
       </div>
-      <div className="mt-6 mx-auto w-full max-w-[90vw] no-drag no-select p-[4vw] sm:p-[3vw] lg:p-[2vw] ">
+      <div className="mt-6 mx-auto w-full max-w-[90vw] p-[4vw] sm:p-[3vw] lg:p-[2vw] ">
         <div className="rounded-lg ">
           <div className="flex flex-col lg:flex-row gap-[5vw] items-center lg:items-start">
             <img
               src={userData.photo}
-              className="no-select no-drag rounded-full shadow-lg w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] object-cover m-6 ml-6"
+              className="rounded-full shadow-lg w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] object-cover m-6 ml-6"
               alt={`${userData.name}'s profile`}
             />
             <div className="text-center lg:text-left">
