@@ -55,7 +55,7 @@ export const ResetPasswordPage = () => {
             <br />
           </form>
           {state ? (
-            <Button
+            <Button styles='px-3 py-2'
               fieldname="Back"
               onClick={() => {
                 back();

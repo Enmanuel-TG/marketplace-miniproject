@@ -159,7 +159,7 @@ const ProfilePage = () => {
               </DialogHeader>
               <DialogClose>
                 <button
-                  className="bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   onClick={logOut}
                 >
                   Log out
@@ -199,9 +199,14 @@ const ProfilePage = () => {
                   </DialogHeader>
                   <div className="flex flex-col items-center">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                      <Input type="text" fieldname="Name" {...register('name', { required: true })} />
-                      <Input type="date" fieldname="Birthday" {...register('birthday', { required: true })} />
-                      <Input type="text" fieldname="Phone Number" {...register('phoneNumber', { required: true })} />
+                      <Input type="text" required fieldname="Name" {...register('name', { required: true })} />
+                      <Input type="date" required fieldname="Birthday" {...register('birthday', { required: true })} />
+                      <Input
+                        type="text"
+                        required
+                        fieldname="Phone Number"
+                        {...register('phoneNumber', { required: true })}
+                      />
                       <DialogClose>
                         <Button type="submit" fieldname="Update Profile" styles="p-2 mt-4" />
                       </DialogClose>
@@ -234,7 +239,12 @@ const ProfilePage = () => {
                           className="w-full h-[10vw] border border-gray-300 rounded-lg p-2 resize-none"
                           {...register('description')}
                         ></textarea>
-                        <Button fieldname="Update" disabled={isOpen} type="submit" styles="flex justify-center mt-4 p-2" />
+                        <Button
+                          fieldname="Update"
+                          disabled={isOpen}
+                          type="submit"
+                          styles="flex justify-center mt-4 p-2"
+                        />
                       </form>
                     </DialogHeader>
                   </DialogContent>

@@ -74,7 +74,7 @@ const Rating = ({ data, allowRating }: { data: { average: number; count: number 
               If you have already added a validation, when you re-rate, you change your previous rating.
               <DialogDescription>
                 <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
-                  <Input fieldname="" type="number" {...register('rating')} min="1" max="5" />
+                  <Input fieldname="" required type="number" {...register('rating')} min="1" max="5" />
                   <br />
                   <Button fieldname="Submit" type="submit" styles="w-full py-3" />
                 </form>

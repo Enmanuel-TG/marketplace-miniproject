@@ -53,10 +53,11 @@ const CreateProductPage = () => {
         <div className="max-w-3xl pt-20 px-4 mx-auto">
           <form onSubmit={handleSubmit(onSubmit)}>
             <ImageUploader onFilesChange={handleFileChange} />
-            <Input type="text" fieldname="Title" {...register('name', { required: true })} />
+            <Input required type="text" fieldname="Title" {...register('name', { required: true })} />
             <div className="flex w-full justify-between mt-5">
               <Input
                 type="text"
+                required
                 title="Enter a price with numbers (Example: 0, 0.0, 0.00)"
                 pattern="^(0|[1-9][0-9]*)(\.[0-9]{1,2})?$"
                 fieldname="Price"
@@ -64,12 +65,13 @@ const CreateProductPage = () => {
               />
               <Input
                 type="text"
+                required
                 pattern="^(0|[1-9][0-9]*)(\.[0-9]{1,2})?$"
                 title="Enter a price with numbers (Example: 0, 0.0, 0.00)"
                 fieldname="Stock"
                 {...register('stock', { required: true })}
               />
-              <Input type="text" fieldname="Location" {...register('location', { required: true })} />
+              <Input type="text" required fieldname="Location" {...register('location', { required: true })} />
             </div>
             <div className="my-5 flex justify-between w-full gap-4">
               <div className="w-full">
@@ -108,7 +110,7 @@ const CreateProductPage = () => {
                 </select>
               </div>
             </div>
-            <Input type="text" fieldname="Description" {...register('description', { required: true })} />
+            <Input required type="text" fieldname="Description" {...register('description', { required: true })} />
             <div className="flex justify-end mt-5">
               <Button type="submit" fieldname="Create Product" disabled={isLoading} styles="p-3" />
             </div>

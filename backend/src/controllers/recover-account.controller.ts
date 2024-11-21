@@ -20,6 +20,7 @@ export const requestPasswordReset = async (req: Request, res: Response) => {
       html: `
         <p>Dear ${user.name},</p>
         <p>We received a request to reset your password. Please click the link below to reset your password:</p>
+        <p>This link is only valid for 1 hour</p>
         <p><a href="${resetUrl}">Reset your password</a></p>
         <p>If you did not request a password reset, please ignore this email or contact support if you have any questions.</p>
         <p>Best regards,</p>
