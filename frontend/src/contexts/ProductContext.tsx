@@ -107,7 +107,6 @@ export const ProductProvider = ({ children }: ProviderProps) => {
       const res = await updateProductRequest(dataProduct);
       if (res.status === 200) {
         getAllProducts();
-        toast.success('Product updated successfully', toastifyConfig);
       }
       return res.data;
     } catch (error) {

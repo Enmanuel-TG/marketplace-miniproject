@@ -94,14 +94,14 @@ export const ProductPage = () => {
       <HeadPage namePage={'Product Page'} />
       <div className="flex flex-col items-center justify-center min-h-screen p-4">
         <div className="shadow-2xl rounded-lg max-w-5xl w-full overflow-hidden px-6 pb-4">
-          <div className="h-96 w-full mt-4 sm:mt-10 flex items-center justify-center">
+          <div className="w-full mt-4 sm:mt-10 flex items-center justify-center">
             <PhotoProduct images={product.photos as unknown as string[]} />
           </div>
-          <div className="my-6 flex flex-col sm:flex-row sm:justify-between sm:items-center">
+          <div className="my-6 flex flex-col sm:flex-row sm:justify-between sm:items-center md:flex-wrap gap-3">
             {/* Product Name and Price */}
-            <div className="flex flex-row sm:flex-row sm:items-center">
-              <h1 className="text-3xl font-bold mr-4  truncate">{product.name}</h1>
-              <span className="text-3xl text-green-600 font-semibold">${product.price}</span>
+            <div className="flex flex-row sm:flex-row sm:items-center flex-wrap md:flex-nowrap">
+              <h1 className="text-3xl font-bold mr-4 truncate flex text-balance">{product.name}</h1>
+              <span className="text-3xl text-green-600 flex flex-growth font-semibold">${product.price}</span>
             </div>
 
             {/* Seller Information or Admin Options */}
@@ -109,7 +109,7 @@ export const ProductPage = () => {
               {productOwner || user?.role === 'admin' ? (
                 <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
                   <Dialog>
-                    <DialogTrigger className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors">
+                    <DialogTrigger className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors font-bold">
                       Delete
                     </DialogTrigger>
                     <DialogContent>
@@ -138,7 +138,7 @@ export const ProductPage = () => {
                   />
                 </div>
               ) : (
-                <div className="flex flex-row gap-3">
+                <div className="flex flex-row gap-3 mb-2">
                   <img
                     src={userData?.photo}
                     onClick={userProfile}
@@ -158,7 +158,7 @@ export const ProductPage = () => {
 
           <div>
             {user?.role === 'admin' && !productOwner && (
-              <div className="flex items-center">
+              <div className="flex items-center mb-3">
                 <img src={userData?.photo} onClick={userProfile} className="aspect-square size-10 rounded-full mr-2" />
                 <div className="flex flex-row">
                   <p className="pr-2 cursor-pointer">Seller:</p>
@@ -205,7 +205,7 @@ export const ProductPage = () => {
             <p className="">{product.description}</p>
           </div>
           {isAuthenticated ? (
-            <div>
+            <div className="mb-6">
               {productOwner ? (
                 <div>
                   <Button styles="bg-blue-500 px-4 py-2 rounded-md" fieldname="Mark as sold" onClick={markAsSold} />
@@ -215,7 +215,7 @@ export const ProductPage = () => {
                   href={`https://wa.me/${userData?.phoneNumber}?text=I'm interested in ${product.name}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-auto bg-green-500 py-2 my-4 px-4 rounded-lg hover:bg-green-600 transition-colors"
+                  className="font-bold mt-auto bg-green-500 py-2 my-4 px-4 rounded-lg hover:bg-green-600 transition-colors text-white"
                 >
                   Contact me
                 </a>

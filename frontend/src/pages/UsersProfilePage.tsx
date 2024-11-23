@@ -130,7 +130,7 @@ const ExternalProfilePage = () => {
           <div className="flex flex-col lg:flex-row md:gap-[64px] items-center lg:items-start">
             <img
               src={userData.photo}
-              className="aspect-square rounded-full shadow-lg lg:size-[220px] object-cover"
+              className="aspect-square rounded-full shadow-lg w-full max-w-[220px] lg:size-[220px] object-cover"
               alt={`${userData.name}'s profile`}
             />
             <div className="lg:text-left">

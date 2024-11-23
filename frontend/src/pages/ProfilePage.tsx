@@ -78,7 +78,6 @@ const ProfilePage = () => {
           ...newData,
         });
         userDataRef.current?.click();
-        toast.success('User updated successfully', toastifyConfig);
       }
     } catch (error) {
       setValue('name', user?.name);
@@ -163,7 +162,10 @@ const ProfilePage = () => {
         <div className="bg-background mt-10 mx-auto w-full md:max-w-[80%] p-[52px] sm:p-[38px] lg:p-[25px] rounded-lg shadow-md">
           <div className="flex flex-col lg:flex-row gap-[64px] items-center lg:items-start">
             <div className="relative">
-              <img src={user?.photo} className="aspect-square rounded-full shadow-lg lg:size-[220px] object-cover" />
+              <img
+                src={user?.photo}
+                className="aspect-square rounded-full shadow-lg w-full max-w-[220px] lg:size-[220px] object-cover"
+              />
 
               {user?.phoneNumber !== '0000000000' && (
                 <DialogTrigger
@@ -203,7 +205,7 @@ const ProfilePage = () => {
                       />
                       <Button type="submit" fieldname="Update Profile" styles="p-2 mt-4" />
                       <DialogClose>
-                        <button ref={userDataRef}></button>
+                        <button ref={userDataRef} aria-hidden="true"></button>
                       </DialogClose>
                     </form>
                   </div>
