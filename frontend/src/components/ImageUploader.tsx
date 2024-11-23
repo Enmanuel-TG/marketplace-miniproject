@@ -15,7 +15,6 @@ const ImageUploader = ({ onFilesChange, imgs }: ImageUploaderProps) => {
     const updatedFiles = [...selectedFiles, ...acceptedFiles];
     setSelectedFiles(updatedFiles);
     onFilesChange([...updatedFiles, ...previewImage]);
-    console.log(updatedFiles);
   };
 
   const handleRemoveFile = (index: number) => {
@@ -57,7 +56,11 @@ const ImageUploader = ({ onFilesChange, imgs }: ImageUploaderProps) => {
       <div className="mt-4 flex flex-wrap gap-4">
         {selectedFiles.map((file, index) => (
           <div key={index} className="relative">
-            <img src={URL.createObjectURL(file)} alt={`preview-${index}`} className="h-24 w-24 object-cover rounded" />
+            <img
+              src={URL.createObjectURL(file)}
+              alt={`preview-${index}`}
+              className="aspect-square size-24 object-cover rounded"
+            />
             <button
               type="button"
               className="absolute top-0 right-0 bg-red-500 text-white rounded-md m-auto p-1"
@@ -71,7 +74,11 @@ const ImageUploader = ({ onFilesChange, imgs }: ImageUploaderProps) => {
       <div className="flex flex-wrap gap-4">
         {previewImage.map((file, index) => (
           <div key={index} className="relative">
-            <img src={URL.createObjectURL(file)} alt={`preview-${index}`} className="h-24 w-24 object-cover rounded" />
+            <img
+              src={URL.createObjectURL(file)}
+              alt={`preview-${index}`}
+              className="aspect-square size-24 object-cover rounded"
+            />
             <button
               type="button"
               className="absolute top-0 right-0 bg-red-500 text-white rounded-md m-auto p-1"

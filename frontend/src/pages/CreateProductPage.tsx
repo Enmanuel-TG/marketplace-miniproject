@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { useEffect, useState, useRef } from 'react';
 import ImageUploader from '@/components/ImageUploader';
 import { useNavigate } from 'react-router-dom';
+import Textarea from '@/components/ui/Textarea';
 
 const CreateProductPage = () => {
   const navigate = useNavigate();
@@ -75,8 +76,11 @@ const CreateProductPage = () => {
             </div>
             <div className="my-5 flex justify-between w-full gap-4">
               <div className="w-full">
-                <label htmlFor="category" className="block text-white">
-                  Category
+                <label htmlFor="category" className="block mb-1">
+                  Category{' '}
+                  <span className="text-red-500" title="The category is required.">
+                    *
+                  </span>
                 </label>
                 <select
                   id="category"
@@ -94,8 +98,11 @@ const CreateProductPage = () => {
                 </select>
               </div>
               <div className="w-full">
-                <label htmlFor="state" className="block text-white">
-                  State
+                <label htmlFor="state" className="block mb-1">
+                  Condition{' '}
+                  <span className="text-red-500" title="The condition is required.">
+                    *
+                  </span>
                 </label>
                 <select
                   id="state"
@@ -110,9 +117,14 @@ const CreateProductPage = () => {
                 </select>
               </div>
             </div>
-            <Input required type="text" fieldname="Description" {...register('description', { required: true })} />
+            <Textarea required fieldname="Description" {...register('description', { required: true })} />
             <div className="flex justify-end mt-5">
-              <Button type="submit" fieldname="Create Product" disabled={isLoading} styles="p-3" />
+              <Button
+                type="submit"
+                fieldname={isLoading ? 'Creating...' : 'Create Product'}
+                disabled={isLoading}
+                styles="p-3 w-full md:w-fit"
+              />
             </div>
           </form>
         </div>

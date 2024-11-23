@@ -8,16 +8,20 @@ interface ButtonProps {
   styles?: string;
 }
 
-const Button = ({ fieldname, type, ...props }: ButtonProps) => {
+const Button = ({ fieldname, type, disabled, ...props }: ButtonProps) => {
   const style = cn(
-    'bg-blue-500 hover:bg-blue-700 text-white font-bold rounded focus:outline-none focus:shadow-outline focus:shadow-outline',
+    'bg-blue-500 hover:bg-blue-700 text-white font-bold rounded focus:outline-none focus:shadow-outline',
+    disabled
+      ? 'bg-gray-400 cursor-not-allowed hover:bg-gray-400'
+      : 'hover:bg-blue-700',
     props.styles,
   );
 
   return (
-    <button className={style} {...props} type={type} onClick={props.onClick}>
+    <button className={style} {...props} type={type} onClick={props.onClick} disabled={disabled}>
       {fieldname}
     </button>
   );
 };
+
 export default Button;

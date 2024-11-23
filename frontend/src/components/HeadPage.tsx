@@ -1,15 +1,26 @@
+import { cn } from '@/lib/utils';
 import { ButtonBack } from './ui/ButtonBack';
 import MyIconProfile from './ui/MyIconProfile';
+import Logout from '@/components/Logout';
+import HomeMenu from './HomeMenu';
 
-const HeadPage = ({ namePage }: { namePage: string }) => {
+const HeadPage = ({ namePage, isHome = false }: { namePage: string; isHome?: boolean }) => {
   return (
-    <header className="w-full px-4 flex justify-between ">
-      <div className="flex">
-        <ButtonBack className="mt-4" />
-        <h1 className="text-3xl font-bold mb-8 ml-4 mt-4">{namePage}</h1>
+    <>
+      <header className={cn('w-full px-4 flex items-center justify-between', isHome && 'justify-end')}>
+        <div className={cn('flex items-center', isHome && 'hidden')}>
+          <ButtonBack className="mt-4" />
+          <h1 className="flex text-xl md:text-3xl font-bold mt-4 ml-4">{namePage}</h1>
+        </div>
+        <div className="flex items-center justify-center mt-3">
+          <Logout />
+          <MyIconProfile className="bg-white size-11 rounded-full" />
+        </div>
+      </header>
+      <div className="fixed bottom-10 bg-white right-4 z-10 pt-3 pb-11 rounded-full shadow-md transition-opacity duration-300 ">
+        <HomeMenu />
       </div>
-      <MyIconProfile className="mt-3 bg-white w-11 h-11 rounded-full" />
-    </header>
+    </>
   );
 };
 

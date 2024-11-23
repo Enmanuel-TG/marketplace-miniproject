@@ -18,8 +18,10 @@ export const ProductCard = ({ product, title }: ProductCardProps) => {
         src={product.photos[0] as unknown as string}
         alt={`Image of ${product.name}`}
       />
-      <div className="px-5   flex flex-row justify-between">
-        <h5 className="text-xl font-semibold tracking-tight truncate pr-3">{product.name}</h5>
+      <div className="px-5 flex flex-row justify-between">
+        <h2 className="text-xl font-semibold tracking-tight truncate pr-3" title={product.name}>
+          {product.name}
+        </h2>
         <span className="mr-2 text-xl font-semibold tracking-tight">${product.price}</span>
       </div>
       <div className="flex flex-row justify-end mt-3">
@@ -28,7 +30,7 @@ export const ProductCard = ({ product, title }: ProductCardProps) => {
           onClick={() => {
             getProduct(product.id);
           }}
-          className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm mb-2 mx-5 py-2 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 w-1/3 "
+          className="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm mb-2 mx-5 py-2 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 px-2 min-w-[33%]"
         >
           {title}
         </Link>

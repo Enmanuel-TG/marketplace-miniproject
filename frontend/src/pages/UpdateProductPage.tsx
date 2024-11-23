@@ -10,6 +10,7 @@ import { toastifyConfig } from '../utilities/toastify.utility';
 import { useNavigate } from 'react-router-dom';
 import ImageUploader from '@/components/ImageUploader';
 import HeadPage from '@/components/HeadPage';
+import Textarea from '@/components/ui/Textarea';
 
 const UpdateProductPage = () => {
   const { product, updateProduct, errors, setProduct, setErrors } = useProduct();
@@ -66,8 +67,11 @@ const UpdateProductPage = () => {
           </div>
           <div className="my-5 flex justify-between w-full gap-4">
             <div className="w-full">
-              <label htmlFor="category" className="block text-white">
-                Category
+              <label htmlFor="category" className="block mb-1">
+                Category{' '}
+                <span className="text-red-500" title="The condition is required.">
+                  *
+                </span>
               </label>
               <select
                 id="category"
@@ -85,8 +89,11 @@ const UpdateProductPage = () => {
               </select>
             </div>
             <div className="w-full">
-              <label htmlFor="state" className="block text-white">
-                State
+              <label htmlFor="state" className="block mb-1">
+                State{' '}
+                <span className="text-red-500" title="The condition is required.">
+                  *
+                </span>
               </label>
               <select
                 id="state"
@@ -101,9 +108,14 @@ const UpdateProductPage = () => {
               </select>
             </div>
           </div>
-          <Input type="text" fieldname="Description" required {...register('description', { required: true })} />
+          <Textarea fieldname="Description" required {...register('description', { required: true })} />
           <div className="flex justify-end mt-5">
-            <Button type="submit" fieldname="Update Product" styles="p-3" disabled={isLoading} />
+            <Button
+              type="submit"
+              fieldname={isLoading ? 'Updating...' : 'Update'}
+              styles="p-3 w-full md:w-fit"
+              disabled={isLoading}
+            />
           </div>
         </form>
       </div>

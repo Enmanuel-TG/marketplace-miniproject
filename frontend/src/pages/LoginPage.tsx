@@ -74,7 +74,7 @@ const LoginPages = () => {
           </div>
           <div className="flex items-center">
             <span>New to our platform? </span>
-            <Link className="text-blue-500 hover:text-blue-700 font-bold ml-2" to="/register">
+            <Link className="text-blue-500 hover:text-blue-700 ml-2" to="/register">
               Join now
             </Link>
           </div>

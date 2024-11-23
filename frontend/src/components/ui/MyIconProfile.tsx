@@ -7,9 +7,6 @@ const MyIconProfile = ({ className }: { className: string }) => {
     <div>
       {isAuthenticated && (
         <img
-          onClick={() => {
-            navigate('/profile');
-          }}
           className={className}
           src={user?.photo}
         />

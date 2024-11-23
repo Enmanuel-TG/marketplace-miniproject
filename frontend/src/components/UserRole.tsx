@@ -25,15 +25,15 @@ const UserRole = (user: { name: string; role: string; photo: string; id: number 
     }
   };
   return (
-    <div className="flex w-2/3 pt-3 mx-auto">
+    <div className="flex mx-4 md:w-2/3 pt-3 md:mx-auto">
       <div className="flex flex-row w-full justify-between bg-gray-100 shadow p-2">
         <div className="flex flex-row items-center gap-2">
-          <img className="w-10 h-10 rounded-full" src={user.photo} alt="Profile" />
+          <img className="aspect-square size-10 rounded-full" src={user.photo} alt="Profile" />
           <p>{user.name}</p>
         </div>
         <Dialog>
           <DialogTrigger>
-            <Button fieldname="Roles" styles='py-2 px-4' />
+            <Button fieldname="Role" title="Click to change role" styles="py-2 px-4" />
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>

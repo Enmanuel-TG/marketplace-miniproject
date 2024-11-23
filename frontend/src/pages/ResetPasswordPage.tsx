@@ -49,13 +49,22 @@ export const ResetPasswordPage = () => {
       <div className="flex m-28 justify-center min-h-screen">
         <div className="w-full max-w-lg mx-auto p-8">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Input fieldname="New password" type="password" {...register('password', { required: true })} />
-            <br />
-            <Input fieldname="Confirm Password" type="password" {...register('confirm-password', { required: true })} />
-            <br />
+            <Input
+              className="mb-3"
+              fieldname="New password"
+              type="password"
+              {...register('password', { required: true })}
+            />
+            <Input
+              className="mb-3"
+              fieldname="Confirm Password"
+              type="password"
+              {...register('confirm-password', { required: true })}
+            />
           </form>
           {state ? (
-            <Button styles='px-3 py-2'
+            <Button
+              styles="px-3 py-2"
               fieldname="Back"
               onClick={() => {
                 back();

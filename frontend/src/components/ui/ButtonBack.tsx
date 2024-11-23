@@ -6,12 +6,13 @@ export const ButtonBack = ({ className }: { className: ClassValue }) => {
   return (
     <div>
       <img
+        title="Go to Home"
         src="/home.svg"
         onClick={() => {
           navigate('/');
         }}
-        alt="Back"
-        className={cn('cursor-pointer w-10 h-10', className)}
+        alt="Go to Home"
+        className={cn('cursor-pointer aspect-square size-10', className)}
       />
     </div>
   );

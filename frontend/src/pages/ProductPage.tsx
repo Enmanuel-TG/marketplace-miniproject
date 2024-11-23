@@ -115,9 +115,8 @@ export const ProductPage = () => {
                     <DialogContent>
                       <DialogHeader>
                         <DialogTitle>Are you absolutely sure?</DialogTitle>
-                        <br />
                         <DialogDescription>
-                          <p>
+                          <p className="mt-3">
                             This action cannot be undone. This will permanently delete this product and remove the data
                             from our servers.
                           </p>
@@ -143,7 +142,7 @@ export const ProductPage = () => {
                   <img
                     src={userData?.photo}
                     onClick={userProfile}
-                    className="w-10 h-10 rounded-full object-cover"
+                    className="aspect-square size-10 rounded-full object-cover"
                     alt="Seller"
                   />
                   <div className="flex flex-row gap-2 items-center">
@@ -160,7 +159,7 @@ export const ProductPage = () => {
           <div>
             {user?.role === 'admin' && !productOwner && (
               <div className="flex items-center">
-                <img src={userData?.photo} onClick={userProfile} className="w-10 h-10 rounded-full mr-2" />
+                <img src={userData?.photo} onClick={userProfile} className="aspect-square size-10 rounded-full mr-2" />
                 <div className="flex flex-row">
                   <p className="pr-2 cursor-pointer">Seller:</p>
                   <div className="cursor-pointer" onClick={userProfile}>
@@ -177,7 +176,7 @@ export const ProductPage = () => {
                 {productOwner && (
                   <Dialog>
                     <DialogTrigger>
-                      <img src="/edit.svg" className="w-3.5 h-3.5 ml-2" alt="Edit Stock" />
+                      <img src="/edit.svg" className="aspect-square size-3.5 ml-2" alt="Edit Stock" />
                     </DialogTrigger>
                     <DialogContent>
                       <DialogTitle>Change Stock</DialogTitle>

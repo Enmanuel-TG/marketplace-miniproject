@@ -52,9 +52,9 @@ export const HomeMenu = () => {
           )}
         </div>
       )}
-      <div
+      <button
         onClick={() => setMenuOpen(!menuOpen)}
-        className="fixed bottom-4 right-4 z-10 p-4 bg-blue-600 text-white rounded-full shadow-md transition-opacity duration-300"
+        className="fixed bottom-4 right-4 z-10 p-4 bg-blue-600 text-white rounded-full shadow transition-opacity duration-300"
       >
         <svg
           id="Menu--Streamline-Carbon.svg"
@@ -73,7 +73,7 @@ export const HomeMenu = () => {
           <path d="M1.875 8.4375h11.25v0.9375H1.875Z" strokeWidth="1"></path>
           <path id="_Transparent_Rectangle_" d="M0 0h15v15H0Z" fill="none" strokeWidth="1"></path>
         </svg>
-      </div>
+      </button>
     </div>
   );
 };

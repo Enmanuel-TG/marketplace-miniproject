@@ -125,20 +125,20 @@ const ExternalProfilePage = () => {
           )}
         </div>
       </div>
-      <div className="mt-6 mx-auto w-full max-w-[90vw] p-[4vw] sm:p-[3vw] lg:p-[2vw] ">
-        <div className="rounded-lg ">
-          <div className="flex flex-col lg:flex-row gap-[5vw] items-center lg:items-start">
+      <div className="mt-6 mx-auto w-full md:max-w-[80%] p-[40px] sm:p-[30px] lg:p-[20px]">
+        <div className="bg-background mt-10 mx-auto w-full p-[38px] lg:p-[25px] rounded-lg shadow-md">
+          <div className="flex flex-col lg:flex-row md:gap-[64px] items-center lg:items-start">
             <img
               src={userData.photo}
-              className="rounded-full shadow-lg w-[25vw] h-[25vw] sm:w-[20vw] sm:h-[20vw] lg:w-[15vw] lg:h-[15vw] object-cover m-6 ml-6"
+              className="aspect-square rounded-full shadow-lg lg:size-[220px] object-cover"
               alt={`${userData.name}'s profile`}
             />
-            <div className="text-center lg:text-left">
+            <div className="lg:text-left">
               <div className="flex flex-row items-center gap-4 mt-6">
-                <p className=" text-[3vw] lg:text-[2.5vw] font-semibold">{userData.name}</p>
+                <p className="text-xl md:text-[30px] lg:text-[26px] font-semibold text-center">{userData.name}</p>
               </div>
               {userData.createdAt && (
-                <div className=" mt-[1vw] text-[2.5vw] sm:text-[1.5vw] lg:text-[1vw]">
+                <div className="mt-[10px] text-[26px] sm:text-[16px] lg:text-[10px]">
                   Joined on{' '}
                   {new Date(userData.createdAt).toLocaleDateString('en-US', {
                     month: 'long',
@@ -149,7 +149,7 @@ const ExternalProfilePage = () => {
               <div>
                 <Rating allowRating={true} data={rating} />
               </div>
-              <div className="w-full h-[7vw] mt-3 border mr-3 border-gray-300 rounded-md">
+              <div className="w-full mt-3 mr-3 border-gray-300 rounded-md">
                 <p>{userData?.description}</p>
               </div>
             </div>
@@ -157,8 +157,10 @@ const ExternalProfilePage = () => {
         </div>
         <div className="mx-auto mt-10">
           <hr />
-          <p className=" mt-7 text-[3vw] sm:text-[1.5vw] lg:text-[1.5vw] font-semibold">Product history</p>
-          <label htmlFor="showAvailableOnly">
+          <p className="mb-3 mt-7 text-xl md:text-[30px] sm:text-[16px] lg:text-[16px] font-semibold">
+            Product history
+          </p>
+          <label htmlFor="showAvailableOnly" className="mb-16">
             <Switch
               name="showAvailableOnly"
               id="showAvailableOnly"
@@ -167,8 +169,6 @@ const ExternalProfilePage = () => {
             />
             <span className="pl-2">Show available only</span>
           </label>
-          <br />
-          <br />
           <div className="max-w-screen mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {filteredProducts.map((product) => (
               <ProductCard title="See Details" key={product.id} product={product} />

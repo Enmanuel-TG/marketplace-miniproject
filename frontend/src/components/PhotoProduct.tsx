@@ -30,7 +30,9 @@ const PhotoProduct = ({ images }: SliderProps) => {
         {images.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-transform transform ${index === currentIndex ? 'translate-x-0' : 'translate-x-full'} ${index < currentIndex ? '-translate-x-full' : ''}`}
+            className={`absolute inset-0 transition-transform transform ${
+              index === currentIndex ? 'translate-x-0' : 'translate-x-full'
+            } ${index < currentIndex ? '-translate-x-full' : ''}`}
             style={{ transitionDuration: '500ms' }}
           >
             <div className="relative w-full h-full flex items-center justify-center">

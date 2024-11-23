@@ -35,9 +35,7 @@ export const ForgetPasswordPage = () => {
           <p className="text-base mb-3">
             Please enter the email address associated with your account to reset your password.
           </p>
-          <p className="  text-base mb-4">You will receive an email with a link to reset your password.</p>
-          <br />
-          <br />
+          <p className="text-base mb-8">You will receive an email with a link to reset your password.</p>
           <div>
             {forgetPasswordErrors.map((error, i) => (
               <div key={i} className="text-red-500 mb-2">
