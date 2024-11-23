@@ -20,5 +20,8 @@
   "tailwindCSS.classAttributes": ["className", "tw", "variants"],
   "[markdown]": {
     "editor.defaultFormatter": "ms-vsliveshare.vsliveshare"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "ms-vsliveshare.vsliveshare"
   }
 }
