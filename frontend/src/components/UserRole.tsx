@@ -33,7 +33,7 @@ const UserRole = (user: { name: string; role: string; photo: string; id: number 
         </div>
         <Dialog>
           <DialogTrigger>
-            <Button fieldname="Role" title="Click to change role" styles="py-2 px-4" />
+            <Button fieldname="Role" styles="py-2 px-4" />
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
