@@ -26,5 +26,5 @@ app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`server is running in port ${PORT}`);
+  console.info(`server is running in port ${PORT}`);
 });
