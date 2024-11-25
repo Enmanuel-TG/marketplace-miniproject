@@ -5,6 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from '@/components/ui/Dialog';
 import { FieldValues, useForm } from 'react-hook-form';
 import { createOrUpdateRating } from '../services/rating.service';
@@ -13,10 +14,12 @@ import Button from './ui/Button';
 import { useAuth } from '@/contexts/AuthContext';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '@/utilities/toastify.utility';
+import { useRef } from 'react';
 
 const Rating = ({ data, allowRating }: { data: { average: number; count: number }; allowRating: boolean }) => {
   const { userData, isAuthenticated } = useAuth();
   const { register, handleSubmit } = useForm();
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   const onSubmit = async (formData: FieldValues) => {
     const sellerId = userData?.id as number;
@@ -28,6 +31,7 @@ const Rating = ({ data, allowRating }: { data: { average: number; count: number 
       const res = await createOrUpdateRating(sellerId, formData.rating as number);
       if (res.status === 200) {
         toast.success('Rating added successfully', toastifyConfig);
+        closeRef?.current?.click();
       }
     } catch (error) {
       toast.error('Error adding rating', toastifyConfig);
@@ -74,6 +78,9 @@ const Rating = ({ data, allowRating }: { data: { average: number; count: number 
                   <Input fieldname="Rating" required type="number" {...register('rating')} min="1" max="5" />
                   <Button fieldname="Submit" type="submit" styles="w-full py-3 mt-3" />
                 </form>
+                <DialogClose>
+                  <button ref={closeRef}></button>
+                </DialogClose>
               </DialogDescription>
             </DialogHeader>
           </DialogContent>
