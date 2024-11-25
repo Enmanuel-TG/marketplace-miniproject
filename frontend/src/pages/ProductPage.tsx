@@ -179,12 +179,18 @@ export const ProductPage = () => {
                       <img src="/edit.svg" className="aspect-square size-3.5 ml-2" alt="Edit Stock" />
                     </DialogTrigger>
                     <DialogContent>
-                      <DialogTitle>Change Stock</DialogTitle>
+                      <DialogTitle className="mx-1">Change Stock</DialogTitle>
                       <DialogDescription>
-                        If you send 0, you will mark the product as sold, or out of stock,
+                        <p className="mx-1 mb-6">If you send 0, you will mark the product as sold, or out of stock.</p>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                          <Input min={0} type="number" fieldname="Stock" {...register('stock', { required: true })} />
-                          <Button type="submit" fieldname="Change" />
+                          <Input
+                            required
+                            min={0}
+                            type="number"
+                            fieldname="Stock"
+                            {...register('stock', { required: true })}
+                          />
+                          <Button type="submit" styles="py-2 px-4 mt-4" fieldname="Change" />
                         </form>
                       </DialogDescription>
                     </DialogContent>
