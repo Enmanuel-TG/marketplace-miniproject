@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useProduct } from '../contexts/ProductContext';
 import PhotoProduct from '../components/PhotoProduct';
 import { useAuth } from '../contexts/AuthContext';
@@ -227,7 +227,13 @@ export const ProductPage = () => {
               )}
             </div>
           ) : (
-            <div>You need to be logged in to contact me</div>
+            <div>
+              You need to be{' '}
+              <Link className="hover:underline text-blue-500" to="/login">
+                logged
+              </Link>{' '}
+              in to contact me
+            </div>
           )}
         </div>
       </div>
