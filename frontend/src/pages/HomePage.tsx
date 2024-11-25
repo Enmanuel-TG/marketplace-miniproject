@@ -36,11 +36,13 @@ const HomePages = () => {
       <div className="flex">
         <SearchBar />
       </div>
-      <p className="text-xl mx-auto my-10 bg-background">
-        {isLoading
-          ? 'Loading products... Please wait a moment. This may take a while.'
-          : ProductAvailable.length === 0 && 'No products found'}
-      </p>
+      {(isLoading || ProductAvailable.length === 0) && (
+        <p className="text-xl mx-auto my-10 bg-background">
+          {isLoading
+            ? 'Loading products... Please wait a moment. This may take a while.'
+            : ProductAvailable.length === 0 && 'No products found'}
+        </p>
+      )}
       <div className="max-w-screen w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {ProductAvailable.map((product) => (
           <ProductCard key={product.id} title="Buy" product={product} />
