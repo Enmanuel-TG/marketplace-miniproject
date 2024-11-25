@@ -12,7 +12,7 @@ export const ButtonBack = ({ className }: { className: ClassValue }) => {
           navigate('/');
         }}
         alt="Go to Home"
-        className={cn('cursor-pointer aspect-square size-10', className)}
+        className={cn('cursor-pointer aspect-square size-7 md:size-10', className)}
       />
     </div>
   );
