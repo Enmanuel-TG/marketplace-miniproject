@@ -191,8 +191,17 @@ const ProfilePage = () => {
                 </div>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle className="text-lg ">Update user data</DialogTitle>
+                    <DialogTitle className="text-lg ">
+                      {user?.phoneNumber === '0000000000' ? 'Complete your profile' : 'Update profile'}
+                    </DialogTitle>
                   </DialogHeader>
+
+                  {user?.phoneNumber !== '0000000000' && (
+                    <p>
+                      You registered with Google. You must complete your profile by adding your phone number and date of
+                      birth to continue.
+                    </p>
+                  )}
                   <div className="flex flex-col items-center">
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <Input type="text" required fieldname="Name" {...register('name', { required: true })} />
