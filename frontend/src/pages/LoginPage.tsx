@@ -39,7 +39,7 @@ const LoginPages = () => {
   return (
     <div>
       <HeadPage namePage="Login" />
-      <div className="m-auto">
+      <div className="m-auto px-3">
         <div className="w-full max-w-md mx-auto my-28">
           <form onSubmit={handleSubmit(setData)} className="space-y-6">
             <Input
@@ -58,7 +58,7 @@ const LoginPages = () => {
             <Button fieldname="Sign In" type="submit" styles="px-4 py-2 w-full" />
           </form>
 
-          <div className="flex items-center my-3">
+          <div className="flex items-center my-3 mt-5">
             <hr className="flex-grow border-t border-gray-300" />
             <span className="px-4 text-gray-500 text-sm">or</span>
             <hr className="flex-grow border-t border-gray-300" />

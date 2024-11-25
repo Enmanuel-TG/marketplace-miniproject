@@ -135,7 +135,7 @@ const RegisterPage = () => {
             </div>
           </Slider>
 
-          <div className="flex items-center my-4">
+          <div className="flex items-center my-4 mt-5">
             <hr className="flex-grow border-t border-gray-300" />
             <span className="px-4 text-gray-500 text-sm">or</span>
             <hr className="flex-grow border-t border-gray-300" />

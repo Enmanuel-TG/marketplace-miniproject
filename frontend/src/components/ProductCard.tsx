@@ -12,7 +12,7 @@ export const ProductCard = ({ product, title }: ProductCardProps) => {
   return (
     <div className="w-full max-w-md text-primary pb-6 flex flex-col shadow-lg rounded-md overflow-hidden">
       <img
-        className="mb-3 rounded-t-lg object-cover w-full aspect-square"
+        className="mb-3 rounded-t-lg object-contain w-full aspect-square"
         width={200}
         height={200}
         src={product.photos[0] as unknown as string}

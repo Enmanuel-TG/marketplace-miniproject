@@ -66,7 +66,7 @@ export const HomeMenu = () => {
         >
           <desc>Menu Streamline Icon: https://streamlinehq.com</desc>
           <defs></defs>
-          <title>menu</title>
+          <title>Menu</title>
           <path d="M1.875 2.8125h11.25v0.9375H1.875Z" strokeWidth="1"></path>
           <path d="M1.875 11.25h11.25v0.9375H1.875Z" strokeWidth="1"></path>
           <path d="M1.875 5.625h11.25v0.9375H1.875Z" strokeWidth="1"></path>

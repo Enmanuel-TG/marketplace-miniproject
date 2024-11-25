@@ -17,7 +17,7 @@ const HeadPage = ({ namePage, isHome = false }: { namePage: string; isHome?: boo
           <MyIconProfile className="bg-white size-11 rounded-full" />
         </div>
       </header>
-      <div className="fixed bottom-10 bg-white right-4 z-10 pt-3 pb-11 rounded-full shadow-md transition-opacity duration-300 ">
+      <div className="fixed bottom-10 bg-white right-4 z-10 pt-3 pb-11 rounded-full shadow-md transition-opacity duration-300 max-w-[65px]">
         <HomeMenu />
       </div>
     </>
