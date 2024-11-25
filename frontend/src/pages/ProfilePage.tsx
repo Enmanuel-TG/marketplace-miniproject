@@ -179,7 +179,7 @@ const ProfilePage = () => {
             <div className="md:text-center lg:text-left w-full md:w-2/3">
               <Dialog>
                 <div className="flex flex-row items-center gap-4">
-                  <p className="text-xl md:text-[38px] font-semibold">{user?.name}</p>
+                  <p className="text-xl md:text-2xl font-semibold text-left">{user?.name}</p>
                   <DialogTrigger ref={triggerRef}>
                     <img
                       src="/edit.svg"
@@ -221,7 +221,7 @@ const ProfilePage = () => {
                 </DialogContent>
               </Dialog>
               {user?.createdAt && (
-                <div className="mb-3 md:mt-3 text-gray-600">
+                <div className="mb-3 text-gray-600 text-left">
                   Joined on{' '}
                   {new Date(user?.createdAt).toLocaleDateString('en-US', {
                     month: 'long',
