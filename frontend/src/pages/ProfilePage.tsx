@@ -161,10 +161,10 @@ const ProfilePage = () => {
       <div className="mb-8">
         <div className="bg-background mt-10 mx-auto w-full md:max-w-[80%] p-[52px] sm:p-[38px] lg:p-[25px] rounded-lg shadow-md">
           <div className="flex flex-col lg:flex-row gap-[64px] items-center lg:items-start">
-            <div className="relative">
+            <div className="relative w-full max-w-[200px] md:w-fit">
               <img
                 src={user?.photo}
-                className="aspect-square rounded-full shadow-lg w-full max-w-[220px] lg:size-[220px] object-cover"
+                className="aspect-square rounded-full shadow-lg w-full max-w-none md:max-w-[220px] lg:size-[220px] object-cover"
               />
 
               {user?.phoneNumber !== '0000000000' && (
