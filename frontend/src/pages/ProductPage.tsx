@@ -230,9 +230,9 @@ export const ProductPage = () => {
             <div>
               You need to be{' '}
               <Link className="hover:underline text-blue-500" to="/login">
-                logged
+                logged in
               </Link>{' '}
-              in to contact me
+              to contact me
             </div>
           )}
         </div>
