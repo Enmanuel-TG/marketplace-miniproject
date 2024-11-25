@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useProduct } from '../contexts/ProductContext';
 import { ProductCard } from '../components/ProductCard';
 import SearchBar from '../components/SearchBar';
@@ -13,6 +13,7 @@ const HomePages = () => {
   const { isAuthenticated } = useAuth();
   const ProductAvailable = allProducts.filter((product) => product.stock > 0);
   const isFirstRender = useRef(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -26,7 +27,7 @@ const HomePages = () => {
   }, [errors]);
 
   useEffect(() => {
-    getAllProducts();
+    getAllProducts().finally(() => setIsLoading(false));
   }, []);
 
   return (
@@ -35,9 +36,11 @@ const HomePages = () => {
       <div className="flex">
         <SearchBar />
       </div>
-      {ProductAvailable.length === 0 && (
-        <h1 className="text-3xl font-bold mx-auto mt-6 bg-background  text-white">No products found</h1>
-      )}
+      <p className="text-xl mx-auto my-10 bg-background">
+        {isLoading
+          ? 'Loading products... Please wait a moment. This may take a while.'
+          : ProductAvailable.length === 0 && 'No products found'}
+      </p>
       <div className="max-w-screen w-11/12 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {ProductAvailable.map((product) => (
           <ProductCard key={product.id} title="Buy" product={product} />
