@@ -1,14 +1,20 @@
 import { forwardRef } from 'react';
 
-interface TextareaProps extends React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {
+interface TextareaProps
+  extends React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {
   fieldname: string;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(({ fieldname, required, ...props }, ref) => {
   return (
     <label className="flex flex-col px-1">
-      <span className="mb-1">
-        {fieldname} {required && <span className="text-red-500" title={`The ${fieldname} is required.`}>*</span>}
+      <span className="mb-1 cursor-pointer">
+        {fieldname}{' '}
+        {required && (
+          <span className="text-red-500" title={`The ${fieldname} is required.`}>
+            *
+          </span>
+        )}
       </span>
       <textarea
         required={required}

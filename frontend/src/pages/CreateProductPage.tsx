@@ -17,6 +17,7 @@ const CreateProductPage = () => {
   const { register, handleSubmit, setValue, reset } = useForm<Product>();
   const { createProduct, errors, setProduct, setErrors } = useProduct();
   const [isLoading, setIsLoading] = useState(false);
+  const [hasImage, setHasImage] = useState(false);
   const isFirstRender = useRef(true);
 
   useEffect(() => {
@@ -31,20 +32,31 @@ const CreateProductPage = () => {
   }, [errors]);
 
   const onSubmit = async (data: Product): Promise<void> => {
-    setIsLoading(true);
-    const res = await createProduct(data);
-    if (res) {
-      toast.success(res.message, toastifyConfig);
-      reset();
-    }
-    if (res.product.id) {
-      setProduct(res.product);
-      navigate(`/product/id:${res.product.id}`);
+    try {
+      setIsLoading(true);
+      if (!hasImage) {
+        toast.error('Image is required', toastifyConfig);
+        return;
+      }
+      const res = await createProduct(data);
+      if (res) {
+        toast.success(res.message, toastifyConfig);
+        reset();
+      }
+      if (res.product.id) {
+        setProduct(res.product);
+        navigate(`/product/id:${res.product.id}`);
+      }
+    } catch (error) {
+      toast.error('Something went wrong in creating the product. Try again.', toastifyConfig);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleFileChange = (files: File[]) => {
     setValue('photos', files);
+    setHasImage(files.length !== 0);
   };
 
   return (
