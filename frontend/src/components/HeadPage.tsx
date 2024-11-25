@@ -7,10 +7,10 @@ import HomeMenu from './HomeMenu';
 const HeadPage = ({ namePage, isHome = false }: { namePage: string; isHome?: boolean }) => {
   return (
     <>
-      <header className={cn('w-full px-4 flex items-center justify-between', isHome && 'justify-end')}>
-        <div className={cn('flex items-center', isHome && 'hidden')}>
-          <ButtonBack className="mt-4" />
-          <h1 className="flex text-base md:text-3xl font-bold mt-4 ml-1 md:ml-4">{namePage}</h1>
+      <header className="w-full px-4 flex items-center justify-between">
+        <div className="flex items-center">
+          <ButtonBack className={('mt-4', isHome && 'hidden')} />
+          <h1 className="flex text-base md:text-3xl font-bold ml-1 md:ml-4">{namePage}</h1>
         </div>
         <div className="flex items-center justify-center mt-3">
           <Logout />

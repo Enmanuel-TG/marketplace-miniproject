@@ -81,7 +81,7 @@ export const ProductPage = () => {
       <div className="flex flex-row items-center justify-center min-h-screen bg-background p-4">
         This Product Does Not Exist
         <button className="ml-4 border border-gray-500 px-3 py-1 rounded" onClick={back}>
-          back
+          Back
         </button>
       </div>
     );
@@ -98,13 +98,10 @@ export const ProductPage = () => {
             <PhotoProduct images={product.photos as unknown as string[]} />
           </div>
           <div className="my-6 flex flex-col sm:flex-row sm:justify-between sm:items-center md:flex-wrap gap-3">
-            {/* Product Name and Price */}
             <div className="flex flex-row sm:flex-row sm:items-center flex-wrap md:flex-nowrap">
               <h1 className="text-3xl font-bold mr-4 truncate flex text-balance">{product.name}</h1>
               <span className="text-3xl text-green-600 flex flex-growth font-semibold">${product.price}</span>
             </div>
-
-            {/* Seller Information or Admin Options */}
             <div className="mt-4 sm:mt-0">
               {productOwner || user?.role === 'admin' ? (
                 <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
@@ -131,11 +128,13 @@ export const ProductPage = () => {
                       </DialogHeader>
                     </DialogContent>
                   </Dialog>
-                  <Button
-                    styles="bg-green-500 py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
-                    onClick={Edit}
-                    fieldname="Edit"
-                  />
+                  {user?.role !== 'admin' && (
+                    <Button
+                      styles="bg-green-500 py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
+                      onClick={Edit}
+                      fieldname="Edit"
+                    />
+                  )}
                 </div>
               ) : (
                 <div className="flex flex-row gap-3 mb-2">
