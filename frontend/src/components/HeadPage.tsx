@@ -3,6 +3,7 @@ import { ButtonBack } from './ui/ButtonBack';
 import MyIconProfile from './ui/MyIconProfile';
 import Logout from '@/components/Logout';
 import HomeMenu from './HomeMenu';
+import { Link } from 'react-router-dom';
 
 const HeadPage = ({ namePage, isHome = false }: { namePage: string; isHome?: boolean }) => {
   return (
@@ -14,7 +15,9 @@ const HeadPage = ({ namePage, isHome = false }: { namePage: string; isHome?: boo
         </div>
         <div className="flex items-center justify-center mt-3">
           <Logout />
-          <MyIconProfile className="bg-white size-11 rounded-full" />
+          <Link to="/profile">
+            <MyIconProfile className="bg-white size-11 rounded-full" />
+          </Link>
         </div>
       </header>
       <div className="fixed bottom-10 bg-white right-4 z-10 pt-3 pb-11 rounded-full shadow-md transition-opacity duration-300 max-w-[65px]">
