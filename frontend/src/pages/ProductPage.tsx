@@ -19,6 +19,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '@/utilities/toastify.utility';
 import HeadPage from '@/components/HeadPage';
+import { categoryOptions } from '@/utilities/select-option.utility';
 
 export const ProductPage = () => {
   const { register, handleSubmit } = useForm();
@@ -202,7 +203,11 @@ export const ProductPage = () => {
             </p>
             <p className="capitalize">
               <strong className="mr-2">Category:</strong>
-              {product.category}
+              <>
+                {categoryOptions.find(({ value }) => {
+                  return value === product.category.toLowerCase();
+                })?.label || 'Others'}
+              </>
             </p>
           </div>
           <div className="mb-8">
