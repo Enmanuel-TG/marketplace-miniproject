@@ -210,6 +210,7 @@ const ProfilePage = () => {
                         type="text"
                         required
                         fieldname="Phone Number"
+                        placeholder='18295555555'
                         {...register('phoneNumber', { required: true })}
                       />
                       <Button type="submit" fieldname="Update Profile" styles="p-2 mt-4" />
