@@ -8,7 +8,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Profile } from '@/utilities/interfaces.utility';
 
 const UserRole = (user: { name: string; role: string; photo: string; id: number }) => {
-  const { userData, setUserData } = useAuth();
+  const { userData, setUserData, user: loggedUser } = useAuth();
   const changeRole = async (id: number, role: string) => {
     try {
       const res = await updateRoleRequest(id, role);
@@ -32,8 +32,8 @@ const UserRole = (user: { name: string; role: string; photo: string; id: number 
           <p>{user.name}</p>
         </div>
         <Dialog>
-          <DialogTrigger>
-            <Button fieldname="Role" styles="py-2 px-4" />
+          <DialogTrigger title={user?.id === loggedUser?.id ? 'You can not change your own role' : 'Change role'}>
+            <Button fieldname="Role" styles="py-2 px-4" disabled={user?.id === loggedUser?.id} />
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>

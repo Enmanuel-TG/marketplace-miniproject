@@ -128,7 +128,7 @@ export const ProductPage = () => {
                       </DialogHeader>
                     </DialogContent>
                   </Dialog>
-                  {user?.role !== 'admin' && (
+                  {product?.userId === user?.id && (
                     <Button
                       styles="bg-green-500 py-2 px-4 rounded-lg hover:bg-green-600 transition-colors"
                       onClick={Edit}
@@ -137,37 +137,37 @@ export const ProductPage = () => {
                   )}
                 </div>
               ) : (
-                <div className="flex flex-row gap-3 mb-2">
-                  <img
-                    src={userData?.photo}
-                    onClick={userProfile}
-                    className="aspect-square size-10 rounded-full object-cover"
-                    alt="Seller"
-                  />
-                  <div className="flex flex-row gap-2 items-center">
-                    <p className="text-sm font-semibold">Seller:</p>
-                    <p className="cursor-pointer font-medium text-sm" onClick={userProfile}>
-                      {userData?.name}
-                    </p>
+                user?.role === 'admin' && (
+                  <div className="flex flex-row gap-3 mb-2">
+                    <img
+                      src={userData?.photo}
+                      onClick={userProfile}
+                      className="aspect-square size-10 rounded-full object-cover"
+                      alt="Seller"
+                    />
+                    <div className="flex flex-row gap-2 items-center">
+                      <p className="text-sm font-semibold">Seller:</p>
+                      <p className="cursor-pointer font-medium text-sm" onClick={userProfile}>
+                        {userData?.name}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                )
               )}
             </div>
           </div>
 
-          <div>
-            {user?.role === 'admin' && !productOwner && (
-              <div className="flex items-center mb-3">
-                <img src={userData?.photo} onClick={userProfile} className="aspect-square size-10 rounded-full mr-2" />
-                <div className="flex flex-row">
-                  <p className="pr-2 cursor-pointer">Seller:</p>
-                  <div className="cursor-pointer" onClick={userProfile}>
-                    {userData?.name}
-                  </div>
+          {!productOwner && (
+            <div className="flex items-center mb-3">
+              <img src={userData?.photo} onClick={userProfile} className="aspect-square size-10 rounded-full mr-2" />
+              <div className="flex flex-row">
+                <p className="pr-2 cursor-pointer">Seller:</p>
+                <div className="cursor-pointer" onClick={userProfile}>
+                  {userData?.name}
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
           <div className="mb-4 flex flex-col md:flex-row flex-wrap gap-x-8">
             <div>
               <p>

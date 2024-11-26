@@ -85,46 +85,9 @@ const ExternalProfilePage = () => {
   }
 
   return (
-    <div>
-      <div className="flex justify-between">
-        <HeadPage namePage={'Profile'} />
-        <div>
-          {isAdmin && (
-            <div>
-              <Dialog>
-                <DialogTrigger>
-                  <div>
-                    <Button fieldname="Role" styles="w-14 h-8 mt-4 mr-4" />
-                  </div>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle className="text-center">Change role of this user</DialogTitle>
-                  </DialogHeader>
-                  <DialogClose>
-                    <div className="flex justify-around w-5/6 m-auto gap-2 my-6">
-                      <Button
-                        fieldname="Change to user"
-                        onClick={() => {
-                          changeRole(Number(userId), 'user');
-                        }}
-                        styles="py-2 px-4"
-                      />
-                      <Button
-                        fieldname="Change to admin"
-                        onClick={() => {
-                          changeRole(Number(userId), 'admin');
-                        }}
-                        styles="py-2 px-4"
-                      />
-                    </div>
-                  </DialogClose>
-                </DialogContent>
-              </Dialog>
-            </div>
-          )}
-        </div>
-      </div>
+    <>
+      <HeadPage namePage={'Profile'} />
+
       <div className="mt-6 mx-auto w-full md:max-w-[80%] p-[40px] sm:p-[30px] lg:p-[20px]">
         <div className="bg-background mt-10 mx-auto w-full p-[38px] lg:p-[25px] rounded-lg shadow-md">
           <div className="flex flex-col lg:flex-row md:gap-[64px] items-center lg:items-start">
@@ -152,6 +115,41 @@ const ExternalProfilePage = () => {
               <div className="w-full mt-3 mr-3 border-gray-300 rounded-md">
                 <p>{userData?.description}</p>
               </div>
+              {isAdmin && user?.id !== userData.id && (
+                <div>
+                  <Dialog>
+                    <DialogTrigger>
+                      <Button fieldname="Change role" styles="px-4 py-2 mt-2 mr-4" />
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle className="text-center">Change role of this user</DialogTitle>
+                      </DialogHeader>
+                      <DialogClose>
+                        <div className="flex justify-around w-5/6 m-auto gap-2 my-6">
+                          {userData.role === 'admin' ? (
+                            <Button
+                              fieldname="Change to user"
+                              onClick={() => {
+                                changeRole(Number(userId), 'user');
+                              }}
+                              styles="py-2 px-4"
+                            />
+                          ) : (
+                            <Button
+                              fieldname="Change to admin"
+                              onClick={() => {
+                                changeRole(Number(userId), 'admin');
+                              }}
+                              styles="py-2 px-4"
+                            />
+                          )}
+                        </div>
+                      </DialogClose>
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -176,7 +174,7 @@ const ExternalProfilePage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
