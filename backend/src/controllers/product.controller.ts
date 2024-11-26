@@ -134,6 +134,7 @@ export const getAllUserProduct = async (req: Request, res: Response) => {
       where: {
         userId: getTokenId(req),
       },
+      orderBy: [{ createdAt: 'desc' }],
     });
     return res.status(200).json(products);
   } catch (error) {
@@ -145,7 +146,9 @@ export const getAllUserProduct = async (req: Request, res: Response) => {
 };
 export const getAllProduct = async (_req: Request, res: Response) => {
   try {
-    const products = await prisma.product.findMany();
+    const products = await prisma.product.findMany({
+      orderBy: [{ createdAt: 'desc' }],
+    });
     return res.status(200).json(products);
   } catch (error) {
     return res.status(500).json({
@@ -162,6 +165,7 @@ export const getProductsByCategory = async (req: Request, res: Response) => {
       where: {
         category: category,
       },
+      orderBy: [{ createdAt: 'desc' }],
     });
     if (products.length === 0) {
       return res.status(404).json(['No products in this category.']);
@@ -194,6 +198,7 @@ export const searchProduct = async (req: Request, res: Response) => {
           },
         ],
       },
+      orderBy: [{ createdAt: 'desc' }],
     });
     if (products.length === 0) {
       return res.status(404).json(['No products found.']);
