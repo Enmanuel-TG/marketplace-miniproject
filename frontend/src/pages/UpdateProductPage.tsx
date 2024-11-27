@@ -124,7 +124,7 @@ const UpdateProductPage = () => {
           <div className="flex justify-between mt-5">
             <Button
               fieldname="Cancel"
-              onClick={() => navigate(`/product/id:${product.id}`)}
+              onClick={() => navigate(`/product/id:${product.id} `)}
               styles="p-3 w-full md:w-fit"
             />
             <Button

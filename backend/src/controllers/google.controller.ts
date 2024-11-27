@@ -24,7 +24,7 @@ export const loginWithGoogle = async (req: Request, res: Response) => {
   }
   const token = await createAccessToken({ id: userFound.id });
   return res
-    .cookie(NAME_TOKEN, token, { httpOnly: true, secure: true, sameSite: 'none' })
+    .cookie(NAME_TOKEN, token, { httpOnly: true, secure: true })
     .status(200)
     .json({
       message: 'Login successfully.',
@@ -84,7 +84,7 @@ export const registerWithGoogle = async (req: Request, res: Response) => {
   const token = await createAccessToken({ id: user.id });
 
   return res
-    .cookie(NAME_TOKEN, token, { httpOnly: true, secure: true, sameSite: 'none' })
+    .cookie(NAME_TOKEN, token, { httpOnly: true, secure: true })
     .status(200)
     .json({
       message: 'Register successfully.',
