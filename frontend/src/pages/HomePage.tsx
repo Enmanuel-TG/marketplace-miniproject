@@ -37,7 +37,7 @@ const HomePages = () => {
         <SearchBar />
       </div>
       {(isLoading || ProductAvailable.length === 0) && (
-        <p className="text-xl mx-auto my-10 bg-background">
+        <p className="text-xl mx-auto px-4 my-10 bg-background">
           {isLoading
             ? 'Loading products... Please wait a moment. This may take a while.'
             : ProductAvailable.length === 0 && 'No products found'}

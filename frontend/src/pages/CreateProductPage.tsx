@@ -135,7 +135,7 @@ const CreateProductPage = () => {
                 type="submit"
                 fieldname={isLoading ? 'Creating...' : 'Create Product'}
                 disabled={isLoading}
-                styles="p-3 w-full md:w-fit"
+                styles="p-3 mb-3 w-full md:w-fit"
               />
             </div>
           </form>

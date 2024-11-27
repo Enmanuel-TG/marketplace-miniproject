@@ -267,7 +267,7 @@ const ProfilePage = () => {
                         <img
                           src="/edit.svg"
                           alt="edit"
-                          className="aspect-square size-4 transition-all hover:w-5 hover:h-7"
+                          className="aspect-square size-4 min-w-4 transition-all hover:w-5 hover:h-7"
                           title="Edit description"
                         />
                       </DialogTrigger>
