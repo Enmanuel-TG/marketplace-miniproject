@@ -64,11 +64,11 @@ const PhotoProduct = ({ images }: SliderProps) => {
       )}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="relative bg-white p-4 rounded-lg max-w-4xl max-h-4xl" onClick={() => setIsModalOpen(false)}>
+          <div className="relative bg-white p-4 rounded-lg" onClick={() => setIsModalOpen(false)}>
             <img
               src={images[currentIndex]}
               alt={`Slide ${currentIndex}`}
-              className="max-w-full max-h-full object-contain"
+              className="w-[1000px] h-[650px] object-contain"
             />
             <button
               className="absolute top-2 right-2 text-white bg-black bg-opacity-50 p-2"

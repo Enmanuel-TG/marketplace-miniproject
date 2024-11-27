@@ -125,12 +125,12 @@ const UpdateProductPage = () => {
             <Button
               fieldname="Cancel"
               onClick={() => navigate(`/product/id:${product.id} `)}
-              styles="p-3 w-full md:w-fit"
+              styles="p-2 w-full md:w-fit"
             />
             <Button
               type="submit"
               fieldname={isLoading ? 'Updating...' : 'Update'}
-              styles="p-3 w-full md:w-fit"
+              styles="p-2 w-full md:w-fit"
               disabled={isLoading}
             />
           </div>
