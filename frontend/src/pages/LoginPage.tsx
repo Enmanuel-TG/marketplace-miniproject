@@ -46,10 +46,17 @@ const LoginPages = () => {
               className="mb-3"
               fieldname="Email"
               type="email"
+              autoComplete="email"
               required
               {...register('email', { required: true })}
             />
-            <Input required fieldname="Password" type="password" {...register('password', { required: true })} />
+            <Input
+              required
+              fieldname="Password"
+              type="password"
+              autoComplete="current-password"
+              {...register('password', { required: true })}
+            />
             <div className="flex justify-between items-center">
               <Link className="text-blue-500 hover:text-blue-700 text-sm hover:underline" to="/forget-password">
                 Forgot password?

@@ -112,6 +112,7 @@ const RegisterPage = () => {
                   fieldname="Email"
                   required
                   type="email"
+                  autoComplete="email"
                   {...register('email', { required: true })}
                   className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -119,6 +120,7 @@ const RegisterPage = () => {
                   fieldname="Password"
                   required
                   type="password"
+                  autoComplete="current-password"
                   {...register('password', { required: true })}
                   className="w-full p-3 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />

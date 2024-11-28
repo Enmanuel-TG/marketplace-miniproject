@@ -53,12 +53,14 @@ export const ResetPasswordPage = () => {
               className="mb-3"
               fieldname="New password"
               type="password"
+              autoComplete="current-password"
               {...register('password', { required: true })}
             />
             <Input
               className="mb-3"
               fieldname="Confirm Password"
               type="password"
+              autoComplete="current-password"
               {...register('confirm-password', { required: true })}
             />
           </form>

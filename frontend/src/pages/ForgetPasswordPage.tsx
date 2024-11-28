@@ -48,6 +48,7 @@ export const ForgetPasswordPage = () => {
               required
               fieldname="Email"
               type="email"
+              autoComplete="email"
               placeholder="Enter your email"
               {...register('email', { required: true })}
             />
