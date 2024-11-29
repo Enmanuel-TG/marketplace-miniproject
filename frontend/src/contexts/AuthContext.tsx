@@ -30,13 +30,12 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: ProviderProps) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(false);
   const [errors, setErrors] = useState<string[]>([]);
   const [user, setUser] = useState<Profile | null>(null);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [isResetPasswordEmailSent, setIsResetPasswordEmailSent] = useState(false);
   const [userData, setUserData] = useState<Profile | null>(null);
-
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
       try {
@@ -189,21 +188,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     }
   };
 
-  const checkAuth = async () => {
-    try {
-      const res = await profileRequest();
-      if (!res.data) {
-        setUser(null);
-        setIsAuthenticated(false);
-      } else {
-        setUser(res.data);
-        setIsAuthenticated(true);
-      }
-    } catch (error) {
-      setUser(null);
-      setIsAuthenticated(false);
-    }
-  };
   const updatedDescription = async (description: string) => {
     if (!user) return;
     try {
@@ -221,6 +205,21 @@ export const AuthProvider = ({ children }: ProviderProps) => {
           setErrors(error.response.data);
         }
       }
+    }
+  };
+  const checkAuth = async () => {
+    try {
+      const res = await profileRequest();
+      if (!res.data) {
+        setUser(null);
+        setIsAuthenticated(false);
+      } else {
+        setUser(res.data);
+        setIsAuthenticated(true);
+      }
+    } catch (error) {
+      setUser(null);
+      setIsAuthenticated(false);
     }
   };
 
