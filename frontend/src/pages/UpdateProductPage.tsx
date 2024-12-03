@@ -73,9 +73,24 @@ const UpdateProductPage = () => {
           <ImageUploader onFilesChange={handleFileChange} imgs={product?.photos as unknown as string[]} />
           <Input type="text" fieldname="Title" required {...register('name', { required: true })} />
           <div className="flex w-full justify-between mt-5">
-            <Input type="text" fieldname="Price" required {...register('price', { required: true })} />
-            <Input type="text" fieldname="Stock" required {...register('stock', { required: true })} />
-            <Input type="text" fieldname="Location" required {...register('location', { required: true })} />
+            <Input
+              type="text"
+              required
+              title="Enter a whole number greater than 0"
+              pattern="^[1-9][0-9]*$"
+              fieldname="Price"
+              {...register('price', { required: true })}
+            />
+            <Input
+              type="text"
+              required
+              title="Enter a price greater than 0 (e.g., 0.01, 1, 1.99)"
+              pattern="^(?!0(\.0{1,2})?$)([1-9][0-9]*|0\.[1-9][0-9]?|[1-9][0-9]*\.[0-9]{1,2})$"
+              fieldname="Price"
+              {...register('price', { required: true })}
+            />
+            <Input type="text" required fieldname="Location" {...register('location', { required: true })} />
+
           </div>
           <div className="my-5 flex justify-between w-full gap-4">
             <div className="w-full">
