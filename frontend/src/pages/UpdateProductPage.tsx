@@ -76,18 +76,18 @@ const UpdateProductPage = () => {
             <Input
               type="text"
               required
-              title="Enter a whole number greater than 0"
-              pattern="^[1-9][0-9]*$"
+              title="Enter a price greater than 0 (e.g., 0.01, 1, 1.99)"
+              pattern="^(?!0(\.0{1,2})?$)([1-9][0-9]*|0\.[1-9][0-9]?|[1-9][0-9]*\.[0-9]{1,2})$"
               fieldname="Price"
               {...register('price', { required: true })}
             />
             <Input
               type="text"
               required
-              title="Enter a price greater than 0 (e.g., 0.01, 1, 1.99)"
-              pattern="^(?!0(\.0{1,2})?$)([1-9][0-9]*|0\.[1-9][0-9]?|[1-9][0-9]*\.[0-9]{1,2})$"
-              fieldname="Price"
-              {...register('price', { required: true })}
+              title="Enter a whole number greater than 0"
+              pattern="^[1-9][0-9]*$"
+              fieldname="Stock"
+              {...register('stock', { required: true })}
             />
             <Input type="text" required fieldname="Location" {...register('location', { required: true })} />
 
