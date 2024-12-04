@@ -14,7 +14,9 @@ const HeadPage = ({ namePage, isHome = false }: { namePage: string; isHome?: boo
           <h1 className="flex text-base md:text-3xl font-bold ml-1 md:ml-4 mt-4">{namePage}</h1>
         </div>
         <div className="flex items-center justify-center mt-3">
-          <Logout />
+          <div>
+            <Logout />
+          </div>
           <Link to="/profile">
             <MyIconProfile className="bg-white size-11 rounded-full" />
           </Link>

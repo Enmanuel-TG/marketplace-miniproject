@@ -3,7 +3,7 @@ import GetPicture from '../components/GetPicture';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { toastifyConfig } from '../utilities/toastify.utility';
-import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/Dialog';
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from '@/components/ui/Dialog';
 import { ProductCard } from '@/components/ProductCard';
 import { useProduct } from '@/contexts/ProductContext';
 import Input from '@/components/ui/Input';
@@ -191,17 +191,20 @@ const ProfilePage = () => {
                 </div>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle className="text-lg ">
+                    <DialogTitle className="text-lg">
                       {user?.phoneNumber === '0000000000' ? 'Complete your profile' : 'Update profile'}
                     </DialogTitle>
                   </DialogHeader>
 
-                  {user?.phoneNumber !== '0000000000' && (
-                    <p>
+                  {user?.phoneNumber === '0000000000' ?
+                    <DialogDescription>
                       You registered with Google. You must complete your profile by adding your phone number and date of
                       birth to continue.
-                    </p>
-                  )}
+                    </DialogDescription> :
+                    <DialogDescription>
+                        Updated your profile data
+                    </DialogDescription>
+                  }
                   <div className="flex flex-col items-center">
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <Input type="text" required fieldname="Name" {...register('name', { required: true })} />
@@ -210,12 +213,11 @@ const ProfilePage = () => {
                         type="text"
                         required
                         fieldname="Phone Number"
-                        placeholder='18295555555'
+                        placeholder='Your phone number'
                         {...register('phoneNumber', { required: true })}
                       />
                       <Button type="submit" fieldname="Update Profile" styles="p-2 mt-4" />
-                      <DialogClose>
-                        <button ref={userDataRef} aria-hidden="true"></button>
+                      <DialogClose ref={userDataRef}>
                       </DialogClose>
                     </form>
                   </div>
@@ -245,9 +247,12 @@ const ProfilePage = () => {
                   <DialogContent>
                     <DialogHeader>
                       <DialogTitle className="mb-3">Change description</DialogTitle>
+                      <DialogDescription>
+                      Add a description of your store or yourself so buyers can get to know you
+                      </DialogDescription>
                       <form onSubmit={handleSubmit(changeDescription)}>
                         <Textarea
-                          fieldname="Description"
+                          fieldname=""
                           defaultValue={user?.description}
                           className="w-full min-h-[128px] border border-gray-300 rounded-lg p-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           {...register('description')}
@@ -272,8 +277,7 @@ const ProfilePage = () => {
                         />
                       </DialogTrigger>
                     )}
-                    <DialogClose>
-                      <button ref={descriptionRef}></button>
+                    <DialogClose ref={descriptionRef}>
                     </DialogClose>
                   </div>
                 </div>
@@ -283,12 +287,15 @@ const ProfilePage = () => {
         </div>
         <DialogContent className="p-[38px]">
           <DialogHeader>
-            <DialogTitle className="text-[50px] lg:text-[25px]">Change your profile photo</DialogTitle>
+            <DialogTitle className="text-[30px] lg:text-[25px]">Change your profile photo</DialogTitle>
           </DialogHeader>
+          <DialogDescription>
+            Select a photo that represents you and. After selecting the photo you will be able to see how it looks before uploading it.
+          </DialogDescription>
           <div className="flex flex-col items-center">
             <img
               src={previewPhoto || user?.photo}
-              className="aspect-square size-[320px] sm:size-[256px] lg:size-[192px] rounded-full shadow-lg object-cover"
+              className="aspect-square size-[220px] sm:size-[256px] lg:size-[192px] rounded-full shadow-lg object-cover"
             />
             <GetPicture onPhotoChange={setPreviewPhoto} />
           </div>

@@ -6,7 +6,6 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -110,23 +109,21 @@ export const ProductPage = () => {
                     <DialogTrigger className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors font-bold">
                       Delete
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className='text-center'>
                       <DialogHeader>
-                        <DialogTitle>Are you absolutely sure?</DialogTitle>
-                        <DialogDescription>
-                          <p className="mt-3">
+                        <DialogTitle className="text-lg text-center">Delete Product. Are you absolutely sure?</DialogTitle>
+                      </DialogHeader>
+                      <DialogDescription>
                             This action cannot be undone. This will permanently delete this product and remove the data
                             from our servers.
-                          </p>
-                          <DialogClose className="w-full flex justify-center">
-                            <Button
-                              fieldname="Delete"
-                              styles="p-2 w-1/6 mt-6 hover:bg-red-600 bg-red-500 text-white rounded-lg"
-                              onClick={ProductDelete}
-                            />
-                          </DialogClose>
-                        </DialogDescription>
-                      </DialogHeader>
+                      </DialogDescription>
+                      <div className='flex flex-row justify-center'>
+                        <Button
+                          fieldname="Delete"
+                          styles=" py-2 px-4 mt-6 hover:bg-red-600 bg-red-500 text-white rounded-lg"
+                          onClick={ProductDelete}
+                        />
+                      </div>
                     </DialogContent>
                   </Dialog>
                   {product?.userId === user?.id && (
@@ -180,19 +177,19 @@ export const ProductPage = () => {
                     </DialogTrigger>
                     <DialogContent>
                       <DialogTitle className="mx-1">Change Stock</DialogTitle>
-                      <DialogDescription>
-                        <p className="mx-1 mb-6">If you send 0, you will mark the product as sold, or out of stock.</p>
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                          <Input
-                            required
-                            min={0}
-                            type="number"
-                            fieldname="Stock"
-                            {...register('stock', { required: true })}
-                          />
-                          <Button type="submit" styles="py-2 px-4 mt-4" fieldname="Change" />
-                        </form>
+                      <DialogDescription className="mx-1 mb-6">
+                        If you send 0, you will mark the product as sold, or out of stock.
                       </DialogDescription>
+                      <form onSubmit={handleSubmit(onSubmit)}>
+                        <Input
+                          required
+                          min={0}
+                          type="number"
+                          fieldname="Stock"
+                          {...register('stock', { required: true })}
+                        />
+                        <Button type="submit" styles="py-2 px-4 mt-4" fieldname="Change" />
+                      </form>
                     </DialogContent>
                   </Dialog>
                 )}

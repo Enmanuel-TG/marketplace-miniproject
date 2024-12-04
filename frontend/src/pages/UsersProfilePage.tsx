@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useParams } from 'react-router-dom';
 import { Product, Profile } from '@/utilities/interfaces.utility';
 import { getRating } from '@/services/rating.service';
 import { useProduct } from '@/contexts/ProductContext';
 import { filterStockProducts } from '@/utilities/filter-products.utility';
-import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/Dialog';
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from '@/components/ui/Dialog';
 import Rating from '@/components/Rating';
 import { Switch } from '@/components/ui/Switch';
 import { ProductCard } from '@/components/ProductCard';
@@ -30,6 +30,7 @@ const ExternalProfilePage = () => {
   const [isAvailable, setIsAvailable] = useState(true);
   const { id } = useParams<{ id: string }>();
   const userId = id?.split(':')[1];
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   const getUserRating = async (id: number) => {
     const res = await getRating(id);
@@ -46,6 +47,7 @@ const ExternalProfilePage = () => {
       if (res.status === 200) {
         setUserData({ ...userData, role } as Profile);
         toast.success(res.data.message, toastifyConfig);
+        triggerRef.current?.click();
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -87,7 +89,6 @@ const ExternalProfilePage = () => {
   return (
     <>
       <HeadPage namePage={'Profile'} />
-
       <div className="mt-6 mx-auto w-full md:max-w-[80%] p-[40px] sm:p-[30px] lg:p-[20px]">
         <div className="bg-background mt-10 mx-auto w-full p-[38px] lg:p-[25px] rounded-lg shadow-md">
           <div className="flex flex-col lg:flex-row md:gap-[64px] items-center lg:items-start">
@@ -118,33 +119,33 @@ const ExternalProfilePage = () => {
               {isAdmin && user?.id !== userData.id && (
                 <div>
                   <Dialog>
-                    <DialogTrigger>
-                      <Button fieldname="Change role" styles="px-4 py-2 mt-2 mr-4" />
+                    <DialogTrigger className='px-4 py-2 mt-2 mr-4'>
+                      Change role
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
                         <DialogTitle className="text-center">Change role of this user</DialogTitle>
                       </DialogHeader>
-                      <DialogClose>
-                        <div className="flex justify-around w-5/6 m-auto gap-2 my-6">
-                          {userData.role === 'admin' ? (
-                            <Button
-                              fieldname="Change to user"
-                              onClick={() => {
-                                changeRole(Number(userId), 'user');
-                              }}
-                              styles="py-2 px-4"
-                            />
-                          ) : (
-                            <Button
-                              fieldname="Change to admin"
-                              onClick={() => {
-                                changeRole(Number(userId), 'admin');
-                              }}
-                              styles="py-2 px-4"
-                            />
-                          )}
-                        </div>
+                      <DialogDescription className="flex justify-around w-5/6 m-auto gap-2 my-6">
+                        {userData.role === 'admin' ? (
+                          <Button
+                            fieldname="Change to user"
+                            onClick={() => {
+                              changeRole(Number(userId), 'user');
+                            }}
+                            styles="py-2 px-4"
+                          />
+                        ) : (
+                          <Button
+                            fieldname="Change to admin"
+                            onClick={() => {
+                              changeRole(Number(userId), 'admin');
+                            }}
+                            styles="py-2 px-4"
+                          />
+                        )}
+                      </DialogDescription>
+                      <DialogClose ref={triggerRef}>
                       </DialogClose>
                     </DialogContent>
                   </Dialog>
