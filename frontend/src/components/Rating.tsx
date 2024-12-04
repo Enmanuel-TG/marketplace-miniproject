@@ -60,30 +60,27 @@ const Rating = ({ data, allowRating }: { data: { average: number; count: number 
       <p>{data.count} reviews</p>
       {allowRating && (
         <Dialog>
-          <DialogTrigger>
-            <div className="ml-3 pb-1">
-              <img className="size-5 md:size-6" src="/rating.svg" alt="Add Rating" />
-            </div>
+          <DialogTrigger className="ml-3 pb-1">
+            <img className="size-5 md:size-6" src="/rating.svg" alt="Add Rating" />
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>
-                <h2>Add a review</h2>
+                Add a review
               </DialogTitle>
-              <p className="mt-3">
+              <DialogDescription className="mt-3">
                 If you have already added a review, when you re-rate, you change your previous rating.
-              </p>
-              <DialogDescription>
-                <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
-                  <Input fieldname="Rating" required type="number" {...register('rating')} min="1" max="5" />
-                  <Button fieldname="Submit" type="submit" styles="w-full py-3 mt-3" />
-                </form>
-                <DialogClose>
-                  <button ref={closeRef}></button>
-                </DialogClose>
               </DialogDescription>
             </DialogHeader>
+            <div>
+              <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
+                <Input fieldname="Rating" required type="number" {...register('rating')} min="1" max="5" />
+                <Button fieldname="Submit" type="submit" styles="w-full py-3 mt-3" />
+              </form>
+            </div>
           </DialogContent>
+          <DialogClose ref={closeRef}>
+          </DialogClose>
         </Dialog>
       )}
     </div>
