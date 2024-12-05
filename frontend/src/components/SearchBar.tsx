@@ -44,7 +44,6 @@ const SearchBar = () => {
             </svg>
           </div>
           <Input
-            fieldname=""
             type="search"
             className="w-full pl-10 text-sm text-primary border rounded-lg focus:border-blue-500 bg-muted focus:ring-blue-500"
             placeholder="Search product by Name or Location"

@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 
 interface InputProps extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  fieldname: string;
+  fieldname?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(({ fieldname, required, ...props }, ref) => {

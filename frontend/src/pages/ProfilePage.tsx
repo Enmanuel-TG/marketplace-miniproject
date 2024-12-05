@@ -252,7 +252,6 @@ const ProfilePage = () => {
                       </DialogDescription>
                       <form onSubmit={handleSubmit(changeDescription)}>
                         <Textarea
-                          fieldname=""
                           defaultValue={user?.description}
                           className="w-full min-h-[128px] border border-gray-300 rounded-lg p-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           {...register('description')}

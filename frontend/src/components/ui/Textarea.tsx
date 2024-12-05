@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 
 interface TextareaProps
   extends React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {
-  fieldname: string;
+  fieldname?: string;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(({ fieldname, required, ...props }, ref) => {

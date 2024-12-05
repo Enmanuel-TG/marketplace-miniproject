@@ -184,6 +184,7 @@ export const getAllUsers = async (_req: Request, res: Response) => {
         name: user.name,
         photo: user.photo,
         role: user.role,
+        email: user.email,
       };
     });
     return res.status(200).json(allUsers);
