@@ -219,7 +219,7 @@ export const ProductPage = () => {
                 </div>
               ) : (
                 <a
-                  href={`https://wa.me/${userData?.phoneNumber}?text=I'm interested in ${product.name}`}
+                  href={`https://wa.me/${userData?.phoneNumber}?text=${window.location.href} I'm interested in ${product.name}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-bold mt-auto bg-green-500 py-2 my-4 px-4 rounded-lg hover:bg-green-600 transition-colors text-white"

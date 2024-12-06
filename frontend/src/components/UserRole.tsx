@@ -28,9 +28,9 @@ const UserRole = (user: { name: string; role: string; photo: string; id: number,
   };
 
   return (
-    <div className="flex mx-4 md:w-2/3 pt-3 md:mx-auto">
-      <div className="flex flex-wrap items-center justify-between bg-gray-100 shadow p-2 w-full">
-        <div className="flex items-center gap-2">
+    <div className="mx-4 lg:mx-8 md:w-10/12 pt-3 md:mx-auto">
+      <div className="flex flex-wrap items-center justify-between md:flex-row bg-gray-100 shadow p-2 w-full">
+        <div className="flex items-center gap-2 w-[300px] min-w-[250px]">
           <img
             className="aspect-square size-10 rounded-full"
             src={user.photo}
@@ -44,55 +44,54 @@ const UserRole = (user: { name: string; role: string; photo: string; id: number,
             <p className="text-sm">{user.email}</p>
           </div>
         </div>
-        <Dialog>
-          {user?.id !== loggedUser?.id ? (
-            <DialogTrigger
-              className="
-                bg-blue-500 hover:bg-blue-700 text-white 
-                font-bold rounded focus:outline-none focus:shadow-outline 
-                py-2 px-4 text-sm md:text-base mt-2 md:mt-0
-              "
-              title={
-                user?.id === loggedUser?.id
-                  ? 'You cannot change your own role'
-                  : 'Change role'
-              }
-            >
+        <div>
+          <Dialog>
+            {user?.id !== loggedUser?.id ? (
+              <DialogTrigger
+                className="
+                bg-blue-500 hover:bg-blue-700 text-white font-bold rounded focus:outline-none focus:shadow-outline py-2 px-4 text-sm md:text-base mt-2 md:mt-0"
+                title={
+                  user?.id === loggedUser?.id
+                    ? 'You cannot change your own role'
+                    : 'Change role'
+                }
+              >
               Change role
-            </DialogTrigger>
-          ) : (
-            <div className="py-2 px-4 text-lg font-medium">You</div>
-          )}
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle className="text-lg flex justify-center">Roles</DialogTitle>
-            </DialogHeader>
-            <DialogDescription className=" flex flex-col mx-auto mb-5">
+              </DialogTrigger>
+            ) : (
+              <div className="py-2 px-4 text-lg font-medium">You</div>
+            )}
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle className="text-lg flex justify-center">Roles</DialogTitle>
+              </DialogHeader>
+              <DialogDescription className=" flex flex-col mx-auto mb-5">
               Are you sure you want to change the role of {user.name}?
-              <strong className="font-bold flex justify-center">{user.role}</strong>
-            </DialogDescription>
-            <div>
-              {user.role === 'admin' ? (
-                <div className="flex justify-center">
-                  <Button
-                    fieldname="Change to User"
-                    onClick={() => changeRole(user.id, 'user')}
-                    styles="py-2 px-4"
-                  />
-                </div>
-              ) : (
-                <div className="flex justify-center">
-                  <Button
-                    fieldname="Change to Admin"
-                    onClick={() => changeRole(user.id, 'admin')}
-                    styles="py-2 px-4"
-                  />
-                </div>
-              )}
-            </div>
-            <DialogClose ref={triggerRef} />
-          </DialogContent>
-        </Dialog>
+                <strong className="font-bold flex justify-center">{user.role}</strong>
+              </DialogDescription>
+              <div>
+                {user.role === 'admin' ? (
+                  <div className="flex justify-center">
+                    <Button
+                      fieldname="Change to User"
+                      onClick={() => changeRole(user.id, 'user')}
+                      styles="py-2 px-4"
+                    />
+                  </div>
+                ) : (
+                  <div className="flex justify-center">
+                    <Button
+                      fieldname="Change to Admin"
+                      onClick={() => changeRole(user.id, 'admin')}
+                      styles="py-2 px-4"
+                    />
+                  </div>
+                )}
+              </div>
+              <DialogClose ref={triggerRef} />
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
     </div>
   );

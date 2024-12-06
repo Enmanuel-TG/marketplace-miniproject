@@ -33,7 +33,7 @@ const HomePages = () => {
   return (
     <div className="flex flex-col h-screen">
       <HeadPage namePage="Home" isHome />
-      <div className="flex">
+      <div className="flex pb-5">
         <SearchBar />
       </div>
       {(isLoading || ProductAvailable.length === 0) && (

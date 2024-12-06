@@ -22,10 +22,9 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="flex justify-center w-full pt-5 mx-2 mr-3">
-      <form onSubmit={handleSubmit(onSubmit)} className="w-2/3 flex items-center">
-        <label className="mb-2 text-sm sr-only text-white">Search</label>
-        <div className="relative flex-grow">
+    <div className="w-10/12 mx-auto  flex flex-col sm:flex-row items-center gap-3 pt-5 px-2">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex-grow w-full">
+        <div className="relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <svg
               className="w-4 h-4 text-gray-400"
@@ -45,7 +44,7 @@ const SearchBar = () => {
           </div>
           <Input
             type="search"
-            className="w-full pl-10 text-sm text-primary border rounded-lg focus:border-blue-500 bg-muted focus:ring-blue-500"
+            className="w-full pl-10 py-3 text-sm text-primary border rounded-lg focus:border-blue-500 bg-muted focus:ring-blue-500"
             placeholder="Search product by Name or Location"
             {...register('search', { required: true, onChange: (e) => getAllProducts(e.target.value) })}
           />
@@ -55,7 +54,7 @@ const SearchBar = () => {
         id="category"
         defaultValue=""
         onChange={handleCategoryChange}
-        className="ml-3 px-3 text-sm border rounded-lg bg-muted text-primary focus:ring-blue-500 focus:border-blue-500"
+        className="w-full sm:w-auto px-3 py-3 text-sm border rounded-lg bg-muted text-primary focus:ring-blue-500 focus:border-blue-500"
       >
         <option value="" disabled>
           Select Filter
