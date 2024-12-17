@@ -28,7 +28,7 @@ const UserRole = (user: { name: string; role: string; photo: string; id: number,
   };
 
   return (
-    <div className="mx-4 lg:mx-8 md:w-10/12 pt-3 md:mx-auto">
+    <div className="px-4 md:w-10/12 pt-3 mx-auto">
       <div className="flex flex-wrap items-center justify-between md:flex-row bg-gray-100 shadow p-2 w-full">
         <div className="flex items-center gap-2 w-[300px] min-w-[250px]">
           <img

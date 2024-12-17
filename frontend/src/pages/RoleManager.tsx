@@ -20,19 +20,22 @@ interface Users {
 const RoleManager = () => {
   const { user } = useAuth();
   const [users, setUsers] = useState<Users[]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<Users[]>([]);
+  const [search, setSearch] = useState<string>('');
   const navigate = useNavigate();
+
   const getUsers = async () => {
     try {
-      const users = await getAllUsers();
-      setUsers(users.data);
+      const response = await getAllUsers();
+      setUsers(response.data);
+      setFilteredUsers(response.data);
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response && error.response.data) {
-          toast.error(error.response.data.message, toastifyConfig);
-        }
+      if (axios.isAxiosError(error) && error.response) {
+        toast.error(error.response.data.message, toastifyConfig);
       }
     }
   };
+
   useEffect(() => {
     if (user?.role !== 'admin') {
       toast.error('You are not an admin', toastifyConfig);
@@ -40,7 +43,7 @@ const RoleManager = () => {
       return;
     }
     getUsers();
-  }, []);
+  }, [user?.role, navigate]);
 
   return (
     <div>
@@ -50,19 +53,19 @@ const RoleManager = () => {
           type="search"
           className="pl-10 text-sm text-primary border rounded-lg focus:border-blue-500 bg-muted focus:ring-blue-500"
           placeholder="Search Users by email"
+          value={search}
           onChange={(e) => {
-            const search = e.target.value.toLowerCase();
-            if (search.trim() === '') {
-              getUsers();
-            } else {
-              const filteredUsers = users.filter((user) => user.email.toLowerCase().includes(search));
-              setUsers(filteredUsers);
-            }
+            const value = e.target.value.toLowerCase();
+            setSearch(value);
+            const filtered = users.filter(user =>
+              user.email.toLowerCase().includes(value),
+            );
+            setFilteredUsers(filtered);
           }}
         />
       </div>
       <div>
-        {users.map((user) => {
+        {filteredUsers.map((user) => {
           return (
             <div key={user.id}>
               <UserRole name={user.name} role={user.role} photo={user.photo} id={user.id} email={user.email} />

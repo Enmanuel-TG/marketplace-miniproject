@@ -110,6 +110,17 @@ const ProfilePage = () => {
     }
   }, []);
 
+  const handleShare = async () => {
+    try {
+      const profileUrl = `${window.location.origin}/user-Profile/id:${user?.id}`;
+      await navigator.clipboard.writeText(profileUrl);
+      toast.success('Profile URL copied to clipboard', toastifyConfig);
+    } catch (error) {
+      toast.error('Failed to copy profile URL', toastifyConfig);
+    }
+  };
+
+
   const changeDescription = async (data: UpdateUser) => {
     const description = data.description as string;
     setIsOpen(true);
@@ -188,6 +199,9 @@ const ProfilePage = () => {
                       title="Edit"
                     />
                   </DialogTrigger>
+                  <div>
+                    <Button fieldname="Share" styles="py-[1px] px-4 rounded-lg mt-2" onClick={handleShare} />
+                  </div>
                 </div>
                 <DialogContent>
                   <DialogHeader>
@@ -239,7 +253,7 @@ const ProfilePage = () => {
                 <div className="flex flex-row">
                   <div className="mt-3 mr-3 ">
                     {user?.description ? (
-                      <p className="">{user.description}</p>
+                      <p>{user.description}</p>
                     ) : (
                       <p className="text-gray-500">No description yet.</p>
                     )}

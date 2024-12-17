@@ -41,6 +41,12 @@ export const ProductPage = () => {
     back();
   };
 
+  const shareProduct = () => {
+    const productUrl = `${window.location.origin}/product/id:${productID}`;
+    navigator.clipboard.writeText(productUrl);
+    toast.success('Product link copied to clipboard', toastifyConfig);
+  };
+
   const onSubmit = async (data: FieldValues) => {
     const res = await updateStock(parseInt(data.stock), productID as unknown as string);
     if (res === 200) {
@@ -105,10 +111,16 @@ export const ProductPage = () => {
             <div className="mt-4 sm:mt-0">
               {productOwner || user?.role === 'admin' ? (
                 <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
+                  <Button
+                    styles='py-2 px-4 rounded-lg text-white'
+                    onClick={shareProduct}
+                    fieldname='Share'/>
                   <Dialog>
-                    <DialogTrigger className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors font-bold">
+                    {product?.userId === user?.id && (
+                      <DialogTrigger className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors font-bold">
                       Delete
-                    </DialogTrigger>
+                      </DialogTrigger>
+                    ) }
                     <DialogContent className='text-center'>
                       <DialogHeader>
                         <DialogTitle className="text-lg text-center">Delete Product. Are you absolutely sure?</DialogTitle>
@@ -219,7 +231,7 @@ export const ProductPage = () => {
                 </div>
               ) : (
                 <a
-                  href={`https://wa.me/${userData?.phoneNumber}?text=${window.location.href} I'm interested in ${product.name}`}
+                  href={`https://wa.me/${userData?.phoneNumber}?text= I'm interested in ${product.name}, ${window.location.href}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-bold mt-auto bg-green-500 py-2 my-4 px-4 rounded-lg hover:bg-green-600 transition-colors text-white"
